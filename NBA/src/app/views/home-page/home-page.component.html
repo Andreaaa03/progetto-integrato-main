@@ -1,0 +1,42 @@
+<header class="min-h-screen w-full">
+    <app-navbar></app-navbar>
+</header>
+<section>
+    <div class="flex justify-center h-full">
+        <div class="container flex justify-center h-full">
+            <div class="w-[90%] h-full flex flex-wrap justify-center">
+                <div class="w-full h-20 bg-primary flex justify-center items-center">
+                    <h2 class=" text-white text-4xl font-bold">
+                        ULTIMI MATCH
+                    </h2>
+                </div>
+                <div class="w-full h-6 bg-secondary"></div>
+                <app-partite-del-giorno-preview class="w-full h-full my-10">
+
+                </app-partite-del-giorno-preview>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="flex justify-center">
+        <div class="container flex justify-center">
+            <div class="w-[90%]  flex flex-wrap justify-center">
+                <div class="w-full h-20 bg-primary flex justify-center items-center">
+                    <h2 class=" text-white text-4xl font-bold">
+                        CLASSIFICA
+                    </h2>
+                </div>
+                <div class="w-full h-6 bg-secondary"></div>
+                <app-classifica [isParziale]="true" class="w-[75%] mt-10">
+
+                </app-classifica>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="mt-20">
+    <app-footer></app-footer>
+</footer>

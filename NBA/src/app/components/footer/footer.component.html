@@ -1,0 +1,48 @@
+<div>
+    <div class="w-full bg-primary text-white h-[50vh] flex flex-nowrap">
+        <div class="w-[25%] flex justify-center items-center">
+            <img [routerLink]="['/home']" class="object-fill h-[50%] w-auto" src="assets/logo-slam-stats.png" alt="logo" />
+        </div>
+        <div class="w-[75%] flex flex-nowrap items-center">
+            <div class="w-full flex">
+                <div class="w-1/4">
+                    <h3 class="flex justify-center">PAGINE</h3>
+                    <ul class="flex flex-col items-start h-full m-4">
+                        <li [routerLink]="['/home']">HOME</li>
+                        <li [routerLink]="['/classifica']">CLASSIFICA</li>
+                        <li [routerLink]="['/calendario']">CALENDARIO</li>
+                        <li [routerLink]="['/squadre']">SQUADRE</li>
+                        <li [routerLink]="['/']">GIOCATORI</li>
+                        <li [routerLink]="['/storia&regole']">STORIA E REGOLE</li>
+                        <li [routerLink]="['/blog']">BLOG</li>
+                    </ul>
+                </div>
+                <div class="w-1/4">
+                    <h3 class="text-white flex justify-center">CONTATTI</h3>
+                    <ul class="flex flex-col items-start h-full m-4">
+                        <li [routerLink]="['/']">Maps</li>
+                        <li [routerLink]="['/']">Mail1</li>
+                        <li [routerLink]="['/']">Mail2</li>
+                        <li [routerLink]="['/']">telefono</li>
+                    </ul>
+                </div>
+                <div class="w-1/4">
+                    <h3 class="text-white flex justify-center">SOCIAL</h3>
+                    <ul class="flex flex-col items-start h-full m-4">
+                        <li [routerLink]="['/']">Instagram</li>
+                        <li [routerLink]="['/']">Facebook</li>
+                        <li [routerLink]="['/']">Tik Tok</li>
+                        <li [routerLink]="['/']">X</li>
+                    </ul>
+                </div>
+                <div class="w-1/4 flex flex-col justify-center items-center pb-5 h-full">
+                    <h3>CERCA</h3>
+                    <div class="bg-gray-500 w-[75%] h-10 mr-5 mt-5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-full flex justify-center">
+        <p>Powered By: Slam Dunkers</p>
+    </div>
+</div>

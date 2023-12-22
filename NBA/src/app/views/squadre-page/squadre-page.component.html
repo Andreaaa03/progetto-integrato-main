@@ -1,0 +1,151 @@
+<app-navbar></app-navbar>
+<section>
+    <div class="flex h-full justify-center">
+        <div class="container h-full flex flex-wrap justify-center">
+            <div class="w-[75%] h-full flex flex-wrap justify-center my-12">
+                <div class="w-full flex justify-end pb-2">
+                    <button>preferiti</button>
+                </div>
+                <div class="w-full flex justify-center items-center bg-primary h-12">
+                    <h2 class="font-bold text-2xl text-white pl-4">EASTERN CONFERENCE</h2>
+                </div>
+                <div class="w-full flex justify-between mt-8 h-full">
+                    <div class="w-1/3 flex flex-wrap justify-start">
+                        <div class="w-[80%]">
+                            <div class="w-full flex justify-center items-center bg-primary font-bold text-1xl text-white h-12">
+                                <p>SOUTHEAST</p>
+                            </div>
+                            <div class="flex justify-center">
+                                <ul class="w-[90%] flex-col">
+                                    <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.SoutHeast">
+                                        <div class="w-1/3 flex justify-center">
+                                            <img class="object-contain h-full" src={{team.logo}} alt="" />
+                                        </div>
+                                        <div class="w-2/3 pl-4">
+                                            <p class="w-full">{{team.name}}</p>
+                                            <p class="w-full">❤</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/3 flex flex-wrap justify-center">
+                        <div class="w-[80%]">
+                            <div class="w-full flex justify-center items-center bg-primary font-bold text-1xl text-white h-12">
+                                <p>ATLANTIC</p>
+                            </div>
+                            <div class="flex justify-center">
+                                <ul class="w-[90%] flex-col">
+                                    <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.Atlantic">
+                                        <div class="w-1/3 flex justify-center">
+                                            <img class="object-contain h-full" src={{team.logo}} alt="" />
+                                        </div>
+                                        <div class="w-2/3 pl-4">
+                                            <p class="w-full">{{team.name}}</p>
+                                            <p class="w-full">❤</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/3 flex flex-wrap justify-end">
+                        <div class="w-[80%]">
+                            <div class="w-full flex justify-center items-center bg-primary font-bold text-1xl text-white h-12">
+                                <p>CENTRAL</p>
+                            </div>
+                            <div class="flex justify-center">
+                                <ul class="w-[90%] flex-col">
+                                    <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.Central">
+                                        <div class="w-1/3 flex justify-center">
+                                            <img class="object-contain h-full" src={{team.logo}} alt="" />
+                                        </div>
+                                        <div class="w-2/3 pl-4">
+                                            <p class="w-full">{{team.name}}</p>
+                                            <p class="w-full">❤</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-[75%] h-full flex flex-wrap justify-center my-12">
+                <div class="w-full flex justify-end pb-2">
+                    <button>preferiti</button>
+                </div>
+                <div class="w-full flex justify-center items-center bg-primary h-12">
+                    <h2 class="font-bold text-2xl text-white pl-4">WESTERN CONFERENCE</h2>
+                </div>
+                <div class="w-full flex justify-between mt-8 h-full">
+                    <div class="w-1/3 flex flex-wrap justify-start" >
+                        <div class="w-[80%]">
+                            <div class="w-full flex justify-center items-center bg-primary font-bold text-1xl text-white h-12">
+                                <p>SOUTHWEST</p>
+                            </div>
+                            <div class="flex justify-center" >
+                                <ul class="w-[90%] flex-col">
+                                    <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.SouthWest">
+                                        <div class="w-1/3 flex justify-center">
+                                            <img class="object-contain h-full" src={{team.logo}} alt="" />
+                                        </div>
+                                        <div class="w-2/3 pl-4">
+                                                <p class="w-full">{{team.name}}</p>
+                                                <p class="w-full">❤</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/3 flex flex-wrap justify-center" >
+                        <div class="w-[80%]">
+                            <div class="w-full flex justify-center items-center bg-primary font-bold text-1xl text-white h-12">
+                                <p>NORTHWEST</p>
+                            </div>
+                            <div class="flex justify-center" >
+                                <ul class="w-[90%] flex-col">
+                                    <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.NorthWest">
+                                        <div class="w-1/3 flex justify-center">
+                                            <img class="object-contain h-full" src={{team.logo}} alt="" />
+                                        </div>
+                                        <div class="w-2/3 pl-4">
+                                                <p class="w-full">{{team.name}}</p>
+                                                <p class="w-full">❤</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/3 flex flex-wrap justify-end" >
+                        <div class="w-[80%]">
+                            <div class="w-full flex justify-center items-center bg-primary font-bold text-1xl text-white h-12">
+                                <p>PACIFIC</p>
+                            </div>
+                            <div class="flex justify-center" >
+                                <ul class="w-[90%] flex-col">
+                                    <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.Pacific">
+                                        <div class="w-1/3 flex justify-center">
+                                            <img class="object-contain h-full" src={{team.logo}} alt="" />
+                                        </div>
+                                        <div class="w-2/3 pl-4">
+                                                <p class="w-full">{{team.name}}</p>
+                                                <p class="w-full">❤</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<footer class="mt-20">
+    <app-footer></app-footer>
+</footer>

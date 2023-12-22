@@ -1,0 +1,229 @@
+<div class="">
+    <div class="mb-10">
+        <ul class="flex flex-nowrap justify-center text-center">
+            <li class="me-2 w-full" role="presentation">
+                <button (click)="functionSelectionConference(true)" [class.border-b-2]="selectedConference===true" class="w-full inline-block p-4 focus:border-b-2 hover:border-b-2 rounded-t-lg" type="button">Profile</button>
+            </li>
+            <li class="me-2 w-full" role="presentation">
+                <button (click)="functionSelectionConference(false)" class="w-full inline-block p-4 focus:border-b-2 hover:border-b-2 rounded-t-lg" type="button">Dashboard</button>
+            </li>
+        </ul>
+    </div>
+    <div class="border-2 ">
+        <table class="w-full " *ngIf="selectedConference===true">
+            <thead class="w-full bg-primary text-white">
+                <tr class="">
+                    <td class="w-[8%]">
+                    </td>
+                    <td class="w-[26%]">
+                        <p class="w-full text-center" (click)="
+                            percentageStanding=false;
+                            nameStanding=true;
+                            crescente=!crescente;
+                            winStanding=false;
+                            lossStanding=false;
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                        ">Nome </p>
+                    </td>
+                    <td class="w-[6%]">
+                        <p class="w-full text-center" (click)="
+                            percentageStanding=true;
+                            crescente=!crescente;
+                            nameStanding=false;
+                            winStanding=false;
+                            lossStanding=false;
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                        ">% V. </p>
+                    </td>
+                    <td class="w-[6%]">
+                        <p class="w-full text-center" (click)="
+                            percentageStanding=false;
+                            nameStanding=false;
+                            winStanding=true;
+                            crescente=!crescente;
+                            lossStanding=false;
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                        ">V. </p>
+                    </td>
+                    <td class="w-[6%]">
+                        <p class="w-full text-center" (click)="
+                            percentageStanding=false;
+                            nameStanding=false;
+                            winStanding=false;
+                            lossStanding=true;
+                            crescente=!crescente;
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                        ">S. </p>
+                    </td>
+                    <td class="w-[12%]">
+                        <p class="w-full text-center">Casa</p>
+                        <p>V - S</p>
+                    </td>
+                    <td class="w-[12%]">
+                        <p class="w-full text-center">Traseferta</p>
+                        <p>V - S</p>
+                    </td>
+                    <td class="w-[12%]">
+                        <p class="w-full text-center">Ultimi Match</p>
+                    </td>
+                    <td class="w-[12%]">
+                        <p class="w-full text-center" (click)="
+                            favouriteStanding=!favouriteStanding;
+                            functionChangeStandingWithFavourite(favouriteStanding, $event) ">❤️</p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let squadra of standingToShow?.eastConference, let i=index">
+                    <ng-container *ngIf="i < countForStanding">
+                        <tr class=""  >
+                            <td class="w-[8%]" class="">
+                                {{squadra.conference.rank}}
+                            </td>
+                            <td class="w-[26%]" class="">
+                                <div class="flex flex-nowrap items-center pl-3">
+                                    <div class="w-1/4 flex justify-center">
+                                        <img class="object-contain h-full" src={{squadra.team.logo}} alt="">
+                                    </div>
+                                    <h3 class="w-3/4 p-2 flex justify-center items-center text-center">{{squadra.team.name}}</h3>
+                                </div>
+                            </td>
+                            <td class="w-[6%]">
+                                <p>{{squadra.win.percentage}}</p>
+                            </td>
+                            <td class="w-[6%]">
+                                <p class="">{{squadra.win.total}}</p>
+                            </td>
+                            <td class="w-[6%]">
+                                <p class="">{{squadra.loss.total}}</p>
+                            </td>
+                            <td class="w-[12%]">
+                                <p>{{squadra.win.home}} <span>-</span>
+                                    {{squadra.loss.home}}</p>
+                            </td>
+                            <td class="w-[12%]">
+                                <p>{{squadra.win.away}} <span>-</span>
+                                    {{squadra.loss.away}}
+                            </td>
+                            <td class="w-[12%]">
+                                <p>{{squadra.win.lastTen}} <span>-</span> {{squadra.loss.lastTen}}</p>
+                            </td>
+                            <td class="w-[12%]">
+                                <p class="" *ngIf="squadra.preferiti===true">❤️</p>
+                                <p class="" *ngIf="squadra.preferiti===false">🖤</p>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </table>
+        <table class="w-full" *ngIf="selectedConference===false">
+            <thead class="w-full bg-primary text-white">
+                <tr class="">
+                    <td class="w-[8%]">
+                    </td>
+                    <td class="w-[26%]">
+                        <p class="w-full text-center" (click)="
+                            percentageStanding=false;
+                            nameStanding=true;
+                            crescente=!crescente;
+                            winStanding=false;
+                            lossStanding=false;
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                        ">Nome </p>
+                    </td>
+                    <td class="w-[6%]">
+                        <p class="w-full text-center" (click)="
+                            percentageStanding=true;
+                            crescente=!crescente;
+                            nameStanding=false;
+                            winStanding=false;
+                            lossStanding=false;
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                        ">% V. </p>
+                    </td>
+                    <td class="w-[6%]">
+                        <p class="w-full text-center" (click)="
+                            percentageStanding=false;
+                            nameStanding=false;
+                            winStanding=true;
+                            crescente=!crescente;
+                            lossStanding=false;
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                        ">V. </p>
+                    </td>
+                    <td class="w-[6%]">
+                        <p class="w-full text-center" (click)="
+                            percentageStanding=false;
+                            nameStanding=false;
+                            winStanding=false;
+                            lossStanding=true;
+                            crescente=!crescente;
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                        ">S. </p>
+                    </td>
+                    <td class="w-[12%]">
+                        <p class="w-full text-center">Casa</p>
+                        <p>V - S</p>
+                    </td>
+                    <td class="w-[12%]">
+                        <p class="w-full text-center">Traseferta</p>
+                        <p>V - S</p>
+                    </td>
+                    <td class="w-[12%]">
+                        <p class="w-full text-center">Ultimi Match</p>
+                    </td>
+                    <td class="w-[12%]">
+                        <p class="w-full text-center" (click)="
+                            favouriteStanding=!favouriteStanding;
+                            functionChangeStandingWithFavourite(favouriteStanding, $event) ">❤️</p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let squadra of standingToShow?.westConference, let i=index">
+                    <ng-container *ngIf="i < countForStanding">
+                        <tr class="">
+                            <td class="w-[8%]" class="">
+                                {{squadra.conference.rank}}
+                            </td>
+                            <td class="w-[26%]" class="">
+                                <div class="flex flex-nowrap items-center pl-3">
+                                    <div class="w-1/4 flex justify-center">
+                                        <img class="object-contain h-full" src={{squadra.team.logo}} alt="">
+                                        <!-- <img class="object-contain h-full" src="../../../assets/logo-orlando-magic-2048.png" alt=""> -->
+                                    </div>
+                                    <h3 class="w-3/4 p-2 flex justify-center items-center text-center">{{squadra.team.name}}</h3>
+                                </div>
+                            </td>
+                            <td class="w-[6%]">
+                                <p>{{squadra.win.percentage}}</p>
+                            </td>
+                            <td class="w-[6%]">
+                                <p class="">{{squadra.win.total}}</p>
+                            </td>
+                            <td class="w-[6%]">
+                                <p class="">{{squadra.loss.total}}</p>
+                            </td>
+                            <td class="w-[12%]">
+                                <p>{{squadra.win.home}} <span>-</span>
+                                    {{squadra.loss.home}}</p>
+                            </td>
+                            <td class="w-[12%]">
+                                <p>{{squadra.win.away}} <span>-</span>
+                                    {{squadra.loss.away}}
+                            </td>
+                            <td class="w-[12%]">
+                                <p>{{squadra.win.lastTen}} <span>-</span> {{squadra.loss.lastTen}}</p>
+                            </td>
+                            <td class="w-[12%]">
+                                <p class="" *ngIf="squadra.preferiti===true">❤️</p>
+                                <p class="" *ngIf="squadra.preferiti===false">🖤</p>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

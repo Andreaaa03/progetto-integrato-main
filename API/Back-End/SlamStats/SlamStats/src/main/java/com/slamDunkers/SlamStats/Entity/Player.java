@@ -1,5 +1,6 @@
 package com.slamDunkers.SlamStats.Entity;
 
+import com.slamDunkers.SlamStats.Payload.Response.PlayerResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,7 +27,7 @@ public class Player {
 	@Column(name = "last_name", columnDefinition = "varchar(255)")
 	private String lastName;
 
-	@Column(name = "birth_date", columnDefinition = "date")
+	@Column(name = "birth_date", columnDefinition = "date", nullable = true)
 	private Date birthDate;
 
 	@Column(name = "birth_Country", columnDefinition = "varchar(255)")
@@ -58,4 +59,24 @@ public class Player {
 
 	@Column(name = "affiliation", columnDefinition = "varchar(255)")
 	private String lastAffiliation;
+
+	public PlayerResponse toPlayerResponse() {
+		PlayerResponse playerResponse = new PlayerResponse();
+		playerResponse.playerId = this.Id;
+		playerResponse.team = this.team.toTeamsResponse();
+		playerResponse.firstName = this.firstName;
+		playerResponse.lastName = this.lastName;
+		playerResponse.birthDate = this.birthDate.toString();
+		playerResponse.birthCountry = this.birthCountry;
+		playerResponse.nbaStart = this.nbaStart.getValue();
+		playerResponse.nbaPro = this.nbaPro;
+		playerResponse.heightFeet = this.heightFeet;
+		playerResponse.heightInches = this.heightInches;
+		playerResponse.heightMeters = this.heightMeters;
+		playerResponse.weightPounds = this.weightPounds;
+		playerResponse.weightKg = this.weightKilograms;
+		playerResponse.college = this.college;
+		playerResponse.affiliation = this.lastAffiliation;
+		return playerResponse;
+	}
 }

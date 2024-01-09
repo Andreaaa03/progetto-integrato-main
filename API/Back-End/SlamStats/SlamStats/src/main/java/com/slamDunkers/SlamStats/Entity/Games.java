@@ -25,9 +25,6 @@ public class Games {
 	private Season season;
 
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="league_id", nullable = false)
-	private League league;
 
 
 	@OneToOne(fetch = FetchType.EAGER)
@@ -47,7 +44,7 @@ public class Games {
 	@Column(name = "clock", columnDefinition = "time")
 	private String clock;
 	@Column(name = "halftime", columnDefinition = "tinyint(1)")
-	private boolean halftime;
+	private Boolean halftime;
 	@Column(name = "status", columnDefinition = "varchar(50)")
 	private String status;
 	@Column(name = "current_period", columnDefinition = "int")

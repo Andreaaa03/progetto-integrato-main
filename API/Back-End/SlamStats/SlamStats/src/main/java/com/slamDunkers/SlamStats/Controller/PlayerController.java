@@ -1,6 +1,7 @@
 package com.slamDunkers.SlamStats.Controller;
 
 import com.slamDunkers.SlamStats.Entity.Player;
+import com.slamDunkers.SlamStats.Payload.Response.PlayerResponse;
 import com.slamDunkers.SlamStats.Service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +25,12 @@ public class PlayerController {
 	}
 
 	@GetMapping("/Id")
-	public Player getPlayer( int playerId) {
+	public PlayerResponse getPlayer(int playerId) {
 		return service.selezionaGiocatore(playerId);
 	}
-	@GetMapping("/teamName")
-	public List<Player> getPlayersByTeamName(String teamName) {
-		return service.selezionaGiocatoriPerSquadra(teamName);
+
+	@GetMapping("/teamId")
+	public List<PlayerResponse> getPlayersByTeamName(int Id) {
+		return service.selezionaGiocatoriPerSquadra(Id);
 	}
 }

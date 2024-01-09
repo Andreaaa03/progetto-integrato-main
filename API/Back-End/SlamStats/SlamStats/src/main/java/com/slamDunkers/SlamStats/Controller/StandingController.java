@@ -1,6 +1,7 @@
 package com.slamDunkers.SlamStats.Controller;
 
 import com.slamDunkers.SlamStats.Entity.TeamStandings;
+import com.slamDunkers.SlamStats.Payload.Response.TeamStandingsResponse;
 import com.slamDunkers.SlamStats.Service.StandingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,7 +23,7 @@ public class StandingController {
 		this.service = service;
 	}
 	@GetMapping("/All")
-	public List<TeamStandings> getStandings() {
+	public List<TeamStandingsResponse> getStandings() {
 		return service.selezionaTuttiTeams();
 	}
 }

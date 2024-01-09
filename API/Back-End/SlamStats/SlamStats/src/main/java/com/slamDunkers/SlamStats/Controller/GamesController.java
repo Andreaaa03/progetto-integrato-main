@@ -26,8 +26,8 @@ public class GamesController {
 	}
 
 	@GetMapping("/All")
-	public List<Games> getGames() {
-		return repository.findAll();
+	public List<CalendarioDateResponse> getGames() {
+		return service.getGames();
 	}
 
 	@GetMapping("/date")
@@ -36,14 +36,8 @@ public class GamesController {
 	}
 
 	@GetMapping("/teamId")
-	public List<Games> getGameByTeam(int teamId) {
-		return service.getGameByTeam(teamId);
-	}
-
-	@GetMapping("/All2")
-	public List<CalendarioDateResponse> calendarioFiltrato(int idSquadra) {
-
-		return service.partiteGiocateSquadra(idSquadra);
+	public List<CalendarioDateResponse> calendarioFiltrato(int teamId) {
+		return service.partiteGiocateSquadra(teamId);
 	}
 
 }

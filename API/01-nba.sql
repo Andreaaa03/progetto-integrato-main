@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 05, 2024 alle 11:06
+-- Creato il: Gen 09, 2024 alle 03:05
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -35,14 +35,6 @@ CREATE TABLE `commenti` (
   `id_games` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dump dei dati per la tabella `commenti`
---
-
-INSERT INTO `commenti` (`id`, `testo`, `id_commento_padre`, `id_utente`, `id_games`) VALUES
-(1, 'testo di prova', NULL, 1, 3),
-(2, 'commento al commento prova', 1, 2, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -53,18 +45,6 @@ CREATE TABLE `conference` (
   `ID` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `conference`
---
-
-INSERT INTO `conference` (`ID`, `name`) VALUES
-(1, 'East'),
-(2, 'West'),
-(3, 'California'),
-(4, 'Utah'),
-(5, 'Summer League'),
-(6, 'International');
 
 -- --------------------------------------------------------
 
@@ -77,19 +57,6 @@ CREATE TABLE `division` (
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dump dei dati per la tabella `division`
---
-
-INSERT INTO `division` (`ID`, `name`) VALUES
-(1, 'Atlantic'),
-(2, 'Southeast'),
-(3, 'Central'),
-(4, 'Northwest'),
-(5, 'Pacific'),
-(6, 'Southwest'),
-(7, 'Utah');
-
 -- --------------------------------------------------------
 
 --
@@ -98,8 +65,7 @@ INSERT INTO `division` (`ID`, `name`) VALUES
 
 CREATE TABLE `games` (
   `id` int(11) NOT NULL,
-  `league_ID` int(11) NOT NULL,
-  `season_ID` int(11) NOT NULL,
+  `season_ID` int(11) NOT NULL DEFAULT 1,
   `home_team` int(11) NOT NULL,
   `away_team` int(11) NOT NULL,
   `start_date` datetime NOT NULL,
@@ -112,19 +78,10 @@ CREATE TABLE `games` (
   `total_periods` int(11) DEFAULT 0,
   `area_name` varchar(100) DEFAULT NULL,
   `arena_city` varchar(100) DEFAULT NULL,
-  `arena_state` varchar(2) DEFAULT NULL,
-  `arena_country` varchar(50) DEFAULT NULL
+  `arena_state` varchar(20) DEFAULT NULL,
+  `arena_country` varchar(50) DEFAULT NULL,
+  `season` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `games`
---
-
-INSERT INTO `games` (`id`, `league_ID`, `season_ID`, `home_team`, `away_team`, `start_date`, `end_date`, `stage`, `clock`, `halftime`, `status`, `current_period`, `total_periods`, `area_name`, `arena_city`, `arena_state`, `arena_country`) VALUES
-(3, 1, 1, 1, 2, '2023-12-24 00:59:55', NULL, 0, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL),
-(4, 1, 1, 2, 1, '2023-12-24 00:59:55', NULL, 0, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL),
-(5, 1, 1, 2, 4, '2023-12-24 00:59:55', NULL, 0, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL),
-(6, 1, 1, 4, 1, '2023-12-24 00:59:55', NULL, 0, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -139,15 +96,6 @@ CREATE TABLE `league` (
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dump dei dati per la tabella `league`
---
-
-INSERT INTO `league` (`id`, `conference_id`, `division_id`, `name`) VALUES
-(1, 1, 1, 'East-Atlantic'),
-(2, 1, 2, 'East-Southeast'),
-(3, 6, NULL, 'Internetional\r\n');
-
 -- --------------------------------------------------------
 
 --
@@ -157,28 +105,20 @@ INSERT INTO `league` (`id`, `conference_id`, `division_id`, `name`) VALUES
 CREATE TABLE `player` (
   `id` int(11) NOT NULL,
   `team_id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `birth_date` date NOT NULL,
-  `birth_country` varchar(100) NOT NULL,
-  `nba_start` year(4) NOT NULL,
-  `nba_pro` int(11) NOT NULL,
-  `height_feet` int(11) NOT NULL,
-  `height_inches` int(11) NOT NULL,
-  `height_meters` decimal(10,2) NOT NULL,
-  `weight_pounds` int(11) NOT NULL,
-  `weight_kg` decimal(10,2) NOT NULL,
-  `college` varchar(100) NOT NULL,
-  `affiliation` varchar(100) NOT NULL
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `birth_country` varchar(100) DEFAULT NULL,
+  `nba_start` year(4) DEFAULT NULL,
+  `nba_pro` int(11) DEFAULT NULL,
+  `height_feet` int(11) DEFAULT NULL,
+  `height_inches` int(11) DEFAULT NULL,
+  `height_meters` decimal(10,2) DEFAULT NULL,
+  `weight_pounds` int(11) DEFAULT NULL,
+  `weight_kg` decimal(10,2) DEFAULT NULL,
+  `college` varchar(100) DEFAULT NULL,
+  `affiliation` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `player`
---
-
-INSERT INTO `player` (`id`, `team_id`, `first_name`, `last_name`, `birth_date`, `birth_country`, `nba_start`, `nba_pro`, `height_feet`, `height_inches`, `height_meters`, `weight_pounds`, `weight_kg`, `college`, `affiliation`) VALUES
-(1, 1, 'Richaun', 'Holmes', '1993-10-15', 'USA', '2015', 6, 6, 10, 2.08, 235, 106.60, 'Bowling Green', 'Bowling Green/USA'),
-(382, 1, 'Dejounte', 'Murray', '1996-09-19', 'USA', '2016', 4, 6, 4, 1.93, 180, 81.60, 'Washington', 'Washington/USA');
 
 -- --------------------------------------------------------
 
@@ -216,6 +156,17 @@ CREATE TABLE `player_statistics` (
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `role` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `scores`
 --
 
@@ -226,30 +177,8 @@ CREATE TABLE `scores` (
   `loss` int(11) NOT NULL,
   `series_win` int(11) NOT NULL,
   `series_loss` int(11) NOT NULL,
-  `q1` int(11) NOT NULL,
-  `q2` int(11) NOT NULL,
-  `q3` int(11) NOT NULL,
-  `q4` int(11) NOT NULL,
-  `ot1` int(11) NOT NULL,
-  `ot2` int(11) NOT NULL,
-  `ot3` int(11) NOT NULL,
-  `ot4` int(11) NOT NULL,
   `points` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `scores`
---
-
-INSERT INTO `scores` (`games_ID`, `teams_ID`, `win`, `loss`, `series_win`, `series_loss`, `q1`, `q2`, `q3`, `q4`, `ot1`, `ot2`, `ot3`, `ot4`, `points`) VALUES
-(3, 1, 1, 0, 5, 3, 30, 30, 30, 30, 30, 30, 30, 30, 240),
-(3, 2, 1, 0, 5, 3, 20, 30, 30, 30, 30, 30, 30, 30, 230),
-(4, 1, 1, 0, 5, 3, 30, 30, 30, 30, 30, 30, 30, 30, 250),
-(4, 2, 1, 0, 5, 3, 20, 30, 30, 30, 30, 30, 30, 30, 230),
-(5, 2, 1, 0, 5, 3, 20, 30, 30, 30, 30, 30, 30, 30, 30),
-(5, 4, 1, 0, 5, 3, 20, 30, 30, 30, 30, 30, 30, 30, 40),
-(6, 1, 1, 0, 5, 3, 30, 30, 30, 30, 30, 30, 30, 30, 290),
-(6, 4, 1, 0, 5, 3, 30, 30, 30, 30, 30, 30, 30, 30, 80);
 
 -- --------------------------------------------------------
 
@@ -258,16 +187,9 @@ INSERT INTO `scores` (`games_ID`, `teams_ID`, `win`, `loss`, `series_win`, `seri
 --
 
 CREATE TABLE `season` (
-  `ID` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `year` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `season`
---
-
-INSERT INTO `season` (`ID`, `year`) VALUES
-(1, 2023);
 
 -- --------------------------------------------------------
 
@@ -286,16 +208,6 @@ CREATE TABLE `teams` (
   `nba_franchise` tinyint(1) NOT NULL,
   `league_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `teams`
---
-
-INSERT INTO `teams` (`id`, `name`, `nickname`, `code`, `city`, `logo`, `all_star`, `nba_franchise`, `league_id`) VALUES
-(1, 'Atlanta Hawks', 'Hawks', 'ATL', 'Atlanta', 'https://upload.wikimedia.org/wikipedia/fr/e/ee/Hawks_2016.png', 0, 1, 2),
-(2, 'Boston Celtics', 'Celtics', 'BOS', 'Boston', 'https://upload.wikimedia.org/wikipedia/fr/thumb/6/65/Celtics_de_Boston_logo.svg/1024px-Celtics_de_Boston_logo.svg.png', 0, 1, 1),
-(3, 'Brisbane Bullets', 'Bullets', 'BNE', 'Brisbane', 'https://upload.wikimedia.org/wikipedia/fr/thumb/1/1b/Brisbane_Bullets_1992.png/130px-Brisbane_Bullets_1992.png', 0, 0, 3),
-(4, 'Brooklyn Nets', 'Nets', 'BKN', 'Brooklyn', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -333,13 +245,6 @@ CREATE TABLE `teams_statistics` (
   `plus_minus` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dump dei dati per la tabella `teams_statistics`
---
-
-INSERT INTO `teams_statistics` (`team_ID`, `season_ID`, `games`, `fast_break_points`, `points_in_paint`, `biggest_lead`, `second_chance_points`, `points_off_turnover`, `points`, `fgm`, `fga`, `fgp`, `ftm`, `fta`, `ftp`, `tpm`, `tpa`, `tpp`, `off_reb`, `def_reb`, `tot_reb`, `assists`, `p_fouls`, `steals`, `turnovers`, `blocks`, `plus_minus`) VALUES
-(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.2, 1, 1, 1.5, 1, 1, 5.3, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -353,30 +258,37 @@ CREATE TABLE `team_standings` (
   `conference_rank` int(11) NOT NULL,
   `conference_win` int(11) NOT NULL,
   `conference_loss` int(11) NOT NULL,
-  `division_games_behind` decimal(4,1) NOT NULL,
+  `division_games_behind` decimal(4,1) DEFAULT NULL,
   `home_win` int(11) NOT NULL,
   `away_win` int(11) NOT NULL,
   `total_win` int(11) NOT NULL,
-  `win_percentage` decimal(4,3) NOT NULL,
+  `win_percentage` decimal(4,3) DEFAULT NULL,
   `last_ten_win` int(11) NOT NULL,
   `home_loss` int(11) NOT NULL,
   `away_loss` int(11) NOT NULL,
   `total_loss` int(11) NOT NULL,
-  `loss_percentage` decimal(4,3) NOT NULL,
+  `loss_percentage` decimal(4,3) DEFAULT NULL,
   `last_ten_loss` int(11) NOT NULL,
-  `games_behind` decimal(4,1) NOT NULL,
+  `games_behind` decimal(4,1) DEFAULT NULL,
   `streak` int(11) NOT NULL,
   `is_win_streak` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dump dei dati per la tabella `team_standings`
+-- Struttura della tabella `utente`
 --
 
-INSERT INTO `team_standings` (`team_ID`, `season_ID`, `conference_name`, `conference_rank`, `conference_win`, `conference_loss`, `division_games_behind`, `home_win`, `away_win`, `total_win`, `win_percentage`, `last_ten_win`, `home_loss`, `away_loss`, `total_loss`, `loss_percentage`, `last_ten_loss`, `games_behind`, `streak`, `is_win_streak`) VALUES
-(1, 1, 'East', 2, 12, 3, 0.0, 9, 5, 12, 8.500, 5, 3, 1, 3, 4.000, 1, 3.0, 4, 1),
-(2, 1, 'East', 3, 12, 3, 0.0, 9, 5, 12, 8.300, 5, 3, 1, 3, 4.000, 1, 3.0, 4, 1),
-(4, 1, 'Weast', 1, 12, 3, 0.0, 9, 5, 12, 8.700, 5, 3, 1, 3, 4.000, 1, 3.0, 4, 1);
+CREATE TABLE `utente` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `birth_date` date NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `pswd` varchar(255) NOT NULL,
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indici per le tabelle scaricate
@@ -407,10 +319,9 @@ ALTER TABLE `division`
 --
 ALTER TABLE `games`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `league_ID` (`league_ID`),
   ADD KEY `season_ID` (`season_ID`),
-  ADD KEY `home_team` (`home_team`),
-  ADD KEY `away_team` (`away_team`);
+  ADD KEY `away_team` (`away_team`),
+  ADD KEY `home_team` (`home_team`);
 
 --
 -- Indici per le tabelle `league`
@@ -436,6 +347,12 @@ ALTER TABLE `player_statistics`
   ADD KEY `teams_ID` (`teams_ID`);
 
 --
+-- Indici per le tabelle `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indici per le tabelle `scores`
 --
 ALTER TABLE `scores`
@@ -446,7 +363,7 @@ ALTER TABLE `scores`
 -- Indici per le tabelle `season`
 --
 ALTER TABLE `season`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indici per le tabelle `teams`
@@ -466,8 +383,15 @@ ALTER TABLE `teams_statistics`
 -- Indici per le tabelle `team_standings`
 --
 ALTER TABLE `team_standings`
-  ADD PRIMARY KEY (`team_ID`,`season_ID`),
-  ADD KEY `season_ID` (`season_ID`);
+  ADD PRIMARY KEY (`team_ID`,`season_ID`);
+
+--
+-- Indici per le tabelle `utente`
+--
+ALTER TABLE `utente`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `role_id` (`role_id`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
@@ -477,49 +401,55 @@ ALTER TABLE `team_standings`
 -- AUTO_INCREMENT per la tabella `commenti`
 --
 ALTER TABLE `commenti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `conference`
 --
 ALTER TABLE `conference`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `division`
 --
 ALTER TABLE `division`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `league`
 --
 ALTER TABLE `league`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `player`
 --
 ALTER TABLE `player`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `season`
 --
 ALTER TABLE `season`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `utente`
+--
+ALTER TABLE `utente`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Limiti per le tabelle scaricate
@@ -536,10 +466,9 @@ ALTER TABLE `commenti`
 -- Limiti per la tabella `games`
 --
 ALTER TABLE `games`
-  ADD CONSTRAINT `games_ibfk_1` FOREIGN KEY (`league_ID`) REFERENCES `league` (`ID`),
   ADD CONSTRAINT `games_ibfk_2` FOREIGN KEY (`season_ID`) REFERENCES `season` (`ID`),
-  ADD CONSTRAINT `games_ibfk_3` FOREIGN KEY (`home_team`) REFERENCES `teams` (`ID`),
-  ADD CONSTRAINT `games_ibfk_4` FOREIGN KEY (`away_team`) REFERENCES `teams` (`ID`);
+  ADD CONSTRAINT `games_ibfk_3` FOREIGN KEY (`away_team`) REFERENCES `teams` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `games_ibfk_4` FOREIGN KEY (`home_team`) REFERENCES `teams` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limiti per la tabella `league`
@@ -588,6 +517,12 @@ ALTER TABLE `teams_statistics`
 ALTER TABLE `team_standings`
   ADD CONSTRAINT `team_standings_ibfk_1` FOREIGN KEY (`season_ID`) REFERENCES `season` (`ID`),
   ADD CONSTRAINT `team_standings_ibfk_2` FOREIGN KEY (`team_ID`) REFERENCES `teams` (`ID`);
+
+--
+-- Limiti per la tabella `utente`
+--
+ALTER TABLE `utente`
+  ADD CONSTRAINT `utente_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

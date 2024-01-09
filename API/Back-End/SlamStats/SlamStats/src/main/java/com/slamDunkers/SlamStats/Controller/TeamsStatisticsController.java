@@ -1,7 +1,7 @@
 package com.slamDunkers.SlamStats.Controller;
 
 
-import com.slamDunkers.SlamStats.Entity.TeamsStatistics;
+import com.slamDunkers.SlamStats.Payload.Response.TeamStatisticsResponse;
 import com.slamDunkers.SlamStats.Service.TeamsStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,7 +20,7 @@ public class TeamsStatisticsController {
 		this.service = service;
 	}
 	@GetMapping("/statistics")
-	public TeamsStatistics getTeamsStatisticsById(int id) {
+	public TeamStatisticsResponse getTeamsStatisticsById(Integer id) {
 		return service.selezionaTeamsStatisticsById(id);
 	}
 }

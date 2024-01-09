@@ -28,22 +28,6 @@ public class Scores {
 	private int seriesWin;
 	@Column(name = "series_loss", columnDefinition = "int")
 	private int seriesLoss;
-	@Column(name = "q1", columnDefinition = "int")
-	private int q1;
-	@Column(name = "q2", columnDefinition = "int")
-	private int q2;
-	@Column(name = "q3", columnDefinition = "int")
-	private int q3;
-	@Column(name = "q4", columnDefinition = "int")
-	private int q4;
-	@Column(name = "ot1", columnDefinition = "int")
-	private int ot1;
-	@Column(name = "ot2", columnDefinition = "int")
-	private int ot2;
-	@Column(name = "ot3", columnDefinition = "int")
-	private int ot3;
-	@Column(name = "ot4", columnDefinition = "int")
-	private int ot4;
 	@Column(name = "points", columnDefinition = "int")
 	private int points;
 

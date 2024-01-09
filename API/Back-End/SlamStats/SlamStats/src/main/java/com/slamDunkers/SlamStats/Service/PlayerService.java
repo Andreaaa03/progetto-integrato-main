@@ -2,11 +2,13 @@ package com.slamDunkers.SlamStats.Service;
 
 import com.slamDunkers.SlamStats.Entity.Player;
 import com.slamDunkers.SlamStats.Entity.Teams;
+import com.slamDunkers.SlamStats.Payload.Response.PlayerResponse;
 import com.slamDunkers.SlamStats.Repository.PlayerRepository;
 import com.slamDunkers.SlamStats.Repository.TeamsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,20 +25,23 @@ public class PlayerService {
 
 	public List<Player> selezzionaTuttiGiocatori(){return playerRepository.findAll();}
 
-	public Player selezionaGiocatore(int playerId){return playerRepository.findById(playerId);}
+	public PlayerResponse selezionaGiocatore(int playerId){
+		return playerRepository.findById(playerId).toPlayerResponse();
+	}
 
-	public List<Player> selezionaGiocatoriPerSquadra(String teamName) {
+	public List<PlayerResponse> selezionaGiocatoriPerSquadra(int teamId) {
 
-		Optional<Teams> teamFound = teamsRepository.findByTeamName(teamName);
+		Optional<Teams> teamFound = teamsRepository.findById(teamId);
 		if (teamFound.isPresent()) {
-			return playerRepository.findByTeam(teamFound);
+			List<PlayerResponse> playerResponseList = new ArrayList<>();
+			for (Player player : playerRepository.findByTeam(teamFound)) {
+				playerResponseList.add(player.toPlayerResponse());
+			}
+			return playerResponseList;
 		} else {
 			return null;
 		}
 	}
-
-//
-//	public List<Player> selezionaGiocatoriPerSquadra(String teamName){return playerRepository.findByTeamName(teamName);}
 
 
 }

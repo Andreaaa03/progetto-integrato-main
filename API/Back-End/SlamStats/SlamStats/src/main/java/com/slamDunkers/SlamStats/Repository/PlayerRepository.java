@@ -2,6 +2,7 @@ package com.slamDunkers.SlamStats.Repository;
 
 import com.slamDunkers.SlamStats.Entity.Player;
 import com.slamDunkers.SlamStats.Entity.Teams;
+import com.slamDunkers.SlamStats.Payload.Response.PlayerResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

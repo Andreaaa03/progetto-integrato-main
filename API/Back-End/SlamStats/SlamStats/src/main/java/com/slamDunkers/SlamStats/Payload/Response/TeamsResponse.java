@@ -28,6 +28,8 @@ public class TeamsResponse {
 	                     boolean allStar,
 	                     boolean nbaFranchise,
 	                     String conference,
-	                     String code) {
+	                     String code
+
+	) {
 	}
 }

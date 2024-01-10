@@ -38,4 +38,5 @@ public class TeamStatisticsResponse {
 	public Integer blocks;
 	public Integer plusMinus;
 	public Integer pfouls;
+	public Integer conferenceRank;
 }

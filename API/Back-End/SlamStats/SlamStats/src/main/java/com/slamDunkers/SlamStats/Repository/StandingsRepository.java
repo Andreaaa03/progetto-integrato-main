@@ -10,4 +10,7 @@ import java.util.List;
 public interface StandingsRepository extends JpaRepository<TeamStandings,Integer>{
 
 	List<TeamStandings> findByOrderByWinPercentageDesc();
+
+
+	TeamStandings findByTeamId(int id);
 }

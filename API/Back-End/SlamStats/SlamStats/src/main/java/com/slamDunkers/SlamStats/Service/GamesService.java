@@ -1,10 +1,8 @@
 package com.slamDunkers.SlamStats.Service;
 
 import com.slamDunkers.SlamStats.Entity.Games;
-import com.slamDunkers.SlamStats.Entity.Scores;
 import com.slamDunkers.SlamStats.Entity.Teams;
 import com.slamDunkers.SlamStats.Payload.Response.CalendarioDateResponse;
-import com.slamDunkers.SlamStats.Payload.Response.CalendarioResponse;
 import com.slamDunkers.SlamStats.Repository.GamesRepository;
 import com.slamDunkers.SlamStats.Repository.ScoreRepository;
 import com.slamDunkers.SlamStats.Repository.TeamsRepository;
@@ -26,7 +24,7 @@ public class GamesService {
 		this.scoreRepository = scoreRepository;
 	}
 	public List<CalendarioDateResponse> getGameByDate(String date) {
-		List<Games> games = repository.findByStartDateContaining(date);
+		List<Games> games = repository.findByStartDateContainingOrderByStartDate(date);
 		return toCalendarioDateResponse(games);
 
 	}
@@ -38,15 +36,27 @@ public class GamesService {
 	public List<Games> getGameByTeam(int teamId) {
 		Teams team = new Teams();
 		team.setId(teamId);
-		return repository.findByHomeTeamOrAwayTeam(team, team);
+		return repository.findByHomeTeamOrAwayTeamOrderByStartDate(team, team);
 	}
 
 	public List<CalendarioDateResponse> partiteGiocateSquadra(int idSquadra) {
 		//prendere tutti i games della squadra
 		Optional<Teams> optionalTeam = teamsRepository.findById(idSquadra);
 		Teams team = optionalTeam.orElseThrow(() -> new NoSuchElementException("Team not found"));
-		List<Games> games = repository.findByHomeTeamOrAwayTeam(team, team);
+		List<Games> games = repository.findByHomeTeamOrAwayTeamOrderByStartDate(team, team);
 		return toCalendarioDateResponse(games);
+	}
+
+	public Optional<List<CalendarioDateResponse>> findById(Integer gameId) {
+		Optional<Games> games = repository.findById(gameId);
+//		convert game to list
+		if (games.isPresent()) {
+			List<Games> gameList = new ArrayList<>();
+			gameList.add(games.get());
+			return Optional.of(toCalendarioDateResponse(gameList));
+		}
+		return null;
+
 	}
 	public List<CalendarioDateResponse> toCalendarioDateResponse(List<Games> games){
 		List<CalendarioDateResponse> calendarioResponseList = new ArrayList<>();
@@ -94,15 +104,10 @@ public class GamesService {
 			}
 			else { calendario.setTeamHomeName(" "); }
 
-
-
-
-
-
-
 			calendarioResponseList.add(calendario);
 		}
 		return calendarioResponseList;
 	}
+
 
 }

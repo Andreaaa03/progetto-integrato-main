@@ -12,9 +12,11 @@ public interface GamesRepository extends JpaRepository<Games,Integer> {
 	@Override
 	List<Games> findAll();
 
-	List<Games> findByStartDateContaining(String startDate);
+	List<Games> findByStartDateContainingOrderByStartDate(String startDate);
 
-	List<Games> findByHomeTeamOrAwayTeam(Teams teamId, Teams teamId2);
+	List<Games> findByHomeTeamOrAwayTeamOrderByStartDate(Teams teamId, Teams teamId2);
+
+	Games findById(int gameId);
 
 
 }

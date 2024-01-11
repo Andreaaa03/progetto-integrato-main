@@ -1,6 +1,7 @@
 package com.slamDunkers.SlamStats.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,23 +10,25 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 @IdClass( PlayerStatisticsId.class)
 public class PlayerStatistics {
 //	1 	player_ID Primaria 	int(11) 			No 	Nessuno 			Modifica Modifica 	Elimina Elimina
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "player_ID ",referencedColumnName = "player", nullable = false)
+	@JoinColumn(name = "player_ID",referencedColumnName = "player", nullable = false)
 	private Player player;
 //	2 	teams_ID PrimariaIndice 	int(11) 			No 	Nessuno 			Modifica Modifica 	Elimina Elimina
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "team_ID ",referencedColumnName = "team", nullable = false)
+	@JoinColumn(name = "teams_id",referencedColumnName = "team", nullable = false)
 	private Teams team;
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "game_ID ",referencedColumnName = "game", nullable = false)
+	@JoinColumn(name = "game_id",referencedColumnName = "game", nullable = false)
 	private Games game;
+
 	@Column(name = "points", columnDefinition = "int")
 	private int points;
 	@Column(name = "pos", columnDefinition = "varchar(2)")
@@ -36,19 +39,19 @@ public class PlayerStatistics {
 	private int fgm;
 	@Column(name = "fga", columnDefinition = "int")
 	private int fga;
-	@Column(name = "fgp", columnDefinition = "decimal(3,2)")
+	@Column(name = "fgp", columnDefinition = "double")
 	private double fgp;
 	@Column(name = "ftm", columnDefinition = "int")
 	private int ftm;
 	@Column(name = "fta", columnDefinition = "int")
 	private int fta;
-	@Column(name = "ftp", columnDefinition = "decimal(3,2)")
+	@Column(name = "ftp", columnDefinition = "double")
 	private double ftp;
 	@Column(name = "tpm", columnDefinition = "int")
 	private int tpm;
 	@Column(name = "tpa", columnDefinition = "int")
 	private int tpa;
-	@Column(name = "tpp", columnDefinition = "decimal(3,2)")
+	@Column(name = "tpp", columnDefinition = "double")
 	private double tpp;
 	@Column(name = "off_reb", columnDefinition = "int")
 	private int offReb;

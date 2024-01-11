@@ -19,7 +19,7 @@ import java.io.Serializable;
 public class PlayerStatisticsId implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "team_ID ", nullable = false)
+	@JoinColumn(name = "teams_id ", nullable = false)
 	private Teams team;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -27,6 +27,6 @@ public class PlayerStatisticsId implements Serializable {
 	private Player player;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "game_ID ", nullable = false)
+	@JoinColumn(name = "game_id ", nullable = false)
 	private Games game;
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 14, 2024 alle 18:51
+-- Creato il: Gen 14, 2024 alle 19:01
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `nba`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `scores`
+--
+
+CREATE TABLE `scores` (
+  `id` int(11) NOT NULL,
+  `games_ID` int(11) NOT NULL,
+  `teams_ID` int(11) NOT NULL,
+  `win` int(11) NOT NULL,
+  `loss` int(11) NOT NULL,
+  `series_win` int(11) NOT NULL,
+  `series_loss` int(11) NOT NULL,
+  `points` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `scores`
@@ -2613,6 +2630,39 @@ INSERT INTO `scores` (`id`, `games_ID`, `teams_ID`, `win`, `loss`, `series_win`,
 (2584, 13773, 16, 0, 0, 0, 0, 117),
 (2585, 13774, 29, 0, 0, 0, 0, 112),
 (2586, 13774, 8, 0, 0, 0, 0, 125);
+
+--
+-- Indici per le tabelle scaricate
+--
+
+--
+-- Indici per le tabelle `scores`
+--
+ALTER TABLE `scores`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `games_ID` (`games_ID`),
+  ADD KEY `teams_ID` (`teams_ID`);
+
+--
+-- AUTO_INCREMENT per le tabelle scaricate
+--
+
+--
+-- AUTO_INCREMENT per la tabella `scores`
+--
+ALTER TABLE `scores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2587;
+
+--
+-- Limiti per le tabelle scaricate
+--
+
+--
+-- Limiti per la tabella `scores`
+--
+ALTER TABLE `scores`
+  ADD CONSTRAINT `scores_ibfk_1` FOREIGN KEY (`games_ID`) REFERENCES `games` (`id`),
+  ADD CONSTRAINT `scores_ibfk_2` FOREIGN KEY (`teams_ID`) REFERENCES `teams` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

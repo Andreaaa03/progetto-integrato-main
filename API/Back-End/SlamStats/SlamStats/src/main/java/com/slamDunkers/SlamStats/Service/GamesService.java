@@ -1,9 +1,14 @@
 package com.slamDunkers.SlamStats.Service;
 
 import com.slamDunkers.SlamStats.Entity.Games;
+import com.slamDunkers.SlamStats.Entity.PlayerStatistics;
 import com.slamDunkers.SlamStats.Entity.Teams;
 import com.slamDunkers.SlamStats.Payload.Response.CalendarioDateResponse;
+import com.slamDunkers.SlamStats.Payload.Response.PartitaStatResponse;
+import com.slamDunkers.SlamStats.Payload.Response.PlayerStatisticsResponse;
+import com.slamDunkers.SlamStats.Payload.Response.TeamStatGameResponse;
 import com.slamDunkers.SlamStats.Repository.GamesRepository;
+import com.slamDunkers.SlamStats.Repository.PlayerStatRepository;
 import com.slamDunkers.SlamStats.Repository.ScoreRepository;
 import com.slamDunkers.SlamStats.Repository.TeamsRepository;
 import org.springframework.stereotype.Service;
@@ -18,10 +23,13 @@ public class GamesService {
 	private final ScoreRepository scoreRepository;
 	private final TeamsRepository teamsRepository;
 
-	public GamesService(GamesRepository repository,TeamsRepository teamsRepository, ScoreRepository scoreRepository) {
+	private final PlayerStatRepository playerStatRepository;
+
+	public GamesService(GamesRepository repository, TeamsRepository teamsRepository, ScoreRepository scoreRepository, PlayerStatRepository playerStatRepository) {
 		this.repository = repository;
 		this.teamsRepository = teamsRepository;
 		this.scoreRepository = scoreRepository;
+		this.playerStatRepository = playerStatRepository;
 	}
 	public List<CalendarioDateResponse> getGameByDate(String date) {
 		List<Games> games = repository.findByStartDateContainingOrderByStartDate(date);
@@ -56,8 +64,107 @@ public class GamesService {
 			return Optional.of(toCalendarioDateResponse(gameList));
 		}
 		return null;
-
 	}
+	public PartitaStatResponse partitaStatResponse(Integer gameid){
+		Optional<Games> game = repository.findById(gameid);
+		PartitaStatResponse partitaStatResponse = new PartitaStatResponse();
+
+		if (game.isPresent()){
+			partitaStatResponse.setCalendarioDateResponse(toCalendarioDateResponse(Collections.singletonList(game.get())).get(0));
+
+			List<PlayerStatistics> playerstat = playerStatRepository.findByGameAndTeam(game, game.get().getHomeTeam());
+			partitaStatResponse.setHomeTeam(toPartitaStatResponse(playerstat));
+
+			playerstat = playerStatRepository.findByGameAndTeam(game, game.get().getAwayTeam());
+			partitaStatResponse.setAwayTeam(toPartitaStatResponse(playerstat));
+			return partitaStatResponse;
+		}
+		return null;
+	}
+
+	public TeamStatGameResponse toPartitaStatResponse(List<PlayerStatistics> playerstat){
+		TeamStatGameResponse response = new TeamStatGameResponse();
+		List<Integer> fgm = new ArrayList<>();
+		List<Integer> fga = new ArrayList<>();
+		List<Double> fgp = new ArrayList<>();
+		List<Integer> ftm = new ArrayList<>();
+		List<Integer> fta = new ArrayList<>();
+		List<Double> ftp = new ArrayList<>();
+		List<Integer> tpm = new ArrayList<>();
+		List<Integer> tpa = new ArrayList<>();
+		List<Double> tpp = new ArrayList<>();
+		List<Integer> offReb = new ArrayList<>();
+		List<Integer> defReb = new ArrayList<>();
+		List<Integer> totReb = new ArrayList<>();
+		List<Integer> assists = new ArrayList<>();
+		List<Integer> pFouls = new ArrayList<>();
+		List<Integer> steals = new ArrayList<>();
+		List<Integer> turnovers = new ArrayList<>();
+		List<Integer> blocks = new ArrayList<>();
+		List<Integer> plusMinus = new ArrayList<>();
+		List<PlayerStatisticsResponse> playersStatistics = new ArrayList<>();
+
+
+		for (PlayerStatistics p : playerstat){
+			fgm.add(p.getFgm());
+			fga.add(p.getFga());
+			fgp.add(p.getFgp());
+			ftm.add(p.getFtm());
+			fta.add(p.getFta());
+			ftp.add(p.getFtp());
+			tpm.add(p.getTpm());
+			tpa.add(p.getTpa());
+			tpp.add(p.getTpp());
+			offReb.add(p.getOffReb());
+			defReb.add(p.getDefReb());
+			totReb.add(p.getTotReb());
+			assists.add(p.getAssists());
+			pFouls.add(p.getPFouls());
+			steals.add(p.getSteals());
+			turnovers.add(p.getTurnovers());
+			blocks.add(p.getBlocks());
+			plusMinus.add(p.getPlusMinus());
+			playersStatistics.add(p.toPlayerStatisticsResponse());
+		}
+
+
+
+		response.setFga(sommaInt(fga));
+		response.setFgm(sommaInt(fgm));
+		response.setFgp(sommaDouble(fgp));
+		response.setFta(sommaInt(fta));
+		response.setFtm(sommaInt(ftm));
+		response.setFtp(sommaDouble(ftp));
+		response.setTpa(sommaInt(tpa));
+		response.setTpm(sommaInt(tpm));
+		response.setTpp(sommaDouble(tpp));
+		response.setOffReb(sommaInt(offReb));
+		response.setDefReb(sommaInt(defReb));
+		response.setTotReb(sommaInt(totReb));
+		response.setAssists(sommaInt(assists));
+		response.setPFouls(sommaInt(pFouls));
+		response.setSteals(sommaInt(steals));
+		response.setTurnovers(sommaInt(turnovers));
+		response.setBlocks(sommaInt(blocks));
+		response.setPlusMinus(sommaInt(plusMinus));
+		response.setPlayersStatistics(playersStatistics);
+		return response;
+	}
+	public int sommaInt(List<Integer> lista) {
+		int somma = 0;
+		for (Integer integer : lista) {
+			somma += integer;
+		}
+		return somma;
+	}
+	public double sommaDouble(List<Double> lista) {
+		double somma = 0;
+		for (Double integer : lista) {
+			somma += integer;
+		}
+		return somma;
+	}
+
 	public List<CalendarioDateResponse> toCalendarioDateResponse(List<Games> games){
 		List<CalendarioDateResponse> calendarioResponseList = new ArrayList<>();
 		for (Games game : games)

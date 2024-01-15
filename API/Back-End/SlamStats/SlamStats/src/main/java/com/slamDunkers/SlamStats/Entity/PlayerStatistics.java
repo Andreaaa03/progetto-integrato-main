@@ -1,5 +1,6 @@
 package com.slamDunkers.SlamStats.Entity;
 
+import com.slamDunkers.SlamStats.Payload.Response.PlayerStatisticsResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -71,5 +72,34 @@ public class PlayerStatistics {
 	private int blocks;
 	@Column(name = "plus_minus", columnDefinition = "int")
 	private int plusMinus;
+
+	public PlayerStatisticsResponse toPlayerStatisticsResponse(){
+		PlayerStatisticsResponse response = new PlayerStatisticsResponse();
+		response.setId(this.player.getId());
+		response.setNome(this.player.getFirstName() + " " + this.player.getLastName());
+		response.setPoints(this.points);
+		response.setPos(this.pos);
+		response.setMin(this.min);
+		response.setFgm(this.fgm);
+		response.setFga(this.fga);
+		response.setFgp(this.fgp);
+		response.setFtm(this.ftm);
+		response.setFta(this.fta);
+		response.setFtp(this.ftp);
+		response.setTpm(this.tpm);
+		response.setTpa(this.tpa);
+		response.setTpp(this.tpp);
+		response.setOffReb(this.offReb);
+		response.setDefReb(this.defReb);
+		response.setTotReb(this.totReb);
+		response.setAssists(this.assists);
+		response.setPFouls(this.pFouls);
+		response.setSteals(this.steals);
+		response.setTurnovers(this.turnovers);
+		response.setBlocks(this.blocks);
+		response.setPlusMinus(this.plusMinus);
+		return response;
+	}
+
 
 }

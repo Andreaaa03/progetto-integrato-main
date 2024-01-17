@@ -30,25 +30,10 @@ public class PlayerResponse {
 	public int points;
 	public String posizione;
 	public int assists;
+	public int numeroMaglia;
 
-//	public String min;
-//	public int fgm;
-//	public int fga;
-//	public double fgp;
-//	public int ftm;
-//	public int fta;
-//	public double ftp;
-//	public int tpm;
-//	public int tpa;
-//	public double tpp;
-//	public int offReb;
-//	public int defReb;
-//	public int totReb;
-//	public int pFouls;
-//	public int steals;
-//	public int turnovers;
-//	public int blocks;
-//	public int plusMinus;
+
+
 
 
 }

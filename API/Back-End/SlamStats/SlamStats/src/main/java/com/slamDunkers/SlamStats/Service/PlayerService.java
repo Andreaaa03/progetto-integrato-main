@@ -128,6 +128,7 @@ public class PlayerService {
 		playerResponse.weightKg = player.getWeightKilograms();
 		playerResponse.college = player.getCollege();
 		playerResponse.affiliation= player.getLastAffiliation();
+		playerResponse.numeroMaglia = player.getNumeroMaglia();
 
 		List<PlayerStatistics> playerStatisticsList = playerStatRepository.findByPlayerId(player.getId());
 		playerResponse.setPoints(somma(playerStatisticsList.stream().map(PlayerStatistics::getPoints).toList()));

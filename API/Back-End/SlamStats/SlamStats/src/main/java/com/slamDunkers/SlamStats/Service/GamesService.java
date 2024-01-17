@@ -3,16 +3,14 @@ package com.slamDunkers.SlamStats.Service;
 import com.slamDunkers.SlamStats.Entity.Games;
 import com.slamDunkers.SlamStats.Entity.PlayerStatistics;
 import com.slamDunkers.SlamStats.Entity.Teams;
-import com.slamDunkers.SlamStats.Payload.Response.CalendarioDateResponse;
-import com.slamDunkers.SlamStats.Payload.Response.PartitaStatResponse;
-import com.slamDunkers.SlamStats.Payload.Response.PlayerStatisticsResponse;
-import com.slamDunkers.SlamStats.Payload.Response.TeamStatGameResponse;
+import com.slamDunkers.SlamStats.Payload.Response.*;
 import com.slamDunkers.SlamStats.Repository.GamesRepository;
 import com.slamDunkers.SlamStats.Repository.PlayerStatRepository;
 import com.slamDunkers.SlamStats.Repository.ScoreRepository;
 import com.slamDunkers.SlamStats.Repository.TeamsRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -72,17 +70,43 @@ public class GamesService {
 		if (game.isPresent()){
 			partitaStatResponse.setCalendarioDateResponse(toCalendarioDateResponse(Collections.singletonList(game.get())).get(0));
 
+
+
+
 			List<PlayerStatistics> playerstat = playerStatRepository.findByGameAndTeam(game, game.get().getHomeTeam());
-			partitaStatResponse.setHomeTeam(toPartitaStatResponse(playerstat));
+			QaurtiScoreResponse qaurtiScoreResponse = new QaurtiScoreResponse();
+			qaurtiScoreResponse.setQ1Score(game.get().getQ1h());
+			qaurtiScoreResponse.setQ2Score(game.get().getQ2h());
+			qaurtiScoreResponse.setQ3Score(game.get().getQ3h());
+			qaurtiScoreResponse.setQ4Score(game.get().getQ4h());
+			partitaStatResponse.setHomeTeam(toPartitaStatResponse(playerstat,qaurtiScoreResponse));
+
 
 			playerstat = playerStatRepository.findByGameAndTeam(game, game.get().getAwayTeam());
-			partitaStatResponse.setAwayTeam(toPartitaStatResponse(playerstat));
+			QaurtiScoreResponse qaurtiScoreResponse1 = new QaurtiScoreResponse();
+			qaurtiScoreResponse1.setQ1Score(game.get().getQ1a());
+			qaurtiScoreResponse1.setQ2Score(game.get().getQ2a());
+			qaurtiScoreResponse1.setQ3Score(game.get().getQ3a());
+			qaurtiScoreResponse1.setQ4Score(game.get().getQ4a());
+			partitaStatResponse.setAwayTeam(toPartitaStatResponse(playerstat,qaurtiScoreResponse1));
+
+
+			System.out.println(partitaStatResponse.awayTeam.qaurtiScoreResponse.q1Score);
+			System.out.println(partitaStatResponse.awayTeam.qaurtiScoreResponse.q2Score);
+			System.out.println(partitaStatResponse.awayTeam.qaurtiScoreResponse.q3Score);
+			System.out.println(partitaStatResponse.awayTeam.qaurtiScoreResponse.q4Score);
+
+			System.out.println(partitaStatResponse.homeTeam.qaurtiScoreResponse.q1Score);
+			System.out.println(partitaStatResponse.homeTeam.qaurtiScoreResponse.q2Score);
+			System.out.println(partitaStatResponse.homeTeam.qaurtiScoreResponse.q3Score);
+			System.out.println(partitaStatResponse.homeTeam.qaurtiScoreResponse.q4Score);
+
 			return partitaStatResponse;
 		}
 		return null;
 	}
 
-	public TeamStatGameResponse toPartitaStatResponse(List<PlayerStatistics> playerstat){
+	public TeamStatGameResponse toPartitaStatResponse(List<PlayerStatistics> playerstat, QaurtiScoreResponse qaurtiScoreResponse){
 		TeamStatGameResponse response = new TeamStatGameResponse();
 		List<Integer> fgm = new ArrayList<>();
 		List<Integer> fga = new ArrayList<>();
@@ -102,6 +126,7 @@ public class GamesService {
 		List<Integer> turnovers = new ArrayList<>();
 		List<Integer> blocks = new ArrayList<>();
 		List<Integer> plusMinus = new ArrayList<>();
+
 		List<PlayerStatisticsResponse> playersStatistics = new ArrayList<>();
 
 
@@ -148,6 +173,8 @@ public class GamesService {
 		response.setBlocks(sommaInt(blocks));
 		response.setPlusMinus(sommaInt(plusMinus));
 		response.setPlayersStatistics(playersStatistics);
+		response.setQaurtiScoreResponse(qaurtiScoreResponse);
+		response.toMap();
 		return response;
 	}
 	public int sommaInt(List<Integer> lista) {
@@ -172,6 +199,7 @@ public class GamesService {
 			CalendarioDateResponse calendario = new CalendarioDateResponse() ;
 			calendario.setGameid(game.getId());
 			calendario.setGameStartDate(game.getStartDate());
+
 
 			if (game.getHomeTeam() != null) {
 				calendario.setTeamHomeName(game.getHomeTeam().getTeamName());
@@ -217,4 +245,9 @@ public class GamesService {
 	}
 
 
+	public List<CalendarioDateResponse> getLast20FromDate(LocalDate date) {
+		List<Games> games = repository.findByStartDateBetween(date.minusDays(20).toString(), date.toString());
+		return toCalendarioDateResponse(games);
+
+	}
 }

@@ -37,6 +37,4 @@ public class CalendarioDateResponse {
 	private String codeHome;
 	private String codeAway;
 
-
-
 }

@@ -1,15 +1,13 @@
 package com.slamDunkers.SlamStats.Entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Roles {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +15,7 @@ public class Roles {
 	private int id;
 	@Column(nullable = false, length = 10, unique = true)
 	private String role;
-	public Roles(String role) {
-		this.role = role;
-	}
+
+
+
 }

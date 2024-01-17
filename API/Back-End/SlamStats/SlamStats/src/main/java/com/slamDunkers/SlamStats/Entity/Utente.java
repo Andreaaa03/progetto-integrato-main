@@ -2,40 +2,45 @@ package com.slamDunkers.SlamStats.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Utente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private int id;
 
-	@Column(nullable = false, length = 100)
-	private String first_name;
-	@Column(nullable = false, length = 100)
-	private String last_name;
-	@Column(nullable = false)
-	private Date birth_date;
-	@Column(nullable = false, length = 255, unique = true)
+	@Column(name = "first_name", nullable = false)
+	private String firstName;
+	@Column(name = "last_name", nullable = false)
+	private String lastName;
+	@Column(name = "birth_date", nullable = false)
+	private LocalDate birthDate;
+	@Column(name = "email", nullable = false)
 	private String email;
-	@Column(nullable = false, length = 255)
-	private String pswd;
+	@Column(name = "pswd", nullable = false)
+	private String passwd;
 
 	@ManyToOne
 	@JoinColumn(name = "role_id", nullable = false)
-	private Roles role_id;
+	private Roles roleId;
 
-	public Utente(String first_name, String last_name, Date birth_date, String email, String pswd, Roles roles) {
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.birth_date = birth_date;
-		this.email = email;
-		this.pswd = pswd;
-		this.role_id = roles;
-	}
+	@Column(name = "data_iscrizione", updatable = false)
+	private LocalDate dataIscrizione;
+	@Column(name = "numero_telefono", nullable = false)
+	private String numeroTelefono;
+	@Column(name = "follower")
+	private int follower;
+	@Column(name = "favorite_team")
+	private int favoriteTeam;
+	@Column(name = "favorite_player")
+	private int favoritePlayer;
 }

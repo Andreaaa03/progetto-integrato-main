@@ -4,12 +4,10 @@ import com.slamDunkers.SlamStats.Payload.Response.CalendarioDateResponse;
 import com.slamDunkers.SlamStats.Payload.Response.PartitaStatResponse;
 import com.slamDunkers.SlamStats.Service.GamesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +43,7 @@ public class GamesController {
 	}
 
 	@GetMapping("/gameId")
-	public Optional<List<CalendarioDateResponse>> getGameById(Integer id) {
+	public Optional<List<CalendarioDateResponse>> getGameById(@RequestParam Integer id) {
 		return service.findById(id);
 	}
 

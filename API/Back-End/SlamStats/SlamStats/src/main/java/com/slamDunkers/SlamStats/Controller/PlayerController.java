@@ -30,7 +30,7 @@ public class PlayerController {
 	}
 
 	@GetMapping("/teamId")
-	public List<PlayerResponse> getPlayersByTeamName(int Id) {
-		return service.selezionaGiocatoriPerSquadra(Id);
+	public List<PlayerResponse> getPlayersByTeamName(int id) {
+		return service.selezionaGiocatoriPerSquadra(id);
 	}
 }

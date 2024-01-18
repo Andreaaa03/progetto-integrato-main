@@ -5,8 +5,12 @@ import com.slamDunkers.SlamStats.Entity.Teams;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 @Repository
 public interface GamesRepository extends JpaRepository<Games,Integer> {
@@ -20,9 +24,8 @@ public interface GamesRepository extends JpaRepository<Games,Integer> {
 	Games findById(int gameId);
 
 
-//	List<Games> findFirst20ByOrderByStartDateDesc();
-
-//	find by date containing  bitween 2 dates
-	List<Games> findByStartDateBetween(String startDate, String endDate);
+//  query to get last 20 games from date
+	@Query(value = "SELECT * FROM `games` WHERE start_date < :date ORDER BY start_date DESC LIMIT 20;", nativeQuery = true)
+	List<Games> findLast20Games(String date);
 
 }

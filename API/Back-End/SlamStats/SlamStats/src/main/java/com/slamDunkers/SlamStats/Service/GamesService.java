@@ -246,7 +246,8 @@ public class GamesService {
 
 
 	public List<CalendarioDateResponse> getLast20FromDate(LocalDate date) {
-		List<Games> games = repository.findByStartDateBetween(date.minusDays(20).toString(), date.toString());
+		String dataOra = date.toString() + " 23:59:59";
+		List<Games> games = repository.findLast20Games(dataOra);
 		return toCalendarioDateResponse(games);
 
 	}

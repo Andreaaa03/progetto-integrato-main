@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 21, 2024 alle 14:16
+-- Creato il: Gen 21, 2024 alle 15:54
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -16433,22 +16433,22 @@ CREATE TABLE `utente` (
   `email` varchar(255) NOT NULL,
   `pswd` varchar(255) NOT NULL,
   `role_id` int(11) NOT NULL DEFAULT 2,
-  `data_iscrizione` date NOT NULL,
+  `data_iscrizione` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `numero_telefono` varchar(14) NOT NULL,
   `follower` int(11) NOT NULL DEFAULT 0,
   `favorite_team` int(11) DEFAULT NULL,
-  `favorite_player` int(11) DEFAULT NULL,
-  `username` varchar(255) NOT NULL
+  `username` varchar(255) NOT NULL,
+  `sesso` varchar(255) NOT NULL,
+  `seguiti` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `utente`
 --
 
-INSERT INTO `utente` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `pswd`, `role_id`, `data_iscrizione`, `numero_telefono`, `follower`, `favorite_team`, `favorite_player`, `username`) VALUES
-(4, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-17', '1234567891', 0, 0, 0, 'ciao'),
-(5, 'Giorgio', 'Modeo', '2002-12-08', 'giorgio.modeo@gmail.com', 'e98e17f3e8a79a36583ebf1931c4a089f9bc556a3ca6b5158386a997d9bce2e8', 2, '2024-01-17', '1234567891', 0, 0, 0, 'giovanni'),
-(6, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.com', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 2, '2024-01-21', '1234567891', 0, 0, 0, 'domanico');
+INSERT INTO `utente` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `pswd`, `role_id`, `data_iscrizione`, `numero_telefono`, `follower`, `favorite_team`, `username`, `sesso`, `seguiti`) VALUES
+(5, 'Giorgio', 'Modeo', '2002-12-08', 'giorgio.modeo@gmail.com', 'e98e17f3e8a79a36583ebf1931c4a089f9bc556a3ca6b5158386a997d9bce2e8', 2, '2024-01-16 23:00:00', '1234567891', 0, 0, 'giovanni', '', 0),
+(9, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-21 14:53:09', '1234567891', 0, 0, 'domanico', 'm', NULL);
 
 --
 -- Indici per le tabelle scaricate
@@ -16641,7 +16641,7 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Limiti per le tabelle scaricate

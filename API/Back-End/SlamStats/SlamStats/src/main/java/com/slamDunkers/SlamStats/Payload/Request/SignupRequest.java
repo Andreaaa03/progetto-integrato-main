@@ -44,5 +44,9 @@ public class SignupRequest {
 	@Size(min=4)
 	private String username;
 
+	@NotBlank
+	@Size(min=1)
+	private String sesso;
+
 
 }

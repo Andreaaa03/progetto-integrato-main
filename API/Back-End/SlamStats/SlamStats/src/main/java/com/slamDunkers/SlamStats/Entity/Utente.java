@@ -33,16 +33,15 @@ public class Utente {
 	@JoinColumn(name = "role_id", nullable = false)
 	private Roles roleId;
 
-	@Column(name = "data_iscrizione", updatable = false)
-	private LocalDate dataIscrizione;
 	@Column(name = "numero_telefono", nullable = false)
 	private String numeroTelefono;
 	@Column(name = "follower")
 	private int follower;
 	@Column(name = "favorite_team")
 	private int favoriteTeam;
-	@Column(name = "favorite_player")
-	private int favoritePlayer;
+
 	@Column(name ="username" )
 	private String username;
+	@Column(name = "sesso")
+	private String sesso;
 }

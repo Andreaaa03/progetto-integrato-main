@@ -45,9 +45,9 @@ public class UtenteService {
 		u.setBirthDate(request.getBirthDate());
 		u.setUsername(request.getUsername());
 		u.setEmail(request.getEmail());
+		u.setSesso(request.getSesso());
 		u.setPasswd(new DigestUtils("SHA3-256").digestAsHex(request.getPasswd()));
 		u.setNumeroTelefono(request.getNumeroTelefono());
-		u.setDataIscrizione(java.time.LocalDate.now());
 		if (request.getEmail().contains("@edu.itspiemonte.it")) {
 			u.setRoleId(new Roles(3,"blogger"));
 		} else {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 21, 2024 alle 15:54
+-- Creato il: Gen 21, 2024 alle 22:46
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -16450,6 +16450,18 @@ INSERT INTO `utente` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `p
 (5, 'Giorgio', 'Modeo', '2002-12-08', 'giorgio.modeo@gmail.com', 'e98e17f3e8a79a36583ebf1931c4a089f9bc556a3ca6b5158386a997d9bce2e8', 2, '2024-01-16 23:00:00', '1234567891', 0, 0, 'giovanni', '', 0),
 (9, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-21 14:53:09', '1234567891', 0, 0, 'domanico', 'm', NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `utente_team`
+--
+
+CREATE TABLE `utente_team` (
+  `id` int(11) NOT NULL,
+  `utente` int(11) NOT NULL,
+  `team` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indici per le tabelle scaricate
 --
@@ -16568,6 +16580,14 @@ ALTER TABLE `utente`
   ADD KEY `role_id` (`role_id`);
 
 --
+-- Indici per le tabelle `utente_team`
+--
+ALTER TABLE `utente_team`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `team` (`team`),
+  ADD KEY `utente` (`utente`);
+
+--
 -- AUTO_INCREMENT per le tabelle scaricate
 --
 
@@ -16644,6 +16664,12 @@ ALTER TABLE `utente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT per la tabella `utente_team`
+--
+ALTER TABLE `utente_team`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- Limiti per le tabelle scaricate
 --
 
@@ -16660,6 +16686,13 @@ ALTER TABLE `games`
 --
 ALTER TABLE `paragrafo`
   ADD CONSTRAINT `paragrafo_ibfk_1` FOREIGN KEY (`id_blog`) REFERENCES `blog` (`id`);
+
+--
+-- Limiti per la tabella `utente_team`
+--
+ALTER TABLE `utente_team`
+  ADD CONSTRAINT `utente_team_ibfk_1` FOREIGN KEY (`team`) REFERENCES `teams` (`id`),
+  ADD CONSTRAINT `utente_team_ibfk_2` FOREIGN KEY (`utente`) REFERENCES `utente` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

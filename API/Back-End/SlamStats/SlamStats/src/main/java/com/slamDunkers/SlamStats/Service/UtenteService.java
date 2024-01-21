@@ -43,6 +43,7 @@ public class UtenteService {
 		u.setFirstName(request.getFirst_name());
 		u.setLastName(request.getLast_name());
 		u.setBirthDate(request.getBirthDate());
+		u.setUsername(request.getUsername());
 		u.setEmail(request.getEmail());
 		u.setPasswd(new DigestUtils("SHA3-256").digestAsHex(request.getPasswd()));
 		u.setNumeroTelefono(request.getNumeroTelefono());
@@ -57,7 +58,7 @@ public class UtenteService {
 
 
 	public ResponseEntity<AuthResponse> accesso(SinginRequest request, HttpSession session) {
-		Optional<Utente> u = utenteRepository.findByEmailAndPasswd(request.getEmail(), new DigestUtils("SHA3-256").digestAsHex(request.getPasswd()));
+		Optional<Utente> u = utenteRepository.findByEmailOrUsernameAndPasswd(request.getEmail(), new DigestUtils("SHA3-256").digestAsHex(request.getPasswd()));
 		if(u.isPresent()) {
 			String token = tokenService.createToken(u.get().getId(), u.get().getRoleId().getRole());
 			AuthResponse authenticatedUser = new AuthResponse(u.get().getId(), u.get().getFirstName(), u.get().getRoleId().getRole(), token);

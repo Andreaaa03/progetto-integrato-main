@@ -40,5 +40,9 @@ public class SignupRequest {
 	@Size(min=10)
 	private String numeroTelefono;
 
+	@NotBlank
+	@Size(min=4)
+	private String username;
+
 
 }

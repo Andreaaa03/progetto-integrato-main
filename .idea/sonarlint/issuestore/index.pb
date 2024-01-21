@@ -21,3 +21,5 @@ mAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Payloa
 cAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Service/PlayerService.java,e\b\ebd03ad8590d84bf7150746df6cabd82ce75596a
 ™
 iAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Payload/Response/ToResponse.java,c\b\cbd1b8e8e2e966ae166e35a8dfc8edc59d2eda8d
+˜
+hAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Controller/GamesController.java,3\6\365dbaa6668aa4017da4fcbb0a9a67a7cdfe413a

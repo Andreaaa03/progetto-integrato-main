@@ -43,4 +43,6 @@ public class Utente {
 	private int favoriteTeam;
 	@Column(name = "favorite_player")
 	private int favoritePlayer;
+	@Column(name ="username" )
+	private String username;
 }

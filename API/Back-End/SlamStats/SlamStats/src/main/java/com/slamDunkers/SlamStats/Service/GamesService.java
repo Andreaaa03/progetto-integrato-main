@@ -18,217 +18,129 @@ import java.util.*;
 public class GamesService {
 
 	private final GamesRepository repository;
-	private final ScoreRepository scoreRepository;
 	private final TeamsRepository teamsRepository;
+	private final ToResponse toResponse;
 
-	private final PlayerStatRepository playerStatRepository;
 
-	public GamesService(GamesRepository repository, TeamsRepository teamsRepository, ScoreRepository scoreRepository, PlayerStatRepository playerStatRepository) {
+	public GamesService(GamesRepository repository, TeamsRepository teamsRepository, ToResponse toResponse) {
 		this.repository = repository;
 		this.teamsRepository = teamsRepository;
-		this.scoreRepository = scoreRepository;
-		this.playerStatRepository = playerStatRepository;
+
+		this.toResponse = toResponse;
 	}
+	/**
+	* This method retrieves a list of games that match the provided date.
+	* The date is passed as a string and is used to query the GamesRepository.
+	* The method findByStartDateContainingOrderByStartDate in the GamesRepository uses Spring Data JPA's method naming conventions to generate a query.
+	* This query will find all Games entities where the startDate field contains the provided date string and order the results by startDate.
+	* The list of Games entities returned by the repository is then passed to the toCalendarioDateResponse method.
+	* The toCalendarioDateResponse method is responsible for converting the list of Games entities into a list of CalendarioDateResponse objects.
+	* This method then returns this list of CalendarioDateResponse objects.
+	*
+	* @param date The date to search for in the format of a String.
+	* @return A list of CalendarioDateResponse objects that match the provided date.
+	*/
 	public List<CalendarioDateResponse> getGameByDate(String date) {
-		List<Games> games = repository.findByStartDateContainingOrderByStartDate(date);
-		return toCalendarioDateResponse(games);
-
+	 List<Games> games = repository.findByStartDateContainingOrderByStartDate(date);
+	 return toResponse.toCalendarioDateResponse(games);
 	}
+
+	/**
+	 * This method retrieves all games from the repository.
+	 * It uses the findAll method of the repository which returns a list of all Games entities.
+	 * This list is then passed to the toCalendarioDateResponse method which converts the list of Games entities into a list of CalendarioDateResponse objects.
+	 * The method then returns this list of CalendarioDateResponse objects.
+	 *
+	 * @return A list of CalendarioDateResponse objects representing all games.
+	 */
 	public List<CalendarioDateResponse> getGames(){
-		List<Games> games = repository.findAll();
-		return toCalendarioDateResponse(games);
-
+	 List<Games> games = repository.findAll();
+	 return toResponse.toCalendarioDateResponse(games);
 	}
 
+	/**
+	 * This method retrieves all games played by a specific team.
+	 * It takes an integer parameter idSquadra which represents the id of the team.
+	 * The method first retrieves the team entity from the TeamsRepository using the provided id.
+	 * If the team is not found, it throws a NoSuchElementException.
+	 * Then, it queries the GamesRepository to find all games where the provided team is either the home team or the away team.
+	 * The games are ordered by their start date.
+	 * The list of Games entities returned by the repository is then passed to the toCalendarioDateResponse method.
+	 * The toCalendarioDateResponse method is responsible for converting the list of Games entities into a list of CalendarioDateResponse objects.
+	 * This method then returns this list of CalendarioDateResponse objects.
+	 *
+	 * @param idSquadra The id of the team to search for.
+	 * @return A list of CalendarioDateResponse objects that represent all games played by the team.
+	 */
 	public List<CalendarioDateResponse> partiteGiocateSquadra(int idSquadra) {
-		//prendere tutti i games della squadra
-		Optional<Teams> optionalTeam = teamsRepository.findById(idSquadra);
-		Teams team = optionalTeam.orElseThrow(() -> new NoSuchElementException("Team not found"));
-		List<Games> games = repository.findByHomeTeamOrAwayTeamOrderByStartDate(team, team);
-		return toCalendarioDateResponse(games);
+	 //prendere tutti i games della squadra
+	 Optional<Teams> optionalTeam = teamsRepository.findById(idSquadra);
+	 Teams team = optionalTeam.orElseThrow(() -> new NoSuchElementException("Team not found"));
+	 List<Games> games = repository.findByHomeTeamOrAwayTeamOrderByStartDate(team, team);
+	 return toResponse.toCalendarioDateResponse(games);
 	}
 
+	/**
+	 * This method retrieves a game by its id.
+	 * It takes an integer parameter gameId which represents the id of the game.
+	 * The method first retrieves the game entity from the GamesRepository using the provided id.
+	 * If the game is not found, it returns an empty list.
+	 * If the game is found, it is added to a new list of Games entities.
+	 * This list is then passed to the toCalendarioDateResponse method which converts the list of Games entities into a list of CalendarioDateResponse objects.
+	 * The method then returns this list of CalendarioDateResponse objects wrapped in an Optional.
+	 *
+	 * @param gameId The id of the game to search for.
+	 * @return An Optional containing a list of CalendarioDateResponse objects that represent the game with the provided id.
+	 */
 	public Optional<List<CalendarioDateResponse>> findById(Integer gameId) {
-		Optional<Games> games = repository.findById(gameId);
-//		convert game to list
-		if (games.isPresent()) {
-			List<Games> gameList = new ArrayList<>();
-			gameList.add(games.get());
-			return Optional.of(toCalendarioDateResponse(gameList));
-		}
-		return Optional.of(new ArrayList<>());
+	 Optional<Games> games = repository.findById(gameId);
+	 if (games.isPresent()) {
+	  List<Games> gameList = new ArrayList<>();
+	  gameList.add(games.get());
+	  return Optional.of(toResponse.toCalendarioDateResponse(gameList));
+	 }
+	 return Optional.of(new ArrayList<>());
 	}
+
+
+	/**
+	 * This method retrieves the statistics of a game by its id.
+	 * It takes an integer parameter gameId which represents the id of the game.
+	 * The method first retrieves the game entity from the GamesRepository using the provided id.
+	 * If the game is not found, it returns null.
+	 * If the game is found, it calls the toPartitaStatResponse method of the ToResponse object, passing the game entity as a parameter.
+	 * The toPartitaStatResponse method is responsible for converting the game entity into a PartitaStatResponse object.
+	 * This method then returns this PartitaStatResponse object, or null if the game was not found.
+	 *
+	 * @param gameId The id of the game to search for.
+	 * @return A PartitaStatResponse object that represents the statistics of the game with the provided id, or null if the game is not found.
+	 */
 	public PartitaStatResponse partitaStatResponse(Integer gameId){
 		Optional<Games> game = repository.findById(gameId);
-		PartitaStatResponse partitaStatResponse = new PartitaStatResponse();
 
 		if (game.isPresent()){
-			partitaStatResponse.setCalendarioDateResponse(toCalendarioDateResponse(Collections.singletonList(game.get())).get(0));
-
-
-			var stat = playerStatRepository.findByGameAndTeam(game, game.get().getHomeTeam());
-			QaurtiScoreResponse qaurtiScoreResponse = new QaurtiScoreResponse();
-			qaurtiScoreResponse.setQ1Score(game.get().getQ1h());
-			qaurtiScoreResponse.setQ2Score(game.get().getQ2h());
-			qaurtiScoreResponse.setQ3Score(game.get().getQ3h());
-			qaurtiScoreResponse.setQ4Score(game.get().getQ4h());
-			partitaStatResponse.setHomeTeam(toPartitaStatResponse(stat,qaurtiScoreResponse));
-
-
-			stat = playerStatRepository.findByGameAndTeam(game, game.get().getAwayTeam());
-			QaurtiScoreResponse qaurtiScoreResponse1 = new QaurtiScoreResponse();
-			qaurtiScoreResponse1.setQ1Score(game.get().getQ1a());
-			qaurtiScoreResponse1.setQ2Score(game.get().getQ2a());
-			qaurtiScoreResponse1.setQ3Score(game.get().getQ3a());
-			qaurtiScoreResponse1.setQ4Score(game.get().getQ4a());
-			partitaStatResponse.setAwayTeam(toPartitaStatResponse(stat,qaurtiScoreResponse1));
-
-			return partitaStatResponse;
+			return toResponse.toPartitaStatResponse(game.get());
 		}
 		return null;
 	}
 
-	public TeamStatGameResponse toPartitaStatResponse(List<PlayerStatistics> stat, QaurtiScoreResponse qaurtiScoreResponse){
-		TeamStatGameResponse response = new TeamStatGameResponse();
-		List<Integer> fgm = new ArrayList<>();
-		List<Integer> fga = new ArrayList<>();
-		List<Double> fgp = new ArrayList<>();
-		List<Integer> ftm = new ArrayList<>();
-		List<Integer> fta = new ArrayList<>();
-		List<Double> ftp = new ArrayList<>();
-		List<Integer> tpm = new ArrayList<>();
-		List<Integer> tpa = new ArrayList<>();
-		List<Double> tpp = new ArrayList<>();
-		List<Integer> offReb = new ArrayList<>();
-		List<Integer> defReb = new ArrayList<>();
-		List<Integer> totReb = new ArrayList<>();
-		List<Integer> assists = new ArrayList<>();
-		List<Integer> pFouls = new ArrayList<>();
-		List<Integer> steals = new ArrayList<>();
-		List<Integer> turnovers = new ArrayList<>();
-		List<Integer> blocks = new ArrayList<>();
-		List<Integer> plusMinus = new ArrayList<>();
 
-		List<PlayerStatisticsResponse> playersStatistics = new ArrayList<>();
-
-
-		for (PlayerStatistics p : stat){
-			fgm.add(p.getFgm());
-			fga.add(p.getFga());
-			fgp.add(p.getFgp());
-			ftm.add(p.getFtm());
-			fta.add(p.getFta());
-			ftp.add(p.getFtp());
-			tpm.add(p.getTpm());
-			tpa.add(p.getTpa());
-			tpp.add(p.getTpp());
-			offReb.add(p.getOffReb());
-			defReb.add(p.getDefReb());
-			totReb.add(p.getTotReb());
-			assists.add(p.getAssists());
-			pFouls.add(p.getPFouls());
-			steals.add(p.getSteals());
-			turnovers.add(p.getTurnovers());
-			blocks.add(p.getBlocks());
-			plusMinus.add(p.getPlusMinus());
-			playersStatistics.add(p.toPlayerStatisticsResponse());
-		}
-
-
-
-		response.setFga(sommaInt(fga));
-		response.setFgm(sommaInt(fgm));
-		response.setFgp(sommaDouble(fgp));
-		response.setFta(sommaInt(fta));
-		response.setFtm(sommaInt(ftm));
-		response.setFtp(sommaDouble(ftp));
-		response.setTpa(sommaInt(tpa));
-		response.setTpm(sommaInt(tpm));
-		response.setTpp(sommaDouble(tpp));
-		response.setOffReb(sommaInt(offReb));
-		response.setDefReb(sommaInt(defReb));
-		response.setTotReb(sommaInt(totReb));
-		response.setAssists(sommaInt(assists));
-		response.setPFouls(sommaInt(pFouls));
-		response.setSteals(sommaInt(steals));
-		response.setTurnovers(sommaInt(turnovers));
-		response.setBlocks(sommaInt(blocks));
-		response.setPlusMinus(sommaInt(plusMinus));
-		response.setPlayersStatistics(playersStatistics);
-		response.setQaurtiScoreResponse(qaurtiScoreResponse);
-		response.toMap();
-		return response;
-	}
-	public int sommaInt(List<Integer> lista) {
-		int somma = 0;
-		for (Integer integer : lista) {
-			somma += integer;
-		}
-		return somma;
-	}
-	public double sommaDouble(List<Double> lista) {
-		double somma = 0;
-		for (Double integer : lista) {
-			somma += integer;
-		}
-		return somma;
-	}
-
-	public List<CalendarioDateResponse> toCalendarioDateResponse(List<Games> games){
-		List<CalendarioDateResponse> calendarioResponseList = new ArrayList<>();
-		for (Games game : games)
-		{
-			CalendarioDateResponse calendario = new CalendarioDateResponse() ;
-			calendario.setGameid(game.getId());
-			calendario.setGameStartDate(game.getStartDate());
-
-
-			if (game.getHomeTeam() != null) {
-				calendario.setTeamHomeName(game.getHomeTeam().getTeamName());
-				calendario.setConferenceNameHome(game.getHomeTeam().getLeague().getConference());
-				calendario.setDivisionNameHome(game.getHomeTeam().getLeague().getDivision());
-				calendario.setTeamIdHome(game.getHomeTeam().getId());
-				calendario.setAllStarHome(game.getHomeTeam().isAllStar());
-				calendario.setNicknameHome(game.getHomeTeam().getNickname());
-				calendario.setLogoHome(game.getHomeTeam().getLogo());
-				calendario.setCityHome(game.getHomeTeam().getCity());
-				calendario.setCodeHome(game.getHomeTeam().getCode());
-
-				if (scoreRepository.findByGameAndTeam(game, game.getHomeTeam()) != null) {
-					calendario.setScoreTeamHome(scoreRepository.findByGameAndTeam(game, game.getHomeTeam()).getPoints());
-				}
-			}
-			else { calendario.setTeamHomeName(" "); }
-
-
-			if (game.getAwayTeam() != null) {
-				calendario.setTeamAwayName(game.getAwayTeam().getTeamName());
-				calendario.setConferenceNameAway(game.getAwayTeam().getLeague().getConference());
-				calendario.setDivisionNameAway(game.getAwayTeam().getLeague().getDivision());
-				calendario.setTeamIdAway(game.getAwayTeam().getId());
-				calendario.setAllStarAway(game.getAwayTeam().isAllStar());
-				calendario.setNicknameAway(game.getAwayTeam().getNickname());
-				calendario.setLogoAway(game.getAwayTeam().getLogo());
-				calendario.setCityAway(game.getAwayTeam().getCity());
-				calendario.setCodeAway(game.getAwayTeam().getCode());
-				if (scoreRepository.findByGameAndTeam(game, game.getAwayTeam()) != null){
-					calendario.setScoreTeamAway(scoreRepository.findByGameAndTeam(game, game.getAwayTeam()).getPoints());
-				}
-
-
-			}
-			else { calendario.setTeamHomeName(" "); }
-
-			calendarioResponseList.add(calendario);
-		}
-		return calendarioResponseList;
-	}
-
-
+	/**
+	 * This method retrieves the last 20 games from a specific date.
+	 * It takes a LocalDate parameter date which represents the date from which to retrieve the games.
+	 * The method first converts the date to a string and appends " 23:59:59" to it to represent the end of the day.
+	 * Then, it calls the findLast20Games method of the GamesRepository, passing the string representation of the date and time as a parameter.
+	 * The findLast20Games method is responsible for retrieving the last 20 games that started before the provided date and time.
+	 * The list of Games entities returned by the repository is then passed to the toCalendarioDateResponse method of the ToResponse object.
+	 * The toCalendarioDateResponse method is responsible for converting the list of Games entities into a list of CalendarioDateResponse objects.
+	 * This method then returns this list of CalendarioDateResponse objects.
+	 *
+	 * @param date The date from which to retrieve the last 20 games.
+	 * @return A list of CalendarioDateResponse objects that represent the last 20 games from the provided date.
+	 */
 	public List<CalendarioDateResponse> getLast20FromDate(LocalDate date) {
-		String dataOra = date.toString() + " 23:59:59";
-		List<Games> games = repository.findLast20Games(dataOra);
-		return toCalendarioDateResponse(games);
-
+	 String dataOra = date.toString() + " 23:59:59";
+	 List<Games> games = repository.findLast20Games(dataOra);
+	 return toResponse.toCalendarioDateResponse(games);
 	}
 }

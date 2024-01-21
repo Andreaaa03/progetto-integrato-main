@@ -22,7 +22,7 @@ public interface PlayerStatRepository extends JpaRepository<PlayerStatistics, In
 	List<PlayerStatistics> findLast5Games(int playerId);
 
 
-	List< PlayerStatistics> findByGameAndTeam(Optional<Games> game, Teams teamId);
+	List< PlayerStatistics> findByGameAndTeam(Games game, Teams teamId);
 
 
 

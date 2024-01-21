@@ -1,5 +1,6 @@
 package com.slamDunkers.SlamStats.Payload.Response;
 
+import com.slamDunkers.SlamStats.Entity.Teams;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,6 @@ public class UtenteResponse {
 	private String username;
 	private String sesso;
 	private int follower;
-	private int favoriteTeam;
+	private Teams favoriteTeam;
 
 }

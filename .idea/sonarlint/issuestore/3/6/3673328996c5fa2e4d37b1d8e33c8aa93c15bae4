@@ -1,0 +1,57 @@
+
+r
+java:S1104"PMake team a static final constant or non-public and provide accessors if needed.(¯šƒåÿÿÿÿÿ8ì÷–äÒ1
+t
+java:S1104"RMake season a static final constant or non-public and provide accessors if needed.(õíÎ¹üÿÿÿÿ8í÷–äÒ1
+n
+java:S1104"QMake games a static final constant or non-public and provide accessors if needed.(ÊÜÊÇ8í÷–äÒ1
+}
+java:S1104"[Make fastBreakPoints a static final constant or non-public and provide accessors if needed.(çğÑêùÿÿÿÿ8í÷–äÒ1
+v
+java:S1104"YMake pointsInPaint a static final constant or non-public and provide accessors if needed.(Éö±Ù8í÷–äÒ1
+s
+java:S1104"WMake biggestLead a static final constant or non-public and provide accessors if needed.(Ó¸=8í÷–äÒ1
+€
+java:S1104"^Make secondChancePoints a static final constant or non-public and provide accessors if needed.(Àäşÿÿÿÿ8í÷–äÒ1
+
+java:S1104"]Make pointsOffTurnover a static final constant or non-public and provide accessors if needed.(ƒ°ışÿÿÿÿ8í÷–äÒ1
+t
+java:S1104"RMake points a static final constant or non-public and provide accessors if needed.(Ô¹»»şÿÿÿÿ8í÷–äÒ1
+l
+java:S1104"OMake fgm a static final constant or non-public and provide accessors if needed.(ˆ¼ı–8î÷–äÒ1
+l
+java:S1104"OMake fga a static final constant or non-public and provide accessors if needed.(ÃÕºË8î÷–äÒ1
+k
+java:S1104"OMake fgp a static final constant or non-public and provide accessors if needed.(ğéÚ-8î÷–äÒ1
+q
+java:S1104"OMake ftm a static final constant or non-public and provide accessors if needed.(œ»Ãÿÿÿÿÿ8î÷–äÒ1
+l
+java:S1104"OMake fta a static final constant or non-public and provide accessors if needed.(êæß8î÷–äÒ1
+q
+java:S1104"OMake ftp a static final constant or non-public and provide accessors if needed.(Ñ÷¢Êøÿÿÿÿ8î÷–äÒ1
+q
+java:S1104"OMake tpm a static final constant or non-public and provide accessors if needed.(’‚Óçøÿÿÿÿ8î÷–äÒ1
+q
+java:S1104"OMake tpa a static final constant or non-public and provide accessors if needed.(ÅÑşıÿÿÿÿ8î÷–äÒ1
+q
+java:S1104"OMake tpp a static final constant or non-public and provide accessors if needed.(ô´âÄüÿÿÿÿ8ï÷–äÒ1
+t
+java:S1104 "RMake offReb a static final constant or non-public and provide accessors if needed.(ò£ÿ×ÿÿÿÿÿ8ï÷–äÒ1
+t
+java:S1104!"RMake defReb a static final constant or non-public and provide accessors if needed.(®ú±§üÿÿÿÿ8ï÷–äÒ1
+t
+java:S1104""RMake totReb a static final constant or non-public and provide accessors if needed.(”ßŞÎÿÿÿÿÿ8ï÷–äÒ1
+p
+java:S1104#"SMake assists a static final constant or non-public and provide accessors if needed.(€’•8ï÷–äÒ1
+o
+java:S1104$"RMake steals a static final constant or non-public and provide accessors if needed.(¤Œ»ó8ï÷–äÒ1
+r
+java:S1104%"UMake turnovers a static final constant or non-public and provide accessors if needed.(òöÈ÷8ï÷–äÒ1
+o
+java:S1104&"RMake blocks a static final constant or non-public and provide accessors if needed.(ªü“ê8ï÷–äÒ1
+w
+java:S1104'"UMake plusMinus a static final constant or non-public and provide accessors if needed.(ö˜™ãùÿÿÿÿ8ï÷–äÒ1
+t
+java:S1104("RMake pfouls a static final constant or non-public and provide accessors if needed.(óˆ§³øÿÿÿÿ8ï÷–äÒ1
+w
+java:S1104)"ZMake conferenceRank a static final constant or non-public and provide accessors if needed.(äèæ»8ï÷–äÒ1

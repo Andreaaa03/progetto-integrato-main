@@ -141,32 +141,30 @@ public class ToResponse {
 	}
 
 
-	public PartitaStatResponse toPartitaStatResponse(Integer id){
-		Optional<Games> game = gameRepository.findById(id);
+	public PartitaStatResponse toPartitaStatResponse(Games game){
+
 		PartitaStatResponse partitaStatResponse = new PartitaStatResponse();
 
-		if (game.isPresent()){
-			partitaStatResponse.setCalendarioDateResponse(toCalendarioDateResponse(Collections.singletonList(game.get())).get(0));
+		partitaStatResponse.setCalendarioDateResponse(toCalendarioDateResponse(Collections.singletonList(game)).get(0));
 
-			List<PlayerStatistics> stat = playerStatRepository.findByGameAndTeam(game, game.get().getHomeTeam());
-			QaurtiScoreResponse qaurtiScoreResponse = new QaurtiScoreResponse();
-			qaurtiScoreResponse.setQ1Score(game.get().getQ1h());
-			qaurtiScoreResponse.setQ2Score(game.get().getQ2h());
-			qaurtiScoreResponse.setQ3Score(game.get().getQ3h());
-			qaurtiScoreResponse.setQ4Score(game.get().getQ4h());
-			partitaStatResponse.setHomeTeam(toPartitaStatResponse(stat,qaurtiScoreResponse));
+		var stat = playerStatRepository.findByGameAndTeam(game, game.getHomeTeam());
+		QaurtiScoreResponse qaurtiScoreResponse = new QaurtiScoreResponse();
+		qaurtiScoreResponse.setQ1Score(game.getQ1h());
+		qaurtiScoreResponse.setQ2Score(game.getQ2h());
+		qaurtiScoreResponse.setQ3Score(game.getQ3h());
+		qaurtiScoreResponse.setQ4Score(game.getQ4h());
+		partitaStatResponse.setHomeTeam(toPartitaStatResponse(stat,qaurtiScoreResponse));
 
 
-			stat = playerStatRepository.findByGameAndTeam(game, game.get().getAwayTeam());
-			QaurtiScoreResponse qaurti = new QaurtiScoreResponse();
-			qaurti.setQ1Score(game.get().getQ1a());
-			qaurti.setQ2Score(game.get().getQ2a());
-			qaurti.setQ3Score(game.get().getQ3a());
-			qaurti.setQ4Score(game.get().getQ4a());
-			partitaStatResponse.setAwayTeam(toPartitaStatResponse(stat,qaurti));
-			return partitaStatResponse;
-		}
-		return null;
+		stat = playerStatRepository.findByGameAndTeam(game, game.getAwayTeam());
+		QaurtiScoreResponse qaurtiScoreResponse1 = new QaurtiScoreResponse();
+		qaurtiScoreResponse1.setQ1Score(game.getQ1a());
+		qaurtiScoreResponse1.setQ2Score(game.getQ2a());
+		qaurtiScoreResponse1.setQ3Score(game.getQ3a());
+		qaurtiScoreResponse1.setQ4Score(game.getQ4a());
+		partitaStatResponse.setAwayTeam(toPartitaStatResponse(stat,qaurtiScoreResponse1));
+
+		return partitaStatResponse;
 	}
 
 	public List<CalendarioDateResponse> toCalendarioDateResponse(List<Games> games){

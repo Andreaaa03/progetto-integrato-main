@@ -14,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 @Service
 @Slf4j
 class TokenService {
+//			TODO cambiare il token e metteo in un file
 //	        TODO cambiare le eccezioni da generiche a specifiche
 	private static final String TOKEN_SECRET = "slamDunkersSlamStats2024";
 	public static final int EXPIRE_AFTER = 36000;
@@ -21,6 +22,8 @@ class TokenService {
 * @param idUser id dell'utente
 * @param role ruolo dell'utente
 * @return token
+* crea il token con l'id dell'utente e il suo ruolo usando l'algoritmo HMAC256
+*
 */
 	public String createToken(int idUser, String role){
 		try{
@@ -35,7 +38,6 @@ class TokenService {
 			log.error(e.getMessage());
 			throw new RuntimeException("problemi di creazione del token"+e.getMessage());
 		}
-
 	}
 
 
@@ -44,9 +46,14 @@ class TokenService {
 			Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
 			JWTVerifier verifier = JWT.require(algorithm).build();
 			DecodedJWT jwt = verifier.verify(token);
-			return  new UserToken(jwt.getClaim("userId").asInt(), jwt.getClaim("role").asString());
+			UserToken ut = new UserToken(jwt.getClaim("idUser").asInt(), jwt.getClaim("role").asString());
+			return ut;
 		} catch (Exception e){
-			throw new RuntimeException("problema di recupero del id"+e);
+			log.error(e.getMessage());
 		}
+		return null;
 	}
+
+
+
 }

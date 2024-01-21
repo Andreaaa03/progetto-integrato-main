@@ -39,11 +39,6 @@ public class GamesService {
 		return toCalendarioDateResponse(games);
 
 	}
-	public List<Games> getGameByTeam(int teamId) {
-		Teams team = new Teams();
-		team.setId(teamId);
-		return repository.findByHomeTeamOrAwayTeamOrderByStartDate(team, team);
-	}
 
 	public List<CalendarioDateResponse> partiteGiocateSquadra(int idSquadra) {
 		//prendere tutti i games della squadra
@@ -61,52 +56,39 @@ public class GamesService {
 			gameList.add(games.get());
 			return Optional.of(toCalendarioDateResponse(gameList));
 		}
-		return null;
+		return Optional.of(new ArrayList<>());
 	}
-	public PartitaStatResponse partitaStatResponse(Integer gameid){
-		Optional<Games> game = repository.findById(gameid);
+	public PartitaStatResponse partitaStatResponse(Integer gameId){
+		Optional<Games> game = repository.findById(gameId);
 		PartitaStatResponse partitaStatResponse = new PartitaStatResponse();
 
 		if (game.isPresent()){
 			partitaStatResponse.setCalendarioDateResponse(toCalendarioDateResponse(Collections.singletonList(game.get())).get(0));
 
 
-
-
-			List<PlayerStatistics> playerstat = playerStatRepository.findByGameAndTeam(game, game.get().getHomeTeam());
+			var stat = playerStatRepository.findByGameAndTeam(game, game.get().getHomeTeam());
 			QaurtiScoreResponse qaurtiScoreResponse = new QaurtiScoreResponse();
 			qaurtiScoreResponse.setQ1Score(game.get().getQ1h());
 			qaurtiScoreResponse.setQ2Score(game.get().getQ2h());
 			qaurtiScoreResponse.setQ3Score(game.get().getQ3h());
 			qaurtiScoreResponse.setQ4Score(game.get().getQ4h());
-			partitaStatResponse.setHomeTeam(toPartitaStatResponse(playerstat,qaurtiScoreResponse));
+			partitaStatResponse.setHomeTeam(toPartitaStatResponse(stat,qaurtiScoreResponse));
 
 
-			playerstat = playerStatRepository.findByGameAndTeam(game, game.get().getAwayTeam());
+			stat = playerStatRepository.findByGameAndTeam(game, game.get().getAwayTeam());
 			QaurtiScoreResponse qaurtiScoreResponse1 = new QaurtiScoreResponse();
 			qaurtiScoreResponse1.setQ1Score(game.get().getQ1a());
 			qaurtiScoreResponse1.setQ2Score(game.get().getQ2a());
 			qaurtiScoreResponse1.setQ3Score(game.get().getQ3a());
 			qaurtiScoreResponse1.setQ4Score(game.get().getQ4a());
-			partitaStatResponse.setAwayTeam(toPartitaStatResponse(playerstat,qaurtiScoreResponse1));
-
-
-			System.out.println(partitaStatResponse.awayTeam.qaurtiScoreResponse.q1Score);
-			System.out.println(partitaStatResponse.awayTeam.qaurtiScoreResponse.q2Score);
-			System.out.println(partitaStatResponse.awayTeam.qaurtiScoreResponse.q3Score);
-			System.out.println(partitaStatResponse.awayTeam.qaurtiScoreResponse.q4Score);
-
-			System.out.println(partitaStatResponse.homeTeam.qaurtiScoreResponse.q1Score);
-			System.out.println(partitaStatResponse.homeTeam.qaurtiScoreResponse.q2Score);
-			System.out.println(partitaStatResponse.homeTeam.qaurtiScoreResponse.q3Score);
-			System.out.println(partitaStatResponse.homeTeam.qaurtiScoreResponse.q4Score);
+			partitaStatResponse.setAwayTeam(toPartitaStatResponse(stat,qaurtiScoreResponse1));
 
 			return partitaStatResponse;
 		}
 		return null;
 	}
 
-	public TeamStatGameResponse toPartitaStatResponse(List<PlayerStatistics> playerstat, QaurtiScoreResponse qaurtiScoreResponse){
+	public TeamStatGameResponse toPartitaStatResponse(List<PlayerStatistics> stat, QaurtiScoreResponse qaurtiScoreResponse){
 		TeamStatGameResponse response = new TeamStatGameResponse();
 		List<Integer> fgm = new ArrayList<>();
 		List<Integer> fga = new ArrayList<>();
@@ -130,7 +112,7 @@ public class GamesService {
 		List<PlayerStatisticsResponse> playersStatistics = new ArrayList<>();
 
 
-		for (PlayerStatistics p : playerstat){
+		for (PlayerStatistics p : stat){
 			fgm.add(p.getFgm());
 			fga.add(p.getFga());
 			fgp.add(p.getFgp());
@@ -212,8 +194,6 @@ public class GamesService {
 				calendario.setCityHome(game.getHomeTeam().getCity());
 				calendario.setCodeHome(game.getHomeTeam().getCode());
 
-				System.out.println(game.getHomeTeam().getTeamName());
-				System.out.println(game.getId());
 				if (scoreRepository.findByGameAndTeam(game, game.getHomeTeam()) != null) {
 					calendario.setScoreTeamHome(scoreRepository.findByGameAndTeam(game, game.getHomeTeam()).getPoints());
 				}

@@ -10,8 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlayerResponse {
-	public TeamsResponse team;
 	public Integer playerId;
+
+	public TeamsResponse team;
 	public String firstName;
 	public String lastName;
 	public String birthDate;
@@ -31,7 +32,7 @@ public class PlayerResponse {
 	public String posizione;
 	public int assists;
 	public int numeroMaglia;
-
+	public PlayerStatisticsResponse statistics;
 
 
 

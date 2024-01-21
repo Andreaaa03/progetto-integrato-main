@@ -28,7 +28,7 @@ public class TeamsController {
 
 	@GetMapping("/All")
 	public List<TeamsResponse> getAllTeamsAsPayload() {
-		List<Teams> teams = service.selezzionaTuttiTeams();
+		List<Teams> teams = service.selezionaTuttiTeams();
 		List<TeamsResponse> teamsResponses = new ArrayList<>();
 		for (Teams team : teams) {
 			teamsResponses.add(team.toTeamsResponse());

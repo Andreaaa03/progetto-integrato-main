@@ -10,17 +10,16 @@ import java.util.Optional;
 
 @Service
 public class TeamsService {
-	private TeamsRepository Repository;
+	private final TeamsRepository repository;
 
 	@Autowired
-	public TeamsService(TeamsRepository Repository){this.Repository =Repository;}
+	public TeamsService(TeamsRepository repository){this.repository=repository;}
 
-	public List<Teams> selezzionaTuttiTeams(){
-		return Repository.findAll();
-
+	public List<Teams> selezionaTuttiTeams(){
+		return repository.findAll();
 	}
 
 	public Optional<Teams> selezionaTeamById(int id) {
-		return Repository.findById(id);
+		return repository.findById(id);
 	}
 }

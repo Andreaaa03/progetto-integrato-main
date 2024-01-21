@@ -11,13 +11,13 @@ import java.util.List;
 
 @Service
 public class StandingsService {
-	private StandingsRepository Repository;
+	private final StandingsRepository repository;
 
 	@Autowired
-	public StandingsService(StandingsRepository Repository){this.Repository =Repository;}
+	public StandingsService(StandingsRepository repository){this.repository =repository;}
 
 	public List<TeamStandingsResponse> selezionaTuttiTeams(){
-		List<TeamStandings> teams = Repository.findByOrderByWinPercentageDesc();
+		List<TeamStandings> teams = repository.findByOrderByWinPercentageDesc();
 		List<TeamStandingsResponse> respons = new ArrayList<>();
 		for (TeamStandings team : teams) {
 			TeamStandingsResponse response = new TeamStandingsResponse();

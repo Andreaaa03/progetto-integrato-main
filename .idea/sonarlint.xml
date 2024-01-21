@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SonarLintProjectSettings">
+    <option name="fileExclusions">
+      <list>
+        <option value="DIRECTORY:API/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Controller" />
+        <option value="DIRECTORY:API/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats" />
+        <option value="DIRECTORY:API/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Entity" />
+      </list>
+    </option>
+  </component>
+</project>

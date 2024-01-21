@@ -1,4 +1,4 @@
-package com.slamDunkers.SlamStats.Service;
+package com.slamDunkers.SlamStats.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

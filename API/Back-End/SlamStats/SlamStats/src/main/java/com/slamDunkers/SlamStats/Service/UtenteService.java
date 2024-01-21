@@ -20,20 +20,21 @@ import java.util.Optional;
 public class UtenteService {
 	public final UtenteRepository utenteRepository;
 	public final RolesRepository rolesRepository;
-	public final TockenService tokenService;
+	public final TokenService tokenService;
 
-	public UtenteService(UtenteRepository utenteRepository, RolesRepository rolesRepository, TockenService tokenService) {
+	public UtenteService(UtenteRepository utenteRepository, RolesRepository rolesRepository, TokenService tokenService) {
 		this.utenteRepository = utenteRepository;
 		this.rolesRepository = rolesRepository;
 		this.tokenService = tokenService;
 	}
-	public ResponseEntity<?> save(SignupRequest request){
+	public ResponseEntity<String> save(SignupRequest request){
 		Optional<Object> u = utenteRepository.findByEmail(request.getEmail());
 		if (u.isPresent()){
-			return new ResponseEntity("Email già in uso", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Email già presente",HttpStatus.BAD_REQUEST);
 		}
 		else{
-			return new ResponseEntity(utenteRepository.save(fromRequestToEntity(request)), HttpStatus.CREATED);
+			utenteRepository.save(fromRequestToEntity(request));
+			return new ResponseEntity<>("Utente creato con successo",HttpStatus.CREATED);
 		}
 	}
 
@@ -55,14 +56,13 @@ public class UtenteService {
 	}
 
 
-	public ResponseEntity<?> accesso(SinginRequest request, HttpSession session) {
+	public ResponseEntity<AuthResponse> accesso(SinginRequest request, HttpSession session) {
 		Optional<Utente> u = utenteRepository.findByEmailAndPasswd(request.getEmail(), new DigestUtils("SHA3-256").digestAsHex(request.getPasswd()));
-
 		if(u.isPresent()) {
 			String token = tokenService.createToken(u.get().getId(), u.get().getRoleId().getRole());
-			AuthResponse authenticadedUser = new AuthResponse(u.get().getId(), u.get().getFirstName(), u.get().getRoleId().getRole(), token);
+			AuthResponse authenticatedUser = new AuthResponse(u.get().getId(), u.get().getFirstName(), u.get().getRoleId().getRole(), token);
 			session.setAttribute("userRole", u.get().getRoleId().getRole());
-			return new ResponseEntity(authenticadedUser, HttpStatus.OK);
+			return new ResponseEntity<>(authenticatedUser, HttpStatus.OK);
 		}
 		else{
 		return new ResponseEntity("Username o password errati", HttpStatus.BAD_REQUEST);

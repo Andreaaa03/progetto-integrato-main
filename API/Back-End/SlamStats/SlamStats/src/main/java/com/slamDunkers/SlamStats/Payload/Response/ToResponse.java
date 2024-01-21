@@ -32,7 +32,7 @@ public class ToResponse {
 
 
 	public TeamStatisticsResponse toTeamsStatisticsResponse(Integer id) {
-		Optional<TeamsStatistics> teamsStatistic = repository.findByTeamId(id);
+		Optional<TeamsStatistics> teamsStatistic = Optional.ofNullable(repository.findByTeamId(id));
 		TeamStandings teamStandings = standings.findByTeamId(id);
 		if(teamsStatistic.isEmpty()) {
 			return null;

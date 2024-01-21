@@ -1,0 +1,43 @@
+
+p
+java:S1104"TMake playerId a static final constant or non-public and provide accessors if needed.(¬ğ”d8àİ³ÍÒ1
+r
+java:S1104"PMake team a static final constant or non-public and provide accessors if needed.(¯šƒåÿÿÿÿÿ8ßİ³ÍÒ1
+w
+java:S1104"UMake firstName a static final constant or non-public and provide accessors if needed.(ßæÆÑıÿÿÿÿ8àİ³ÍÒ1
+p
+java:S1104"TMake lastName a static final constant or non-public and provide accessors if needed.(¿ü8àİ³ÍÒ1
+r
+java:S1104"UMake birthDate a static final constant or non-public and provide accessors if needed.(çÑ¬Ú8àİ³ÍÒ1
+l
+java:S1104"OMake age a static final constant or non-public and provide accessors if needed.(×Áò¿8àİ³ÍÒ1
+u
+java:S1104"XMake birthCountry a static final constant or non-public and provide accessors if needed.(º€ã®8àİ³ÍÒ1
+q
+java:S1104"TMake nbaStart a static final constant or non-public and provide accessors if needed.(ö–ÄÎ8àİ³ÍÒ1
+t
+java:S1104"RMake nbaPro a static final constant or non-public and provide accessors if needed.(“ÁƒÅúÿÿÿÿ8àİ³ÍÒ1
+x
+java:S1104"VMake heightFeet a static final constant or non-public and provide accessors if needed.(çûÔÈøÿÿÿÿ8àİ³ÍÒ1
+z
+java:S1104"XMake heightInches a static final constant or non-public and provide accessors if needed.(µó£şÿÿÿÿ8àİ³ÍÒ1
+z
+java:S1104"XMake heightMeters a static final constant or non-public and provide accessors if needed.(Ø¾òıøÿÿÿÿ8àİ³ÍÒ1
+z
+java:S1104"XMake weightPounds a static final constant or non-public and provide accessors if needed.( Åşøÿÿÿÿ8àİ³ÍÒ1
+q
+java:S1104"TMake weightKg a static final constant or non-public and provide accessors if needed.(ãöÈÌ8àİ³ÍÒ1
+o
+java:S1104"SMake college a static final constant or non-public and provide accessors if needed.(¼çÅ8àİ³ÍÒ1
+y
+java:S1104"WMake affiliation a static final constant or non-public and provide accessors if needed.(™Âÿ³üÿÿÿÿ8àİ³ÍÒ1
+t
+java:S1104"RMake points a static final constant or non-public and provide accessors if needed.(£³“àùÿÿÿÿ8áİ³ÍÒ1
+r
+java:S1104 "UMake posizione a static final constant or non-public and provide accessors if needed.(§™‚8áİ³ÍÒ1
+u
+java:S1104!"SMake assists a static final constant or non-public and provide accessors if needed.(Öü“Ğùÿÿÿÿ8áİ³ÍÒ1
+u
+java:S1104""XMake numeroMaglia a static final constant or non-public and provide accessors if needed.(±ç´Ã8áİ³ÍÒ1
+x
+java:S1104#"VMake statistics a static final constant or non-public and provide accessors if needed.(½íúàûÿÿÿÿ8áİ³ÍÒ1

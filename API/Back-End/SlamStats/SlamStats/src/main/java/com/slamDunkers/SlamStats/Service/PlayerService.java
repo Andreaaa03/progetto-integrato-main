@@ -101,16 +101,8 @@ public class PlayerService {
 		playerResponse.affiliation= player.getLastAffiliation();
 		playerResponse.numeroMaglia = player.getNumeroMaglia();
 
-		List<PlayerStatistics> playerStatisticsList = playerStatRepository.findByPlayerId(player.getId());
-		playerResponse.setPoints(somma(playerStatisticsList.stream().map(PlayerStatistics::getPoints).toList()));
-		playerResponse.setAssists(somma(playerStatisticsList.stream().map(PlayerStatistics::getAssists).toList()));
-		if (playerStatisticsList.isEmpty()) {
-			playerResponse.setPosizione("N/A");
-		}
-		else {
-			playerResponse.setPosizione(playerStatisticsList.get(0).getPos());
-		}
-		playerResponse.setStatistics(toResponse.toPlayerStatisticsResponse(player.getId()));
+		List<PlayerStatistics> playerStatisticsList = playerStatRepository.findLast5Games(player.getId());
+		playerResponse.setStatistics(playerStatisticsList.stream().map(PlayerStatistics::toPlayerStatisticsResponse).toList());
 
 
 

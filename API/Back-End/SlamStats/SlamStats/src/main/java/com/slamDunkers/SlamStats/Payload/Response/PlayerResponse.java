@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,7 +34,7 @@ public class PlayerResponse {
 	public String posizione;
 	public int assists;
 	public int numeroMaglia;
-	public PlayerStatisticsResponse statistics;
+	public List<PlayerStatisticsResponse> statistics;
 
 
 

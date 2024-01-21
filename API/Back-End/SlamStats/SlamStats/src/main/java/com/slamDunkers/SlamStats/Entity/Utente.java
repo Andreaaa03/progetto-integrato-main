@@ -33,6 +33,9 @@ public class Utente {
 	@JoinColumn(name = "role_id", nullable = false)
 	private Roles roleId;
 
+	@Column(name = "data_iscrizione", updatable = false)
+	private LocalDate dataIscrizione;
+
 	@Column(name = "numero_telefono", nullable = false)
 	private String numeroTelefono;
 	@Column(name = "follower")

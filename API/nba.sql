@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 21, 2024 alle 22:46
+-- Creato il: Gen 21, 2024 alle 23:18
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -1468,8 +1468,8 @@ INSERT INTO `league` (`id`, `conference_id`, `division_id`, `name`) VALUES
 (7, 2, 4, 'West-Northwest'),
 (8, 2, 5, 'West-Pacific'),
 (9, 2, 6, 'West-Southwest'),
-(10, NULL, NULL, 'Est'),
-(11, NULL, NULL, 'West');
+(10, 1, NULL, 'Est'),
+(11, 2, NULL, 'West');
 
 -- --------------------------------------------------------
 

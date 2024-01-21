@@ -21,6 +21,7 @@ public class ToResponse {
 	private final PlayerStatRepository playerStatRepository;
 
 
+
 	@Autowired
 	public ToResponse(TeamsStatisticsRepository repository, StandingsRepository standings, GamesRepository gameRepository, ScoreRepository scoreRepository, PlayerStatRepository playerStatRepository) {
 		this.repository = repository;
@@ -40,7 +41,8 @@ public class ToResponse {
 		TeamsStatistics teamsStatistics = teamsStatistic.get();
 
 		TeamStatisticsResponse response = new TeamStatisticsResponse();
-		response.setTeam(teamsStatistics. getTeam().toTeamsResponse());
+
+		response.setTeam(teamsStatistics.getTeam().toTeamsResponse());
 		response.setSeason(teamsStatistics.getSeason().getYear());
 		response.setGames(teamsStatistics.getGames());
 		response.setFastBreakPoints(teamsStatistics.getFastBreakPoints());

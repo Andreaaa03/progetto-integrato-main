@@ -1,8 +1,11 @@
 package com.slamDunkers.SlamStats.Controller;
 
 import com.slamDunkers.SlamStats.Entity.Commenti;
+import com.slamDunkers.SlamStats.Payload.Request.CommentiRequest;
 import com.slamDunkers.SlamStats.Repository.CommentiRepository;
+import com.slamDunkers.SlamStats.Service.CommentiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,21 +15,17 @@ import java.util.List;
 @CrossOrigin
 public class CommentiController {
 
-	@Autowired
-	private CommentiRepository repository;
-	@Autowired
-	public CommentiController(CommentiRepository repository) {
-		this.repository = repository;
-	}
-	@GetMapping("/All")
-	public List<Commenti> getCommenti() {
-		return repository.findAll();
+	private final CommentiService commentiService;
+
+
+
+	public CommentiController(CommentiService commentiService) {
+        this.commentiService = commentiService;
 	}
 
 	@PostMapping("/add")
-	public String addCommento(@RequestBody Commenti commento) {
-		repository.save(commento);
-		return "Commento aggiunto con successo";
+	public ResponseEntity<String> addCommento(@RequestBody CommentiRequest commento) {
+		return commentiService.commenta(commento);
 	}
 
 

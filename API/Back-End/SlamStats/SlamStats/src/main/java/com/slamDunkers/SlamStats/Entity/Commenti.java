@@ -21,12 +21,17 @@ public class Commenti {
 	@JoinColumn(name = "id_commento_padre", columnDefinition = "int")
 	private Commenti id_commento_padre;
 
-	@Column(name = "id_utente", columnDefinition = "int")
-	private int id_utente;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_utente", columnDefinition = "int")
+	private Utente id_utente;
 
-	@Column(name = "id_games", columnDefinition = "int")
-	private int id_games;
-	@Column(name = "blog", columnDefinition = "int")
-	private int blog;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_games", columnDefinition = "int")
+	private Games id_games;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "blog", columnDefinition = "int")
+	private Blog blog;
+
 
 }

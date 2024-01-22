@@ -21,6 +21,7 @@ import java.util.List;
 public class UtenteController {
 	public final UtenteService userService;
 
+
 	@PostMapping("/signup")
 	public ResponseEntity<String> save(@RequestBody @Valid SignupRequest request){
 		return userService.save(request);
@@ -58,5 +59,6 @@ public class UtenteController {
 	public UtenteResponse profilo(@RequestBody @Valid TokenRequest request){
 		return userService.profilo(request);
 	}
+
 
 }

@@ -60,6 +60,7 @@ public class PlayerService {
 	public List<PlayerResponse> selezionaGiocatoriPerSquadra(int teamId) {
 
 		Optional<Teams> teamFound = teamsRepository.findById(teamId);
+
 		if (teamFound.isPresent()) {
 			List<PlayerResponse> playerResponseList = new ArrayList<>();
 			for (Player player : playerRepository.findByTeam(teamFound)) {
@@ -101,9 +102,18 @@ public class PlayerService {
 		playerResponse.affiliation= player.getLastAffiliation();
 		playerResponse.numeroMaglia = player.getNumeroMaglia();
 
-		List<PlayerStatistics> playerStatisticsList = playerStatRepository.findLast5Games(player.getId());
-		playerResponse.setStatistics(playerStatisticsList.stream().map(PlayerStatistics::toPlayerStatisticsResponse).toList());
 
+		List<PlayerStatistics> playerStatisticsList = playerStatRepository.findLast5Games(player.getId());
+		for (PlayerStatistics playerStatistics : playerStatisticsList) {
+			playerResponse.points += playerStatistics.getPoints();
+			playerResponse.assists += playerStatistics.getAssists();
+		}
+		playerResponse.posizione = playerStatisticsList.get(0).getPos();
+
+		playerResponse.setStatistics(playerStatisticsList.stream().map(PlayerStatistics::toPlayerStatisticsResponse).toList());
+		if (playerResponse.getStatistics().size() == 0) {
+			playerResponse.setStatistics(Collections.emptyList());
+		}
 
 
 		return playerResponse;

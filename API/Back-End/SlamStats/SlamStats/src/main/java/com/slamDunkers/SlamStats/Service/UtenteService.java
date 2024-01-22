@@ -44,12 +44,20 @@ public class UtenteService {
     }
 	public ResponseEntity<String> save(SignupRequest request){
 		Optional<Object> u = utenteRepository.findByEmail(request.getEmail());
+		Optional<Object> u2 = utenteRepository.findByUsername(request.getUsername());
+		Optional<Object> u3 = utenteRepository.findByNumeroTelefono(request.getNumeroTelefono());
 		if (u.isPresent()){
-			return new ResponseEntity<>("Email già presente",HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Email già presente",HttpStatus.OK);
+		}
+		else if(u2.isPresent()){
+			return new ResponseEntity<>("Username già presente",HttpStatus.OK);
+		}
+		else if(u3.isPresent()){
+			return new ResponseEntity<>("Numero di telefono già presente",HttpStatus.OK);
 		}
 		else{
 			utenteRepository.save(fromRequestToEntity(request));
-			return new ResponseEntity<>("Utente creato con successo",HttpStatus.CREATED);
+			return new ResponseEntity<>("Utente creato con successo",HttpStatus.OK);
 		}
 	}
 
@@ -73,7 +81,7 @@ public class UtenteService {
 
 
 	public ResponseEntity<AuthResponse> accesso(SinginRequest request, HttpSession session) {
-		Optional<Utente> u = utenteRepository.findByEmailOrUsernameAndPasswd(request.getEmail(), new DigestUtils("SHA3-256").digestAsHex(request.getPasswd()));
+		Optional<Utente> u = utenteRepository.findByEmailOrUsernameOrNumeroTelefonoAndPasswd(request.getEmail(), new DigestUtils("SHA3-256").digestAsHex(request.getPasswd()));
 		if(u.isPresent()) {
 			String token = tokenService.createToken(u.get().getId(), u.get().getRoleId().getRole());
 			AuthResponse authenticatedUser = new AuthResponse(u.get().getId(), u.get().getFirstName(), u.get().getRoleId().getRole(), token);
@@ -81,7 +89,7 @@ public class UtenteService {
 			return new ResponseEntity<>(authenticatedUser, HttpStatus.OK);
 		}
 		else{
-		return new ResponseEntity("Username o password errati", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity("Username o password errati", HttpStatus.OK);
 		}
 	}
 
@@ -91,7 +99,7 @@ public class UtenteService {
 
 		int ut5 = utente_teamRepository.findByIdUtente(u.getId());
 		if(ut5 >= 5){
-			return new ResponseEntity<>("Hai già raggiunto il limite di 5 squadre preferite",HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Hai già raggiunto il limite di 5 squadre preferite",HttpStatus.OK);
 		}
 
 		return SorRteamPreferiti(u,t.get());
@@ -108,7 +116,7 @@ public class UtenteService {
 			utente_team.setIdUtente(u);
 			utente_team.setIdTeam(t);
 			utente_teamRepository.save(utente_team);
-			return new ResponseEntity<>("Team aggiunto con successo",HttpStatus.CREATED);
+			return new ResponseEntity<>("Team aggiunto con successo",HttpStatus.OK);
 		}
 	}
 
@@ -117,7 +125,7 @@ public class UtenteService {
 
 		Blog b = blogRepository.findById(request.getIdArticolo());
 		if (b == null) {
-			return new ResponseEntity<>("Articolo non trovato", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Articolo non trovato", HttpStatus.OK);
 		}
 		return SorRarticoloPreferiti(u, b);
 
@@ -134,7 +142,7 @@ public class UtenteService {
 			utente_team.setIdUtente(u);
 			utente_team.setIdArticolo(b);
 			utente_teamRepository.save(utente_team);
-			return new ResponseEntity<>("Articolo aggiunto con successo",HttpStatus.CREATED);
+			return new ResponseEntity<>("Articolo aggiunto con successo",HttpStatus.OK);
 		}
 	}
 	public List<BlogCompleto> getArticoliPreferiti(TokenRequest request) {
@@ -179,7 +187,7 @@ public class UtenteService {
 			seguito.setSeguito(u2.get());
 			seguito.setSeguace(u);
 			seguitoRepository.save(seguito);
-			return new ResponseEntity<>("Utente seguito con successo",HttpStatus.CREATED);
+			return new ResponseEntity<>("Utente seguito con successo",HttpStatus.OK);
 		}
 		else{
 			seguitoRepository.delete(s.get());

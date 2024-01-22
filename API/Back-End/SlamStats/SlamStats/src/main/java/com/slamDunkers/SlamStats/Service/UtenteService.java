@@ -207,7 +207,6 @@ public class UtenteService {
 		for (UtentePreferiti utentePreferiti : lut) {
 			teams.add(toResponse.toTeamsResponse(utentePreferiti.getIdTeam()));
 		}
-		ur.setFavoriteTeam(teams);
 
 		return ur;
 	}

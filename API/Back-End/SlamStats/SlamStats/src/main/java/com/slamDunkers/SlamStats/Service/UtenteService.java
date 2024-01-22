@@ -2,10 +2,7 @@ package com.slamDunkers.SlamStats.Service;
 
 import com.slamDunkers.SlamStats.Entity.*;
 import com.slamDunkers.SlamStats.Payload.Request.*;
-import com.slamDunkers.SlamStats.Payload.Response.AuthResponse;
-import com.slamDunkers.SlamStats.Payload.Response.BlogCompleto;
-import com.slamDunkers.SlamStats.Payload.Response.TeamsResponse;
-import com.slamDunkers.SlamStats.Payload.Response.ToResponse;
+import com.slamDunkers.SlamStats.Payload.Response.*;
 import com.slamDunkers.SlamStats.Repository.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,10 +27,10 @@ public class UtenteService {
 	public final HttpServletRequest request;
 	public final BlogRepository blogRepository;
 	public final BlogService blogService;
-
 	public final ToResponse toResponse;
+	private final SeguitoRepository seguitoRepository;
 
-	public UtenteService(UtenteRepository utenteRepository, RolesRepository rolesRepository, TokenService tokenService, Utente_TeamRepository utente_teamRepository, TeamsRepository teamsRepository, HttpServletRequest request, BlogRepository blogRepository, BlogService blogService, ToResponse toResponse) {
+	public UtenteService(UtenteRepository utenteRepository, RolesRepository rolesRepository, TokenService tokenService, Utente_TeamRepository utente_teamRepository, TeamsRepository teamsRepository, HttpServletRequest request, BlogRepository blogRepository, BlogService blogService, ToResponse toResponse, SeguitoRepository seguitoRepository) {
 		this.utenteRepository = utenteRepository;
 		this.rolesRepository = rolesRepository;
 		this.tokenService = tokenService;
@@ -42,6 +40,7 @@ public class UtenteService {
         this.blogRepository = blogRepository;
         this.blogService = blogService;
         this.toResponse = toResponse;
+        this.seguitoRepository = seguitoRepository;
     }
 	public ResponseEntity<String> save(SignupRequest request){
 		Optional<Object> u = utenteRepository.findByEmail(request.getEmail());
@@ -87,19 +86,15 @@ public class UtenteService {
 	}
 
 	public ResponseEntity<String> teamPreferito(UtenteTeamRequest request) {
-		Integer idUtente = tokenService.getUserIdFromToken(request.getToken()).getId();
-		Optional<Utente> u = utenteRepository.findById(idUtente);
-		if(!u.isPresent()){
-			return new ResponseEntity<>("Utente non trovato",HttpStatus.BAD_REQUEST);
-		}
+		Utente u = getUtente(request.getToken());
 		Optional<Teams> t = teamsRepository.findById(request.getIdTeam());
 
-		int ut5 = utente_teamRepository.findByIdUtente(u.get().getId());
+		int ut5 = utente_teamRepository.findByIdUtente(u.getId());
 		if(ut5 >= 5){
 			return new ResponseEntity<>("Hai già raggiunto il limite di 5 squadre preferite",HttpStatus.BAD_REQUEST);
 		}
 
-		return SorRteamPreferiti(u.get(),t.get());
+		return SorRteamPreferiti(u,t.get());
 	}
 
 	public ResponseEntity<String> SorRteamPreferiti(Utente u,Teams t) {
@@ -118,18 +113,13 @@ public class UtenteService {
 	}
 
 	public ResponseEntity<String> articoloPreferito(UtenteArticoloRequest request) {
+		Utente u = getUtente(request.getToken());
 
-		Integer idUtente = tokenService.getUserIdFromToken(request.getToken()).getId();
-		Optional<Utente> u = utenteRepository.findById(idUtente);
-
-		if (!u.isPresent()) {
-			return new ResponseEntity<>("Utente non trovato", HttpStatus.BAD_REQUEST);
-		}
 		Blog b = blogRepository.findById(request.getIdArticolo());
 		if (b == null) {
 			return new ResponseEntity<>("Articolo non trovato", HttpStatus.BAD_REQUEST);
 		}
-		return SorRarticoloPreferiti(u.get(), b);
+		return SorRarticoloPreferiti(u, b);
 
 	}
 
@@ -148,12 +138,9 @@ public class UtenteService {
 		}
 	}
 	public List<BlogCompleto> getArticoliPreferiti(TokenRequest request) {
-		Integer idUtente = tokenService.getUserIdFromToken(request.getToken()).getId();
-		Optional<Utente> u = utenteRepository.findById(idUtente);
-		if (!u.isPresent()) {
-			return null;
-		}
-		List<UtentePreferiti> ub = utente_teamRepository.findArticoliPreferiti (u.get().getId());
+		Utente u = getUtente(request.getToken());
+
+		List<UtentePreferiti> ub = utente_teamRepository.findArticoliPreferiti (u.getId());
 		if (ub == null) {
 			return null;
 		}
@@ -167,12 +154,9 @@ public class UtenteService {
 
 
 	public List<TeamsResponse> getTeamPreferiti(TokenRequest request) {
-		Integer idUtente = tokenService.getUserIdFromToken(request.getToken()).getId();
-		Optional<Utente> u = utenteRepository.findById(idUtente);
-		if (!u.isPresent()) {
-			return null;
-		}
-		List<UtentePreferiti> ut = utente_teamRepository.findTeamPreferiti(u.get().getId());
+		Utente u = getUtente(request.getToken());
+
+		List<UtentePreferiti> ut = utente_teamRepository.findTeamPreferiti(u.getId());
 		if (ut == null) {
 			return null;
 		}
@@ -180,9 +164,62 @@ public class UtenteService {
 		for (UtentePreferiti utentePreferiti : ut) {
 			teams.add(toResponse.toTeamsResponse(utentePreferiti.getIdTeam()));
 		}
-
 		return teams;
-
-
 	}
+
+	public ResponseEntity<String> segui(SeguiRequest request){
+		Utente u = getUtente(request.getToken());
+		Optional<Utente> u2 = utenteRepository.findById(request.getIdUtente());
+		if (!u2.isPresent()) {
+			return new ResponseEntity<>("Utente non trovato",HttpStatus.OK);
+		}
+		Optional<Seguiti> s = seguitoRepository.findSeguito(u.getId(), u2.get().getId());
+		if (s.isEmpty()){
+			Seguiti seguito = new Seguiti();
+			seguito.setSeguito(u2.get());
+			seguito.setSeguace(u);
+			seguitoRepository.save(seguito);
+			return new ResponseEntity<>("Utente seguito con successo",HttpStatus.CREATED);
+		}
+		else{
+			seguitoRepository.delete(s.get());
+			return new ResponseEntity<>("Utente rimosso con successo",HttpStatus.OK);
+		}
+	}
+	public UtenteResponse profilo(TokenRequest request) {
+		Utente u = getUtente(request.getToken());
+		return profiloUtente(u.getId());
+	}
+
+	public UtenteResponse profiloUtente(Integer id){
+		Optional<Utente> u = utenteRepository.findById(id);
+		if (!u.isPresent()) {
+			throw new RuntimeException("Utente non trovato");
+		}
+		UtenteResponse ur = new UtenteResponse();
+		ur.setId(u.get().getId());
+		ur.setEmail(u.get().getEmail());
+		ur.setNumeroTelefono(u.get().getNumeroTelefono());
+		ur.setUsername(u.get().getUsername());
+		ur.setSesso(u.get().getSesso());
+		List<UtentePreferiti> lut = utente_teamRepository.findTeamPreferiti(u.get().getId());
+		List<TeamsResponse> teams = new ArrayList<>();
+		for (UtentePreferiti utentePreferiti : lut) {
+			teams.add(toResponse.toTeamsResponse(utentePreferiti.getIdTeam()));
+		}
+		ur.setFavoriteTeam(teams);
+
+		return ur;
+	}
+
+	public Utente getUtente(String request){
+		Integer utente = tokenService.getUserIdFromToken(request).getId();
+		Optional<Utente> u = utenteRepository.findById(utente);
+		if (!u.isPresent()) {
+			throw new RuntimeException("Utente non trovato");
+		}
+		return u.get();
+	}
+
+
 }

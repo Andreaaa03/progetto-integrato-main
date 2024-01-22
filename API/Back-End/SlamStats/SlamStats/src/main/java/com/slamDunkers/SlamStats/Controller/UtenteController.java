@@ -1,15 +1,13 @@
 package com.slamDunkers.SlamStats.Controller;
 
-import com.slamDunkers.SlamStats.Entity.Teams;
-import com.slamDunkers.SlamStats.Entity.Utente;
 import com.slamDunkers.SlamStats.Payload.Request.*;
 import com.slamDunkers.SlamStats.Payload.Response.BlogCompleto;
 import com.slamDunkers.SlamStats.Payload.Response.TeamsResponse;
+import com.slamDunkers.SlamStats.Payload.Response.UtenteResponse;
 import com.slamDunkers.SlamStats.Service.UtenteService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,4 +49,14 @@ public class UtenteController {
 	public List<TeamsResponse> getTeamPreferiti(@RequestBody @Valid TokenRequest request){
 		return userService.getTeamPreferiti(request);
 	}
+	@PostMapping("/seguiUtente")
+	public ResponseEntity<String> seguiUtente(@RequestBody @Valid SeguiRequest request){
+		return userService.segui(request);
+	}
+
+	@PostMapping("/profilo")
+	public UtenteResponse profilo(@RequestBody @Valid TokenRequest request){
+		return userService.profilo(request);
+	}
+
 }

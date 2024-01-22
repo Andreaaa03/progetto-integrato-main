@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 22, 2024 alle 06:42
+-- Creato il: Gen 22, 2024 alle 08:09
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -16241,6 +16241,13 @@ CREATE TABLE `seguiti` (
   `seguace` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `seguiti`
+--
+
+INSERT INTO `seguiti` (`id`, `seguito`, `seguace`) VALUES
+(7, 9, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -16490,7 +16497,6 @@ CREATE TABLE `utente` (
   `data_iscrizione` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `numero_telefono` varchar(14) NOT NULL,
   `follower` int(11) NOT NULL DEFAULT 0,
-  `favorite_team` int(11) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   `sesso` varchar(255) NOT NULL,
   `seguiti` int(11) DEFAULT NULL
@@ -16500,10 +16506,10 @@ CREATE TABLE `utente` (
 -- Dump dei dati per la tabella `utente`
 --
 
-INSERT INTO `utente` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `pswd`, `role_id`, `data_iscrizione`, `numero_telefono`, `follower`, `favorite_team`, `username`, `sesso`, `seguiti`) VALUES
-(5, 'Giorgio', 'Modeo', '2002-12-08', 'giorgio.modeo@gmail.com', 'e98e17f3e8a79a36583ebf1931c4a089f9bc556a3ca6b5158386a997d9bce2e8', 2, '2024-01-16 23:00:00', '1234567891', 0, 0, 'giovanni', '', 0),
-(9, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-21 14:53:09', '1234567891', 0, 0, 'domanico', 'm', NULL),
-(10, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.co', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 2, '2024-01-22 05:39:30', '1234567891', 0, 0, 'domanico', 'm', NULL);
+INSERT INTO `utente` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `pswd`, `role_id`, `data_iscrizione`, `numero_telefono`, `follower`, `username`, `sesso`, `seguiti`) VALUES
+(5, 'Giorgio', 'Modeo', '2002-12-08', 'giorgio.modeo@gmail.com', 'e98e17f3e8a79a36583ebf1931c4a089f9bc556a3ca6b5158386a997d9bce2e8', 2, '2024-01-16 23:00:00', '1234567891', 0, 'giovanni', '', 0),
+(9, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-21 14:53:09', '1234567891', 0, 'domanico', 'm', NULL),
+(10, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.co', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 2, '2024-01-22 05:39:30', '1234567891', 0, 'domanico', 'm', NULL);
 
 -- --------------------------------------------------------
 
@@ -16739,7 +16745,7 @@ ALTER TABLE `season`
 -- AUTO_INCREMENT per la tabella `seguiti`
 --
 ALTER TABLE `seguiti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT per la tabella `tag`

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './views/home-page/home-page.component';
@@ -17,6 +18,15 @@ import { FormsModule } from '@angular/forms';
 import { ClassificaComponent } from './components/classifica-component/classifica.component';
 import { PartiteDelGiornoPreviewComponent } from './components/partite-del-giorno-preview/partite-del-giorno-preview.component';
 import { CardPartitaComponent } from './components/card-partita/card-partita.component';
+import { PartitaPageComponent } from './views/partita-page/partita-page.component'
+import { SquadraDetailPageComponent } from './views/squadra-detail-page/squadra-detail-page.component';
+import { PostArticoloComponent } from './components/post-articolo/post-articolo.component';
+import { ArticoloDetailPageComponent } from './views/articolo-detail-page/articolo-detail-page.component';
+import { CardCommentoComponent } from './components/card-commento/card-commento.component';
+import { ProfiloPageComponent } from './views/profilo-page/profilo-page.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+
+
 
 @NgModule({
   declarations: [
@@ -32,7 +42,14 @@ import { CardPartitaComponent } from './components/card-partita/card-partita.com
     ErrorePageComponent,
     ClassificaComponent,
     PartiteDelGiornoPreviewComponent,
-    CardPartitaComponent
+    CardPartitaComponent,
+    PartitaPageComponent,
+    SquadraDetailPageComponent,
+    ArticoloDetailPageComponent,
+    PostArticoloComponent,
+    CardCommentoComponent,
+    ProfiloPageComponent,
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,

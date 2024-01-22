@@ -196,7 +196,9 @@ public class UtenteService {
 		if (!u.isPresent()) {
 			throw new RuntimeException("Utente non trovato");
 		}
+
 		UtenteResponse ur = new UtenteResponse();
+		
 		ur.setId(u.get().getId());
 		ur.setEmail(u.get().getEmail());
 		ur.setNumeroTelefono(u.get().getNumeroTelefono());

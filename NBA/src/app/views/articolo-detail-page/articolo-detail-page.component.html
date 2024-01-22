@@ -1,0 +1,112 @@
+<app-navbar></app-navbar>
+<section>
+    <div class="flex justify-center h-full">
+        <div class="container flex justify-center h-full">
+            <div class="w-[90%]">
+                <div class="mt-10">
+                    <div class="w-full h-20 bg-primary flex justify-center items-center">
+                        <h2 class=" text-white text-4xl font-bold">
+                            TITOLO ARTICOLO
+                        </h2>
+                    </div>
+                    <div class="w-full h-6 bg-secondary"></div>
+                </div>
+                <div class="my-5">
+                    <img class="w-full object-contain" src="../../../assets/img-articolo/inizio 9.png" alt="">
+                </div>
+                <div class="w-full h-20 bg-primary flex justify-center items-center">
+                    <h2 class=" text-white text-4xl font-bold">
+                        Sottotitolo ARTICOLO
+                    </h2>
+                </div>
+                <div class="">
+                    <p class="text-2xl p-5 text-justify">
+                        La National Basketball Association (NBA), una delle leghe sportive più prestigiose al mondo, ha una storia ricca e affascinante che ha avuto inizio il 6 giugno 1946 a New York City sotto il nome di Basketball Association of America (BAA). Questo evento segnò il primo passo verso la creazione di una lega di basket professionistica unificata negli Stati Uniti.
+                        <br><br>
+                        Prima della nascita della NBA, esistevano tre leghe separate: la National Basketball League (NBL), fondata nel 1937, con squadre principalmente nella regione del Midwest; la Basketball Association of America (BAA), creata nel 1946, con squadre nelle principali città statunitensi; e la American Basketball League (ABL).
+                        <br><br>
+                        La crescente popolarità del basket professionistico spinse alla fusione di BAA e NBL durante la stagione 1948-1949, dando vita alla National Basketball Association.
+                    </p>
+                </div>
+                <div class="my-5">
+                    <img class="w-full object-contain" src="../../../assets/img-articolo/download (9) 1.png" alt="">
+                </div>
+                <div class="text-2xl p-5 text-justify">
+                    Parlando della storia della NBA è impossibile non citare alcuni tra i giocatori più iconici e straordinari degli anni '80, come la rivalità epica tra Magic Johnson dei Los Angeles Lakers e Larry Bird dei Boston Celtics. Questo duello ha contribuito in modo significativo all'aumento della popolarità del basket e della NBA stessa creando competizioni spettacolari e leggendarie.
+                    <br><br>
+                    Il decennio successivo ha visto l'emergere di una delle leggende più celebrate dello sport: Michael Jordan. Con i Chicago Bulls, Jordan ha portato la NBA ad una nuova era di spettacolarità e successo internazionale. La sua influenza ha contribuito a trasformare il basket in uno degli sport più seguiti a livello globale.
+                </div>
+                <div class="my-5">
+                    <img class="w-full object-contain" src="../../../assets/img-articolo/Basketball - Mens - 1971-1980 - 104 1.png" alt="">
+                </div>
+                <div class="text-2xl p-5 text-justify">
+                    <p>
+                        Negli anni successivi, la NBA ha continuato a prosperare con l'avvento di nuove stelle, tra cui Kobe Bryant e LeBron James. Il gioco ha continuato a evolversi, diventando uno spettacolo globale con una base di fan appassionata in tutto il mondo.
+                        <br><br>
+                        Oggi, la NBA è molto più di una semplice lega di basket; è un fenomeno e un emblema per la cultura che influisce sulla moda, sulla musica e sulla società.
+                        <br><br>
+                        La storia della NBA non parla solo dell’ascesa di uno sport, ma è un racconto entusiasmante di crescita, competizione e successo. Da una fusione di tre leghe pioniere è emersa una potenza sportiva globale, con una storia ricca di leggende e momenti indelebili che hanno plasmato il panorama dello sport e intrattenuto milioni di appassionati di basket in tutto il mondo.
+                    </p>
+                </div>
+                <div class="w-full flex justify-around">
+                    <div class="w-1/5 flex justify-center">
+                        <p class="border-primary border-4 bg-yellow-300 p-2 w-auto">#Tag Articolo</p>
+                    </div>
+                    <div class="w-1/5 flex justify-center">
+                        <p class="border-primary border-4 bg-yellow-300 p-2 w-auto">#Tag Articolo</p>
+                    </div>
+                    <div class="w-1/5 flex justify-center">
+                        <p class="border-primary border-4 bg-yellow-300 p-2 w-auto">#Tag Articolo</p>
+                    </div>
+                    <div class="w-1/5 flex justify-center">
+                        <p class="border-primary border-4 bg-yellow-300 p-2 w-auto">#Tag Articolo</p>
+                    </div>
+                    <div class="w-1/5 flex justify-center">
+                        <p class="border-primary border-4 bg-yellow-300 p-2 w-auto">#Tag Articolo</p>
+                    </div>
+                </div>
+                <div class="h-[75vh] bg-[#ACDEFF] overflow-y-auto mt-10">
+                    <div class="" *ngFor="let _ of CountCommentForArticle">
+                        <app-card-commento class="my-5"></app-card-commento>
+                    </div>
+                </div>
+                <div class="bg-[#ACDEFF] w-full min-h-[25vh] flex flex-nowrap mt-4">
+                    <div class="w-2/3 p-5">
+                        <textarea class="w-full min-h-full p-2" placeholder="inserisci il commento" name="" id=""></textarea>
+                    </div>
+                    <div class="w-1/3 m-5">
+                        <div class="w-full p-5 flex justify-center">
+                            <input class="w-full" type="text" placeholder="tag nome utente per la risposta">
+                        </div>
+                        <div class="w-full p-5 flex justify-center">
+                            <button class="py-2 px-4 bg-secondary rounded-full text-white">Rispondi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="flex justify-center h-full">
+        <div class="container flex justify-center h-full">
+            <div class="w-[90%]">
+                <div class="mt-10">
+                    <div class="w-full h-20 bg-primary flex justify-center items-center">
+                        <h2 class=" text-white text-4xl font-bold">
+                            TITOLO ARTICOLO
+                        </h2>
+                    </div>
+                    <div class="w-full h-6 bg-secondary"></div>
+                </div>
+                <div class="">
+                    <app-post-articolo [extended]="true"></app-post-articolo>
+                    <app-post-articolo [extended]="true"></app-post-articolo>
+                    <app-post-articolo [extended]="true"></app-post-articolo>
+                    <app-post-articolo [extended]="true"></app-post-articolo>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-navbar></app-navbar>

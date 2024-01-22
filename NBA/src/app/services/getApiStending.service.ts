@@ -28,17 +28,17 @@ export class GetApiServiceStanding {
         this.standings.favouriteStandings.westConference = [];
         return this.apiService.SearchStanding().pipe(
             map((res: any) => {
-                res.response.forEach((singleTeam: any) => {
-                    if (singleTeam.conference.name === "east") {
+                res.forEach((singleTeam: any) => {
+                    if (singleTeam.team.conferenceName === "East") {
                         this.standings.allStanding.eastConference.push(singleTeam);
-                        if (singleTeam.preferiti === true) {
-                            this.standings.favouriteStandings.eastConference.push(singleTeam);
-                        }
-                    } else {
+                        // if (singleTeam.preferiti === true) {
+                        //     this.standings.favouriteStandings.eastConference.push(singleTeam);
+                        // }
+                    } else if (singleTeam.team.conferenceName === "West") {
                         this.standings.allStanding.westConference.push(singleTeam);
-                        if (singleTeam.preferiti === true) {
-                            this.standings.favouriteStandings.westConference.push(singleTeam);
-                        }
+                        // if (singleTeam.preferiti === true) {
+                        //     this.standings.favouriteStandings.westConference.push(singleTeam);
+                        // }
                     }
                 });
                 return this.standings as Classifica;

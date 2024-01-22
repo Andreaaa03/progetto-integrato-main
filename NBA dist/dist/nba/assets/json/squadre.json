@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "nbaFranchise": true,
+        "nickname": "Hawks",
+        "city": "Atlanta",
+        "logo": "https://upload.wikimedia.org/wikipedia/fr/e/ee/Hawks_2016.png",
+        "allStar": false,
+        "conferenceName": "East",
+        "teamName": "Atlanta Hawks",
+        "divisionName": "Southeast"
+    },
+    {
+        "id": 2,
+        "nbaFranchise": true,
+        "nickname": "Celtics",
+        "city": "Boston",
+        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/6/65/Celtics_de_Boston_logo.svg/1024px-Celtics_de_Boston_logo.svg.png",
+        "allStar": false,
+        "conferenceName": "East",
+        "teamName": "Boston Celtics",
+        "divisionName": "Atlantic"
+    },
+    {
+        "id": 0,
+        "nbaFranchise": false,
+        "nickname": null,
+        "city": null,
+        "logo": null,
+        "allStar": false,
+        "conferenceName": null,
+        "teamName": null,
+        "divisionName": null
+    },
+    {
+        "id": 4,
+        "nbaFranchise": true,
+        "nickname": "Nets",
+        "city": "Brooklyn",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brooklyn_Nets_newlogo.svg/130px-Brooklyn_Nets_newlogo.svg.png",
+        "allStar": false,
+        "conferenceName": "East",
+        "teamName": "Brooklyn Nets",
+        "divisionName": "Atlantic"
+    }
+]

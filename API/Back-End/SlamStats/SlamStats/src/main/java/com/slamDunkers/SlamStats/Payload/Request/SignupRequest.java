@@ -48,5 +48,4 @@ public class SignupRequest {
 	@Size(min=1)
 	private String sesso;
 
-
 }

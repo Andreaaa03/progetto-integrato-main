@@ -1,39 +1,227 @@
-
-td div {
-    height: 3rem !important;
-    max-height: 3rem !important;
+#contenitore-tabella-classifica tbody tr h3 {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
-tbody tr:nth-child(odd) td:first-child {
-    background-color: #C9C9C9;
-}
-
-tbody tr td:first-child {
-    border-bottom: 2px solid #C9C9C9;
-}
-
-tbody tr:last-child td{
-    border: 0px;
-}
-
-tbody tr td {
-    background-color: #D9D9D9;
+#contenitore-tabella-classifica tbody tr td {
+    background-color: #dcf1ff;
     padding-bottom: -2px;
     margin: 0px;
     border-bottom: 2px solid white;
 }
 
-tbody tr h3 {
-    padding-top: 0;
-    padding-bottom: 0;
+#contenitore-tabella-classifica tbody tr:nth-child(odd) td:first-child {
+    background-color: #acdeff;
 }
 
-td {
-    height: 4rem !important;
-    max-height: 4rem !important;
+#contenitore-tabella-classifica tbody tr td:first-child {
+    border-bottom: 2px solid #dcf1ff;
+}
+
+#contenitore-tabella-classifica tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+#contenitore-tabella-classifica td {
+    height: 3rem !important;
+    max-height: 3rem !important;
     text-align: center;
+    border-right: 2px solid white;
 }
 
-.active:hover {
-    border-bottom: 2px solid white;
+#contenitore-tabella-classifica td:last-child {
+    border: 0;
+}
+
+#contenitore-tabella-classifica td div {
+    height: 2.5rem !important;
+    max-height: 2.5rem !important;
+}
+
+#contenitore-tabella-classifica td p {
+    font-size: small;
+}
+
+@media (min-width: 1024px) {
+    #contenitore-tabella-classifica td p {
+        font-size: medium !important;
+    }
+
+    #contenitore-tabella-classifica td {
+        height: 4rem !important;
+        max-height: 4rem !important;
+    }
+
+    #contenitore-tabella-classifica td:last-child {
+        border: 0;
+    }
+
+    #contenitore-tabella-classifica td div {
+        height: 3rem !important;
+        max-height: 3rem !important;
+    }
+}
+
+.bottoni-classifica input {
+    height: 0px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 0px;
+}
+
+.bottoni-classifica label.toggle-item {
+    width: 5rem;
+    background: #00000083;
+    height: 20px;
+    display: inline-block;
+    border-radius: 50px;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: -10;
+}
+
+.bottoni-classifica .heart-rollover label::before {
+    content: none;
+}
+
+.bottoni-classifica .heart-rollover label .block-heart {
+    display: inline-block;
+    position: absolute;
+    width: 2.5em;
+    height: 2.5em;
+    top: 0;
+    left: 0;
+    transition: 0.6s ease;
+}
+
+.bottoni-classifica .heart-rollover label .heart {
+    position: relative;
+    width: 40px;
+    height: 50px;
+    animation: heartbeat 1s infinite;
+    margin: 0;
+    bottom: 0.5em;
+    left: -0.5em;
+}
+
+.bottoni-classifica .heart-rollover label .heart:before,
+.bottoni-classifica .heart-rollover label .heart:after {
+    position: absolute;
+    content: "";
+    left: 20px;
+    top: 0;
+    width: 20px;
+    height: 35px;
+    background: #acdeff;
+    border-radius: 20px 20px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+
+.bottoni-classifica .heart-rollover label .heart:after {
+    left: 0;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform-origin: 100% 100%;
+    -webkit-transform-origin: 100% 100%;
+}
+
+.bottoni-classifica #cuore:checked+label .block-heart {
+    left: 3.5rem;
+}
+
+.bottoni-classifica #cuore:checked+label .heart:after {
+    animation: colorChangeAfter 0.3s 0s forwards;
+}
+
+.bottoni-classifica #cuore:checked+label .heart:before {
+    animation: colorChangeBefore 0.3s 0s forwards;
+}
+.bottoni-classifica #cuore2:checked+label .block-heart {
+    left: 3.5rem;
+}
+
+.bottoni-classifica #cuore2:checked+label .heart:after {
+    animation: colorChangeAfter 0.3s 0s forwards;
+}
+
+.bottoni-classifica #cuore2:checked+label .heart:before {
+    animation: colorChangeBefore 0.3s 0s forwards;
+}
+
+@keyframes colorChangeAfter {
+    0% {
+        background-color: #acdeff;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform-origin: 100% 100%;
+        -webkit-transform-origin: 100% 100%;
+    }
+
+    25% {
+        background-color: #c2a2ba;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform-origin: 100% 100%;
+        -webkit-transform-origin: 100% 100%;
+    }
+
+    50% {
+        background-color: #d47182;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform-origin: 100% 100%;
+        -webkit-transform-origin: 100% 100%;
+    }
+
+    75% {
+        background-color: #ee2c33;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform-origin: 100% 100%;
+        -webkit-transform-origin: 100% 100%;
+    }
+
+    100% {
+        background-color: red;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform-origin: 100% 100%;
+        -webkit-transform-origin: 100% 100%;
+    }
+}
+
+@keyframes colorChangeBefore {
+    0% {
+        background-color: #acdeff;
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+    }
+
+    25% {
+        background-color: #c2a2ba;
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+    }
+
+    50% {
+        background-color: #d47182;
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+    }
+
+    75% {
+        background-color: #ee2c33;
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+    }
+
+    100% {
+        background-color: red;
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+    }
 }

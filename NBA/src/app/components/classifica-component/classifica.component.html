@@ -1,22 +1,87 @@
-<div class="">
-    <div class="mb-10">
-        <ul class="flex flex-nowrap justify-center text-center">
-            <li class="me-2 w-full" role="presentation">
-                <button (click)="functionSelectionConference(true)" [class.border-b-2]="selectedConference===true" class="w-full inline-block p-4 focus:border-b-2 hover:border-b-2 rounded-t-lg" type="button">Profile</button>
+<div class="mt-10">
+    <div class="lg:h-16 h-10">
+        <ul class="w-full lg:h-16 h-10 flex flex-nowrap justify-around items-center">
+            <!-- Primo elemento della lista -->
+            <li [ngClass]="{'bg-secondary': selectedConference === true, 'border-secondary lg:border-4 border-2 hover:bg-[#DCF1FF]': selectedConference === false}" class="lg:w-1/3 w-[45%] h-full flex justify-center items-center rounded-2xl  text-sm">
+                <button (click)="functionSelectionConference(true)" [class.text-white]="selectedConference === true" class="w-full text-center text-white lg:text-3xl">EASTERN CONFERENCE</button>
             </li>
-            <li class="me-2 w-full" role="presentation">
-                <button (click)="functionSelectionConference(false)" class="w-full inline-block p-4 focus:border-b-2 hover:border-b-2 rounded-t-lg" type="button">Dashboard</button>
+
+            <!-- Secondo elemento della lista -->
+            <li [ngClass]="{'border-secondary lg:border-4 border-2 hover:bg-[#DCF1FF]': selectedConference === true, 'bg-secondary': selectedConference === false}" class="lg:w-1/3 w-[45%] h-full flex justify-center items-center rounded-2xl text-sm">
+                <button (click)="functionSelectionConference(false)" [class.text-white]="selectedConference === false" class="w-full text-center lg:text-3xl">WESTERN CONFERENCE</button>
             </li>
         </ul>
     </div>
-    <div class="border-2 ">
+    <div class="w-full h-auto lg:mt-10 mt-10 lg:mb-5 mb-4 flex flex-wrap justify-center bottoni-classifica">
+        <div class="w-full mb-4 flex flex-nowrap lg:hidden">
+            <div class="w-1/2 flex justify-center">
+                <button *ngIf="isParziale===false" class="rounded-full bg-secondary text-white lg:mr-2 lg:px-6 px-3 lg:py-1 text-sm hover:underline" [routerLink]="['/storia&regole', 'regole']">
+                    REGOLE
+                </button>
+            </div>
+            <div class="w-1/2 flex justify-center">
+                <button *ngIf="isParziale===false" class="rounded-full bg-secondary text-white lg:ml-2 lg:px-6 px-3 lg:py-1 text-sm hover:underline" [routerLink]="['/storia&regole', 'glossario']">
+                    GLOSSARIO
+                </button>
+            </div>
+        </div>
+        <div class="w-full flex flex-nowrap justify-end">
+            <div *ngIf="percentageStanding==true && crescente==false && ControlChecked()==false" class="w-1/2 lg:w-auto flex justify-center lg:justify-end ">
+                <div class="flex items-center rounded-full lg:px-6 px-3 lg:py-1 text-sm bg-[#BAD5E6] opacity-50 -z-10 ">
+                    <p>RESET FILTRI</p>
+                </div>
+            </div>
+            <div *ngIf="percentageStanding==false || crescente==true || ControlChecked()==true" class="w-1/2 lg:w-auto flex justify-center lg:justify-end ">
+                <button class="rounded-full bg-[#BAD5E6] lg:px-6 px-3 lg:py-1 text-sm hover:underline" (click)="percentageStanding=true;
+                    nameStanding=false;
+                    crescente=false;
+                    winStanding=false;
+                    lossStanding=false;
+                    favouriteStanding=false;
+                    ToggleCheckedForReset();
+                    functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)">
+                    RESET FILTRI
+                </button>
+            </div>
+            <div class="w-1/2 lg:w-auto flex justify-center lg:justify-end">
+                <div class="rounded-full lg:px-6 px-3 lg:py-1 text-sm hover:underline">
+                    <div class="heart-rollover" (click)="favouriteStanding=!favouriteStanding; toggleChecked(); functionChangeStandingWithFavourite(favouriteStanding, $event);">
+                        <input id="cuore" type="checkbox" />
+                        <label class="toggle-item" for="cuore">
+                            <div class="block-heart">
+                                <div class="heart">
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden lg:flex lg:w-auto ">
+                <div class="flex justify-end">
+                    <button *ngIf="isParziale===false" class="rounded-full bg-secondary text-white lg:mr-2 lg:px-6 px-3 lg:py-1 text-sm hover:underline" [routerLink]="['/storia&regole', 'regole']">
+                        REGOLE
+                    </button>
+                </div>
+            </div>
+            <div class="hidden lg:flex lg:w-auto ">
+                <div class="flex justify-end">
+                    <button *ngIf="isParziale===false" class="rounded-full bg-secondary text-white lg:ml-2 lg:px-6 px-3 lg:py-1 text-sm hover:underline" [routerLink]="['/storia&regole', 'glossario']">
+                        GLOSSARIO
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="border-2 border-white" id="contenitore-tabella-classifica">
         <table class="w-full " *ngIf="selectedConference===true">
             <thead class="w-full bg-primary text-white">
                 <tr class="">
-                    <td class="w-[8%]">
+                    <td class="lg:w-[8%] w-[6%]">
                     </td>
-                    <td class="w-[26%]">
-                        <p class="w-full text-center" (click)="
+                    <td class="lg:w-[24%] w-[40%]">
+                        <p class="w-full text-center hover:underline" (click)="
                             percentageStanding=false;
                             nameStanding=true;
                             crescente=!crescente;
@@ -25,92 +90,91 @@
                             functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
                         ">Nome </p>
                     </td>
-                    <td class="w-[6%]">
-                        <p class="w-full text-center" (click)="
+                    <td class="w-[10%]">
+                        <p class="w-full text-center hover:underline" (click)="
                             percentageStanding=true;
                             crescente=!crescente;
                             nameStanding=false;
                             winStanding=false;
                             lossStanding=false;
                             functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
-                        ">% V. </p>
+                        ">{{vittore}}</p>
                     </td>
-                    <td class="w-[6%]">
-                        <p class="w-full text-center" (click)="
+                    <td class="w-[10%]">
+                        <p class="w-full text-center hover:underline" (click)="
                             percentageStanding=false;
                             nameStanding=false;
                             winStanding=true;
                             crescente=!crescente;
                             lossStanding=false;
                             functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
-                        ">V. </p>
+                        ">{{vinte}}</p>
                     </td>
-                    <td class="w-[6%]">
-                        <p class="w-full text-center" (click)="
+                    <td class="w-[10%]">
+                        <p class="w-full text-center hover:underline" (click)="
                             percentageStanding=false;
                             nameStanding=false;
                             winStanding=false;
                             lossStanding=true;
                             crescente=!crescente;
                             functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
-                        ">S. </p>
+                        ">{{sconfitte}}</p>
                     </td>
-                    <td class="w-[12%]">
+                    <td class="lg:w-[10%] lg:table-cell w-0 hidden">
                         <p class="w-full text-center">Casa</p>
                         <p>V - S</p>
                     </td>
-                    <td class="w-[12%]">
+                    <td class="lg:w-[10%] lg:table-cell w-0 hidden">
                         <p class="w-full text-center">Traseferta</p>
                         <p>V - S</p>
                     </td>
-                    <td class="w-[12%]">
+                    <td class="lg:w-[10%] lg:table-cell w-0 hidden">
                         <p class="w-full text-center">Ultimi Match</p>
                     </td>
-                    <td class="w-[12%]">
-                        <p class="w-full text-center" (click)="
-                            favouriteStanding=!favouriteStanding;
-                            functionChangeStandingWithFavourite(favouriteStanding, $event) ">❤️</p>
+                    <td class="lg:w-[8%] w-[6%]">
+                        <p class="w-full text-center">❤️</p>
                     </td>
                 </tr>
             </thead>
             <tbody>
                 <ng-container *ngFor="let squadra of standingToShow?.eastConference, let i=index">
                     <ng-container *ngIf="i < countForStanding">
-                        <tr class=""  >
-                            <td class="w-[8%]" class="">
-                                {{squadra.conference.rank}}
+                        <tr class="">
+                            <td class="lg:w-[8%] w-[6%]" class="">
+                                <p>{{squadra.conferenceRank}}</p>
                             </td>
-                            <td class="w-[26%]" class="">
+                            <td class="lg:w-[24%] w-[40%]" class="">
                                 <div class="flex flex-nowrap items-center pl-3">
                                     <div class="w-1/4 flex justify-center">
                                         <img class="object-contain h-full" src={{squadra.team.logo}} alt="">
                                     </div>
-                                    <h3 class="w-3/4 p-2 flex justify-center items-center text-center">{{squadra.team.name}}</h3>
+                                    <p class="w-3/4 p-2 flex justify-center items-center text-center">{{squadra.team.teamName}}</p>
                                 </div>
                             </td>
-                            <td class="w-[6%]">
-                                <p>{{squadra.win.percentage}}</p>
+                            <td class="w-[10%]">
+                                <p>{{squadra.winPercentage}}</p>
                             </td>
-                            <td class="w-[6%]">
-                                <p class="">{{squadra.win.total}}</p>
+                            <td class="w-[10%]">
+                                <p class="">{{squadra.totalWin}}</p>
                             </td>
-                            <td class="w-[6%]">
-                                <p class="">{{squadra.loss.total}}</p>
+                            <td class="w-[10%]">
+                                <p class="">{{squadra.totalLoss}}</p>
                             </td>
-                            <td class="w-[12%]">
-                                <p>{{squadra.win.home}} <span>-</span>
-                                    {{squadra.loss.home}}</p>
+                            <td class="lg:w-[10%] lg:table-cell w-0 hidden">
+                                <p>{{squadra.homeWin}} <span>-</span>
+                                    {{squadra.homeLoss}}</p>
                             </td>
-                            <td class="w-[12%]">
-                                <p>{{squadra.win.away}} <span>-</span>
-                                    {{squadra.loss.away}}
+                            <td class="lg:w-[10%] lg:table-cell w-0 hidden">
+                                <p>{{squadra.awayWin}} <span>-</span>
+                                    {{squadra.awayLoss}}
                             </td>
-                            <td class="w-[12%]">
-                                <p>{{squadra.win.lastTen}} <span>-</span> {{squadra.loss.lastTen}}</p>
+                            <td class="lg:w-[10%] lg:table-cell w-0 hidden">
+                                <p>{{squadra.lastTenWin}} <span>-</span> {{squadra.lastTenLoss}}</p>
                             </td>
-                            <td class="w-[12%]">
-                                <p class="" *ngIf="squadra.preferiti===true">❤️</p>
-                                <p class="" *ngIf="squadra.preferiti===false">🖤</p>
+                            <td class="lg:w-[8%] w-[6%]">
+                                <!-- <p class="" *ngIf="squadra.preferiti===true">❤️</p>
+                                <p class="" *ngIf="squadra.preferiti===false">🖤</p> -->
+                                <p class="">🖤</p>
                             </td>
                         </tr>
                     </ng-container>
@@ -120,63 +184,65 @@
         <table class="w-full" *ngIf="selectedConference===false">
             <thead class="w-full bg-primary text-white">
                 <tr class="">
-                    <td class="w-[8%]">
+                    <td class="lg:w-[8%] w-[6%]">
                     </td>
-                    <td class="w-[26%]">
-                        <p class="w-full text-center" (click)="
+                    <td class="lg:w-[24%] w-[40%]">
+                        <p class="w-full text-center hover:underline" (click)="
                             percentageStanding=false;
                             nameStanding=true;
                             crescente=!crescente;
                             winStanding=false;
                             lossStanding=false;
+
                             functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
                         ">Nome </p>
                     </td>
-                    <td class="w-[6%]">
-                        <p class="w-full text-center" (click)="
+                    <td class="w-[10%]">
+                        <p class="w-full text-center hover:underline" (click)="
                             percentageStanding=true;
                             crescente=!crescente;
                             nameStanding=false;
                             winStanding=false;
                             lossStanding=false;
+
                             functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
-                        ">% V. </p>
+                        ">{{vittore}}</p>
                     </td>
-                    <td class="w-[6%]">
-                        <p class="w-full text-center" (click)="
+                    <td class="w-[10%]">
+                        <p class="w-full text-center hover:underline" (click)="
                             percentageStanding=false;
                             nameStanding=false;
                             winStanding=true;
                             crescente=!crescente;
                             lossStanding=false;
+
                             functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
-                        ">V. </p>
+                        ">{{vinte}}</p>
                     </td>
-                    <td class="w-[6%]">
-                        <p class="w-full text-center" (click)="
+                    <td class="w-[10%]">
+                        <p class="w-full text-center hover:underline" (click)="
                             percentageStanding=false;
                             nameStanding=false;
                             winStanding=false;
                             lossStanding=true;
                             crescente=!crescente;
+
                             functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
-                        ">S. </p>
+                        ">{{sconfitte}}</p>
                     </td>
-                    <td class="w-[12%]">
+                    <td class="lg:w-[10%] lg:table-cell w-0 hidden">
                         <p class="w-full text-center">Casa</p>
                         <p>V - S</p>
                     </td>
-                    <td class="w-[12%]">
+                    <td class="lg:w-[10%] lg:table-cell w-0 hidden">
                         <p class="w-full text-center">Traseferta</p>
                         <p>V - S</p>
                     </td>
-                    <td class="w-[12%]">
+                    <td class="lg:w-[10%] lg:table-cell w-0 hidden">
                         <p class="w-full text-center">Ultimi Match</p>
                     </td>
-                    <td class="w-[12%]">
-                        <p class="w-full text-center" (click)="
-                            favouriteStanding=!favouriteStanding;
-                            functionChangeStandingWithFavourite(favouriteStanding, $event) ">❤️</p>
+                    <td class="lg:w-[8%] w-[6%]">
+                        <p class="w-full text-center">❤️</p>
                     </td>
                 </tr>
             </thead>
@@ -184,41 +250,41 @@
                 <ng-container *ngFor="let squadra of standingToShow?.westConference, let i=index">
                     <ng-container *ngIf="i < countForStanding">
                         <tr class="">
-                            <td class="w-[8%]" class="">
-                                {{squadra.conference.rank}}
+                            <td class="lg:w-[8%] w-[6%]" class="">
+                                <p>{{squadra.conferenceRank}}</p>
                             </td>
-                            <td class="w-[26%]" class="">
+                            <td class="lg:w-[24%] w-[40%]" class="">
                                 <div class="flex flex-nowrap items-center pl-3">
                                     <div class="w-1/4 flex justify-center">
                                         <img class="object-contain h-full" src={{squadra.team.logo}} alt="">
-                                        <!-- <img class="object-contain h-full" src="../../../assets/logo-orlando-magic-2048.png" alt=""> -->
                                     </div>
-                                    <h3 class="w-3/4 p-2 flex justify-center items-center text-center">{{squadra.team.name}}</h3>
+                                    <p class="w-3/4 p-2 flex justify-center items-center text-center">{{squadra.team.teamName}}</p>
                                 </div>
                             </td>
-                            <td class="w-[6%]">
-                                <p>{{squadra.win.percentage}}</p>
+                            <td class="w-[10%]">
+                                <p>{{squadra.winPercentage}}</p>
                             </td>
-                            <td class="w-[6%]">
-                                <p class="">{{squadra.win.total}}</p>
+                            <td class="w-[10%]">
+                                <p class="">{{squadra.totalWin}}</p>
                             </td>
-                            <td class="w-[6%]">
-                                <p class="">{{squadra.loss.total}}</p>
+                            <td class="w-[10%]">
+                                <p class="">{{squadra.totalLoss}}</p>
                             </td>
-                            <td class="w-[12%]">
-                                <p>{{squadra.win.home}} <span>-</span>
-                                    {{squadra.loss.home}}</p>
+                            <td class="lg:w-[10%] lg:table-cell w-0 hidden">
+                                <p>{{squadra.homeWin}} <span>-</span>
+                                    {{squadra.homeLoss}}</p>
                             </td>
-                            <td class="w-[12%]">
-                                <p>{{squadra.win.away}} <span>-</span>
-                                    {{squadra.loss.away}}
+                            <td class="lg:w-[10%] lg:table-cell w-0 hidden">
+                                <p>{{squadra.awayWin}} <span>-</span>
+                                    {{squadra.awayLoss}}
                             </td>
-                            <td class="w-[12%]">
-                                <p>{{squadra.win.lastTen}} <span>-</span> {{squadra.loss.lastTen}}</p>
+                            <td class="lg:w-[10%] lg:table-cell w-0 hidden">
+                                <p>{{squadra.lastTenWin}} <span>-</span> {{squadra.lastTenLoss}}</p>
                             </td>
-                            <td class="w-[12%]">
-                                <p class="" *ngIf="squadra.preferiti===true">❤️</p>
-                                <p class="" *ngIf="squadra.preferiti===false">🖤</p>
+                            <td class="lg:w-[8%] w-[6%]">
+                                <!-- <p class="" *ngIf="squadra.preferiti===true">❤️</p>
+                                <p class="" *ngIf="squadra.preferiti===false">🖤</p> -->
+                                <p class="">🖤</p>
                             </td>
                         </tr>
                     </ng-container>

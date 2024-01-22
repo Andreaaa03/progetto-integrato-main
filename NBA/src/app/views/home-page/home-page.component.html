@@ -1,42 +1,79 @@
-<header class="min-h-screen w-full">
+<header class="md:h-screen h-[50vh] w-full">
+    <img class="md:object-fill object-cover md:w-full md:h-screen h-full md:pb-16 mt-16" src="../../../assets/prova imamgine piccola.jpg" alt="">
     <app-navbar></app-navbar>
 </header>
-<section>
+<section class="md:mt-16 mt-8">
     <div class="flex justify-center h-full">
         <div class="container flex justify-center h-full">
-            <div class="w-[90%] h-full flex flex-wrap justify-center">
+            <div class="lg:w-[90%] w-full h-full flex flex-wrap justify-center">
                 <div class="w-full h-20 bg-primary flex justify-center items-center">
                     <h2 class=" text-white text-4xl font-bold">
                         ULTIMI MATCH
                     </h2>
                 </div>
                 <div class="w-full h-6 bg-secondary"></div>
-                <app-partite-del-giorno-preview class="w-full h-full my-10">
+                <app-partite-del-giorno-preview [cards]="matchToday" class="w-full h-full my-10">
 
                 </app-partite-del-giorno-preview>
-
             </div>
         </div>
     </div>
 </section>
-
 <section>
     <div class="flex justify-center">
         <div class="container flex justify-center">
-            <div class="w-[90%]  flex flex-wrap justify-center">
+            <div class="lg:w-[90%] w-full  flex flex-wrap justify-center">
                 <div class="w-full h-20 bg-primary flex justify-center items-center">
                     <h2 class=" text-white text-4xl font-bold">
                         CLASSIFICA
                     </h2>
                 </div>
                 <div class="w-full h-6 bg-secondary"></div>
-                <app-classifica [isParziale]="true" class="w-[75%] mt-10">
+                <app-classifica [isParziale]="true" class="lg:w-[85%] w-full mt-10">
 
                 </app-classifica>
+                <div class="w-full h-auto mt-10 flex justify-center items-center">
+                    <button class="rounded-full bg-secondary lg:px-8 px-5 py-2 text-white font-bold text-sm lg:text-xl hover:underline" [routerLink]="['/classifica']">
+                        Guarda Tutta la classifica
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </section>
+<section>
+    <div class="w-full pt-12">
+        <div class="flex justify-center lg:h-[150px] h-[75px] -z-10">
+            <img class="object-cover lg:w-[50%] w-[90%] rounded-full -z-10" src="../../../assets/foto-spotify.png" alt="">
+        </div>
+        <div class="flex justify-center items-end -z-40">
+            <button class="lg:w-[40%] w-[80%] rounded-full lg:h-[70px] h-[50px] relative -z-30 bottom-6 bg-secondary lg:px-8 px-5 pt-6 text-white font-bold text-sm lg:text-xl hover:underline" [routerLink]="['/']">
+                SCOPRI IL NOSTRO PODCACAST
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="mt-5">
+    <div class="flex justify-center">
+        <div class="container flex justify-center">
+            <div class="lg:w-[90%] w-full  flex flex-wrap justify-center">
+                <div class="w-full h-20 bg-primary flex justify-center items-center">
+                    <h2 class=" text-white text-4xl font-bold">
+                        ULTIME NOTIZIE
+                    </h2>
+                </div>
+                <div class="w-full h-6 bg-secondary"></div>
+                <div class="mt-10 flex flex-wrap justify-center lg:justify-between">
+                    <app-post-articolo [extended]="true"></app-post-articolo>
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <footer class="mt-20">
     <app-footer></app-footer>
 </footer>

@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './classifica-page.component.html',
   styleUrls: ['./classifica-page.component.css']
 })
-export class ClassificaPageComponent {
+export class ClassificaPageComponent{
 
 }

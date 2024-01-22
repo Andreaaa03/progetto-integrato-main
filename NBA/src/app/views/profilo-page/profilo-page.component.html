@@ -1,0 +1,645 @@
+<app-navbar></app-navbar>
+<section>
+    <div class="flex justify-center h-full">
+        <div class="w-full flex justify-center h-full">
+            <div class="w-full">
+                <div class="w-full h-20 bg-primary flex justify-center items-center">
+                    <h2 class=" text-white text-4xl font-bold">
+                        PROFILO PERSONALE
+                    </h2>
+                </div>
+                <div class="w-full h-6 bg-secondary"></div>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center h-full">
+        <div class="container flex flex-wrap justify-center h-full">
+            <div class="w-[70%] flex flex-nowrap mt-20">
+                <div class="w-[25%] h-full ">
+                    <div class="w-full bg-primary box-shadow-for-menu">
+                        <ul>
+                            <li class="p-5 text-2xl text-white font-bold hover:underline focus:underline" (click)="functionChangeManu('profilo')">Profilo</li>
+                            <li class="p-5 text-2xl text-white font-bold hover:underline focus:underline" (click)="functionChangeManu('risultato')">Risultato Sondaggi</li>
+                            <li class="p-5 text-2xl text-white font-bold hover:underline focus:underline" (click)="functionChangeManu('amici')">Amici</li>
+                            <li class="p-5 text-2xl text-white font-bold hover:underline focus:underline" (click)="functionChangeManu('preferiti')">Preferiti</li>
+                            <li class="p-5 text-2xl text-white font-bold hover:underline focus:underline" (click)="functionChangeManu('impostazioni')">Impostazioni</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="w-[75%] h-full  flex flex-wrap justify-center items-center py-10">
+                    <div class="h-[20vmin] w-[20vmin]">
+                        <div class="h-[20vmin] w-[20vmin] rounded-full bg-gray-500">
+
+                        </div>
+                    </div>
+                    <div class="w-[10px] h-full bg-black ml-20 mr-20"></div>
+                    <div class="mx-10 flex items-center">
+                        <ul>
+                            <li class="p-2 text-xl font-bold">Nome</li>
+                            <li class="p-2 text-xl font-bold">Età</li>
+                            <li class="p-2 text-xl font-bold">Sesso</li>
+                            <li class="p-2 text-xl font-bold">1k followers</li>
+                            <li class="p-2 text-xl font-bold">Data di iscrizione</li>
+                            <li class="p-2 text-xl font-bold">Badge</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="mb-20">
+    <div class="flex justify-center h-full">
+        <div class="container flex flex-wrap justify-center h-full">
+            <div class="lg:w-[70%] w-full my-10">
+                <div class="" *ngIf="menuSelected==='profilo'">
+                    <div class="w-full h-20 bg-primary flex justify-center items-center">
+                        <h2 class=" text-white text-4xl font-bold">
+                            ULTIME INTERAZIONI FATTE
+                        </h2>
+                    </div>
+                    <div class="w-full h-6 bg-secondary"></div>
+                    <div class="w-full h-full flex lg:justify-between mt-10">
+                        <div class="lg:w-[45%] w-[90%] ">
+                            <div class="bg-secondary rounded-xl flex justify-center">
+                                <div class="w-[90%] h-[90%]">
+                                    <div class="w-full h-20 flex flex-nowrap">
+                                        <div class="w-1/5 flex items-center">
+                                            <div class="w-14 h-14 rounded-full bg-white"></div>
+                                        </div>
+                                        <div class="w-4/5 flex items-center">
+                                            <p class="text-white text-xl">Nome</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-full ">
+                                        <div class="bg-[#ACDEFF] rounded-xl mb-6">
+                                            <p class="p-2">
+                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt dicta tempore vel! Minima dolore qui quasi facere consectetur quas nisi?
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-end w-full mt-2">
+                                <button class="font-bold hover:underline text-xl">Vai all'articolo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="" *ngIf="menuSelected==='risultato'">
+                    <div class="w-full h-20 bg-primary flex justify-center items-center">
+                        <h2 class=" text-white text-4xl font-bold">
+                            SONDAGGI
+                        </h2>
+                    </div>
+                    <div class="w-full h-6 bg-secondary"></div>
+                    <div class="w-full">
+                        <!-- <app-piechart></app-piechart> -->
+                        <!-- diagramma a torta -->
+                    </div>
+                </div>
+                <div class="" *ngIf="menuSelected==='amici'">
+                    <div class="w-full h-20 bg-primary flex justify-center items-center">
+                        <h2 class=" text-white text-4xl font-bold">
+                            AMICI
+                        </h2>
+                    </div>
+                    <div class="w-full h-6 bg-secondary"></div>
+                    <div class="w-full flex flex-wrap justify-between my-10">
+                        <div class="lg:w-[30%] w-full mx-2 my-4 rounded-xl border-2 border-[#1671AA]" *ngFor="let _ of ripetiArray, let i = index">
+                            <div class="w-full h-[3/4]  bg-secondary rounded-t-lg flex flex-wrap p-4">
+                                <div class="w-full flex flex-nowrap">
+                                    <div class="w-20 h-20 rounded-full bg-slate-500">
+
+                                    </div>
+                                    <div class="flex flex-wrap ml-4">
+                                        <div class="w-full text-lg text-white ">
+                                            <p>Luca</p>
+                                        </div>
+                                        <div class="w-full text-lg text-white ">
+                                            <p>Badge</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-wrap my-4">
+                                    <p class="w-full lg:text-sm text-white py-1">SONDAGGI INDOVINATI: 5</p>
+                                    <p class="w-full lg:text-sm text-white py-1">SONDAGGI SBAGLIATI: 12</p>
+                                    <p class="w-full lg:text-sm text-white py-1">PERCENTUALE DI RISPOSTE CORRETTE: 2,4%</p>
+                                    <p class="w-full lg:text-sm text-white py-1">POSIZIONE IN CLASSIFICA: 70°</p>
+                                </div>
+                            </div>
+                            <div class="w-full h-[1/4] my-2 bg-white border-solid border-[#1671AA] flex justify-center items-center">
+                                <button class="rounded-full border-2 my-1 px-6 border-blue-900">SEGUI</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="" *ngIf="menuSelected==='preferiti'">
+                    <div class="w-full h-20 bg-primary flex justify-center items-center">
+                        <h2 class=" text-white text-4xl font-bold">
+                            I TUOI PREFERITI
+                        </h2>
+                    </div>
+                    <div class="w-full h-6 bg-secondary"></div>
+                    <div class="w-full">
+                        <div class="hidden lg:flex w-full lg:h-8 h-5 lg:mt-10 mt-5 lg:mb-5 mb-4">
+                            <button (click)="functionChangeManuPreferiti('tutti')" class="rounded-full text-white lg:mr-2 lg:px-6 px-3 lg:py-1 text-sm" [ngClass]="{'bg-secondary': menuPreferitiSelected === 'tutti', 'bg-[#ACDEFF]': menuPreferitiSelected !== 'tutti'}">
+                                TUTTI
+                            </button>
+
+                            <button (click)="functionChangeManuPreferiti('squadre')" class="rounded-full lg:mx-2 lg:px-6 px-3 lg:py-1 text-sm" [ngClass]="{'bg-secondary': menuPreferitiSelected === 'squadre', 'bg-[#ACDEFF]': menuPreferitiSelected !== 'squadre'}">
+                                SQUADRE
+                            </button>
+
+                            <button (click)="functionChangeManuPreferiti('articoli')" class="rounded-full lg:ml-2 lg:px-6 px-3 lg:py-1 text-sm" [ngClass]="{'bg-secondary': menuPreferitiSelected === 'articoli', 'bg-[#ACDEFF]': menuPreferitiSelected !== 'articoli'}">
+                                ARTICOLI
+                            </button>
+
+                        </div>
+                    </div>
+                    <div *ngIf="menuPreferitiSelected==='tutti'" class="w-full flex flex-wrap mt-5">
+                        <div class="w-1/3 flex flex-wrap my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
+                                <div class="w-2/5 flex justify-center">
+                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-3/5 flex items-center">
+                                    <p class="text-white text-xl">Nome squadra</p>
+                                </div>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap justify-center my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
+                                <p class="text-white">Titolo articolo</p>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <!-- aggiungo solo per la visualizzazione -->
+                        <div class="w-1/3 flex flex-wrap justify-end my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
+                                <div class="w-2/5 flex justify-center">
+                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-3/5 flex items-center">
+                                    <p class="text-white text-xl">Nome squadra</p>
+                                </div>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap  my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
+                                <div class="w-2/5 flex justify-center">
+                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-3/5 flex items-center">
+                                    <p class="text-white text-xl">Nome squadra</p>
+                                </div>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap justify-center my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
+                                <p class="text-white">Titolo articolo</p>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap justify-end my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
+                                <p class="text-white">Titolo articolo</p>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
+                                <p class="text-white">Titolo articolo</p>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap justify-center my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
+                                <div class="w-2/5 flex justify-center">
+                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-3/5 flex items-center">
+                                    <p class="text-white text-xl">Nome squadra</p>
+                                </div>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap justify-end my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
+                                <div class="w-2/5 flex justify-center">
+                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-3/5 flex items-center">
+                                    <p class="text-white text-xl">Nome squadra</p>
+                                </div>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
+                                <p class="text-white">Titolo articolo</p>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <!-- fino a qui -->
+                    </div>
+                    <div *ngIf="menuPreferitiSelected==='articoli'" class="w-full flex flex-wrap mt-5">
+                        <div class="w-1/3 flex flex-wrap my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
+                                <p class="text-white">Titolo articolo</p>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap justify-center my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
+                                <p class="text-white">Titolo articolo</p>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="menuPreferitiSelected==='squadre'" class="w-full flex flex-wrap mt-5">
+                        <div class="w-1/3 flex flex-wrap my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
+                                <div class="w-2/5 flex justify-center">
+                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-3/5 flex items-center">
+                                    <p class="text-white text-xl">Nome squadra</p>
+                                </div>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap justify-center my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
+                                <div class="w-2/5 flex justify-center">
+                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-3/5 flex items-center">
+                                    <p class="text-white text-xl">Nome squadra</p>
+                                </div>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap justify-end my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
+                                <div class="w-2/5 flex justify-center">
+                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-3/5 flex items-center">
+                                    <p class="text-white text-xl">Nome squadra</p>
+                                </div>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
+                                <div class="w-2/5 flex justify-center">
+                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-3/5 flex items-center">
+                                    <p class="text-white text-xl">Nome squadra</p>
+                                </div>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-wrap justify-center my-8">
+                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
+                                <div class="w-2/5 flex justify-center">
+                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-3/5 flex items-center">
+                                    <p class="text-white text-xl">Nome squadra</p>
+                                </div>
+                            </div>
+                            <div class="w-[80%] flex justify-end">
+                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="" *ngIf="menuSelected==='impostazioni'">
+                    <div class="w-full h-20 bg-primary flex justify-center items-center">
+                        <h2 class=" text-white text-4xl font-bold">
+                            IMPOSTAZIONI
+                        </h2>
+                    </div>
+                    <div class="w-full h-6 bg-secondary"></div>
+                    <div class="w-full mt-10">
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Nome Utente</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+
+                                <div class="w-1/2 flex justify-center">
+                                    <input class="bg-gray-200 rounded-full text-center min-w-[50%]" type="text" max="50" placeholder="Nome nuovo">
+                                </div>
+                                <div class="w-1/2 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Età</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+
+                                <div class="w-1/2 flex justify-center">
+                                    <input class="bg-gray-200 rounded-full text-center min-w-[50%]" type="number" min="16" max="99" inputmode="numeric">
+                                </div>
+                                <div class="w-1/2 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Numero di Telefono</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+                                <div class="w-1/2 flex justify-center">
+                                    <input class="bg-gray-200 rounded-full text-center min-w-[50%]" type="tel" minlength="10" maxlength="10" placeholder="">
+                                </div>
+                                <div class="w-1/2 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Sesso</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+                                <div class="w-1/2 flex justify-center flex-wrap items-center">
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="maschio" value="maschio" name="sesso" type="radio"> maschio</div>
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="femmina" value="femmina" name="sesso" type="radio"> femmina</div>
+                                </div>
+                                <div class="w-1/2 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Password</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+
+                                <div class="w-3/4 flex justify-around">
+                                    <input class="bg-gray-200 rounded-full text-center min-w-[40%]" type="text" placeholder="Nuovo password">
+                                    <input class="bg-gray-200 rounded-full text-center min-w-[40%]" type="text" placeholder="Ripeti nuova password">
+                                </div>
+                                <div class="w-1/4 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Squadre preferite</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+                                <!-- si deve aprire un riquadro con tutto l'elenco delle squadre e l'utente sceglie le 5 squadre per conference, se gia scelte deve mostrare ovviamente le 5 scelte e deseleziona cosi ha uno slot libero per selezionare una nuova. puo avere piu slot liberi -->
+                                <div *ngIf="showTeams===true" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] border-primary bg-[#ACDEFF] flex justify-center flex-wrap items-center">
+                                    <div class="w-full h-full flex flex-wrap justify-center ">
+                                        <div class="w-full flex flex-wrap lg:flex-nowrap lg:justify-between my-8 h-full">
+                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
+                                                <div class="lg:w-[80%] w-full">
+                                                    <div class="flex justify-center">
+                                                        <ul class="w-[90%] flex-col">
+                                                            <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.SoutHeast">
+                                                                <div class="w-1/3 flex justify-center">
+                                                                    <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
+                                                                </div>
+                                                                <div class="w-2/3 pl-4">
+                                                                    <p class="w-auto hover:cursor-pointer" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer">🖤</p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
+                                                <div class="lg:w-[80%] w-full">
+                                                    <div class="flex justify-center">
+                                                        <ul class="w-[90%] flex-col">
+                                                            <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.Atlantic">
+                                                                <div class="w-1/3 flex justify-center">
+                                                                    <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
+                                                                </div>
+                                                                <div class="w-2/3 pl-4">
+                                                                    <p class="w-auto hover:cursor-pointer" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer">🖤</p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
+                                                <div class="lg:w-[80%] w-full">
+                                                    <div class="flex justify-center">
+                                                        <ul class="w-[90%] flex-col">
+                                                            <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.Central">
+                                                                <div class="w-1/3 flex justify-center">
+                                                                    <img class="object-contain h-full" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
+                                                                </div>
+                                                                <div class="w-2/3 pl-4">
+                                                                    <p class="w-full" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
+                                                                    <p class="w-full">🖤</p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
+                                                <div class="lg:w-[80%] w-full">
+                                                    <div class="flex justify-center">
+                                                        <ul class="w-[90%] flex-col">
+                                                            <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.SouthWest">
+                                                                <div class="w-1/3 flex justify-center">
+                                                                    <img class="object-contain h-full" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
+                                                                </div>
+                                                                <div class="w-2/3 pl-4">
+                                                                    <p class="w-full" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
+                                                                    <p class="w-full">🖤</p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
+                                                <div class="lg:w-[80%] w-full">
+                                                    <div class="flex justify-center">
+                                                        <ul class="w-[90%] flex-col">
+                                                            <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.NorthWest">
+                                                                <div class="w-1/3 flex justify-center">
+                                                                    <img class="object-contain h-full" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
+                                                                </div>
+                                                                <div class="w-2/3 pl-4">
+                                                                    <p class="w-full" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
+                                                                    <p class="w-full">🖤</p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
+                                                <div class="lg:w-[80%] w-full">
+                                                    <div class="flex justify-center">
+                                                        <ul class="w-[90%] flex-col">
+                                                            <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.Pacific">
+                                                                <div class="w-1/3 flex justify-center">
+                                                                    <img class="object-contain h-full" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
+                                                                </div>
+                                                                <div class="w-2/3 pl-4">
+                                                                    <p class="w-full" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
+                                                                    <p class="w-full">🖤</p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full flex justify-around items-center mb-8">
+                                        <p class="text-xl font-bold">slot liberi: 2</p>
+                                        <p class="text-xl font-bold">squadre scelte: 8</p>
+                                        <button class="bg-secondary rounded-full px-4 py-2 text-white" (click)="showTeams=false">CHIUDI E CONFERMA</button>
+                                    </div>
+                                </div>
+                                <div class="w-full flex justify-end items-center">
+                                    <button class="bg-secondary text-white rounded-full px-4 py-2" (click)="showTeams=true">Seleziona squadre</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Attiva/Disattiva notifiche follower (attivata)</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+
+                                <div class="w-1/2 flex justify-center flex-wrap items-center">
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="attiva" value="attiva" name="notifica" type="radio">Attiva</div>
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="disattiva" value="disattiva" name="notifica" type="radio">Disattiva</div>
+                                </div>
+                                <div class="w-1/2 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Attiva/Disattiva notifiche follower (disattivata)</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+
+                                <div class="w-1/2 flex justify-center flex-wrap items-center">
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="attiva" value="attiva" name="notifica" type="radio">Attiva</div>
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="disattiva" value="disattiva" name="notifica" type="radio">Disattiva</div>
+                                </div>
+                                <div class="w-1/2 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Attiva/Disattiva notifiche match (diattivata)</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+
+                                <div class="w-1/2 flex justify-center flex-wrap items-center">
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="attiva" value="attiva" name="notifica" type="radio">Attiva</div>
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="disattiva" value="disattiva" name="notifica" type="radio">Disattiva</div>
+                                </div>
+                                <div class="w-1/2 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Attiva/Disattiva notifiche nuovo articolo blog (attivata)</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+
+                                <div class="w-1/2 flex justify-center flex-wrap items-center">
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="attiva" value="attiva" name="notifica" type="radio">Attiva</div>
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="disattiva" value="disattiva" name="notifica" type="radio">Disattiva</div>
+                                </div>
+                                <div class="w-1/2 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">Attiva/Disattiva notifiche nuova puntata podcast (attivata)</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+                                <div class="w-1/2 flex justify-center flex-wrap items-center">
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="attiva" value="attiva" name="notifica" type="radio">Attiva</div>
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="disattiva" value="disattiva" name="notifica" type="radio">Disattiva</div>
+                                </div>
+                                <div class="w-1/2 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black border-2 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold">LOG OUT</p>
+                            </div>
+                            <div class="w-1/2 flex justify-end items-center">
+                                <button (click)="removeToken()" class="bg-secondary text-white px-7 py-2 h-10 rounded-full">Esci</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

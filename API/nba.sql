@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 21, 2024 alle 23:18
+-- Creato il: Gen 22, 2024 alle 05:46
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -31,15 +31,20 @@ CREATE TABLE `blog` (
   `id` int(11) NOT NULL,
   `titolo` varchar(255) NOT NULL,
   `riassunto` varchar(255) NOT NULL,
-  `foto` varchar(255) DEFAULT NULL
+  `foto` varchar(255) DEFAULT NULL,
+  `creazione` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `numero_foto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `blog`
 --
 
-INSERT INTO `blog` (`id`, `titolo`, `riassunto`, `foto`) VALUES
-(1, 'LA NASCITA E L’ASCESA DELLA NBA', 'La National Basketball Association (NBA), una delle leghe sportive più prestigiose al mondo, ha una storia ricca e affascinante che ha avuto inizio il 6 giugno 1946 a New York City sotto il nome di Basketball Association of America (BAA)...', NULL);
+INSERT INTO `blog` (`id`, `titolo`, `riassunto`, `foto`, `creazione`, `numero_foto`) VALUES
+(1, 'LA NASCITA E L’ASCESA DELLA NBA', 'La National Basketball Association (NBA), una delle leghe sportive più prestigiose al mondo, ha una storia ricca e affascinante che ha avuto inizio il 6 giugno 1946 a New York City sotto il nome di Basketball Association of America (BAA)...', NULL, '2024-01-22 00:02:46', 0),
+(2, 'LAKERS AFFRONTANO E VINCONO CONTRO DALLAS', 'Anthony Davis ha brillato nella vittoria dei Lakers contro i Mavs la sera del 18/01, confermando di essere in ottima forma. Per la squadra gialloviola, attualmente in una posizione delicata nella zona Play-In, ogni vittoria è cruciale e quella di questa s', 'https://lh3.googleusercontent.com/keep-bbsk/ALhRneFbPEx4NBxj21Y_RH5CUWbgmOXl-qJmuBY1cBVL8DDhEl5osrrVVXOozWHQazTYXNN92Qj5nSFJ0x6zF5Tiv-08X5RiPek5BtZIBgyB59DV6GST=s512', '2024-01-22 02:25:20', 2),
+(4, 'LA NASCITA DEL TIRO DA 3 PUNTI', 'Non tutti sanno che il famoso “tiro da 3” non è nato con l’inizio dell’NBA.\r\nLa NBA ha subito una trasformazione epocale con l\'introduzione del tiro da tre punti nella stagione 1979-1980. Questo elemento tattico ha cambiato radicalmente il modo in cui le ', NULL, '2024-01-22 02:10:04', 0),
+(6, 'Suga dei BTS collabora con l\'NBA, nominato nuovo ambasciatore', 'La nuova collezione ispirata al campionato di basket statunitense è stata curata dalla star del K-pop, Suga. Questa emozionante collaborazione è stata resa nota attraverso il sito ufficiale della Lega, che ha comunicato che il rinomato rapper e produttore', 'https://lh3.googleusercontent.com/keep-bbsk/ALhRneEjgaKhYmiZrTsLaSGX119YuiSfIkcPi_Pw4kGjU38q_Xatb55WpVWNIvIrj4GpjgphLUT2tlEZ7pbWmnjSJJWU2HcnDbkzui_N-Ljyi766ydK7=s512', '2024-01-22 02:24:38', 2);
 
 -- --------------------------------------------------------
 
@@ -52,16 +57,9 @@ CREATE TABLE `commenti` (
   `testo` text NOT NULL,
   `id_commento_padre` int(11) DEFAULT NULL,
   `id_utente` int(11) NOT NULL,
-  `id_games` int(11) NOT NULL
+  `id_games` int(11) DEFAULT NULL,
+  `blog` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `commenti`
---
-
-INSERT INTO `commenti` (`id`, `testo`, `id_commento_padre`, `id_utente`, `id_games`) VALUES
-(1, 'testo di prova', NULL, 1, 3),
-(2, 'commento al commento prova', 1, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -1490,9 +1488,16 @@ CREATE TABLE `paragrafo` (
 --
 
 INSERT INTO `paragrafo` (`id`, `id_blog`, `titolo_paragrafo`, `testo_paragrafo`, `foto`) VALUES
-(1, 1, 'La storia della NBA', 'La National Basketball Association (NBA), una delle leghe sportive più prestigiose al mondo, ha una storia ricca e affascinante che ha avuto inizio il 6 giugno 1946 a New York City sotto il nome di Basketball Association of America (BAA). Questo evento segnò il primo passo verso la creazione di una lega di basket professionistica unificata negli Stati Uniti.\r\n\r\nPrima della nascita della NBA, esistevano tre leghe separate: la National Basketball League (NBL), fondata nel 1937, con squadre principalmente nella regione del Midwest; la Basketball Association of America (BAA), creata nel 1946, con squadre nelle principali città statunitensi; e la American Basketball League (ABL). \r\n\r\nLa crescente popolarità del basket professionistico spinse alla fusione di BAA e NBL durante la stagione 1948-1949, dando vita alla National Basketball Association.\r\n ', NULL),
+(1, 1, 'La storia della NBA', 'La National Basketball Association (NBA), una delle leghe sportive più prestigiose al mondo, ha una storia ricca e affascinante che ha avuto inizio il 6 giugno 1946 a New York City sotto il nome di Basketball Association of America (BAA). Questo evento segnò il primo passo verso la creazione di una lega di basket professionistica unificata negli Stati Uniti.\n\nPrima della nascita della NBA, esistevano tre leghe separate: la National Basketball League (NBL), fondata nel 1937, con squadre principalmente nella regione del Midwest; la Basketball Association of America (BAA), creata nel 1946, con squadre nelle principali città statunitensi; e la American Basketball League (ABL). \n\nLa crescente popolarità del basket professionistico spinse alla fusione di BAA e NBL durante la stagione 1948-1949, dando vita alla National Basketball Association.\n ', NULL),
 (4, 1, NULL, 'Parlando della storia della NBA è impossibile non citare alcuni tra i giocatori più iconici e straordinari degli anni \'80, come la rivalità epica tra Magic Johnson dei Los Angeles Lakers e Larry Bird dei Boston Celtics. Questo duello ha contribuito in modo significativo all\'aumento della popolarità del basket e della NBA stessa creando competizioni spettacolari e leggendarie.\r\n\r\nIl decennio successivo ha visto l\'emergere di una delle leggende più celebrate dello sport: Michael Jordan. Con i Chicago Bulls, Jordan ha portato la NBA ad una nuova era di spettacolarità e successo internazionale. La sua influenza ha contribuito a trasformare il basket in uno degli sport più seguiti a livello globale.', NULL),
-(5, 1, NULL, '\r\nNegli anni successivi, la NBA ha continuato a prosperare con l\'avvento di nuove stelle, tra cui Kobe Bryant e LeBron James. Il gioco ha continuato a evolversi, diventando uno spettacolo globale con una base di fan appassionata in tutto il mondo.\r\n\r\nOggi, la NBA è molto più di una semplice lega di basket; è un fenomeno e un emblema per la cultura che influisce sulla moda, sulla musica e sulla società.\r\n\r\nLa storia della NBA non parla solo dell’ascesa di uno sport, ma è un racconto entusiasmante di crescita, competizione e successo. Da una fusione di tre leghe pioniere è emersa una potenza sportiva globale, con una storia ricca di leggende e momenti indelebili che hanno plasmato il panorama dello sport e intrattenuto milioni di appassionati di basket in tutto il mondo.\r\n', NULL);
+(5, 1, NULL, '\r\nNegli anni successivi, la NBA ha continuato a prosperare con l\'avvento di nuove stelle, tra cui Kobe Bryant e LeBron James. Il gioco ha continuato a evolversi, diventando uno spettacolo globale con una base di fan appassionata in tutto il mondo.\r\n\r\nOggi, la NBA è molto più di una semplice lega di basket; è un fenomeno e un emblema per la cultura che influisce sulla moda, sulla musica e sulla società.\r\n\r\nLa storia della NBA non parla solo dell’ascesa di uno sport, ma è un racconto entusiasmante di crescita, competizione e successo. Da una fusione di tre leghe pioniere è emersa una potenza sportiva globale, con una storia ricca di leggende e momenti indelebili che hanno plasmato il panorama dello sport e intrattenuto milioni di appassionati di basket in tutto il mondo.\r\n', NULL),
+(8, 2, NULL, 'Anthony Davis ha brillato nella vittoria dei Lakers contro i Mavs la sera del 18/01, confermando di essere in ottima forma. Per la squadra gialloviola, attualmente in una posizione delicata nella zona Play-In, ogni vittoria è cruciale e quella di questa sera è risultata fondamentale. Il vero protagonista dell\'incontro è stato AD, il quale ha segnato 28 punti con un impressionante 12/17 dal campo, catturato 12 rimbalzi e distribuito nove assist in 33 minuti di gioco, sfiorando così la tripla doppia.\r\n\r\nAnche LeBron James ha fornito una solida prestazione, chiudendo con 25 punti, otto rimbalzi e altrettanti assist. Al termine della partita, LeBron ha elogiato Davis dicendo: \"Sta apprendendo da me come distribuire la palla dal posto basso. Sta facendo un ottimo lavoro e presto le squadre avversarie smetteranno di raddoppiarlo, almeno finché riusciremo a capitalizzare sugli scarichi che ci passa. Il nostro compito è essere nella giusta posizione al momento giusto quando viene messo sotto pressione.\"\r\n', 'https://lh3.googleusercontent.com/keep-bbsk/ALhRneFbPEx4NBxj21Y_RH5CUWbgmOXl-qJmuBY1cBVL8DDhEl5osrrVVXOozWHQazTYXNN92Qj5nSFJ0x6zF5Tiv-08X5RiPek5BtZIBgyB59DV6GST=s512'),
+(10, 2, NULL, '\r\nDavis, noto per la sua abilità nel segnare e catturare rimbalzi, sta chiaramente imparando anche l\'arte del passaggio da LeBron. Quest\'ultimo, con la sua esperienza, si dimostra un maestro efficace in questo aspetto del gioco. Il passaggio, spesso sottovalutato, può fare la differenza nei momenti cruciali delle partite, come sottolinea lo stesso Davis: \"Quando i miei compagni sono liberi, passiamo loro la palla e li incoraggiamo a tirare. Evitiamo l\'egoismo nei tiri e ci divertiamo a fare le giocate giuste.\"\r\n\r\nI Mavericks lasciano Los Angeles con una sconfitta amara nonostante la straordinaria performance di Luka Doncic, che ha registrato 33 punti, 13 rimbalzi e 10 assist. Tuttavia, la leadership dei Lakers è stata evidente fin dall\'inizio, con un vantaggio che ha toccato anche i 24 punti nell\'ultimo quarto. L\'allenatore dei Lakers, Darwin Ham, ha commentato dopo la partita: \"In genere, quando giochi bene in attacco, giochi bene anche in difesa. Tutti sentivano la necessità di essere aggressivi in attacco. Dobbiamo mantenere questo spirito e continuare a migliorare sia in attacco che in difesa.\"\r\n', 'https://lh3.googleusercontent.com/keep-bbsk/ALhRneFYaLVMrHg8jMGa8ko56JmrizeqhfUgQEiyO1U0RVXocucpPQQt1NdMHHmqFRojRFKfTAuNgBVoM_7QQr7cMXoZ7avoFsIRCy5y1MT4vBD7cGox=s512'),
+(11, 4, NULL, 'Non tutti sanno che il famoso “tiro da 3” non è nato con l’inizio dell’NBA.\r\nLa NBA ha subito una trasformazione epocale con l\'introduzione del tiro da tre punti nella stagione 1979-1980. Questo elemento tattico ha cambiato radicalmente il modo in cui le squadre affrontano il gioco, influenzando non solo le strategie, ma anche i ruoli e le abilità dei giocatori. Per capire appieno l\'impatto, esaminiamo come era il gioco prima e dopo l\'avvento del tiro da tre punti, prendendo in considerazione la prima rivalità tra due leggende del basket: Larry Bird e Magic Johnson.\r\n\r\n', NULL),
+(12, 4, 'Prima dell\'introduzione del tiro da tre punti:\r\n', 'Prima del 1979, il gioco della NBA era incentrato su tiri a media distanza, giocate nella zona dei 3 secondi (zona pitturata) e una varietà di mosse individuali. La mancanza di questa dinamica significava che le squadre dovevano lavorare maggiormente per ottenere tiri aperti e creare spazi nella difesa avversaria. In questo contesto, giocatori come Larry Bird e Magic Johnson eccellevano con le loro capacità di creare opportunità per sé e per i compagni di squadra.\r\n\r\nLarry Bird, con la sua precisione nei tiri a media distanza e la visione di gioco superba, divenne un simbolo dei Boston Celtics degli anni \'80, contribuendo a creare una dinastia. Magic Johnson, noto per la sua abilità nel dirigere il gioco come playmaker, guidò i Los Angeles Lakers a diversi titoli grazie a una combinazione di passaggi magistrali e abilità nel pitturato.\r\n', NULL),
+(13, 4, 'Dopo l\'introduzione del tiro da tre punti:\r\n', 'Con l’avvento dei tiri da tre punti, le squadre hanno cominciato a cercare specialisti nel tiro da tre punti, e giocatori come Larry Bird avrebbero trovato nuovi modi per impattare il gioco. Bird, noto per la sua precisione nei tiri a lunga distanza, sarebbe diventato ancora più letale, adattandosi a questa nuova arma nel suo arsenale offensivo.\r\n\r\nMagic Johnson, pur non essendo un grande tiratore da tre punti, avrebbe sicuramente trovato modi creativi per sfruttare gli spazi aggiuntivi generati dal tiro da tre punti. La sua abilità nel penetrare e distribuire assist avrebbe mantenuto una rilevanza fondamentale, ma ora con una dinamica di gioco più aperta.\r\n\r\nIn generale, il tiro da tre punti ha trasformato la NBA in uno show ancora più spettacolare, con una maggiore suspance e coinvolgimento nei tiri da lunga distanza. Le rivalità epiche degli anni \'80, come quella tra Larry Bird e Magic Johnson, si sarebbero evolute in un contesto di gioco diverso, dove la capacità di colpire da tre punti avrebbe avuto un impatto cruciale sui risultati delle partite.\r\n\r\nIn conclusione, il tiro da tre punti ha iniziato una nuova era e un nuovo tipo di gioco per la NBA, portando ai massimi livelli la spettacolarità del gioco e influenzando anche il futuro del basket professionista e le sue leggende come Michael Jordan.\r\n', NULL),
+(17, 6, NULL, 'La nuova collezione ispirata al campionato di basket statunitense è stata curata dalla star del K-pop, Suga. Questa emozionante collaborazione è stata resa nota attraverso il sito ufficiale della Lega, che ha comunicato che il rinomato rapper e produttore contribuirà ad ampliare la portata del marchio NBA a livello globale attraverso varie attività e iniziative promozionali.\r\n\r\nÈ noto che Suga è un grande appassionato di basket, avendo già fatto la sua comparsa a bordo campo in diverse partite nel passato. Addirittura, lo scorso settembre, ha partecipato agli NBA Japan Games 2022, in cui i Warriors e i Washington Wizards hanno disputato due partite di precampionato.\r\n', 'https://keep.google.com/u/2/media/v2/1oAR617zvpwpfLDZUMCDyvaDfJXfP1cmOdxj2NAg7Hv9RoerOXuecYiV3po2s-w/1G0xCUQoDPg3WWZ5Cbmgf-amgMcErQQ75LVCRv2tvjaaw65Mw34tUsTKzytot?sz=512&accept=image%2Fgif%2Cimage%2Fjpeg%2Cimage%2Fjpg%2Cimage%2Fpng%2Cimage%2Fwebp'),
+(18, 6, NULL, 'La svolta è avvenuta quando Suga ha dichiarato con entusiasmo: \"La musica e il basket sono state le mie passioni condivise sin dalla giovinezza, ed è un sogno essere nominato ambasciatore NBA.\" Inoltre, ha annunciato: \"Sono ansioso di formalizzare il mio rapporto con la NBA e non vedo l\'ora di condividere alcune emozionanti collaborazioni che ho pianificato con la Lega nei prossimi mesi.\"\r\n\r\nMark Tatum, vice commissario e direttore operativo della Lega, ha espresso il loro entusiasmo nell\'unirsi a Suga, definendolo un musicista di fama mondiale, un\'icona della moda e un appassionato sostenitore della NBA. Ha aggiunto: \"Non vediamo l\'ora di collaborare con Suga per portare lo stesso entusiasmo che genera dalla sua vasta base di fan a sostegno dei nostri continui sforzi per far crescere il nostro marchio.\"\r\n\r\nLa Lega ha confermato inoltre la presenza dell\'NBA durante il tour mondiale da solista di Suga, sottolineando l\'incredibile successo del tour con la vendita di tutti i biglietti in pochissimi minuti.\r\n\r\n\r\nFonti: https://www.oaplus.it/gossip/suga-star-della-band-dei-bts-e-diventato-ambasciatore-dellnba-il-rapper-sud-coreano-espandera-il-marchio-in-tutto-il-mondo/?doing_wp_cron=1705587752.3182818889617919921875 \r\n\r\nhttps://billboard.it/cultura/stile/suga-bts-nba-mitchell-ness/2024/01/18150412/ \r\n', 'https://keep.google.com/u/2/media/v2/1cghpGHP4aPQpvIEvOCIlXdXRoQ9_tZIbU7N8G5S5IyxTh-nZ2wutAc8GYnZ4CA/1a-pw5ScrNlYSCTGj-D51e9-MxtCyMBldfPoE4DbM8pwylmwxi5sSwCydncUN4w?sz=512&accept=image%2Fgif%2Cimage%2Fjpeg%2Cimage%2Fjpg%2Cimage%2Fpng%2Cimage%2Fwebp');
 
 -- --------------------------------------------------------
 
@@ -16227,6 +16232,43 @@ INSERT INTO `season` (`id`, `year`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `tag`
+--
+
+CREATE TABLE `tag` (
+  `id` int(11) NOT NULL,
+  `tag` varchar(69) NOT NULL,
+  `blog` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `tag`
+--
+
+INSERT INTO `tag` (`id`, `tag`, `blog`) VALUES
+(1, 'Antony Davis', 2),
+(2, 'LeBron James', 2),
+(3, 'Antony Davis', 2),
+(4, 'LeBron James', 2),
+(5, 'Luka Doncic', 2),
+(6, 'Lakers', 2),
+(7, 'Mavs', 2),
+(8, 'Play-in', 2),
+(9, 'Darwin Ham', 2),
+(12, 'Larry Bird', 4),
+(13, 'Magic Johnson', 4),
+(14, 'Michael Jordan', 4),
+(15, 'Boston Celtics', 4),
+(16, 'Los Ageles Lakes', 4),
+(17, 'Suga dei BTS', 6),
+(18, 'Warriors', 6),
+(19, 'Washington Wizards', 6),
+(20, 'Mark Tatum', 6),
+(21, 'NBA Japan Games 2022', 6);
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `teams`
 --
 
@@ -16453,14 +16495,24 @@ INSERT INTO `utente` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `p
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `utente_team`
+-- Struttura della tabella `utente_preferiti`
 --
 
-CREATE TABLE `utente_team` (
+CREATE TABLE `utente_preferiti` (
   `id` int(11) NOT NULL,
   `utente` int(11) NOT NULL,
-  `team` int(11) NOT NULL
+  `team` int(11) DEFAULT NULL,
+  `articolo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `utente_preferiti`
+--
+
+INSERT INTO `utente_preferiti` (`id`, `utente`, `team`, `articolo`) VALUES
+(5, 5, 1, NULL),
+(6, 5, NULL, 4),
+(9, 5, 9, NULL);
 
 --
 -- Indici per le tabelle scaricate
@@ -16478,7 +16530,8 @@ ALTER TABLE `blog`
 ALTER TABLE `commenti`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_commento_padre` (`id_commento_padre`),
-  ADD KEY `id_games` (`id_games`);
+  ADD KEY `id_games` (`id_games`),
+  ADD KEY `blog` (`blog`);
 
 --
 -- Indici per le tabelle `conference`
@@ -16552,6 +16605,13 @@ ALTER TABLE `season`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indici per le tabelle `tag`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `blog` (`blog`);
+
+--
 -- Indici per le tabelle `teams`
 --
 ALTER TABLE `teams`
@@ -16580,12 +16640,13 @@ ALTER TABLE `utente`
   ADD KEY `role_id` (`role_id`);
 
 --
--- Indici per le tabelle `utente_team`
+-- Indici per le tabelle `utente_preferiti`
 --
-ALTER TABLE `utente_team`
+ALTER TABLE `utente_preferiti`
   ADD PRIMARY KEY (`id`),
   ADD KEY `team` (`team`),
-  ADD KEY `utente` (`utente`);
+  ADD KEY `utente` (`utente`),
+  ADD KEY `articolo` (`articolo`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
@@ -16595,7 +16656,7 @@ ALTER TABLE `utente_team`
 -- AUTO_INCREMENT per la tabella `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT per la tabella `commenti`
@@ -16631,7 +16692,7 @@ ALTER TABLE `league`
 -- AUTO_INCREMENT per la tabella `paragrafo`
 --
 ALTER TABLE `paragrafo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT per la tabella `player`
@@ -16652,6 +16713,12 @@ ALTER TABLE `season`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT per la tabella `tag`
+--
+ALTER TABLE `tag`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT per la tabella `teams`
 --
 ALTER TABLE `teams`
@@ -16664,14 +16731,21 @@ ALTER TABLE `utente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT per la tabella `utente_team`
+-- AUTO_INCREMENT per la tabella `utente_preferiti`
 --
-ALTER TABLE `utente_team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `utente_preferiti`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Limiti per le tabelle scaricate
 --
+
+--
+-- Limiti per la tabella `commenti`
+--
+ALTER TABLE `commenti`
+  ADD CONSTRAINT `commenti_ibfk_1` FOREIGN KEY (`id_games`) REFERENCES `games` (`id`),
+  ADD CONSTRAINT `commenti_ibfk_2` FOREIGN KEY (`blog`) REFERENCES `blog` (`id`);
 
 --
 -- Limiti per la tabella `games`
@@ -16688,11 +16762,18 @@ ALTER TABLE `paragrafo`
   ADD CONSTRAINT `paragrafo_ibfk_1` FOREIGN KEY (`id_blog`) REFERENCES `blog` (`id`);
 
 --
--- Limiti per la tabella `utente_team`
+-- Limiti per la tabella `tag`
 --
-ALTER TABLE `utente_team`
-  ADD CONSTRAINT `utente_team_ibfk_1` FOREIGN KEY (`team`) REFERENCES `teams` (`id`),
-  ADD CONSTRAINT `utente_team_ibfk_2` FOREIGN KEY (`utente`) REFERENCES `utente` (`id`);
+ALTER TABLE `tag`
+  ADD CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`blog`) REFERENCES `blog` (`id`);
+
+--
+-- Limiti per la tabella `utente_preferiti`
+--
+ALTER TABLE `utente_preferiti`
+  ADD CONSTRAINT `utente_preferiti_ibfk_1` FOREIGN KEY (`team`) REFERENCES `teams` (`id`),
+  ADD CONSTRAINT `utente_preferiti_ibfk_2` FOREIGN KEY (`utente`) REFERENCES `utente` (`id`),
+  ADD CONSTRAINT `utente_preferiti_ibfk_3` FOREIGN KEY (`articolo`) REFERENCES `blog` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

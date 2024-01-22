@@ -24,4 +24,9 @@ public class Commenti {
 	@Column(name = "id_utente", columnDefinition = "int")
 	private int id_utente;
 
+	@Column(name = "id_games", columnDefinition = "int")
+	private int id_games;
+	@Column(name = "blog", columnDefinition = "int")
+	private int blog;
+
 }

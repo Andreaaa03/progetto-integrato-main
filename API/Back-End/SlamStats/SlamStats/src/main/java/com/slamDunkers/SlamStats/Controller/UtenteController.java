@@ -3,6 +3,7 @@ package com.slamDunkers.SlamStats.Controller;
 import com.slamDunkers.SlamStats.Entity.Utente;
 import com.slamDunkers.SlamStats.Payload.Request.SignupRequest;
 import com.slamDunkers.SlamStats.Payload.Request.SinginRequest;
+import com.slamDunkers.SlamStats.Payload.Request.UtenteArticoloRequest;
 import com.slamDunkers.SlamStats.Payload.Request.UtenteTeamRequest;
 import com.slamDunkers.SlamStats.Service.UtenteService;
 import jakarta.servlet.http.HttpSession;
@@ -32,9 +33,11 @@ public class UtenteController {
 
 	@PostMapping("/teamPreferito")
 	public ResponseEntity<?> teamPreferito(@RequestBody @Valid UtenteTeamRequest request){
-
 		return userService.teamPreferito(request);
 	}
-
-
+	
+	@PostMapping("/articoloPreferito")
+	public ResponseEntity<?> articoloPreferito(@RequestBody @Valid UtenteArticoloRequest request){
+		return userService.articoloPreferito(request);
+	}
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UtenteTeam {
+public class UtentePreferiti {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -23,7 +23,12 @@ public class UtenteTeam {
 	private Utente idUtente;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "team", nullable = false)
+	@JoinColumn(name = "team")
 	private Teams idTeam;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "articolo")
+	private Blog idArticolo;
+
 
 }

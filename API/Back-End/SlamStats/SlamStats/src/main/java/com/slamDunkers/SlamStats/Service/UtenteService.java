@@ -1,11 +1,11 @@
 package com.slamDunkers.SlamStats.Service;
 
 import com.slamDunkers.SlamStats.Entity.*;
-import com.slamDunkers.SlamStats.Payload.Request.SignupRequest;
-import com.slamDunkers.SlamStats.Payload.Request.SinginRequest;
-import com.slamDunkers.SlamStats.Payload.Request.UtenteArticoloRequest;
-import com.slamDunkers.SlamStats.Payload.Request.UtenteTeamRequest;
+import com.slamDunkers.SlamStats.Payload.Request.*;
 import com.slamDunkers.SlamStats.Payload.Response.AuthResponse;
+import com.slamDunkers.SlamStats.Payload.Response.BlogCompleto;
+import com.slamDunkers.SlamStats.Payload.Response.TeamsResponse;
+import com.slamDunkers.SlamStats.Payload.Response.ToResponse;
 import com.slamDunkers.SlamStats.Repository.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,8 +28,11 @@ public class UtenteService {
 	public final TeamsRepository teamsRepository;
 	public final HttpServletRequest request;
 	public final BlogRepository blogRepository;
+	public final BlogService blogService;
 
-	public UtenteService(UtenteRepository utenteRepository, RolesRepository rolesRepository, TokenService tokenService, Utente_TeamRepository utente_teamRepository, TeamsRepository teamsRepository, HttpServletRequest request, BlogRepository blogRepository) {
+	public final ToResponse toResponse;
+
+	public UtenteService(UtenteRepository utenteRepository, RolesRepository rolesRepository, TokenService tokenService, Utente_TeamRepository utente_teamRepository, TeamsRepository teamsRepository, HttpServletRequest request, BlogRepository blogRepository, BlogService blogService, ToResponse toResponse) {
 		this.utenteRepository = utenteRepository;
 		this.rolesRepository = rolesRepository;
 		this.tokenService = tokenService;
@@ -35,6 +40,8 @@ public class UtenteService {
 		this.teamsRepository = teamsRepository;
 		this.request = request;
         this.blogRepository = blogRepository;
+        this.blogService = blogService;
+        this.toResponse = toResponse;
     }
 	public ResponseEntity<String> save(SignupRequest request){
 		Optional<Object> u = utenteRepository.findByEmail(request.getEmail());
@@ -111,7 +118,7 @@ public class UtenteService {
 	}
 
 	public ResponseEntity<String> articoloPreferito(UtenteArticoloRequest request) {
-		System.out.println(request.getToken());
+
 		Integer idUtente = tokenService.getUserIdFromToken(request.getToken()).getId();
 		Optional<Utente> u = utenteRepository.findById(idUtente);
 
@@ -140,9 +147,42 @@ public class UtenteService {
 			return new ResponseEntity<>("Articolo aggiunto con successo",HttpStatus.CREATED);
 		}
 	}
+	public List<BlogCompleto> getArticoliPreferiti(TokenRequest request) {
+		Integer idUtente = tokenService.getUserIdFromToken(request.getToken()).getId();
+		Optional<Utente> u = utenteRepository.findById(idUtente);
+		if (!u.isPresent()) {
+			return null;
+		}
+		List<UtentePreferiti> ub = utente_teamRepository.findArticoliPreferiti (u.get().getId());
+		if (ub == null) {
+			return null;
+		}
+		List<BlogCompleto> blogCompleto = new ArrayList<>();
+		for (UtentePreferiti utentePreferiti : ub) {
+			blogCompleto.add(blogService.getBlogCompleto(utentePreferiti.getIdArticolo().getId()));
+		}
+		return blogCompleto;
+
+	}
 
 
+	public List<TeamsResponse> getTeamPreferiti(TokenRequest request) {
+		Integer idUtente = tokenService.getUserIdFromToken(request.getToken()).getId();
+		Optional<Utente> u = utenteRepository.findById(idUtente);
+		if (!u.isPresent()) {
+			return null;
+		}
+		List<UtentePreferiti> ut = utente_teamRepository.findTeamPreferiti(u.get().getId());
+		if (ut == null) {
+			return null;
+		}
+		List<TeamsResponse> teams = new ArrayList<>();
+		for (UtentePreferiti utentePreferiti : ut) {
+			teams.add(toResponse.toTeamsResponse(utentePreferiti.getIdTeam()));
+		}
+
+		return teams;
 
 
-
+	}
 }

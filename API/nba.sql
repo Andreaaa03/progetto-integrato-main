@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 22, 2024 alle 05:46
+-- Creato il: Gen 22, 2024 alle 06:42
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -16232,6 +16232,18 @@ INSERT INTO `season` (`id`, `year`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `seguiti`
+--
+
+CREATE TABLE `seguiti` (
+  `id` int(11) NOT NULL,
+  `seguito` int(11) NOT NULL,
+  `seguace` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `tag`
 --
 
@@ -16490,7 +16502,8 @@ CREATE TABLE `utente` (
 
 INSERT INTO `utente` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `pswd`, `role_id`, `data_iscrizione`, `numero_telefono`, `follower`, `favorite_team`, `username`, `sesso`, `seguiti`) VALUES
 (5, 'Giorgio', 'Modeo', '2002-12-08', 'giorgio.modeo@gmail.com', 'e98e17f3e8a79a36583ebf1931c4a089f9bc556a3ca6b5158386a997d9bce2e8', 2, '2024-01-16 23:00:00', '1234567891', 0, 0, 'giovanni', '', 0),
-(9, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-21 14:53:09', '1234567891', 0, 0, 'domanico', 'm', NULL);
+(9, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-21 14:53:09', '1234567891', 0, 0, 'domanico', 'm', NULL),
+(10, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.co', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 2, '2024-01-22 05:39:30', '1234567891', 0, 0, 'domanico', 'm', NULL);
 
 -- --------------------------------------------------------
 
@@ -16512,7 +16525,9 @@ CREATE TABLE `utente_preferiti` (
 INSERT INTO `utente_preferiti` (`id`, `utente`, `team`, `articolo`) VALUES
 (5, 5, 1, NULL),
 (6, 5, NULL, 4),
-(9, 5, 9, NULL);
+(10, 5, NULL, 1),
+(11, 5, 9, NULL),
+(13, 5, NULL, 6);
 
 --
 -- Indici per le tabelle scaricate
@@ -16603,6 +16618,14 @@ ALTER TABLE `scores`
 --
 ALTER TABLE `season`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `seguiti`
+--
+ALTER TABLE `seguiti`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `seguace` (`seguace`),
+  ADD KEY `seguito` (`seguito`);
 
 --
 -- Indici per le tabelle `tag`
@@ -16713,6 +16736,12 @@ ALTER TABLE `season`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT per la tabella `seguiti`
+--
+ALTER TABLE `seguiti`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT per la tabella `tag`
 --
 ALTER TABLE `tag`
@@ -16728,13 +16757,13 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT per la tabella `utente_preferiti`
 --
 ALTER TABLE `utente_preferiti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Limiti per le tabelle scaricate
@@ -16760,6 +16789,13 @@ ALTER TABLE `games`
 --
 ALTER TABLE `paragrafo`
   ADD CONSTRAINT `paragrafo_ibfk_1` FOREIGN KEY (`id_blog`) REFERENCES `blog` (`id`);
+
+--
+-- Limiti per la tabella `seguiti`
+--
+ALTER TABLE `seguiti`
+  ADD CONSTRAINT `seguiti_ibfk_1` FOREIGN KEY (`seguace`) REFERENCES `utente` (`id`),
+  ADD CONSTRAINT `seguiti_ibfk_2` FOREIGN KEY (`seguito`) REFERENCES `utente` (`id`);
 
 --
 -- Limiti per la tabella `tag`

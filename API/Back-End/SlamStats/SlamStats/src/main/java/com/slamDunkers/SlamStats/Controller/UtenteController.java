@@ -1,10 +1,10 @@
 package com.slamDunkers.SlamStats.Controller;
 
+import com.slamDunkers.SlamStats.Entity.Teams;
 import com.slamDunkers.SlamStats.Entity.Utente;
-import com.slamDunkers.SlamStats.Payload.Request.SignupRequest;
-import com.slamDunkers.SlamStats.Payload.Request.SinginRequest;
-import com.slamDunkers.SlamStats.Payload.Request.UtenteArticoloRequest;
-import com.slamDunkers.SlamStats.Payload.Request.UtenteTeamRequest;
+import com.slamDunkers.SlamStats.Payload.Request.*;
+import com.slamDunkers.SlamStats.Payload.Response.BlogCompleto;
+import com.slamDunkers.SlamStats.Payload.Response.TeamsResponse;
 import com.slamDunkers.SlamStats.Service.UtenteService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -39,5 +41,14 @@ public class UtenteController {
 	@PostMapping("/articoloPreferito")
 	public ResponseEntity<?> articoloPreferito(@RequestBody @Valid UtenteArticoloRequest request){
 		return userService.articoloPreferito(request);
+	}
+	@PostMapping("/getArticoliPreferiti")
+	public List<BlogCompleto> getArticoliPreferiti(@RequestBody @Valid TokenRequest request){
+		return userService.getArticoliPreferiti(request);
+	}
+
+	@PostMapping("/getTeamPreferiti")
+	public List<TeamsResponse> getTeamPreferiti(@RequestBody @Valid TokenRequest request){
+		return userService.getTeamPreferiti(request);
 	}
 }

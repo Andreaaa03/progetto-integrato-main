@@ -360,19 +360,47 @@ public class ToResponse {
 		response.setTurnovers(sommaInt(turnovers));
 		response.setBlocks(sommaInt(blocks));
 		response.setPlusMinus(sommaInt(plusMinus));
-
-
-
 		String minutiGiocatiString = String.valueOf(sommaDouble(minuti));
 		String[] minutiGiocatiStringArray = minutiGiocatiString.split("\\.");
 		String minutiGiocatiStringFinal = minutiGiocatiStringArray[0] + ":" + minutiGiocatiStringArray[1];
 		response.setMin(minutiGiocatiStringFinal);
-
-
-
-
-
 		return response;
+	}
+
+	public TeamsResponse toTeamsResponse(Teams team) {
+
+		if (team.getLeague().getDivision() == null) {
+			TeamsResponse teamsResponse = new TeamsResponse(
+					team.getId(),
+					team.getTeamName(),
+					team.getCity(),
+					team.getLogo(),
+					team.getNickname(),
+					team.isAllStar(),
+					team.isNbaFranchise(),
+					team.getLeague().getConference(),
+					team.getCode()
+			);
+			return teamsResponse;
+
+		}
+		TeamsResponse teamsResponse = new TeamsResponse(
+				team.getId(),
+				team.getTeamName(),
+				team.getCity(),
+				team.getLogo(),
+				team.getNickname(),
+				team.isAllStar(),
+				team.isNbaFranchise(),
+				team.getLeague().getConference(),
+				team.getLeague().getDivision(),
+				team.getCode()
+
+		);
+		return teamsResponse;
+
+
+
 	}
 
 //	TODO: creare un file con i metodi tools

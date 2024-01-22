@@ -6,18 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UtenteResponse {
-
 	private int id;
 	private String email;
 	private String numeroTelefono;
 	private String username;
 	private String sesso;
 	private int follower;
-	private Teams favoriteTeam;
-
 }

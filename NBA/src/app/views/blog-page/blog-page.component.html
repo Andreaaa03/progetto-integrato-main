@@ -1,2 +1,66 @@
 <app-navbar></app-navbar>
-<p>blog-page works!</p>
+<section class="">
+    <div class="w-full h-20 bg-primary flex justify-center items-center">
+        <h2 class=" text-white text-4xl font-bold">
+            BLOG
+        </h2>
+    </div>
+    <div class="w-full h-6 bg-secondary"></div>
+    <div class="flex justify-center mt-10">
+        <div class="container flex justify-center">
+            <div class="lg:w-[90%] w-full  flex flex-wrap justify-center">
+                <div class="w-full h-20 bg-primary flex justify-center items-center">
+                    <h2 class=" text-white text-4xl font-bold">
+                        ULTIME NOTIZIE
+                    </h2>
+                </div>
+                <div class="w-full h-6 bg-secondary"></div>
+                <div class="mt-10 flex flex-wrap justify-center lg:justify-between">
+                    <app-post-articolo [extended]="true"></app-post-articolo>
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="my-10">
+    <div class="flex justify-center">
+        <div class="container flex justify-center">
+            <div class="lg:w-[90%] w-full  flex flex-wrap justify-center">
+                <div class="w-full h-20 bg-primary flex justify-center items-center">
+                    <h2 class=" text-white text-4xl font-bold">
+                        ULTIME NOTIZIE
+                    </h2>
+                </div>
+                <div class="w-full h-6 bg-secondary"></div>
+                <div class="mt-10 flex flex-wrap justify-center lg:justify-between">
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="my-10">
+    <div class="flex justify-center">
+        <div class="container flex justify-center">
+            <div class="lg:w-[90%] w-full  flex flex-wrap justify-center">
+                <div class="w-full h-20 bg-primary flex justify-center items-center">
+                    <h2 class=" text-white text-4xl font-bold">
+                        ULTIME NOTIZIE
+                    </h2>
+                </div>
+                <div class="w-full h-6 bg-secondary"></div>
+                <div class="mt-10 flex flex-wrap justify-center lg:justify-between">
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [extended]="false"></app-post-articolo>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

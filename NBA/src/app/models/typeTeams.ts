@@ -1,30 +1,13 @@
 export type SingleTeamTeams = {
     id: number;
-    name: string;
+    nbaFranchise: boolean;
     nickname: string;
-    code: string;
     city: string;
     logo: string;
     allStar: boolean;
-    nbaFranchise: boolean;
-    leagues: {
-        standard: {
-            conference: string;
-            division: string | null;
-        };
-        vegas: {
-            conference: string;
-            division: string | null;
-        };
-        utah: {
-            conference: string;
-            division: string | null;
-        };
-        sacramento: {
-            conference: string;
-            division: string | null;
-        };
-    };
+    conferenceName: string;
+    teamName: string;
+    divisionName: string;
 };
 
 export type division = {

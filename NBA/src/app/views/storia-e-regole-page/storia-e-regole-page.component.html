@@ -1,2 +1,661 @@
 <app-navbar></app-navbar>
-<p>storia-eregole-page works!</p>
+<section>
+  <div class="mb-10">
+    <div class="w-full h-20 bg-primary flex justify-center items-center">
+      <h2 class="text-white text-4xl font-bold">REGOLE & GLOSSARIO</h2>
+    </div>
+    <div class="w-full h-6 bg-secondary"></div>
+  </div>
+  <div class="flex justify-center h-full">
+    <div class="container h-full flex justify-center">
+      <div class="w-[85%]">
+        <section class="flex lg:justify-start justify-center">
+          <div class="lg:w-[50%] w-full p-2 mt-10">
+            <ul class="w-full lg:h-16 h-10 flex flex-nowrap">
+              <li
+                [ngClass]="{
+                  'bg-secondary': selectedRegole === true,
+                  'border-secondary lg:border-4 border-2 hover:bg-[#DCF1FF]':
+                    selectedRegole === false
+                }"
+                class="lg:w-full w-[45%] h-full flex justify-center items-center rounded-2xl mr-4"
+              >
+                <button
+                  (click)="functionSelectionRegole(true)"
+
+                  [class.text-white]="selectedRegole === true"
+                  class="w-full text-center text-white lg:text-3xl"
+                >
+                  Regole
+                </button>
+              </li>
+              <li
+                [ngClass]="{
+                  'border-secondary lg:border-4 border-2 hover:bg-[#DCF1FF]':
+                    selectedRegole === true,
+                  'bg-secondary': selectedRegole === false
+                }"
+                class="lg:w-full w-[45%] h-full flex justify-center items-center rounded-2xl"
+              >
+                <button
+                  (click)="functionSelectionRegole(false)"
+                  [class.text-white]="selectedRegole === false"
+                  class="w-full text-center lg:text-3xl"
+                >
+                  Glossario
+                </button>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section *ngIf="selectedRegole === true">
+          <section>
+            <div class="w-full altezza h-32 flex justify-center mb-2 mt-12">
+              <img
+                class="object-cover  w-full lg:h-full h-32 rounded-[25px]"
+                src="../../../assets/immagini sito/IMG_5217.webp"
+                alt=""
+              />
+            </div>
+            <div class="flex lg:justify-between flex-wrap">
+              <div
+                class="block rounded-xl border-[1px] border-blue-600 mt-10 bg-white text-justify lg:w-[45%] w-full h-auto"
+              >
+                <div
+                  class="border-b-2 rounded-t-xl font-bold text-lg px-6 py-3 bg-secondary text-center text-white"
+                >
+                  Regole di Base dell'NBA
+                </div>
+                <div class="p-6">
+                  <h3 class="mb-2 text-xl font-medium leading-tight">
+                    Il basket è uno sport molto diffuso in tutto il mondo, e
+                    forse avete già visto partite della nazionale italiana ai
+                    mondiali o alle olimpiadi.
+                  </h3>
+                  <p class="mb-4 lg:text-base">
+                    A differenza di altri sport americani come il football
+                    americano, il baseball e l'hockey, il basket è molto
+                    popolare in Italia. Potrebbe essere che non abbiate mai
+                    visto una partita di football americano, baseball o hockey
+                    sul ghiaccio.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    Se non siete grandi appassionati di sport, ma volete vivere
+                    l'atmosfera unica delle partite negli Stati Uniti, l'NBA
+                    potrebbe essere la scelta migliore.
+                  </p>
+                  <!-- <div><button (click)="functionIsShorter(isShorter)">mostra tutto</button></div> -->
+                  <ul>
+                    Ecco perché:
+                    <li>
+                      1. Gli stadi di NBA sono spesso situati nelle zone più
+                      turistiche delle città, quindi sono facili da raggiungere.
+                      Questo è simile anche per l'hockey, dato che molte arene
+                      ospitano sia partite di basket che di hockey, talvolta
+                      nello stesso giorno. Al contrario, gli stadi di MLB e NFL
+                      sono spesso fuori città, richiedendo spostamenti più
+                      lunghi sia in auto che con i mezzi pubblici.
+                    </li>
+                    <li>
+                      2. Nonostante ci siano timeout, la partita di basket
+                      scorre veloce, anche se ci sono pause. Questo è diverso
+                      nel baseball e nel football, dove le pause possono essere
+                      più lunghe e noiose.
+                    </li>
+                    <li>
+                      3. Le regole del basket sono più facili da capire rispetto
+                      ad altri sport, e anche se non ne conoscete nessuna,
+                      potete comunque seguire la partita. Al contrario, il
+                      football americano e il baseball possono essere più
+                      complicati da capire, mentre l'hockey è una via di mezzo.
+                    </li>
+                  </ul>
+                  <p class="mt-4 lg:text-base">
+                    In breve, se volete avvicinarvi al clima delle partite negli
+                    Stati Uniti e preferite uno sport più facile da seguire,
+                    l'NBA potrebbe essere la scelta giusta per voi.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="block rounded-xl border-[1px] border-blue-600 mt-10 bg-white text-justify lg:w-[45%] w-full h-auto"
+              >
+                <div
+                  class="border-b-2 rounded-t-xl font-bold text-lg px-6 py-3 bg-secondary text-center text-white"
+                >
+                  Durata partita
+                </div>
+                <div class="p-6">
+                  <h3 class="mb-2 text-xl font-medium leading-tight">
+                    La prima cosa importante è capire come funziona il
+                    cronometro durante una partita e quanto durano i vari
+                    periodi di gioco.
+                  </h3>
+                  <ul>
+                    Ecco perché:
+                    <li>
+                      1. Ci sono 4 periodi di gioco, chiamati anche quarti, e
+                      ognuno dura 12 minuti.
+                    </li>
+                    <li>
+                      2. Dopo il secondo quarto c'è una pausa lunga, chiamata
+                      anche primo tempo, che dura 15 minuti.
+                    </li>
+                    <li>
+                      3. Quando una squadra ha la palla, ha un massimo di 24
+                      secondi per compiere un possesso offensivo (questo si
+                      chiama shot clock).
+                    </li>
+                    <li>
+                      4. Le sostituzioni possono essere fatte durante le pause
+                      di gioco, non mentre il gioco è in corso, e non c'è un
+                      limite al numero di sostituzioni.
+                    </li>
+                    <li>
+                      5. Ogni squadra può chiamare 7 timeout, o pause, che
+                      durano 75 secondi ciascuna.
+                    </li>
+                    <li>
+                      6. Il tempo di gioco effettivo si ferma quando la palla
+                      non è in gioco, quindi la partita, che è di 48 minuti in
+                      totale (la somma dei 4 quarti), può durare più di 2 ore a
+                      causa di queste interruzioni.
+                    </li>
+                  </ul>
+                  <p class="mt-4 lg:text-base">
+                    In breve, la partita si divide in quarti di 12 minuti, ci
+                    sono pause lunghe e brevi, e il cronometro si ferma quando
+                    la palla non è in gioco, rendendo la durata totale della
+                    partita più lunga di quanto indicato dai soli 48 minuti di
+                    gioco effettivo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div
+              class="w-full inline-flex justify-center mb-2 mt-12 border-4 border-black"
+            >
+              <img
+                class="object-contain w-full h-full"
+                src="https://www.ncaa.com/_flysystem/public-s3/styles/original/public-s3/images/2019-09-25/NBA-Court-Dimensions-.png?itok=Kw-bQ2Vy"
+                alt=""
+              />
+            </div>
+          </section>
+          <section>
+            <div>
+              <div
+                class="block rounded-xl border-[1px] border-blue-600 mt-10 bg-white text-justify w-full h-full"
+              >
+                <div
+                  class="border-b-2 rounded-t-xl font-bold text-lg px-6 py-3 bg-secondary text-center text-white"
+                >
+                  Sistema punti NBA
+                </div>
+                <div class="p-6">
+                  <h3 class="mb-2 text-xl font-medium leading-tight">
+                    Vince chi fa più punti, ed ecco perché l'NBA è semplice
+                    rispetto ad altre leghe.
+                  </h3>
+                  <p class="mb-4 lg:text-base">
+                    Segnare, o fare canestro, è il modo principale per ottenere
+                    punti e rendere più facile seguire la partita con
+                    entusiasmo.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    Se non siete grandi appassionati di sport, ma volete vivere
+                    l'atmosfera unica delle partite negli Stati Uniti, l'NBA
+                    potrebbe essere la scelta migliore.
+                  </p>
+                  <ul>
+                    Ci sono tre modi di segnare punti:
+                    <li>
+                      1. <span class="font-bold">Tiri liberi:</span> Si fanno
+                      quando il gioco è fermo, dopo un fallo, e valgono 1 punto.
+                      Il giocatore tira da una linea posta a 5,80 metri dal
+                      fondo.
+                    </li>
+                    <li>
+                      2. <span class="font-bold">Canestro da 2 punti:</span> Si
+                      fa in situazioni di gioco normale, e conta ogni canestro
+                      fatto all'interno della linea dei 3 punti, che è a 7,24
+                      metri di distanza (6,72 metri negli angoli). Sia una
+                      schiacciata che un tiro da 6 metri valgono 2 punti.
+                    </li>
+                    <li>
+                      3.
+                      <span class="font-bold">Canestro da 3 punti:</span> Ogni
+                      tiro oltre la linea dei tre punti conta come un canestro
+                      da 3 punti. Attenzione, se anche solo un centimetro della
+                      scarpa del tiratore tocca la linea, il canestro vale solo
+                      2 punti.
+                    </li>
+                  </ul>
+                  <p class="mt-4 lg:text-base">
+                    Può capitare di segnare 4 punti? Sì, è possibile quando un
+                    giocatore fa una tripla e subisce un fallo. In questo caso,
+                    oltre ai 3 punti per il canestro, il giocatore ha la
+                    possibilità di fare un tiro supplementare dalla lunetta. Se
+                    lo fa, completa un gioco da 4 punti.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="block rounded-xl border-[1px] border-blue-600 mt-10 bg-white text-justify w-full h-full"
+            >
+              <div
+                class="border-b-2 rounded-t-xl font-bold text-lg px-6 py-3 bg-secondary text-center text-white"
+              >
+                Infrazioni
+              </div>
+              <div class="p-6">
+                <h3 class="mb-2 text-xl font-medium leading-tight">
+                  Ogni giocatore ha un massimo di 6 falli a partita da poter
+                  fare, sia che abbia la palla o che sia in atto il gioco della
+                  squadra avversaria. Alla sesta infrazione il giocatore deve
+                  abbandonare il campo.
+                </h3>
+                <p class="mb-4 lg:text-base">
+                  Le sostituzioni non hanno limite quindi spesso c’è un gioco di
+                  strategia nel quale si gestiscono i falli per ogni giocatore.
+                </p>
+                <ul>
+                  Esistono diversi tipi falli;
+                  <span class="font-bold">I FALLI TEMPORALI</span
+                  >:
+                  <li>
+                    1.
+                    <span class="font-bold">Infrazione di falli:</span> quando
+                    viene superato il limite di 4 falli di squadra per periodo
+                    viene fermato il gioco, anche se la gravità del fallo non lo
+                    consentirebbe, per assegnare due tiri liberi. Questa
+                    situazione è definita bonus.
+                  </li>
+                  <li>
+                    2.
+                    <span class="font-bold"
+                      >Infrazione degli otto secondi:</span
+                    >
+                    dopo una rimessa da fondo campo si hanno a disposizione otto
+                    secondi per portare il pallone nella metà campo avversaria.
+                  </li>
+                  <li>
+                    3.
+                    <span class="font-bold">Infrazione dei tre secondi:</span>
+                    un giocatore non può restare con entrambi i piedi nell’area
+                    avversaria per più di tre secondi.
+                  </li>
+                  <li>
+                    4.
+                    <span class="font-bold"
+                      >Infrazione del tempo di gioco:</span
+                    >
+                    il possesso complessivo del pallone prima che lo stesso
+                    tocchi almeno il ferro avversario non può durare più di 24
+                    secondi.
+                  </li>
+                  <li>
+                    5.
+                    <span class="font-bold">Infrazione di rimessa:</span>
+                    per rimettere la palla in campo a seguito all’uscita del
+                    pallone si hanno a disposizione 5 secondi, superati
+                    quest’ultimi la palla passa a gli avversari e viene
+                    considerata persa.
+                  </li>
+                </ul>
+                <ul class="mt-4">
+                  Esistono diversi tipi falli;
+                  <span class="font-bold">I FALLI DI GIOCO</span
+                  >:
+                  <li>
+                    1.
+                    <span class="font-bold">Infrazione di campo:</span>avviene
+                    quando la squadra che ha il possesso della palla, dopo aver
+                    superato la metà campo, torna in dietro nella propria zona
+                    di difesa anche solo fermandosi sulla linee che delimita la
+                    distinzione tra due aree di competenza.
+                  </li>
+                  <li>
+                    2.
+                    <span class="font-bold">Palla Fuori:</span>
+                    se il giocatore sta dribblando o ha il controllo del pallone
+                    e tocca con il piede le linee che delimitano il campo, la
+                    palla viene considerata fuori gioco. La squadra avversaria
+                    riprende con una rimessa.
+                  </li>
+                  <li>
+                    3.
+                    <span class="font-bold">Infrazione di passi:</span>
+                    senza palleggiare si possono compiere al massimo due passi.
+                    Al terzo scatta l’infrazione. Tranne per la regola del terzo
+                    tempo nel quale un giocatore può commettere irregolarità
+                    come partire da fermo senza palleggiare, oppure nel compiere
+                    diversi passi dopo aver smesso di farlo. Questo solo nel
+                    caso in cui un giocatore riceve il pallone mentre si sta
+                    muovendo o se fa due passi, alternando i piedi, prima di
+                    tirare o passare il pallone, senza commettere un’infrazione.
+                  </li>
+                  <li>
+                    4.
+                    <span class="font-bold"
+                      >Infrazione del tempo di gioco:</span
+                    >
+                    palleggio, mi fermo, blocco il pallone e poi riparto -
+                    questo non è consentito dal regolamento.
+                  </li>
+                  <li>
+                    5.
+                    <span class="font-bold">Infrazione di timeout:</span>
+                    chiamare un timeout quando la squadra non ha più residui
+                  </li>
+                  <li>
+                    6.
+                    <span class="font-bold">Rimanere appesi al canestro:</span>
+                    il giocatore non può appendersi al canestro, alla rete, ecc.
+                    per evitare infortuni
+                  </li>
+                  <li>
+                    7.
+                    <span class="font-bold"
+                      >Infrazione del box dell'allenatore:</span
+                    >
+                    l'allenatore deve rimanere all'interno delle marcature e non
+                    correre sul campo.
+                  </li>
+                  <li>
+                    8.
+                    <span class="font-bold">Infrazione dei 5 giocatori:</span>
+                    devi avere 5 giocatori se la palla è viva.
+                  </li>
+                  <li>
+                    9.
+                    <span class="font-bold">Infrazione di sfondamento:</span>
+                    questo avviene quando un giocatore attaccante sbatte contro
+                    un difensore che sta fermo nella sua posizione. Di solito,
+                    il difensore deve essere in una buona posizione e
+                    l'attaccante deve abbassarsi e colpire il difensore con la
+                    spalla.
+                  </li>
+                  <li>
+                    10.
+                    <span class="font-bold">Espulsione:</span>
+                    quando un giocatore commette 6 falli, non può più giocare
+                    nella partita. Tuttavia non è previsto un limite di
+                    sostituzioni, per questo c’è anche una componente strategica
+                    che prevede la gestione dei giocatori in campo. Viene
+                    espulso anche se commette un "Flagrant Foul" di tipo 2, che
+                    è un contatto inutile ed eccessivo, oppure due “Flagrant
+                    Foul” di tipo 1, che è un fall tecnico e che comprende anche
+                    i falli per motivi disciplinari o di comportamento.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="flex lg:justify-between flex-wrap">
+              <div
+                class="block rounded-xl border-[1px] border-blue-600 mt-10 bg-white text-justify lg:w-[45%] w-full h-auto"
+              >
+                <div
+                  class="border-b-2 rounded-t-xl font-bold text-lg px-6 py-3 bg-secondary text-center text-white"
+                >
+                  La classifica
+                </div>
+                <div class="p-6">
+                  <h3 class="mb-2 text-xl font-medium leading-tight">
+                    È importante sapere che in tutte le leghe americane ci sono
+                    divisioni chiamate Conference.
+                  </h3>
+                  <p class="mb-4 lg:text-base">
+                    Nella NBA, ad esempio, ci sono le Conference East e West.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    Allo stesso modo, in NFL ci sono l'AFC (American Football
+                    Conference) e la NFC (National Football Conference), mentre
+                    in MLB ci sono l'AL (American League) e l'NL (National
+                    League).
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    Ogni Conference si suddivide ulteriormente in Division.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    Nella NBA, ci sono 3 division, ognuna con 5 squadre. In
+                    totale, ci sono 15 squadre ad Est e 15 squadre ad Ovest, per
+                    un totale di 30 squadre.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    La classifica viene determinata dalla percentuale di
+                    vittorie di ogni squadra. Quindi, accanto al nome di ogni
+                    squadra, troverete sempre due numeri che indicano le partite
+                    vinte e perse durante la stagione, accompagnati dalla
+                    percentualedi vittorie raggiunte, in caso di parità tra due
+                    o più squadre influiscono gli scontri diretti tra quelle
+                    squadre.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="block rounded-xl border-[1px] border-blue-600 mt-10 bg-white text-justify lg:w-[45%] w-full h-auto"
+              >
+                <div
+                  class="border-b-2 rounded-t-xl font-bold text-lg px-6 py-3 bg-secondary text-center text-white"
+                >
+                  La stagione
+                </div>
+                <div class="p-6">
+                  <h3 class="mb-2 text-xl font-medium leading-tight">
+                    Ogni squadra gioca 82 partite durante la Regular Season.
+                  </h3>
+                  <p class="mb-4 lg:text-base">
+                    Le prime 6 squadre di ogni Conference vanno direttamente ai
+                    Playoff.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    Le squadre dalla 7ª alla 10ª posizione per ogni conference
+                    partecipano a un torneo chiamato Play-in Tournament per
+                    decidere le ultime due squadre che entreranno nei Playoff.
+                  </p>
+                  <ul>
+                    In ogni Conference, si svolgono tre partite durante il
+                    Play-in Tournament:
+                    <li>
+                      1. <span class="font-bold">Primo Round:</span> La settima
+                      e l'ottava squadra si sfidano, e chi vince ottiene il
+                      settimo posto nei Playoff.
+                    </li>
+                    <li>
+                      2. <span class="font-bold">Secondo Round:</span> La nona e
+                      la decima squadra si sfidano, e chi perde viene eliminato.
+                      Chi vince ha ancora una possibilità di andare ai Playoff.
+                    </li>
+                    <li>
+                      3.<span class="font-bold">Terzo Round:</span>La squadra
+                      che perde nella sfida 1 e quella che vince nella sfida 2
+                      giocano per ottenere l'ultimo ottavo posto nei Playoff.
+                    </li>
+                  </ul>
+                  <p class="mt-4 lg:text-base">
+                    In breve, queste sono alcune delle situazioni che possono
+                    accadere durante una partita di basket quando si parla di
+                    infrazioni e falli.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="w-full h-72 inline-flex justify-center mb-2 mt-12">
+              <img
+                class="object-cover w-full h-full rounded-[25px]"
+                src="https://images.foxtv.com/static.fox10phoenix.com/www.fox10phoenix.com/content/uploads/2020/08/1280/720/GettyImages-1228217607.jpg?ve=1&tl=1"
+                alt=""
+              />
+            </div>
+          </section>
+          <section>
+            <div
+              class="block rounded-xl border-[1px] border-blue-600 mt-10 bg-white text-justify w-full h-full"
+            >
+              <div
+                class="border-b-2 rounded-t-xl font-bold text-lg px-6 py-3 bg-secondary text-center text-white"
+              >
+                I Play Off
+              </div>
+              <div class="flex lg:flex-nowrap flex-wrap justify-between items-center">
+                <div class="p-6 lg:w-[45%] w-full">
+                  <p class="mb-4 lg:text-base">
+                    Le 8 squadre che si sfideranno per il titolo giocheranno nei
+                    playoff, seguendo un tabellone tradizionale in cui la prima
+                    della regular season affronta l'ultima e così via.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    Ogni serie di partite si svolge al meglio delle 7 partite,
+                    quindi per passare ai turni successivi dei playoff, una
+                    squadra deve vincere 4 partite.
+                  </p>
+                </div>
+                <div class="lg:w-[50%] w-full">
+                  <img
+                    class="object-cover w-full h-full rounded-xl"
+                    src="https://i.eurosport.com/2021/05/15/3132859.jpg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="block rounded-xl border-[1px] border-blue-600 mt-10 bg-white text-justify w-full h-full"
+            >
+              <div
+                class="border-b-2 rounded-t-xl font-bold text-lg px-6 py-3 bg-secondary text-center text-white"
+              >
+                Cosa Vincono i Compioni
+              </div>
+              <div class="flex lg:flex-row-reverse lg:flex-nowrap flex-wrap items-center">
+                <div class="p-6 lg:w-[50%] w-full justify-start">
+                  <p class="mb-4 lg:text-base">
+                    <span class="font-bold"
+                      >Cosa vincono i campioni delle Finals?</span
+                    >
+                    I vincitori delle Finals ottengono il trofeo Larry O'Brien,
+                    ma ciò che attira più attenzione è l'anello consegnato ai
+                    giocatori nella stagione successiva.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    <span class="font-bold"
+                      >Quanto vale l'anello di campioni NBA?</span
+                    >
+                    Non esiste un prezzo fisso poiché ogni squadra decide come
+                    realizzarlo. Tuttavia, la quantità di diamanti su ogni
+                    "championship ring" fa aumentare il suo valore con ogni
+                    titolo vinto.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    Per esempio, i Lakers hanno incaricato Jason of Beverly
+                    Hills, un negozio di gioielli di lusso, di creare l'anello
+                    per il titolo del 2020.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    Questo negozio ha già realizzato anelli per i Golden State
+                    Warriors, i Lakers nel 2009 e 2010, i Dodgers (MLB) nel 2018
+                    e ha celebrato i successi di Chelsea e Atletico Madrid.
+                  </p>
+                  <p class="mb-4 lg:text-base">
+                    L'anello dei Lakers del 2019 ha 804 pietre, tra cui 15,5
+                    carati di diamanti bianchi e gialli, oltre a 0,95 carati di
+                    pietre di ametista viola Lakers. È il più pesante mai
+                    registrato per un anello di NBA. Le 17 pietre di ametista
+                    viola rappresentano i 17 titoli vinti dai Lakers, e il
+                    numero del giocatore inciso sull'anello ha uno sfondo a
+                    forma di serpente, in omaggio a Kobe Bryant.
+                  </p>
+                  <p class="mb-10 lg:text-base">
+                    <span class="font-bold text-xl">Curiosità:</span> L'ideatore
+                    degli anelli, Jason Arasheben, ha dichiarato che gli anelli
+                    dei Lakers sono i più costosi della storia della NBA,
+                    superando il valore di quelli dei Raptors nel 2019, che
+                    detenevano il record con oltre 100.000 dollari, anche se è
+                    difficile quantificare un valore preciso.
+                  </p>
+                </div>
+                <div class="lg:w-[50%] w-full">
+                  <figure>
+                    <figcaption class="font-bold text-center text-2xl ml-2">
+                      Anello dei Lakers 2020
+                    </figcaption>
+                    <img
+                      class="object-cover w-full h-full rounded-xl justify-center"
+                      src="https://www.corriere.it/methode_image/2021/01/22/Sport/Foto%20Sport%20-%20Trattate/anello1-kYB-U32408487884ptD-656x492@Corriere-Web-Sezioni.JPG"
+                      alt=""
+                    />
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section *ngIf="selectedRegole === false">
+          <section>
+            <div class="w-full">
+              <h3 class="m-4 lg:text-base text-justify">
+              Il glossario utilizzato nella NBA è molto ricco e in questa pagina
+              troverai una lista completa dei nomi tecnici che ti serviranno per
+              analizzare e capire al meglio le statistiche e risultati delle
+              partite
+            </h3>
+            </div>
+            <div class="w-full altezza2 h:32 inline-flex justify-center mb-12 mt-12">
+              <img
+                class="object-cover w-full rounded-[25px]"
+                src="../../../assets/immagini sito/GLOSSARIO2.png"
+                alt=""
+              />
+            </div>
+          </section>
+          <section>
+            <div class="w-full flex flex-nowrap">
+              <div class="lg:w-[20%] w-full lg:block flex flex-wrap h-full rounded-xl pt-2 pb-2 lg:bg-tertiary">
+                <p class="text-xl font-bold text-center">SALTA A:</p>
+                <div
+                  (click)="scrollToSection(i)"
+                  [class.selected]="selectedSection === i"
+                  class="hover:cursor-pointer flex justify-center bg-secondary rounded-xl m-4 text-center w-full lg:w-auto"
+                  *ngFor="let item of jsonInfo; let i = index"
+                >
+                  <button class="m-4 lg:text-base text-xs text-white">
+                    {{ jsonInfo[i].titolo }}
+                  </button>
+                </div>
+              </div>
+              <div class="w-[80%] h-full pl-3">
+                <div
+                  [class.selected]="selectedSection === i"
+                  class="bg-[#ACDEFF]"
+                  *ngFor="let item of jsonInfo; let i = index"
+                >
+                  <p
+                    class="m-2 font-bold text-xl"
+                    [id]="'' + jsonInfo[i].id"
+                  >
+                    {{ jsonInfo[i].titolo }}
+                  </p>
+                  <div class="bg-[#DCF1FF] p-4">
+                    <p class="text-lg mt-2">
+                      <span>&bull;</span>{{ jsonInfo[i].sottotitolo }}
+                    </p>
+                    <p class="text-lg mt-2">{{ jsonInfo[i].descrizione }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="mt-20">
+  <app-footer></app-footer>
+</footer>

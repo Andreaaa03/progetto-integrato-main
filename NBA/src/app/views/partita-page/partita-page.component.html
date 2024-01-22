@@ -1,0 +1,203 @@
+<app-navbar></app-navbar>
+<section class="mb-10">
+    <div class="mb-10">
+        <div class="w-full h-20 bg-primary flex justify-center items-center">
+            <h2 class=" text-white text-4xl font-bold">
+                TABELLINO
+            </h2>
+        </div>
+        <div class="w-full h-6 bg-secondary"></div>
+    </div>
+    <div class="flex justify-center">
+        <div class="container w-full flex flex-wrap justify-center">
+            <div class="lg:w-[75%] w-full rounded-3xl h-[40vh] flex justify-center bg-[#DCF1FF]">
+                <div class="w-1/3 flex flex-wrap justify-center items-center">
+                    <div class="h-1/4 w-full flex justify-center"></div>
+                    <div class="h-1/4 w-full flex justify-center"><img src={{matchStats.calendarioDateResponse.logoAway}} alt="img"></div>
+                    <div class="h-1/4 w-full flex justify-center">
+                        <p class="w-full font-bold text-center text-2xl">{{matchStats.calendarioDateResponse.teamAwayName}}</p>
+                    </div>
+                    <div class="h-1/4 w-full flex justify-center">
+                        <p class="font-bold text-xl">(1-20)</p>
+                    </div>
+                </div>
+                <div class="w-1/3 flex flex-wrap justify-center items-center">
+                    <div class="h-1/4 w-full flex justify-center">
+                        <p class="font-bold text-xl">{{matchStats.calendarioDateResponse.gameStartDate}}</p>
+                    </div>
+                    <div class="h-1/4 w-full flex justify-center">
+                        <p class="font-bold text-4xl">{{matchStats.calendarioDateResponse.scoreTeamAway}}-{{matchStats.calendarioDateResponse.scoreTeamHome}}</p>
+                    </div>
+                    <div class="h-1/4 w-full flex justify-center"></div>
+                    <div class="h-1/4 w-full flex justify-center">barra</div>
+                </div>
+                <div class="w-1/3 flex flex-wrap justify-center items-center">
+                    <div class="h-1/4 w-full flex justify-center"></div>
+                    <div class="h-1/4 w-full flex justify-center"><img src={{matchStats.calendarioDateResponse.logoHome}} alt="img"></div>
+                    <div class="h-1/4 w-full flex justify-center">
+                        <p class="w-full text-center font-bold text-2xl">{{matchStats.calendarioDateResponse.teamHomeName}}</p>
+                    </div>
+                    <div class="h-1/4 w-full flex justify-center">
+                        <p class="font-bold text-xl">(17-3)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-[75%] w-full flex flex-nowrap justify-between mt-5" *ngFor="let i of [0,1,2,3]">
+                <div class="lg:w-[7%] w-[15%] bg-[#DCF1FF] h-12 rounded-3xl flex justify-center items-center">
+                    <p class="text-xl">
+                        {{i+1}}°
+                    </p>
+                </div>
+                <div class="lg:w-[42%] w-[35%]  bg-[#DCF1FF] h-12 rounded-3xl flex justify-center items-center">
+                    <p class="text-xl">{{matchStats.awayTeam.quartiArray[i]}}</p>
+                </div>
+                <div class="lg:w-[42%] w-[35%]  bg-[#DCF1FF] h-12 rounded-3xl flex justify-center items-center">
+                    <p class="text-xl">{{matchStats.homeTeam.quartiArray[i]}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="h-4 bg-secondary w-full my-10"></div>
+    <div class="flex justify-center">
+        <div class="container w-full flex flex-wrap justify-center">
+            <div class="w-full md:w-auto flex flex-wrap md:flex-nowrap justify-center">
+                <div class="w-full flex flex-wrap justify-center mb-5 md:m-0">
+                    <button class="h-14 w-[90%] md:w-40 px-4 mx-2 rounded-full bg-[#DCF1FF]" [class.bg-secondary]="tabsSelected=='teamHome'" [class.text-white]="tabsSelected=='teamHome'" (click)="tabsSelected='teamHome'">
+                        {{matchStats.calendarioDateResponse.teamAwayName}}
+                    </button>
+                    <div class="md:w-[60%] w-[80%] h-1 bg-secondary mt-1" *ngIf="tabsSelected==='teamHome'"></div>
+                </div>
+                <div class="w-full flex flex-wrap justify-center mb-5 lg:m-0">
+                    <button class="h-14 w-[90%] md:w-40 px-4 mx-2 rounded-full bg-[#DCF1FF]" [class.bg-secondary]="tabsSelected=='statics'" [class.text-white]="tabsSelected=='statics'" (click)="tabsSelected='statics'">
+                        CONFRONTO
+                    </button>
+                    <div class="md:w-[60%] w-[80%] h-1 bg-secondary mt-1" *ngIf="tabsSelected==='statics'"></div>
+                </div>
+                <div class="w-full flex flex-wrap justify-center mb-5 lg:m-0">
+                    <button class="h-14 w-[90%] md:w-40 px-4 mx-2 rounded-full bg-[#DCF1FF]" [class.bg-secondary]="tabsSelected=='teamAway'" [class.text-white]="tabsSelected=='teamAway'" (click)="tabsSelected='teamAway'">
+                        {{matchStats.calendarioDateResponse.teamHomeName}}
+                    </button>
+                    <div class="md:w-[60%] w-[80%] h-1 bg-secondary mt-1" *ngIf="tabsSelected==='teamAway'"></div>
+                </div>
+            </div>
+            <div class="lg:w-[75%] w-full h-full mt-5">
+                <table class="w-full" *ngIf="tabsSelected==='teamHome' || tabsSelected==='teamAway'">
+                    <thead>
+                        <tr class="h-10 border-b-4 border-white">
+                            <th class="w-[40%] bg-primary text-white border-r-4 border-white">
+                                <p>GIOCATORE</p>
+                            </th>
+                            <th class="w-[15%] bg-secondary text-white border-r-4 border-white">
+                                <p>MIN</p>
+                            </th>
+                            <th class="w-[15%] bg-secondary text-white border-r-4 border-white">
+                                <p>PTS</p>
+                            </th>
+                            <th class="w-[15%] bg-secondary text-white border-r-4 border-white">
+                                <p>REB</p>
+                            </th>
+                            <th class="w-[15%] bg-secondary text-white">
+                                <p>AST</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="tabsSelected==='teamHome'">
+                        <tr class="h-10 p-0" *ngFor="let player of matchStats.awayTeam.playersStatistics">
+                            <td class="w-[40%] p-0 border-b-4 border-r-4 border-white">
+                                <div class="flex flex-nowrap justify-center w-full">
+                                    <div class="w-1/4 flex justify-center items-center bg-[#ACDEFF] border-r-4 border-white h-10">
+                                        <p></p>
+                                    </div>
+                                    <div class="w-3/4 flex justify-center items-center bg-[#ACDEFF] h-10">
+                                        <p>{{player.nome}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="w-[15%] p-0 border-b-4 border-r-4 border-white bg-[#ACDEFF]">
+                                <p class="text-center">{{player.min}}</p>
+                            </td>
+                            <td class="w-[15%] p-0 border-b-4 border-r-4 border-white bg-[#ACDEFF]">
+                                <p class="text-center">{{player.points}}</p>
+                            </td>
+                            <td class="w-[15%] p-0 border-b-4 border-r-4 border-white bg-[#ACDEFF]">
+                                <p class="text-center">{{player.totReb}}</p>
+                            </td>
+                            <td class="w-[15%] p-0 border-b-4 border-white bg-[#ACDEFF]">
+                                <p class="text-center">{{player.assists}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="tabsSelected==='teamAway'">
+                        <tr class="h-10 p-0" *ngFor="let player of matchStats.homeTeam.playersStatistics">
+                            <td class="w-[40%] p-0 border-b-4 border-r-4 border-white">
+                                <div class="flex flex-nowrap justify-center w-full">
+                                    <div class="w-1/4 flex justify-center items-center bg-[#ACDEFF] border-r-4 border-white h-10">
+                                        <p></p>
+                                    </div>
+                                    <div class="w-3/4 flex justify-center items-center bg-[#ACDEFF] h-10">
+                                        <p>{{player.nome}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="w-[15%] p-0 border-b-4 border-r-4 border-white bg-[#ACDEFF]">
+                                <p class="text-center">{{player.min}}</p>
+                            </td>
+                            <td class="w-[15%] p-0 border-b-4 border-r-4 border-white bg-[#ACDEFF]">
+                                <p class="text-center">{{player.points}}</p>
+                            </td>
+                            <td class="w-[15%] p-0 border-b-4 border-r-4 border-white bg-[#ACDEFF]">
+                                <p class="text-center">{{player.totReb}}</p>
+                            </td>
+                            <td class="w-[15%] p-0 border-b-4 border-white bg-[#ACDEFF]">
+                                <p class="text-center">{{player.assists}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="w-full" *ngIf="tabsSelected==='statics'">
+                    <thead>
+                        <tr class="h-10 border-b-4 border-white">
+                            <th class="w-[20%] bg-secondary text-white border-r-4 border-white">
+                                <p>DCV</p>
+                            </th>
+                            <th class="w-[60%] bg-secondary text-white border-r-4 border-white">
+                                <p>STATISTICHE</p>
+                            </th>
+                            <th class="w-[20%] bg-secondary text-white">
+                                <p>DCV</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="h-20 p-0" *ngFor="let _ of staticsToShow, let i=index">
+                            <td colspan="3" class="w-full p-0 border-b-4 border-white bg-[#ACDEFF]">
+                                <div class="flex flex-col flex-wrap justify-around items-center">
+                                    <p class="w-full text-center font-bold h-auto text-xl pb-2">{{matchStats.awayTeam.datiArray[i][0]}}</p>
+                                    <div class="w-[90%] flex justify-center items-center flex-nowrap">
+                                        <div class="w-[50%] flex justify-end border-r-2 border-black  bg-[#DCF1FF] rounded-l-full">
+                                            <div *ngIf="matchStats.awayTeam.datiArray[i][1]!==0" [style.width.%]="functionCalculatePercentage(matchStats.awayTeam.datiArray[i][1], matchStats.homeTeam.datiArray[i][1], true)" class="bg-red-500 rounded-l-full">
+                                                <p class="w-full text-center font-bold text-xl text-white">{{ matchStats.awayTeam.datiArray[i][1]}}</p>
+                                            </div>
+                                            <div *ngIf="matchStats.awayTeam.datiArray[i][1]===0"class="w-1/4 rounded-l-full">
+                                                <p class="w-full text-center font-bold text-xl text-black">{{ matchStats.awayTeam.datiArray[i][1]}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="w-[50%] flex justify-start border-l-2 border-black  bg-[#DCF1FF] rounded-r-full">
+                                            <div *ngIf="matchStats.homeTeam.datiArray[i][1]!==0" [style.width.%]="functionCalculatePercentage(matchStats.awayTeam.datiArray[i][1], matchStats.homeTeam.datiArray[i][1], false)" class="bg-blue-500 rounded-r-full">
+                                                <p class="w-full text-center font-bold text-xl text-white">{{ matchStats.homeTeam.datiArray[i][1]}}</p>
+                                            </div>
+                                            <div *ngIf="matchStats.homeTeam.datiArray[i][1]===0" class="w-1/4 rounded-r-full">
+                                                <p class="w-full text-center font-bold text-xl text-black">{{ matchStats.homeTeam.datiArray[i][1]}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

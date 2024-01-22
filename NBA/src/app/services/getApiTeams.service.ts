@@ -18,25 +18,31 @@ export class GetApiServiceTeams {
         Pacific: [],
     };
     getSearchTeams() {
+        this.teams.NorthWest=[];
+        this.teams.SouthWest=[];
+        this.teams.SoutHeast=[];
+        this.teams.Atlantic=[];
+        this.teams.Central=[];
+        this.teams.Pacific=[];
         return this.apiService.SearchTeams().pipe(
             map((res: any) => {
                 res.forEach((singleTeam: any) => {
-                    if (singleTeam.leagues.standard.division === "Northwest") {
+                    if (singleTeam.divisionName === "Northwest") {
                         this.teams.NorthWest.push(singleTeam);
                     }
-                    if (singleTeam.leagues.standard.division === "Southwest") {
+                    if (singleTeam.divisionName === "Southwest") {
                         this.teams.SouthWest.push(singleTeam);
                     }
-                    if (singleTeam.leagues.standard.division === "Southeast") {
+                    if (singleTeam.divisionName === "Southeast") {
                         this.teams.SoutHeast.push(singleTeam);
                     }
-                    if (singleTeam.leagues.standard.division === "Atlantic") {
+                    if (singleTeam.divisionName === "Atlantic") {
                         this.teams.Atlantic.push(singleTeam);
                     }
-                    if (singleTeam.leagues.standard.division === "Central") {
+                    if (singleTeam.divisionName === "Central") {
                         this.teams.Central.push(singleTeam);
                     }
-                    if (singleTeam.leagues.standard.division === "Pacific") {
+                    if (singleTeam.divisionName === "Pacific") {
                         this.teams.Pacific.push(singleTeam);
                     }
                 });

@@ -1,24 +1,171 @@
-<nav>
-    <div class="bg-black w-full h-24 flex flex-nowrap">
-        <div class="bg-red-400 w-[10%] flex justify-center">
-            <img [routerLink]="['/home']" class="object-cover h-full w-auto" src="assets/logo-slam-stats.png" alt="">
+<div *ngIf="token==null && modal===true" class="fixed lg:top-1/2 top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center bg-[#acdeff81]">
+    <div class="w-[80%] lg:h-[80%] h-[85%] bg-gray-100 border-4 border-primary z-40">
+        <div class="flex flex-wrap items-center justify-center h-full z-40 mb-4">
+            <div class="w-full flex flex-wrap justify-center" *ngIf="registrati === false">
+                <form class="lg:w-[80%] w-[90%] flex flex-wrap" (submit)="login()">
+                    <div class="w-full flex justify-center">
+                        <div class="w-[80%] flex justify-center">
+                            <div class="w-full flex justify-between items-center">
+                                <div class="w-[15%] flex justify-center"></div>
+                                <p class="w-[70%] flex justify-center text-2xl font-bold">ACCEDI AL TUO ACCOUNT</p>
+                                <div class="w-[15%] flex justify-center " (click)="modal=!modal">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAsUlEQVR4nO2VQQrCMBBFH2Q8nne0FLNpDlYV3HcVEaYg0pqPraFCP8wqf/I6zSQDu/5VR+AONIAJfgNa4OK5MmQAskdXgJl7Rv+gwm4vSSWYvUHGuCqgZiJxCmYzkGecFFAAzjMbJODgnljwSPr0tV1hTWkeubK8tJJvYWkJRIWlNSAUDj6vWU2scT7x181gNdo7CJcxCJe6yhPU1npU+02NCdzY+y9QB1/j40GG7NqWHrZCsVI4Fm8DAAAAAElFTkSuQmCC">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full flex justify-center flex-wrap mt-4">
+                        <div class="w-[70%] mb-4">
+                            <input type="text" id="username" name="username" maxlength="40" [(ngModel)]="email" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="USERNAME: ">
+                        </div>
+                        <div class="w-[70%] mb-4">
+                            <input type="password" id="password" name="password" [(ngModel)]="password" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="PASSWORD: ">
+                        </div>
+                    </div>
+                    <div class="w-full flex justify-center">
+                        <button type="submit" (submit)="login()" class="w-auto py-2 px-4 bg-primary text-white rounded-2xl hover:bg-blue-600">ACCEDI</button>
+                    </div>
+                </form>
+                <div class="w-full flex justify-center my-1">
+                    <button class="lg:w-[30%] w-auto p-2 bg-white my-4 text-secondary font-bold rounded-2xl border-secondary border-4 hover:bg-tertiary">PASSWORD
+                        DIMENTICATA?</button>
+                </div>
+                <div class="w-[60%] flex justify-evenly items-center mt-10">
+                    <p class="w-auto lg:text-base text-xs lg:text-center font-bold mr-2">Non sei ancora registrato?</p>
+                    <button (click)="registratiView()" class="lg:w-[30%] w-auto p-2 bg-primary text-white rounded-2xl hover:bg-blue-600">REGISTRATI</button>
+                </div>
+            </div>
+            <div class="w-full flex flex-wrap justify-center" *ngIf="registrati === true">
+                <form class="lg:w-[80%] w-[90%] flex flex-wrap">
+                    <div class="w-full flex justify-center">
+                        <div class="lg:w-[70%] w-[80%] flex justify-between items-center">
+                            <div class="w-[15%] flex" (click)="registratiView()">
+                                <div class="w-auto lg:flex hidden justify-center items-center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAs0lEQVR4nNXWPQoCMRCG4fcEWsgq+AOKlXowj6mlhZ2uhWujNuolVhYiLJIUwpcPHJj6IZNkZuBPYgKcgC3QzYlcgDrkDuiokTFQtZBPrpXIKIGUQE+FDMKd1F95BoZKpIwgVThlVuQKTFVIP4HcgJkSOUaQOzBXIocI8gAWKqRIIE9gqUKa2EeQF7BSIlaocJXO9hisz9v6Ya0tyNpUrWPCOviso9y6nNDCmpJtcq5bP8UbhdWADWvaLVIAAAAASUVORK5CYII="> indietro </div>
+                                <div class="w-auto lg:hidden flex justify-center items-center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAs0lEQVR4nNXWPQoCMRCG4fcEWsgq+AOKlXowj6mlhZ2uhWujNuolVhYiLJIUwpcPHJj6IZNkZuBPYgKcgC3QzYlcgDrkDuiokTFQtZBPrpXIKIGUQE+FDMKd1F95BoZKpIwgVThlVuQKTFVIP4HcgJkSOUaQOzBXIocI8gAWKqRIIE9gqUKa2EeQF7BSIlaocJXO9hisz9v6Ya0tyNpUrWPCOviso9y6nNDCmpJtcq5bP8UbhdWADWvaLVIAAAAASUVORK5CYII="> </div>
+                            </div>
+                            <p class="w-[70%] flex justify-center text-2xl font-bold">REGISTRATI</p>
+                            <div class="w-[15%] flex justify-end" (click)="modal=!modal">
+                                <img class="w-auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAsUlEQVR4nO2VQQrCMBBFH2Q8nne0FLNpDlYV3HcVEaYg0pqPraFCP8wqf/I6zSQDu/5VR+AONIAJfgNa4OK5MmQAskdXgJl7Rv+gwm4vSSWYvUHGuCqgZiJxCmYzkGecFFAAzjMbJODgnljwSPr0tV1hTWkeubK8tJJvYWkJRIWlNSAUDj6vWU2scT7x181gNdo7CJcxCJe6yhPU1npU+02NCdzY+y9QB1/j40GG7NqWHrZCsVI4Fm8DAAAAAElFTkSuQmCC">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full flex justify-center flex-wrap mt-4">
+                        <div class="lg:w-[70%] w-[80%] mb-4">
+                            <input type="text" id="username" name="username" maxlength="40" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Username* ">
+                        </div>
+                        <div class="lg:w-[70%] w-[80%] mb-4">
+                            <input type="text" id="eta" name="eta" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Età ">
+                        </div>
+                        <div class="lg:w-[70%] w-[80%] flex flex-nowrap mb-4 lg:justify-between justify-center">
+                            <div class="w-full lg:flex hidden items-center">
+                                <div class="w-1/4 flex items-center ">
+                                    <p class="px-4 w-full text-base">Sesso:</p>
+                                </div>
+                                <div class="w-1/4 flex items-center flex-nowrap">
+                                    <input type="radio" name="sesso" class="rounded-full w-5 h-5 bg-gray-400">
+                                    <div class="px-4 flex justify-center border-primary border-4 ml-2">M</div>
+                                </div>
+                                <div class="w-1/4 flex items-center flex-nowrap">
+                                    <input type="radio" name="sesso" class="rounded-full w-5 h-5 bg-gray-400">
+                                    <div class="px-4 flex justify-center border-primary border-4 ml-2">F</div>
+                                </div>
+                                <div class="w-1/4 flex items-center flex-nowrap">
+                                    <input type="radio" name="sesso" class="rounded-full w-5 h-5 bg-gray-400">
+                                    <div class="px-4 flex justify-center border-primary border-4 ml-2">Altro</div>
+                                </div>
+                            </div>
+                            <div class="w-auto lg:hidden flex items-center ml-4">
+                                <div class="flex items-center w-full border-primary border-4">
+                                    <select id="select" class="border p-2" [(ngModel)]="selectedOption">
+                                        <option value="maschio">M</option>
+                                        <option value="femmina">F</option>
+                                        <option value="altro">Altro</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-[70%] w-[80%] mb-4">
+                            <input type="email" id="email" name="email" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Eamil* ">
+                        </div>
+                        <div class="lg:w-[70%] w-[80%] mb-4">
+                            <input type="password" id="password" name="password" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Cellulare* ">
+                        </div>
+                        <div class="lg:w-[70%] w-[80%] mb-4">
+                            <div class="w-full flex lg:flex-nowrap flex-wrap">
+                                <input type="password" id="password" name="password" class="mt-1 px-4 py-1 lg:w-1/2 w-full lg:mr-2 border-primary border-4 rounded-full" placeholder="Password* ">
+                                <input type="password" id="password" name="password" class="mt-1 px-4 py-1 lg:w-1/2 w-full border-primary border-4 rounded-full" placeholder="Ripeti Password* ">
+                            </div>
+                        </div>
+                        <div class="w-full flex justify-center">
+                            <button type="submit" class="w-auto py-2 px-4 bg-primary text-white rounded-2xl hover:bg-blue-600">REGISTRATI</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- <div class="w-[60%] flex justify-evenly items-center mt-4">
+                    <p class="text-base text-center font-bold mr-2">Hai già un account?</p>
+                    <button (click)="registratiView()" class="lg:w-[30%] w-auto p-2 bg-primary text-white rounded-2xl hover:bg-blue-600">ACCEDI</button>
+                </div> -->
+            </div>
+
+            <div class="text-center mt-4">
+                <p class="text-sm text-gray-600">{{ errorMessage }}</p>
+            </div>
         </div>
-        <div class="w-full flex flex-nowrap">
-            <div class="w-[60%] ">
-                <ul class="flex justify-around items-end h-full pb-5 text-white">
-                    <li [routerLink]="['/home']">NBA</li>
-                    <li [routerLink]="['/classifica']">CLASSIFICA</li>
-                    <li [routerLink]="['/calendario']">CALENDARIO</li>
-                    <li [routerLink]="['/squadre']">SQUADRE</li>
-                    <li [routerLink]="['/storia&regole']">STORIA & REGOLE</li>
-                    <li [routerLink]="['/blog']">BLOG</li>
+    </div>
+</div>
+<nav class="h-16 z-50">
+    <div class="bg-secondary w-full flex flex-nowrap fixed top-0 h-16 z-50">
+        <div class="md:flex-row flex flex-row-reverse w-full md:justify-normal justify-end">
+
+
+            <div class="md:w-[10%] w-1/2 flex md:justify-center justify-start h-full items-center md:mr-20 pl-6 ">
+                <img routerLink="/home" class="object-contain h-[80%]" src="assets/logo-slam-stats.png" alt="">
+            </div>
+            <!-- Nel tuo file di componente .html -->
+            <div class="md:w-[70%] w-1/2">
+                <!-- Desktop Menu -->
+                <ul class="hidden md:flex justify-around md:items-center h-full text-white">
+                    <li routerLink="/home"><button>NBA</button></li>
+                    <li routerLink="/classifica"><button>CLASSIFICA</button></li>
+                    <li [routerLink]="['/calendario',dateToday]"><button>CALENDARIO</button></li>
+                    <li routerLink="/squadre"><button>SQUADRE</button></li>
+                    <li [routerLink]="['/storia&regole','regole']"><button>REGOLE & GLOSSARIO</button></li>
+                    <li routerLink="/blog"><button>BLOG</button></li>
+                </ul>
+
+                <!-- Burger Menu Icon for Mobile -->
+                <div class="md:hidden flex justify-start items-center cursor-pointer w-full h-16 pl-5" (click)="toggleMenu(isMobileMenuOpen)">
+                    <img src="../../../assets/icon/burger-menu.png" alt="" class="object-contain h-[80%]">
+                </div>
+
+                <!-- Mobile Menu (Initially Hidden) -->
+                <ul class="md:hidden mobile-menu bg-secondary w-full h-auto text-white absolute top-[64px] pl-4 pb-10" [class.hidden]="!isMobileMenuOpen">
+                    <li routerLink="/home"><button>NBA</button></li>
+                    <li routerLink="/classifica"><button>CLASSIFICA</button></li>
+                    <li [routerLink]="['/calendario',dateToday]"><button>CALENDARIO</button></li>
+                    <li routerLink="/squadre"><button>SQUADRE</button></li>
+                    <li [routerLink]="['/storia&regole','regole']"><button>REGOLE & GLOSSARIO</button></li>
+                    <li routerLink="/blog"><button>BLOG</button></li>
                 </ul>
             </div>
-            <div class="w-[40%] bg-red-300 flex justify-end items-end pb-5 h-full">
-                <div class="bg-gray-500 h-5 w-60 mr-5">
+        </div>
 
-                </div>
-                <p class="mr-5">ciaooo</p>
+        <div class="md:w-[40%] w-2/4 flex md:justify-end h-16 items-center flex-nowrap md:mr-10 mr-5">
+            <div class="md:w-2/4 w-1/2 h-16 md:ml-0 ml-10">
+                <form action="" class="flex items-center justify-end ">
+                    <input type="text" placeholder="cerca" class="rounded-full text-center lg:flex items-center mr-2 hidden">
+                    <button class="h-16 lg:w-[10%] w-[50%]">
+                        <img src="./assets/icon/lente-arancione-1.png" alt="" class="object-contain w-auto">
+                    </button>
+                </form>
+            </div>
+            <div class="h-16 lg:w-[10%] w-1/2 flex md:justify-center justify-end">
+                <button *ngIf="token==null" (click)="modal=!modal" class="h-16 lg:w-2/4 w-[50%]">
+                    <img src="./assets/icon/profilo-arancione-3.png" alt="" class="object-contain w-auto">
+                </button>
+                <button *ngIf="token!=null" [routerLink]="['/profilo']" routerLinkActive="router-link-active"  class="h-16 lg:w-2/4 w-[50%]">
+                    <img src="./assets/icon/profilo-arancione-3.png" alt="" class="object-contain w-auto">
+                </button>
             </div>
         </div>
     </div>

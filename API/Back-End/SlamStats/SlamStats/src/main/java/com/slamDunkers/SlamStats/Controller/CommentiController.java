@@ -3,10 +3,7 @@ package com.slamDunkers.SlamStats.Controller;
 import com.slamDunkers.SlamStats.Entity.Commenti;
 import com.slamDunkers.SlamStats.Repository.CommentiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +22,13 @@ public class CommentiController {
 	public List<Commenti> getCommenti() {
 		return repository.findAll();
 	}
+
+	@PostMapping("/add")
+	public String addCommento(@RequestBody Commenti commento) {
+		repository.save(commento);
+		return "Commento aggiunto con successo";
+	}
+
+
+
 }

@@ -40,8 +40,6 @@ public class Utente {
 	private String numeroTelefono;
 	@Column(name = "follower")
 	private int follower;
-	@Column(name = "favorite_team")
-	private int favoriteTeam;
 
 	@Column(name ="username" )
 	private String username;

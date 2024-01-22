@@ -33,4 +33,5 @@ public class League {
 	public String getDivision() {
 		return this.divisionId.getName();
 	}
+	public String getName(){return this.Name;}
 }

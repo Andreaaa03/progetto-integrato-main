@@ -1,7 +1,9 @@
 package com.slamDunkers.SlamStats.Controller;
 
 import com.slamDunkers.SlamStats.Payload.Response.CalendarioDateResponse;
+import com.slamDunkers.SlamStats.Payload.Response.CommentiResponse;
 import com.slamDunkers.SlamStats.Payload.Response.PartitaStatResponse;
+import com.slamDunkers.SlamStats.Service.CommentiService;
 import com.slamDunkers.SlamStats.Service.GamesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +17,12 @@ import java.util.Optional;
 @RequestMapping("/games")
 @CrossOrigin
 public class GamesController {
-	@Autowired
-	private GamesService service;
-	@Autowired
-	public GamesController(GamesService service) {
+	private final GamesService service;
+	private final CommentiService commentiService;
+	public GamesController(GamesService service, CommentiService commentiService) {
 		this.service = service;
-	}
+        this.commentiService = commentiService;
+    }
 
 	@GetMapping("/All")
 	public List<CalendarioDateResponse> getGames() {
@@ -52,4 +54,8 @@ public class GamesController {
 		return service.partitaStatResponse(idPartita);
 	}
 
+	@GetMapping("/commentiPartita")
+	public List<CommentiResponse> getPartitaCommenti(Integer id) {
+		return commentiService.commentiPartita(id);
+	}
 }

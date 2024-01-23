@@ -79,5 +79,14 @@ public class CommentiService {
         return commentiResponse;
     }
 
+    public List<CommentiResponse> commentiPartita(Integer idPartita) {
+        List<Optional<Commenti>> commenti = commentiRepository.findAllByIdGames(gamesRepository.findById(idPartita).get());
+        if(commenti.isEmpty()) return null;
+        List<CommentiResponse> commentiResponse = new ArrayList<>();
+        for(Optional<Commenti> c : commenti){
+            commentiResponse.add(toResponse.toCommentiResponse(c.get()));
+        }
+        return commentiResponse;
+    }
 }
 

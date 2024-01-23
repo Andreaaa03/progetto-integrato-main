@@ -2,6 +2,7 @@ package com.slamDunkers.SlamStats.Repository;
 
 import com.slamDunkers.SlamStats.Entity.Blog;
 import com.slamDunkers.SlamStats.Entity.Commenti;
+import com.slamDunkers.SlamStats.Entity.Games;
 import com.slamDunkers.SlamStats.Entity.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -16,4 +17,6 @@ public interface CommentiRepository extends JpaRepository<Commenti,Integer> {
     List<Optional<Commenti>> findAllByIdUtente(Utente u);
 
     List<Optional<Commenti>> findAllByBlog(Blog blog);
+
+    List<Optional<Commenti>> findAllByIdGames(Games games);
 }

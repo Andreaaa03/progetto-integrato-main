@@ -21,6 +21,7 @@ public class BlogService {
     private final ParagrafoRepository paragrafoRepository;
     private final TagRepository tagRepository;
 
+
     public BlogService(BlogRepository blogRepository, ParagrafoRepository paragrafoRepository, TagRepository tagRepository) {
         this.blogRepository = blogRepository;
         this.paragrafoRepository = paragrafoRepository;

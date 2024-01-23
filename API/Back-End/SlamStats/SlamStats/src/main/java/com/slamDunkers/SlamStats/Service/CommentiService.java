@@ -35,15 +35,12 @@ public class CommentiService {
 
 
     public ResponseEntity<String> commenta(CommentiRequest commento) {
-
             Utente u = utenteService.getUtente(commento.getToken());
             Commenti c = new Commenti();
             c.setTesto(commento.getTesto());
             c.setIdUtente(u);
                 if (commento.getId_commento_padre() != null) {
-
                     commentiRepository.findById(commento.getId_commento_padre().get()).ifPresent(commentoPadre ->{
-//                        Cannot invoke "java.util.Optional.isPresent()" because the return value of "com.slamDunkers.SlamStats.Payload.Request.CommentiRequest.getId_games()" is null
                         c.setIdCommentoPadre(commentoPadre);
                         c.setBlog(commentoPadre.getBlog());
                         c.setIdGames(commentoPadre.getIdGames());
@@ -51,36 +48,34 @@ public class CommentiService {
                     commentiRepository.save(c);
                     return ResponseEntity.ok("Commento aggiunto con successo");
                 }
-
                 if (commento.getId_games() != null) {
                     gamesRepository.findById(commento.getId_games().get()).ifPresent(c::setIdGames);
                 }
-
                 if (commento.getId_blog() != null) {
                     blogRepository.findById(commento.getId_blog().get()).ifPresent(c::setBlog);
                 }
-
                 commentiRepository.save(c);
                 return ResponseEntity.ok("Commento aggiunto con successo");
-
-
     }
-
 
     public List<CommentiResponse> commentiUtente(TokenRequest token) {
         Utente u = utenteService.getUtente(token.getToken());
-
         List<Optional<Commenti>> commenti = commentiRepository.findAllByIdUtente(u);
-
         if(commenti.isEmpty()) return null;
-
         List<CommentiResponse> commentiResponse = new ArrayList<>();
-
         for(Optional<Commenti> c : commenti){
             commentiResponse.add(toResponse.toCommentiResponse(c.get()));
         }
+        return commentiResponse;
+    }
 
-
+    public List<CommentiResponse> commentiBlog(Integer id_blog) {
+        List<Optional<Commenti>> commenti = commentiRepository.findAllByBlog(blogRepository.findById(id_blog).get());
+        if(commenti.isEmpty()) return null;
+        List<CommentiResponse> commentiResponse = new ArrayList<>();
+        for(Optional<Commenti> c : commenti){
+            commentiResponse.add(toResponse.toCommentiResponse(c.get()));
+        }
         return commentiResponse;
     }
 

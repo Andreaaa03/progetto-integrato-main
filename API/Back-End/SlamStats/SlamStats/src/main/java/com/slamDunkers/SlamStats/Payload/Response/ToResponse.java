@@ -527,5 +527,28 @@ public double toDouble(String stringa) {
 }
 
 
-
+/**
+ * This method converts an array of Objects into an AmicoResponse object.
+ *
+ * @param utente An array of Objects where each element represents a property of the AmicoResponse.
+ *               The array is expected to follow this order:
+ *               utente[0] - seguito (Integer): The ID of the user being followed.
+ *               utente[1] - username (String): The username of the user being followed.
+ *               utente[2] - amico (Boolean): A flag indicating if the user is a friend.
+ *               utente[3] - role (String): The role of the user being followed.
+ *               utente[4] - follower (Long): The number of followers of the user.
+ *               utente[5] - following (Long): The number of users that the user is following.
+ *
+ * @return An AmicoResponse object containing the user's details.
+ */
+public AmicoResponse toAmicoresponse(Object[] utente){
+ AmicoResponse amico = new AmicoResponse();
+ amico.setSeguito((Integer)   utente[0]);
+ amico.setUsername((String)   utente[1]);
+ amico.setAmico((Boolean)    utente[2]);
+ amico.setRole((String)  utente[3]);
+ amico.setFollower((Long)    utente[4]);
+ amico.setFollowing((Long)   utente[5]);
+ return amico;
+}
 }

@@ -22,7 +22,6 @@ public class UtenteService {
     private final TokenService tokenService;
     private final Utente_TeamRepository utenteTeamRepository;
     private final TeamsRepository teamsRepository;
-
     private final BlogRepository blogRepository;
     private final BlogService blogService;
     private final ToResponse toResponse;
@@ -443,21 +442,12 @@ public class UtenteService {
             if (!(Boolean) seguito[2]){
                 continue;
             }
-            utenti.add(toAmicoresponse(seguito));
+            utenti.add(toResponse.toAmicoresponse(seguito));
         }
 
         return  utenti;
 
     }
-    public AmicoResponse toAmicoresponse(Object[] utente){
-        AmicoResponse amico = new AmicoResponse();
-        amico.setSeguito((Integer)   utente[0]);
-        amico.setUsername((String)   utente[1]);
-        amico.setAmico((Boolean)    utente[2]);
-        amico.setRole((String)  utente[3]);
-        amico.setFollower((Long)    utente[4]);
-        amico.setFollowing((Long)   utente[5]);
-        return amico;
-    }
+
 
 }

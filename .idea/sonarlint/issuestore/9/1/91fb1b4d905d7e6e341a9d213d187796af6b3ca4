@@ -1,17 +1,21 @@
 
-h	java:S112ã"FDefine and throw a dedicated exception instead of using a generic one.(Ôåÿıÿÿÿÿ8ËÍëÀÓ1
-h	java:S112…"FDefine and throw a dedicated exception instead of using a generic one.(Ôåÿıÿÿÿÿ8ĞÍëÀÓ1
+h	java:S112â"FDefine and throw a dedicated exception instead of using a generic one.(Ôåÿıÿÿÿÿ8ˆ›èÄÓ1
+h	java:S112„"FDefine and throw a dedicated exception instead of using a generic one.(Ôåÿıÿÿÿÿ8ˆ›èÄÓ1
 Q
-java:S3740w"/Provide the parametrized type for this generic.(‚æòßøÿÿÿÿ8ÑÍëÀÓ1
+java:S3740v"/Provide the parametrized type for this generic.(‚æòßøÿÿÿÿ8ˆ›èÄÓ1
 q
-java:S1192¶"SDefine a constant instead of duplicating this literal "Utente non trovato" 3 times.(Íïº8ÑÍëÀÓ1
-s	java:S117­"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š’éúÿÿÿÿ8ÒÍëÀÓ1
-s	java:S117á"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š’éúÿÿÿÿ8ÒÍëÀÓ1
+java:S1192µ"SDefine a constant instead of duplicating this literal "Utente non trovato" 4 times.(Íïº8ˆ›èÄÓ1
+s	java:S117¬"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š’éúÿÿÿÿ8‰›èÄÓ1
+s	java:S117à"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š’éúÿÿÿÿ8‰›èÄÓ1
+F
+java:S5411º"(Use a primitive boolean expression here.(Ó©Ü8‰›èÄÓ1
 e
-java:S3655"BCall "t.isPresent()" or "!t.isEmpty()" before accessing the value.(–Ø¸ûÿÿÿÿ8éÍëÀÓ1
-p	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†‰‘øúÿÿÿÿ8ôÍëÀÓ1
-k	java:S100Ú"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–úÒÔ8öÍëÀÓ1
+java:S3655"BCall "t.isPresent()" or "!t.isEmpty()" before accessing the value.(–Ø¸ûÿÿÿÿ8›èÄÓ1
+p	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†‰‘øúÿÿÿÿ8§›èÄÓ1
+k	java:S100Ù"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–úÒÔ8¬›èÄÓ1
 I
-java:S1168ü"+Return an empty collection instead of null.(¥¹ï8øÍëÀÓ1
+java:S1168û"+Return an empty collection instead of null.(¥¹ï8®›èÄÓ1
 I
-java:S1168š"+Return an empty collection instead of null.(¥¹ï8ùÍëÀÓ1
+java:S1168™"+Return an empty collection instead of null.(¥¹ï8¯›èÄÓ1
+N
+java:S1168µ"+Return an empty collection instead of null.(ùÅñïÿÿÿÿÿ8µ›èÄÓ1

@@ -4,12 +4,15 @@ import com.slamDunkers.SlamStats.Entity.Commenti;
 import com.slamDunkers.SlamStats.Entity.Utente;
 import com.slamDunkers.SlamStats.Payload.Request.CommentiRequest;
 import com.slamDunkers.SlamStats.Payload.Request.TokenRequest;
+import com.slamDunkers.SlamStats.Payload.Response.CommentiResponse;
+import com.slamDunkers.SlamStats.Payload.Response.ToResponse;
 import com.slamDunkers.SlamStats.Repository.BlogRepository;
 import com.slamDunkers.SlamStats.Repository.CommentiRepository;
 import com.slamDunkers.SlamStats.Repository.GamesRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +23,13 @@ public class CommentiService {
     public final UtenteService utenteService;
     public final GamesRepository gamesRepository;
     public final BlogRepository blogRepository;
-    public CommentiService(CommentiRepository commentiRepository, UtenteService utenteService, GamesRepository gamesRepository, BlogRepository blogRepository) {
+    public final ToResponse toResponse;
+    public CommentiService(CommentiRepository commentiRepository, UtenteService utenteService, GamesRepository gamesRepository, BlogRepository blogRepository, ToResponse toResponse) {
         this.commentiRepository = commentiRepository;
         this.utenteService = utenteService;
         this.gamesRepository = gamesRepository;
         this.blogRepository = blogRepository;
+        this.toResponse = toResponse;
     }
 
 
@@ -62,12 +67,21 @@ public class CommentiService {
     }
 
 
-    public List<Optional<Commenti>> commentiUtente(TokenRequest token) {
+    public List<CommentiResponse> commentiUtente(TokenRequest token) {
         Utente u = utenteService.getUtente(token.getToken());
+
         List<Optional<Commenti>> commenti = commentiRepository.findAllByIdUtente(u);
+
         if(commenti.isEmpty()) return null;
 
-        return commenti;
+        List<CommentiResponse> commentiResponse = new ArrayList<>();
+
+        for(Optional<Commenti> c : commenti){
+            commentiResponse.add(toResponse.toCommentiResponse(c.get()));
+        }
+
+
+        return commentiResponse;
     }
 
 }

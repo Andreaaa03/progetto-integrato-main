@@ -237,4 +237,10 @@ public ResponseEntity<String> save(SignupRequest request){
 	}
 
 
+	public TeamArticoliPreferitiResponse teamArticoliPreferiti(TokenRequest request) {
+		TeamArticoliPreferitiResponse tapr = new TeamArticoliPreferitiResponse();
+		tapr.setTeams(getTeamPreferiti(request));
+		tapr.setArticoli(getArticoliPreferiti(request));
+		return tapr;
+	}
 }

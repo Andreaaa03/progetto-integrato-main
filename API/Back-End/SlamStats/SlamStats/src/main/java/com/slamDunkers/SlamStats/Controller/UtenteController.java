@@ -2,6 +2,7 @@ package com.slamDunkers.SlamStats.Controller;
 
 import com.slamDunkers.SlamStats.Payload.Request.*;
 import com.slamDunkers.SlamStats.Payload.Response.BlogCompleto;
+import com.slamDunkers.SlamStats.Payload.Response.TeamArticoliPreferitiResponse;
 import com.slamDunkers.SlamStats.Payload.Response.TeamsResponse;
 import com.slamDunkers.SlamStats.Payload.Response.UtenteResponse;
 import com.slamDunkers.SlamStats.Service.UtenteService;
@@ -60,5 +61,9 @@ public class UtenteController {
 		return userService.profilo(request);
 	}
 
+	@PostMapping("/teamArticoliPreferiti")
+	public TeamArticoliPreferitiResponse teamArticoliPreferiti(@RequestBody @Valid TokenRequest request){
+		return userService.teamArticoliPreferiti(request);
+	}
 
 }

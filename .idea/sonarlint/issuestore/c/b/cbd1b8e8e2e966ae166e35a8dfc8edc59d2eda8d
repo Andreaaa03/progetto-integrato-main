@@ -1,8 +1,11 @@
 
 
-java:S1488¬"^Immediately return this expression instead of assigning it to the temporary variable "numero".(É¤¥ƒùÿÿÿÿ8»ÆÃ—Ó1
-v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(é©ºå8“¢À—Ó1
+java:S1488µ"^Immediately return this expression instead of assigning it to the temporary variable "numero".(É¤¥ƒùÿÿÿÿ8Ğé¤°Ó1
 P
-java:S1135—"2Complete the task associated to this TODO comment.(åğÏœ8Ş¤À—Ó1
+java:S1135 "2Complete the task associated to this TODO comment.(åğÏœ8Œë¤°Ó1
 T
-java:S1068"2Remove this unused "gameRepository" private field.(Æù‚ıÿÿÿÿ8á¤À—Ó1
+java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ8›–¿°Ó1
+\
+java:S1128"?Remove this unused import 'java.time.format.DateTimeFormatter'.(‰÷÷ª8›–¿°Ó1
+T
+java:S1068"2Remove this unused "gameRepository" private field.(Æù‚ıÿÿÿÿ8ë¤°Ó1

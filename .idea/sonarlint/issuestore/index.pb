@@ -81,3 +81,11 @@ kAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Reposi
 gAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Payload/Response/commenti.java,2\0\20545934b178d979b834f709396b135cd296a134
 Ÿ
 oAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Payload/Response/CommentiResponse.java,f\9\f91e69b8ae6ffcde38a9cb68a18f8bbd7cbeb975
+›
+kAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Payload/Response/BlogCompleto.java,a\2\a2d4c6b81c178d58a307527ccc7ac92090648f31
+¢
+rAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Payload/Response/QaurtiScoreResponse.java,2\c\2c91f8e50fc2123fdec8e400209708cdb93fe25d
+š
+jAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Payload/Request/SeguiRequest.java,d\5\d5f24d97bfb1dac556d7f55ee6ed488319513f92
+¬
+|API/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Payload/Response/TeamArticoliPreferitiResponse.java,9\7\976e1ea86fea45b3e79ce87f8b827ffd40320967

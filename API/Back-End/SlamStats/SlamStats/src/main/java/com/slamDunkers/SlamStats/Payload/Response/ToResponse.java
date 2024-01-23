@@ -5,11 +5,11 @@ import com.slamDunkers.SlamStats.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 import static java.lang.Math.round;
 
@@ -397,13 +397,22 @@ public class ToResponse {
 				team.getLeague().getConference(),
 				team.getLeague().getDivision(),
 				team.getCode()
-
 		);
-
-
-
 	}
 
+public CommentiResponse toCommentiResponse(Commenti commenti){
+    CommentiResponse commentiResponse = new CommentiResponse();
+    commentiResponse.setId(commenti.getId());
+    commentiResponse.setUsername(commenti.getIdUtente().getUsername());
+    commentiResponse.setCommento(commenti.getTesto());
+
+    LocalDateTime ldt = commenti.getData();
+    commentiResponse.setGiorno(ldt.getDayOfWeek().toString());
+    commentiResponse.setNGiorno(String.valueOf(ldt.getDayOfMonth()));
+    commentiResponse.setOra(ldt.getHour() + ":" + ldt.getMinute() + ":" + ldt.getSecond());
+
+    return commentiResponse;
+}
 //	TODO: creare un file con i metodi tools
 
 	public int sommaInt(List<Integer> lista) {

@@ -526,4 +526,6 @@ public double toDouble(String stringa) {
  return  numero;
 }
 
+
+
 }

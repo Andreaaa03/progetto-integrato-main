@@ -407,4 +407,57 @@ public class UtenteService {
         tapr.setArticoli(getArticoliPreferiti(request));
         return tapr;
     }
+
+    public ResponseEntity<String> addAmico(SeguiRequest request) {
+        Utente u = getUtente(request.getToken());
+
+        Optional<Utente> u2 = utenteRepository.findById(request.getIdUtente());
+
+        if (!u2.isPresent()) {
+            return new ResponseEntity<>("Utente non trovato", HttpStatus.OK);
+        }
+
+        Optional<Seguiti> s = seguitoRepository.findSeguito(u.getId(), u2.get().getId());
+        if (s.isEmpty()) {
+            Seguiti seguito = new Seguiti();
+            seguito.setSeguito(u2.get());
+            seguito.setSeguace(u);
+            seguito.setAmico(true);
+            seguitoRepository.save(seguito);
+            return new ResponseEntity<>(u2.get().getUsername() +" e diventato tuo amico ", HttpStatus.OK);
+        } else {
+            seguitoRepository.delete(s.get());
+            return new ResponseEntity<>("Utente rimosso con successo", HttpStatus.OK);
+        }
+    }
+
+    public List<AmicoResponse> getAmici(TokenRequest request) {
+        Utente u = getUtente(request.getToken());
+
+        List<Object[]> seguiti = seguitoRepository.chiSeguo(u.getId());
+        if (seguiti == null) return null;
+
+
+        List<AmicoResponse> utenti = new ArrayList<>();
+        for (Object[] seguito : seguiti) {
+            if (!(Boolean) seguito[2]){
+                continue;
+            }
+            utenti.add(toAmicoresponse(seguito));
+        }
+
+        return  utenti;
+
+    }
+    public AmicoResponse toAmicoresponse(Object[] utente){
+        AmicoResponse amico = new AmicoResponse();
+        amico.setSeguito((Integer)   utente[0]);
+        amico.setUsername((String)   utente[1]);
+        amico.setAmico((Boolean)    utente[2]);
+        amico.setRole((String)  utente[3]);
+        amico.setFollower((Long)    utente[4]);
+        amico.setFollowing((Long)   utente[5]);
+        return amico;
+    }
+
 }

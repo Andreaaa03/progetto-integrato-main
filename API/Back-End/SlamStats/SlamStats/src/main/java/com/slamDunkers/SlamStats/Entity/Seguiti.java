@@ -24,4 +24,6 @@ public class Seguiti {
     @JoinColumn(name = "seguace", referencedColumnName = "id")
     private Utente seguace;
 
+    @Column(name = "amico")
+    private boolean amico;
 }

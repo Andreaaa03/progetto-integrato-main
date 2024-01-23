@@ -1,10 +1,7 @@
 package com.slamDunkers.SlamStats.Controller;
 
 import com.slamDunkers.SlamStats.Payload.Request.*;
-import com.slamDunkers.SlamStats.Payload.Response.BlogCompleto;
-import com.slamDunkers.SlamStats.Payload.Response.TeamArticoliPreferitiResponse;
-import com.slamDunkers.SlamStats.Payload.Response.TeamsResponse;
-import com.slamDunkers.SlamStats.Payload.Response.UtenteResponse;
+import com.slamDunkers.SlamStats.Payload.Response.*;
 import com.slamDunkers.SlamStats.Service.UtenteService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -64,6 +61,16 @@ public class UtenteController {
 	@PostMapping("/teamArticoliPreferiti")
 	public TeamArticoliPreferitiResponse teamArticoliPreferiti(@RequestBody @Valid TokenRequest request){
 		return userService.teamArticoliPreferiti(request);
+	}
+
+	@PostMapping("/addAmico")
+	public ResponseEntity<String> addAmico(@RequestBody @Valid SeguiRequest request){
+		return userService.addAmico(request);
+	}
+
+	@PostMapping("/getAmici")
+	public List<AmicoResponse> getAmici(@RequestBody @Valid TokenRequest request){
+		return userService.getAmici(request);
 	}
 
 }

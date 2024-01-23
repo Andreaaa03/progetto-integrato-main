@@ -2,6 +2,7 @@
 }
 java:S1104"bMake calendarioDateResponse a static final constant or non-public and provide accessors if needed.(Ö¨œõùÿÿÿÿ
 j
-java:S1104"TMake homeTeam a static final constant or non-public and provide accessors if needed.(Çòæ
+java:S1104"TMake homeTeam a static final constant or non-public and provide accessors if needed.(Çòæ
 j
-java:S1104"TMake awayTeam a static final constant or non-public and provide accessors if needed.(ğÁãÎ
+java:S1104"TMake awayTeam a static final constant or non-public and provide accessors if needed.(ğÁãÎ
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(é©ºå8Çæ‹—Ó1

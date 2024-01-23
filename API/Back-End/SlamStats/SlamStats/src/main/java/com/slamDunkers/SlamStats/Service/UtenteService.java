@@ -4,7 +4,6 @@ import com.slamDunkers.SlamStats.Entity.*;
 import com.slamDunkers.SlamStats.Payload.Request.*;
 import com.slamDunkers.SlamStats.Payload.Response.*;
 import com.slamDunkers.SlamStats.Repository.*;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.http.HttpStatus;
@@ -13,53 +12,61 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UtenteService {
-	public final UtenteRepository utenteRepository;
-	public final RolesRepository rolesRepository;
-	public final TokenService tokenService;
-	public final Utente_TeamRepository utente_teamRepository;
-	public final TeamsRepository teamsRepository;
-	public final HttpServletRequest request;
-	public final BlogRepository blogRepository;
-	public final BlogService blogService;
-	public final ToResponse toResponse;
+	private final UtenteRepository utenteRepository;
+
+	private final TokenService tokenService;
+	private final Utente_TeamRepository utenteTeamRepository;
+	private final TeamsRepository teamsRepository;
+
+	private final BlogRepository blogRepository;
+	private final BlogService blogService;
+	private final ToResponse toResponse;
 	private final SeguitoRepository seguitoRepository;
 
-	public UtenteService(UtenteRepository utenteRepository, RolesRepository rolesRepository, TokenService tokenService, Utente_TeamRepository utente_teamRepository, TeamsRepository teamsRepository, HttpServletRequest request, BlogRepository blogRepository, BlogService blogService, ToResponse toResponse, SeguitoRepository seguitoRepository) {
+	public UtenteService(UtenteRepository utenteRepository,TokenService tokenService, Utente_TeamRepository utenteTeamRepository, TeamsRepository teamsRepository, BlogRepository blogRepository, BlogService blogService, ToResponse toResponse, SeguitoRepository seguitoRepository) {
 		this.utenteRepository = utenteRepository;
-		this.rolesRepository = rolesRepository;
 		this.tokenService = tokenService;
-		this.utente_teamRepository = utente_teamRepository;
+		this.utenteTeamRepository = utenteTeamRepository;
 		this.teamsRepository = teamsRepository;
-		this.request = request;
         this.blogRepository = blogRepository;
         this.blogService = blogService;
         this.toResponse = toResponse;
         this.seguitoRepository = seguitoRepository;
     }
-	public ResponseEntity<String> save(SignupRequest request){
-		Optional<Object> u = utenteRepository.findByEmail(request.getEmail());
-		Optional<Object> u2 = utenteRepository.findByUsername(request.getUsername());
-		Optional<Object> u3 = utenteRepository.findByNumeroTelefono(request.getNumeroTelefono());
-		if (u.isPresent()){
-			return new ResponseEntity<>("Email già presente",HttpStatus.OK);
-		}
-		else if(u2.isPresent()){
-			return new ResponseEntity<>("Username già presente",HttpStatus.OK);
-		}
-		else if(u3.isPresent()){
-			return new ResponseEntity<>("Numero di telefono già presente",HttpStatus.OK);
-		}
-		else{
-			utenteRepository.save(fromRequestToEntity(request));
-			return new ResponseEntity<>("Utente creato con successo",HttpStatus.OK);
-		}
-	}
+
+
+/**
+ * This method is used to save a new user to the database.
+ * It first checks if the email, username, and phone number provided in the request are already present in the database.
+ * If any of them are present, it returns a response indicating that the respective field is already present.
+ * If none of them are present, it saves the new user to the database and returns a success message.
+ *
+ * @param request SignupRequest object containing the details of the user to be saved.
+ * @return ResponseEntity with a message indicating the result of the operation and HTTP status.
+ */
+public ResponseEntity<String> save(SignupRequest request){
+    Optional<Object> u = utenteRepository.findByEmail(request.getEmail());
+    Optional<Object> u2 = utenteRepository.findByUsername(request.getUsername());
+    Optional<Object> u3 = utenteRepository.findByNumeroTelefono(request.getNumeroTelefono());
+    if (u.isPresent()){
+        return new ResponseEntity<>("Email già presente",HttpStatus.OK);
+    }
+    else if(u2.isPresent()){
+        return new ResponseEntity<>("Username già presente",HttpStatus.OK);
+    }
+    else if(u3.isPresent()){
+        return new ResponseEntity<>("Numero di telefono già presente",HttpStatus.OK);
+    }
+    else{
+        utenteRepository.save(fromRequestToEntity(request));
+        return new ResponseEntity<>("Utente creato con successo",HttpStatus.OK);
+    }
+}
 
 	private Utente fromRequestToEntity(SignupRequest request) {
 		Utente u = new Utente();
@@ -97,25 +104,24 @@ public class UtenteService {
 		Utente u = getUtente(request.getToken());
 		Optional<Teams> t = teamsRepository.findById(request.getIdTeam());
 
-		int ut5 = utente_teamRepository.findByIdUtente(u.getId());
+		int ut5 = utenteTeamRepository.findByIdUtente(u.getId());
 		if(ut5 >= 5){
 			return new ResponseEntity<>("Hai già raggiunto il limite di 5 squadre preferite",HttpStatus.OK);
 		}
-
 		return SorRteamPreferiti(u,t.get());
 	}
 
 	public ResponseEntity<String> SorRteamPreferiti(Utente u,Teams t) {
-		Optional<UtentePreferiti> ut = utente_teamRepository.findByIdUtenteAndIdTeam(u, t);
+		Optional<UtentePreferiti> ut = utenteTeamRepository.findByIdUtenteAndIdTeam(u, t);
 		if(ut.isPresent()){
-			utente_teamRepository.delete(ut.get());
+			utenteTeamRepository.delete(ut.get());
 			return new ResponseEntity<>("Team rimosso con successo",HttpStatus.OK);
 		}
 		else{
 			UtentePreferiti utente_team = new UtentePreferiti();
 			utente_team.setIdUtente(u);
 			utente_team.setIdTeam(t);
-			utente_teamRepository.save(utente_team);
+			utenteTeamRepository.save(utente_team);
 			return new ResponseEntity<>("Team aggiunto con successo",HttpStatus.OK);
 		}
 	}
@@ -132,23 +138,23 @@ public class UtenteService {
 	}
 
 	public ResponseEntity<String> SorRarticoloPreferiti(Utente u, Blog b) {
-		Optional<UtentePreferiti> ub = utente_teamRepository.findByIdUtenteAndIdArticolo(u, b);
+		Optional<UtentePreferiti> ub = utenteTeamRepository.findByIdUtenteAndIdArticolo(u, b);
 
 		if(ub.isPresent()){
-			utente_teamRepository.delete(ub.get());
+			utenteTeamRepository.delete(ub.get());
 			return new ResponseEntity<>("Articolo rimosso con successo",HttpStatus.OK);
 		}else{
 			UtentePreferiti utente_team = new UtentePreferiti();
 			utente_team.setIdUtente(u);
 			utente_team.setIdArticolo(b);
-			utente_teamRepository.save(utente_team);
+			utenteTeamRepository.save(utente_team);
 			return new ResponseEntity<>("Articolo aggiunto con successo",HttpStatus.OK);
 		}
 	}
 	public List<BlogCompleto> getArticoliPreferiti(TokenRequest request) {
 		Utente u = getUtente(request.getToken());
 
-		List<UtentePreferiti> ub = utente_teamRepository.findArticoliPreferiti (u.getId());
+		List<UtentePreferiti> ub = utenteTeamRepository.findArticoliPreferiti (u.getId());
 		if (ub == null) {
 			return null;
 		}
@@ -164,7 +170,7 @@ public class UtenteService {
 	public List<TeamsResponse> getTeamPreferiti(TokenRequest request) {
 		Utente u = getUtente(request.getToken());
 
-		List<UtentePreferiti> ut = utente_teamRepository.findTeamPreferiti(u.getId());
+		List<UtentePreferiti> ut = utenteTeamRepository.findTeamPreferiti(u.getId());
 		if (ut == null) {
 			return null;
 		}
@@ -212,7 +218,7 @@ public class UtenteService {
 		ur.setNumeroTelefono(u.get().getNumeroTelefono());
 		ur.setUsername(u.get().getUsername());
 		ur.setSesso(u.get().getSesso());
-		List<UtentePreferiti> lut = utente_teamRepository.findTeamPreferiti(u.get().getId());
+		List<UtentePreferiti> lut = utenteTeamRepository.findTeamPreferiti(u.get().getId());
 		List<TeamsResponse> teams = new ArrayList<>();
 		for (UtentePreferiti utentePreferiti : lut) {
 			teams.add(toResponse.toTeamsResponse(utentePreferiti.getIdTeam()));

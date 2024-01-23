@@ -3,13 +3,16 @@ package com.slamDunkers.SlamStats.Service;
 import com.slamDunkers.SlamStats.Entity.Commenti;
 import com.slamDunkers.SlamStats.Entity.Utente;
 import com.slamDunkers.SlamStats.Payload.Request.CommentiRequest;
+import com.slamDunkers.SlamStats.Payload.Request.TokenRequest;
 import com.slamDunkers.SlamStats.Repository.BlogRepository;
 import com.slamDunkers.SlamStats.Repository.CommentiRepository;
 import com.slamDunkers.SlamStats.Repository.GamesRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class CommentiService {
@@ -29,30 +32,43 @@ public class CommentiService {
     public ResponseEntity<String> commenta(CommentiRequest commento) {
 
             Utente u = utenteService.getUtente(commento.getToken());
-            try {
-
-
             Commenti c = new Commenti();
             c.setTesto(commento.getTesto());
-            c.setId_utente(u);
-                if (commento.getId_commento_padre() != null && commento.getId_commento_padre().isPresent()) {
-                    Optional<Commenti> commento_padre = commentiRepository.findById(commento.getId_commento_padre().get());
-                    commento_padre.ifPresent(c::setId_commento_padre);
+            c.setIdUtente(u);
+                if (commento.getId_commento_padre() != null) {
+
+                    commentiRepository.findById(commento.getId_commento_padre().get()).ifPresent(commentoPadre ->{
+//                        Cannot invoke "java.util.Optional.isPresent()" because the return value of "com.slamDunkers.SlamStats.Payload.Request.CommentiRequest.getId_games()" is null
+                        c.setIdCommentoPadre(commentoPadre);
+                        c.setBlog(commentoPadre.getBlog());
+                        c.setIdGames(commentoPadre.getIdGames());
+                    });
+                    commentiRepository.save(c);
+                    return ResponseEntity.ok("Commento aggiunto con successo");
                 }
 
-                if (commento.getId_games() != null && commento.getId_games().isPresent()) {
-                    gamesRepository.findById(commento.getId_games().get()).ifPresent(c::setId_games);
+                if (commento.getId_games() != null) {
+                    gamesRepository.findById(commento.getId_games().get()).ifPresent(c::setIdGames);
                 }
 
-                if (commento.getId_blog() != null && commento.getId_blog().isPresent()) {
+                if (commento.getId_blog() != null) {
                     blogRepository.findById(commento.getId_blog().get()).ifPresent(c::setBlog);
                 }
 
                 commentiRepository.save(c);
                 return ResponseEntity.ok("Commento aggiunto con successo");
-            } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Errore"+e.getMessage());
-            }
+
 
     }
+
+
+    public List<Optional<Commenti>> commentiUtente(TokenRequest token) {
+        Utente u = utenteService.getUtente(token.getToken());
+        List<Optional<Commenti>> commenti = commentiRepository.findAllByIdUtente(u);
+        if(commenti.isEmpty()) return null;
+
+        return commenti;
+    }
+
 }
+

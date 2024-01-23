@@ -3,5 +3,6 @@ u
 java:S1104A"_Make qaurtiScoreResponse a static final constant or non-public and provide accessors if needed.(Íß•Ë
 x
 java:S1104B"]Make playersStatistics a static final constant or non-public and provide accessors if needed.(öÃ§°úÿÿÿÿ
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(é©ºå8ò¦Œ—Ó1
 S
 java:S1128"8Remove this unused import 'jakarta.persistence.Convert'.(øÑÙúÿÿÿÿ

@@ -8,16 +8,13 @@ import com.slamDunkers.SlamStats.Entity.UserToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @Service
 @Slf4j
-class TokenService {
-//			TODO cambiare il token e metteo in un file
+public class TokenService {
+//			TODO cambiare il token e metterlo in un file
 //	        TODO cambiare le eccezioni da generiche a specifiche
 	private static final String TOKEN_SECRET = "slamDunkersSlamStats2024";
 	public static final int EXPIRE_AFTER = 3600000;
@@ -39,7 +36,7 @@ class TokenService {
 					.sign(algorithm);
 		}catch (Exception e){
 			log.error(e.getMessage());
-			throw new RuntimeException("problemi di creazione del token"+e.getMessage());
+			return "token non valido";
 		}
 	}
 
@@ -49,20 +46,12 @@ class TokenService {
 			Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
 			JWTVerifier verifier = JWT.require(algorithm).build();
 			DecodedJWT jwt = verifier.verify(token);
-
-			UserToken ut = new UserToken(jwt.getClaim("idUser").asInt(), jwt.getClaim("role").asString());
-			return ut;
+            return new UserToken(jwt.getClaim("idUser").asInt(), jwt.getClaim("role").asString());
 		} catch (Exception e){
 			log.error(e.getMessage());
 		}
 		return null;
 	}
-
-	boolean isJWTExpired(DecodedJWT decodedJWT) {
-		Date expiresAt = (Date) decodedJWT.getExpiresAt();
-		return expiresAt.before(new Date( System.currentTimeMillis()));
-	}
-
 
 
 }

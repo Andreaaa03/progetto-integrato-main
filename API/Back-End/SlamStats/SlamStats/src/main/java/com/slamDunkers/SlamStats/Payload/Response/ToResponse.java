@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.Math.round;
+
 @Service
 public class ToResponse {
 
@@ -164,6 +166,7 @@ public class ToResponse {
 		qaurtiScoreResponse1.setQ2Score(game.getQ2a());
 		qaurtiScoreResponse1.setQ3Score(game.getQ3a());
 		qaurtiScoreResponse1.setQ4Score(game.getQ4a());
+
 		partitaStatResponse.setAwayTeam(toPartitaStatResponse(stat,qaurtiScoreResponse1));
 
 		return partitaStatResponse;
@@ -370,7 +373,7 @@ public class ToResponse {
 	public TeamsResponse toTeamsResponse(Teams team) {
 
 		if (team.getLeague().getDivision() == null) {
-			TeamsResponse teamsResponse = new TeamsResponse(
+			return new TeamsResponse(
 					team.getId(),
 					team.getTeamName(),
 					team.getCity(),
@@ -381,10 +384,9 @@ public class ToResponse {
 					team.getLeague().getConference(),
 					team.getCode()
 			);
-			return teamsResponse;
 
 		}
-		TeamsResponse teamsResponse = new TeamsResponse(
+		return new TeamsResponse(
 				team.getId(),
 				team.getTeamName(),
 				team.getCity(),
@@ -397,7 +399,6 @@ public class ToResponse {
 				team.getCode()
 
 		);
-		return teamsResponse;
 
 
 
@@ -417,12 +418,15 @@ public class ToResponse {
 		for (Double integer : lista) {
 			somma += integer;
 		}
-		return somma;
+		return round(somma);
 	}
+
+
+
 	public double toDouble(String stringa) {
 		String[] stringaArray = stringa.split(":");
 		double numero = Double.parseDouble(stringaArray[0]) + (Double.parseDouble(stringaArray[1])/60);
-		return numero;
+		return  numero;
 	}
 
 }

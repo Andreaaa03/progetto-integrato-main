@@ -12,6 +12,7 @@ import lombok.Setter;
 public class PlayerStatisticsResponse {
 	private int id;
 	private String nome;
+	private int numeroMaglia;
 	private int points;
 	private String pos;
 	private String min;

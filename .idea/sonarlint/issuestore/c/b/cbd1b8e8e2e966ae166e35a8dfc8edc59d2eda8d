@@ -1,5 +1,8 @@
 
 
-java:S1488Œ"^Immediately return this expression instead of assigning it to the temporary variable "numero".(É¤¥ƒùÿÿÿÿ8­Î¦ÏÒ1
+java:S1488¬"^Immediately return this expression instead of assigning it to the temporary variable "numero".(É¤¥ƒùÿÿÿÿ8»ÆÃ—Ó1
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(é©ºå8“¢À—Ó1
 P
-java:S1135ú"2Complete the task associated to this TODO comment.(åğÏœ8éĞ¦ÏÒ1
+java:S1135—"2Complete the task associated to this TODO comment.(åğÏœ8Ş¤À—Ó1
+T
+java:S1068"2Remove this unused "gameRepository" private field.(Æù‚ıÿÿÿÿ8á¤À—Ó1

@@ -11,7 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PartitaStatResponse {
 	public CalendarioDateResponse calendarioDateResponse;
-
 	public TeamStatGameResponse homeTeam;
 	public TeamStatGameResponse awayTeam;
 

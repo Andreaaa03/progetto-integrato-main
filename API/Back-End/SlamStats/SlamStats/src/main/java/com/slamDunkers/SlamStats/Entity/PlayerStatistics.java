@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static java.lang.Math.round;
+
 @Entity
 @NoArgsConstructor
 @Getter
@@ -14,12 +16,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @IdClass( PlayerStatisticsId.class)
 public class PlayerStatistics {
-//	1 	player_ID Primaria 	int(11) 			No 	Nessuno 			Modifica Modifica 	Elimina Elimina
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "player_ID",referencedColumnName = "player", nullable = false)
 	private Player player;
-//	2 	teams_ID PrimariaIndice 	int(11) 			No 	Nessuno 			Modifica Modifica 	Elimina Elimina
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "teams_id",referencedColumnName = "team", nullable = false)
@@ -41,19 +41,19 @@ public class PlayerStatistics {
 	@Column(name = "fga", columnDefinition = "int")
 	private int fga;
 	@Column(name = "fgp", columnDefinition = "double")
-	private double fgp;
+	private double fgp;											//
 	@Column(name = "ftm", columnDefinition = "int")
 	private int ftm;
 	@Column(name = "fta", columnDefinition = "int")
 	private int fta;
 	@Column(name = "ftp", columnDefinition = "double")
-	private double ftp;
+	private double ftp;											//
 	@Column(name = "tpm", columnDefinition = "int")
 	private int tpm;
 	@Column(name = "tpa", columnDefinition = "int")
 	private int tpa;
 	@Column(name = "tpp", columnDefinition = "double")
-	private double tpp;
+	private double tpp;											//
 	@Column(name = "off_reb", columnDefinition = "int")
 	private int offReb;
 	@Column(name = "def_reb", columnDefinition = "int")
@@ -77,18 +77,19 @@ public class PlayerStatistics {
 		PlayerStatisticsResponse response = new PlayerStatisticsResponse();
 		response.setId(this.player.getId());
 		response.setNome(this.player.getFirstName() + " " + this.player.getLastName());
+		response.setNumeroMaglia(this.player.getNumeroMaglia());
 		response.setPoints(this.points);
 		response.setPos(this.pos);
 		response.setMin(this.min);
 		response.setFgm(this.fgm);
 		response.setFga(this.fga);
-		response.setFgp(this.fgp);
+		response.setFgp(round(this.fgp));
 		response.setFtm(this.ftm);
 		response.setFta(this.fta);
-		response.setFtp(this.ftp);
+		response.setFtp(round(this.ftp));
 		response.setTpm(this.tpm);
 		response.setTpa(this.tpa);
-		response.setTpp(this.tpp);
+		response.setTpp(round(this.tpp));
 		response.setOffReb(this.offReb);
 		response.setDefReb(this.defReb);
 		response.setTotReb(this.totReb);
@@ -100,6 +101,7 @@ public class PlayerStatistics {
 		response.setPlusMinus(this.plusMinus);
 		return response;
 	}
+
 
 
 }

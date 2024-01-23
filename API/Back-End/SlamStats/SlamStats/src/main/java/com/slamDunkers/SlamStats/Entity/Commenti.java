@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -19,19 +21,22 @@ public class Commenti {
 	private String testo;
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_commento_padre", columnDefinition = "int")
-	private Commenti id_commento_padre;
+	private Commenti idCommentoPadre;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_utente", columnDefinition = "int")
-	private Utente id_utente;
+	private Utente idUtente;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_games", columnDefinition = "int")
-	private Games id_games;
+	private Games idGames;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "blog", columnDefinition = "int")
 	private Blog blog;
+
+	@Column(name = "creazione", columnDefinition = "timestamp")
+	private LocalDateTime data;
 
 
 }

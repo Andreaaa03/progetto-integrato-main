@@ -22,18 +22,20 @@ public interface Utente_TeamRepository extends JpaRepository<UtentePreferiti, In
 
 	@Query(value = "SELECT * \n" +
 			 "FROM `utente_preferiti` ut\n" +
-			 "WHERE `utente` = :idUtente AND `articolo` IS NOT null;", nativeQuery = true)
+			 "WHERE `utente` = :idUtente AND `articolo` IS NOT null " +
+			"ORDER by `data`", nativeQuery = true)
 	 	List<UtentePreferiti> findArticoliPreferiti(@Param("idUtente") int idUtente);
 
-	@Query(value = "SELECT * \n" +
-			 "FROM `utente_preferiti` ut\n" +
-			 "WHERE `utente` = :idUtente AND `team` IS NOT null;", nativeQuery = true)
-	 	List<UtentePreferiti> findTeamPreferiti(@Param("idUtente") int idUtente);
+@Query(value = "SELECT * \n" +
+    "FROM `utente_preferiti` ut\n" +
+    "WHERE `utente` = :idUtente AND `team` IS NOT null " +
+   "ORDER by `data`", nativeQuery = true)
+List<UtentePreferiti> findTeamPreferiti(@Param("idUtente") int idUtente);
 
 
 	 @Query(value = "SELECT COUNT(ut.id) \n" +
 			 "FROM `utente_preferiti` ut\n" +
-			 "WHERE `utente` = :idUtente AND `team` IS NOT null;", nativeQuery = true)
+			 "WHERE `utente` = :idUtente AND `team` IS NOT null", nativeQuery = true)
 	 Integer findByIdUtente(@Param("idUtente") int idUtente);
 
 

@@ -1,8 +1,2 @@
 .idea
-.idea/sonarlint/issuestore/3/6/365dbaa6668aa4017da4fcbb0a9a67a7cdfe413a
-.idea/sonarlint/issuestore/4/4/44bb4ee10cbe7e745d63e4fb4016380242fbadb7
-.idea/sonarlint/issuestore/5/5/551c0152a64d0d5552893d65cb96b7f109dea7ae
-.idea/sonarlint/issuestore/6/b/6b55dd910957983901b03409164f7ddd499808d3
-.idea/sonarlint/issuestore/e/c/ec778c386ab90cc29ce625da814db214b4c98fa5
-.idea/sonarlint/issuestore/index.pb
-.idea/sonarlint/securityhotspotstore/index.pb
+.idea/sonarlint/*

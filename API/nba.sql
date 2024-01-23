@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 22, 2024 alle 14:10
+-- Creato il: Gen 23, 2024 alle 13:09
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -58,8 +58,27 @@ CREATE TABLE `commenti` (
   `id_commento_padre` int(11) DEFAULT NULL,
   `id_utente` int(11) NOT NULL,
   `id_games` int(11) DEFAULT NULL,
-  `blog` int(11) DEFAULT NULL
+  `blog` int(11) DEFAULT NULL,
+  `creazione` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `commenti`
+--
+
+INSERT INTO `commenti` (`id`, `testo`, `id_commento_padre`, `id_utente`, `id_games`, `blog`, `creazione`) VALUES
+(3, 'prova di commommento da backend a database', NULL, 5, NULL, 6, '2024-01-23 00:20:42'),
+(7, 'risposta al commento', 3, 5, NULL, 6, '2024-01-23 00:20:42'),
+(8, 'risposta al commento', 7, 5, NULL, 6, '2024-01-23 00:20:42'),
+(9, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:24:19'),
+(10, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:25:34'),
+(11, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:33:21'),
+(12, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:35:13'),
+(13, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:35:16'),
+(14, 'risposta al commentoaaaaaaaaaa', NULL, 5, NULL, NULL, '2024-01-23 00:40:03'),
+(15, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:40:21'),
+(16, 'risposta al commentoaaaaaaaaaa', NULL, 5, 13774, NULL, '2024-01-23 00:41:17'),
+(17, 'risposta al commentoaaaaaaaaaa', NULL, 5, 13773, NULL, '2024-01-23 00:41:26');
 
 -- --------------------------------------------------------
 
@@ -34706,6 +34725,18 @@ INSERT INTO `seguiti` (`id`, `seguito`, `seguace`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `sondaggio`
+--
+
+CREATE TABLE `sondaggio` (
+  `utente` int(11) NOT NULL,
+  `partita` int(11) NOT NULL,
+  `scommessa` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `tag`
 --
 
@@ -34963,9 +34994,7 @@ CREATE TABLE `utente` (
 
 INSERT INTO `utente` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `pswd`, `role_id`, `data_iscrizione`, `numero_telefono`, `follower`, `username`, `sesso`, `seguiti`) VALUES
 (5, 'Giorgio', 'Modeo', '2002-12-08', 'giorgio.modeo@gmail.com', 'e98e17f3e8a79a36583ebf1931c4a089f9bc556a3ca6b5158386a997d9bce2e8', 2, '2024-01-16 23:00:00', '1234567891', 0, 'giovanni', '', 0),
-(9, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-21 14:53:09', '1234567891', 0, 'domanico', 'm', NULL),
-(10, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.co', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 2, '2024-01-22 05:39:30', '1234567891', 0, 'domanico', 'm', NULL),
-(11, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.o', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 2, '2024-01-22 10:16:41', '1234567891', 0, 'domanico', 'm', NULL);
+(9, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-22 16:49:21', '1234567890', 0, 'domanico', 'm', NULL);
 
 -- --------------------------------------------------------
 
@@ -34977,17 +35006,20 @@ CREATE TABLE `utente_preferiti` (
   `id` int(11) NOT NULL,
   `utente` int(11) NOT NULL,
   `team` int(11) DEFAULT NULL,
-  `articolo` int(11) DEFAULT NULL
+  `articolo` int(11) DEFAULT NULL,
+  `data` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `utente_preferiti`
 --
 
-INSERT INTO `utente_preferiti` (`id`, `utente`, `team`, `articolo`) VALUES
-(5, 5, 1, NULL),
-(6, 5, NULL, 4),
-(10, 5, NULL, 1);
+INSERT INTO `utente_preferiti` (`id`, `utente`, `team`, `articolo`, `data`) VALUES
+(5, 5, 1, NULL, '2024-01-22 00:26:00'),
+(6, 5, NULL, 4, '2024-01-22 01:26:00'),
+(10, 5, NULL, 1, '2024-01-23 11:26:00'),
+(14, 5, 9, NULL, '2024-01-23 11:29:07'),
+(15, 5, NULL, 6, '2024-01-23 11:29:18');
 
 --
 -- Indici per le tabelle scaricate
@@ -35088,6 +35120,15 @@ ALTER TABLE `seguiti`
   ADD KEY `seguito` (`seguito`);
 
 --
+-- Indici per le tabelle `sondaggio`
+--
+ALTER TABLE `sondaggio`
+  ADD PRIMARY KEY (`utente`,`partita`),
+  ADD KEY `scommessa` (`scommessa`),
+  ADD KEY `partita` (`partita`),
+  ADD KEY `utente` (`utente`);
+
+--
 -- Indici per le tabelle `tag`
 --
 ALTER TABLE `tag`
@@ -35145,7 +35186,7 @@ ALTER TABLE `blog`
 -- AUTO_INCREMENT per la tabella `commenti`
 --
 ALTER TABLE `commenti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT per la tabella `conference`
@@ -35217,13 +35258,13 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT per la tabella `utente_preferiti`
 --
 ALTER TABLE `utente_preferiti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Limiti per le tabelle scaricate
@@ -35256,6 +35297,14 @@ ALTER TABLE `paragrafo`
 ALTER TABLE `seguiti`
   ADD CONSTRAINT `seguiti_ibfk_1` FOREIGN KEY (`seguace`) REFERENCES `utente` (`id`),
   ADD CONSTRAINT `seguiti_ibfk_2` FOREIGN KEY (`seguito`) REFERENCES `utente` (`id`);
+
+--
+-- Limiti per la tabella `sondaggio`
+--
+ALTER TABLE `sondaggio`
+  ADD CONSTRAINT `sondaggio_ibfk_1` FOREIGN KEY (`scommessa`) REFERENCES `teams` (`id`),
+  ADD CONSTRAINT `sondaggio_ibfk_2` FOREIGN KEY (`utente`) REFERENCES `utente` (`id`),
+  ADD CONSTRAINT `sondaggio_ibfk_3` FOREIGN KEY (`partita`) REFERENCES `games` (`id`);
 
 --
 -- Limiti per la tabella `tag`

@@ -33,47 +33,58 @@ public class ToResponse {
 		this.playerStatRepository = playerStatRepository;
 	}
 
+/**
+ * This method converts a team's statistics into a response format.
+ *
+ * @param id The ID of the team whose statistics are to be converted.
+ * @return A TeamStatisticsResponse object containing the team's statistics.
+ * The TeamStatisticsResponse object includes details such as the team's games, fast break points, points in paint, biggest lead,
+ * second chance points, points off turnover, points, field goals made, field goals attempted, field goal percentage,
+ * free throws made, free throws attempted, free throw percentage, three-pointers made, three-pointers attempted,
+ * three-point percentage, offensive rebounds, defensive rebounds, total rebounds, assists, steals, turnovers, blocks,
+ * plus-minus, personal fouls, and conference rank.
+ * If no team statistics are found with the specified ID, the method returns null.
+ */
+public TeamStatisticsResponse toTeamsStatisticsResponse(Integer id) {
+	Optional<TeamsStatistics> teamsStatistic = Optional.ofNullable(repository.findByTeamId(id));
+	TeamStandings teamStandings = standings.findByTeamId(id);
+	if(teamsStatistic.isEmpty()) {
+		return null;
+	}
+	TeamsStatistics teamsStatistics = teamsStatistic.get();
 
-	public TeamStatisticsResponse toTeamsStatisticsResponse(Integer id) {
-		Optional<TeamsStatistics> teamsStatistic = Optional.ofNullable(repository.findByTeamId(id));
-		TeamStandings teamStandings = standings.findByTeamId(id);
-		if(teamsStatistic.isEmpty()) {
-			return null;
-		}
-		TeamsStatistics teamsStatistics = teamsStatistic.get();
+	TeamStatisticsResponse response = new TeamStatisticsResponse();
 
-		TeamStatisticsResponse response = new TeamStatisticsResponse();
-
-		response.setTeam(teamsStatistics.getTeam().toTeamsResponse());
-		response.setSeason(teamsStatistics.getSeason().getYear());
-		response.setGames(teamsStatistics.getGames());
-		response.setFastBreakPoints(teamsStatistics.getFastBreakPoints());
-		response.setPointsInPaint(teamsStatistics.getPointsInPaint());
-		response.setBiggestLead(teamsStatistics.getBiggestLead());
-		response.setSecondChancePoints(teamsStatistics.getSecondChancePoints());
-		response.setPointsOffTurnover(teamsStatistics.getPointsOffTurnover());
-		response.setPoints(teamsStatistics.getPoints());
-		response.setFgm(teamsStatistics.getFgm());
-		response.setFga(teamsStatistics.getFga());
-		response.setFgp(teamsStatistics.getFgp());
-		response.setFtm(teamsStatistics.getFtm());
-		response.setFta(teamsStatistics.getFta());
-		response.setFtp(teamsStatistics.getFtp());
-		response.setTpm(teamsStatistics.getTpm());
-		response.setTpa(teamsStatistics.getTpa());
-		response.setTpp(teamsStatistics.getTpp());
-		response.setOffReb(teamsStatistics.getOffReb());
-		response.setDefReb(teamsStatistics.getDefReb());
-		response.setTotReb(teamsStatistics.getTotReb());
-		response.setAssists(teamsStatistics.getAssists());
-		response.setSteals(teamsStatistics.getSteals());
-		response.setTurnovers(teamsStatistics.getTurnovers());
-		response.setBlocks(teamsStatistics.getBlocks());
-		response.setPlusMinus(teamsStatistics.getPlusMinus());
-		response.setPfouls(teamsStatistics.getPFouls());
-		response.setConferenceRank(teamStandings.getConferenceRank());
-		return response;
-		}
+	response.setTeam(teamsStatistics.getTeam().toTeamsResponse());
+	response.setSeason(teamsStatistics.getSeason().getYear());
+	response.setGames(teamsStatistics.getGames());
+	response.setFastBreakPoints(teamsStatistics.getFastBreakPoints());
+	response.setPointsInPaint(teamsStatistics.getPointsInPaint());
+	response.setBiggestLead(teamsStatistics.getBiggestLead());
+	response.setSecondChancePoints(teamsStatistics.getSecondChancePoints());
+	response.setPointsOffTurnover(teamsStatistics.getPointsOffTurnover());
+	response.setPoints(teamsStatistics.getPoints());
+	response.setFgm(teamsStatistics.getFgm());
+	response.setFga(teamsStatistics.getFga());
+	response.setFgp(teamsStatistics.getFgp());
+	response.setFtm(teamsStatistics.getFtm());
+	response.setFta(teamsStatistics.getFta());
+	response.setFtp(teamsStatistics.getFtp());
+	response.setTpm(teamsStatistics.getTpm());
+	response.setTpa(teamsStatistics.getTpa());
+	response.setTpp(teamsStatistics.getTpp());
+	response.setOffReb(teamsStatistics.getOffReb());
+	response.setDefReb(teamsStatistics.getDefReb());
+	response.setTotReb(teamsStatistics.getTotReb());
+	response.setAssists(teamsStatistics.getAssists());
+	response.setSteals(teamsStatistics.getSteals());
+	response.setTurnovers(teamsStatistics.getTurnovers());
+	response.setBlocks(teamsStatistics.getBlocks());
+	response.setPlusMinus(teamsStatistics.getPlusMinus());
+	response.setPfouls(teamsStatistics.getPFouls());
+	response.setConferenceRank(teamStandings.getConferenceRank());
+	return response;
+}
 
 	public TeamStatGameResponse toPartitaStatResponse(List<PlayerStatistics> stat, QaurtiScoreResponse qaurtiScoreResponse){
 		TeamStatGameResponse response = new TeamStatGameResponse();

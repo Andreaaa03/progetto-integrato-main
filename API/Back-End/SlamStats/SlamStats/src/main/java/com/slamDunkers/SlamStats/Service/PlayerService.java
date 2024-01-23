@@ -45,67 +45,75 @@ public PlayerResponse selezionaGiocatore(int playerId){
  return toPlayerResponse(playerRepository.findById(playerId));
 }
 
-	public List<PlayerResponse> selezionaGiocatoriPerSquadra(int teamId) {
+/**
+ * This method retrieves all players from a specific team.
+ *
+ * @param teamId The ID of the team whose players are to be retrieved.
+ * @return A list of PlayerResponse objects, each representing a player from the specified team.
+ * If no players are found for the specified team, the method returns an empty list.
+ */
+public List<PlayerResponse> selezionaGiocatoriPerSquadra(int teamId) {
+ Optional<Teams> teamFound = teamsRepository.findById(teamId);
+ if (teamFound.isPresent()) {
+  List<PlayerResponse> playerResponseList = new ArrayList<>();
+  for (Player player : playerRepository.findByTeam(teamFound)) {
+   playerResponseList.add(toPlayerResponse(player));
+  }
+  return playerResponseList;
+ } else {
+  return Collections.emptyList();
+ }
+}
 
-		Optional<Teams> teamFound = teamsRepository.findById(teamId);
-
-		if (teamFound.isPresent()) {
-			List<PlayerResponse> playerResponseList = new ArrayList<>();
-			for (Player player : playerRepository.findByTeam(teamFound)) {
-				playerResponseList.add(toPlayerResponse(player));
-			}
-			return playerResponseList;
-		} else {
-			return Collections.emptyList();
-		}
+/**
+ * This method converts a Player object into a PlayerResponse object.
+ *
+ * @param player The Player object to be converted.
+ * @return A PlayerResponse object containing the details of the player.
+ * The PlayerResponse object includes the player's ID, team, first name, last name, birth date, age, birth country,
+ * NBA start year, NBA pro status, height (in feet, inches, and meters), weight (in pounds and kilograms),
+ * college, last affiliation, jersey number, total points, total assists, position, and statistics from the last 5 games.
+ * If the player has no statistics from the last 5 games, the statistics field in the PlayerResponse object is set to an empty list.
+ */
+public PlayerResponse toPlayerResponse(Player player) {
+	PlayerResponse playerResponse = new PlayerResponse();
+	playerResponse.playerId = player.getId();
+	playerResponse.team = player.getTeam().toTeamsResponse();
+	playerResponse.firstName = player.getFirstName();
+	playerResponse.lastName = player.getLastName();
+	playerResponse.birthDate = player.getBirthDate().toString();
+	LocalDate now = LocalDate.now();
+	LocalDate birthDate = player.getBirthDate();
+	int year = now.getYear() - birthDate.getYear();
+	int month = now.getMonthValue() - birthDate.getMonthValue();
+	int day = now.getDayOfMonth() - birthDate.getDayOfMonth();
+	if (month < 0 || (month == 0 && day < 0)) {
+		year--;
 	}
-	public PlayerResponse toPlayerResponse(Player player) {
-		PlayerResponse playerResponse = new PlayerResponse();
-		playerResponse.playerId = player.getId();
-		playerResponse.team = player.getTeam().toTeamsResponse();
-		playerResponse.firstName = player.getFirstName();
-		playerResponse.lastName = player.getLastName();
-		playerResponse.birthDate = player.getBirthDate().toString();
-//		trovare l'età del player
-		LocalDate now = LocalDate.now();
-		LocalDate birthDate = player.getBirthDate();
-		int year = now.getYear() - birthDate.getYear();
-		int month = now.getMonthValue() - birthDate.getMonthValue();
-		int day = now.getDayOfMonth() - birthDate.getDayOfMonth();
-		if (month < 0 || (month == 0 && day < 0)) {
-			year--;
-		}
-		playerResponse.age = year;
-
-
-		playerResponse.birthCountry = player.getBirthCountry();
-		playerResponse.nbaStart = player.getNbaStart().getValue();
-		playerResponse.nbaPro = player.getNbaPro();
-		playerResponse.heightFeet = player.getHeightFeet();
-		playerResponse.heightInches = player.getHeightInches();
-		playerResponse.heightMeters = player.getHeightMeters();
-		playerResponse.weightPounds = player.getWeightPounds();
-		playerResponse.weightKg = player.getWeightKilograms();
-		playerResponse.college = player.getCollege();
-		playerResponse.affiliation= player.getLastAffiliation();
-		playerResponse.numeroMaglia = player.getNumeroMaglia();
-
-
-		List<PlayerStatistics> playerStatisticsList = playerStatRepository.findLast5Games(player.getId());
-		for (PlayerStatistics playerStatistics : playerStatisticsList) {
-			playerResponse.points += playerStatistics.getPoints();
-			playerResponse.assists += playerStatistics.getAssists();
-		}
-		playerResponse.posizione = playerStatisticsList.get(0).getPos();
-
-		playerResponse.setStatistics(playerStatisticsList.stream().map(PlayerStatistics::toPlayerStatisticsResponse).toList());
-		if (playerResponse.getStatistics().size() == 0) {
-			playerResponse.setStatistics(Collections.emptyList());
-		}
-
-
-		return playerResponse;
+	playerResponse.age = year;
+	playerResponse.birthCountry = player.getBirthCountry();
+	playerResponse.nbaStart = player.getNbaStart().getValue();
+	playerResponse.nbaPro = player.getNbaPro();
+	playerResponse.heightFeet = player.getHeightFeet();
+	playerResponse.heightInches = player.getHeightInches();
+	playerResponse.heightMeters = player.getHeightMeters();
+	playerResponse.weightPounds = player.getWeightPounds();
+	playerResponse.weightKg = player.getWeightKilograms();
+	playerResponse.college = player.getCollege();
+	playerResponse.affiliation= player.getLastAffiliation();
+	playerResponse.numeroMaglia = player.getNumeroMaglia();
+	List<PlayerStatistics> playerStatisticsList = playerStatRepository.findLast5Games(player.getId());
+	for (PlayerStatistics playerStatistics : playerStatisticsList) {
+		playerResponse.points += playerStatistics.getPoints();
+		playerResponse.assists += playerStatistics.getAssists();
 	}
+	playerResponse.posizione = playerStatisticsList.get(0).getPos();
+	playerResponse.setStatistics(playerStatisticsList.stream().map(PlayerStatistics::toPlayerStatisticsResponse).toList());
+	if (playerResponse.getStatistics().size() == 0) {
+		playerResponse.setStatistics(Collections.emptyList());
+	}
+	return playerResponse;
+}
 
 
 }

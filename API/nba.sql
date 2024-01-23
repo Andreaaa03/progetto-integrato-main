@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 23, 2024 alle 16:30
+-- Creato il: Gen 24, 2024 alle 00:10
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -34714,15 +34714,18 @@ INSERT INTO `season` (`id`, `year`) VALUES
 CREATE TABLE `seguiti` (
   `id` int(11) NOT NULL,
   `seguito` int(11) NOT NULL,
-  `seguace` int(11) NOT NULL
+  `seguace` int(11) NOT NULL,
+  `amico` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `seguiti`
 --
 
-INSERT INTO `seguiti` (`id`, `seguito`, `seguace`) VALUES
-(7, 9, 5);
+INSERT INTO `seguiti` (`id`, `seguito`, `seguace`, `amico`) VALUES
+(12, 9, 5, 1),
+(13, 16, 5, 0),
+(14, 16, 9, 0);
 
 -- --------------------------------------------------------
 
@@ -34987,16 +34990,18 @@ CREATE TABLE `utente` (
   `follower` int(11) NOT NULL DEFAULT 0,
   `username` varchar(255) NOT NULL,
   `sesso` varchar(255) NOT NULL,
-  `seguiti` int(11) DEFAULT NULL
+  `seguiti` int(11) DEFAULT NULL,
+  `iscrizione` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `utente`
 --
 
-INSERT INTO `utente` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `pswd`, `role_id`, `data_iscrizione`, `numero_telefono`, `follower`, `username`, `sesso`, `seguiti`) VALUES
-(5, 'Giorgio', 'Modeo', '2002-12-08', 'giorgio.modeo@gmail.com', 'e98e17f3e8a79a36583ebf1931c4a089f9bc556a3ca6b5158386a997d9bce2e8', 2, '2024-01-16 23:00:00', '1234567891', 0, 'giovanni', '', 0),
-(9, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-22 16:49:21', '1234567890', 0, 'domanico', 'm', NULL);
+INSERT INTO `utente` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `pswd`, `role_id`, `data_iscrizione`, `numero_telefono`, `follower`, `username`, `sesso`, `seguiti`, `iscrizione`) VALUES
+(5, 'Giorgio', 'Modeo', '2002-12-08', 'giorgio.modeo@gmail.com', 'e98e17f3e8a79a36583ebf1931c4a089f9bc556a3ca6b5158386a997d9bce2e8', 2, '2024-01-16 23:00:00', '1234567891', 0, 'giovanni', '', 0, '2024-01-23 22:06:04'),
+(9, 'Edoardo', 'Caon', '2002-06-26', 'edoardo.caon@edu.itspiemonte.it', 'ac842f312e549196f8f469e89e9cd2a1e2c963c354321270137f9cd98e539a71', 3, '2024-01-22 16:49:21', '1234567890', 0, 'domanico', 'm', NULL, '2024-01-23 22:06:04'),
+(16, 'marco', 'pacchiotti', '2002-06-26', 'marco.pacchiotti@edu.itspiemonte.it', 'e2109500f396dd5e27b2222d9f5324b63a5e07c177d9ea7fe5043123fc02c5bf', 3, '2024-01-23 22:06:16', '1234567896', 0, 'pacchio1', 'm', NULL, '2024-01-23 22:06:16');
 
 -- --------------------------------------------------------
 
@@ -35017,11 +35022,11 @@ CREATE TABLE `utente_preferiti` (
 --
 
 INSERT INTO `utente_preferiti` (`id`, `utente`, `team`, `articolo`, `data`) VALUES
-(5, 5, 1, NULL, '2024-01-22 00:26:00'),
-(6, 5, NULL, 4, '2024-01-22 01:26:00'),
-(10, 5, NULL, 1, '2024-01-23 11:26:00'),
-(14, 5, 9, NULL, '2024-01-23 11:29:07'),
-(15, 5, NULL, 6, '2024-01-23 11:29:18');
+(37, 5, 5, NULL, '2024-01-23 20:52:02'),
+(38, 5, 2, NULL, '2024-01-23 20:53:41'),
+(39, 5, 4, NULL, '2024-01-23 20:53:45'),
+(40, 5, 24, NULL, '2024-01-23 20:53:51'),
+(42, 5, 27, NULL, '2024-01-23 21:07:57');
 
 --
 -- Indici per le tabelle scaricate
@@ -35242,7 +35247,7 @@ ALTER TABLE `season`
 -- AUTO_INCREMENT per la tabella `seguiti`
 --
 ALTER TABLE `seguiti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT per la tabella `tag`
@@ -35260,13 +35265,13 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT per la tabella `utente_preferiti`
 --
 ALTER TABLE `utente_preferiti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Limiti per le tabelle scaricate

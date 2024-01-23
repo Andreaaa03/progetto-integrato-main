@@ -1,2 +1,11 @@
 
-r	java:S114"QRename this interface name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Ú¼Æåşÿÿÿÿ8¾ÅÂåÒ1
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Û°ºø8—äÛÀÓ1
+m	java:S114"QRename this interface name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(È°ğ˜8˜äÛÀÓ1
+O
+java:S6126"2Replace this String concatenation with Text block.(“„²Õ8›äÛÀÓ1
+O
+java:S6126"2Replace this String concatenation with Text block.(“„²Õ8›äÛÀÓ1
+T
+java:S6126$"2Replace this String concatenation with Text block.(ô€³Úùÿÿÿÿ8›äÛÀÓ1
+P
+java:S1128"3Remove this unused import 'jakarta.persistence.Id'.(š¨ô 8œäÛÀÓ1

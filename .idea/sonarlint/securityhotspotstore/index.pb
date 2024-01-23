@@ -101,3 +101,13 @@ aAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Servic
 tAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Payload/Response/TeamStandingsResponse.java,2\2\225880c3da3e531f3a3bd1467e6d0273bbc49246
 ’
 bAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Entity/TeamStandings.java,0\9\09fcd0c22419b4ad2a2d64b3447236e4139f9bdc
+˜
+hAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Repository/GamesRepository.java,b\0\b05d92170ac946184eae917c48f41afd88c744dd
+;
+API/nba.sql,d\c\dcebe350353d0802ebe295608d9def86029e1b15
+˜
+hAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Repository/TeamsRepository.java,9\f\9f21439d7cefde013655a65d31aa8ee69187ee87
+Š
+ZAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Entity/Teams.java,6\0\606cf531b9492f05aa870b1300ee83eba06e95bd
+‹
+[API/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Entity/League.java,2\0\206b53aad85a2e542f8b168a1d4d94975e27fa81

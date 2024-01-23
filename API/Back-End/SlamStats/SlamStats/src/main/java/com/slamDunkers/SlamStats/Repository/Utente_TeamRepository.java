@@ -35,8 +35,11 @@ List<UtentePreferiti> findTeamPreferiti(@Param("idUtente") int idUtente);
 
 	 @Query(value = "SELECT COUNT(ut.id) \n" +
 			 "FROM `utente_preferiti` ut\n" +
-			 "WHERE `utente` = :idUtente AND `team` IS NOT null", nativeQuery = true)
-	 Integer findByIdUtente(@Param("idUtente") int idUtente);
+			 "join teams t on t.id = ut.team\n" +
+			 "join league l on l.id = t.league_id\n" +
+			 "join conference c on c.ID = l.conference_id\n" +
+			 "WHERE `utente` = :idUtente AND `team` IS NOT null AND c.ID = :conference", nativeQuery = true)
+	 Integer findByIdUtente(@Param("idUtente") int idUtente,@Param("conference") int conference);
 
 
 }

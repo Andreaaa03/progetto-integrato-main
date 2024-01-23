@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 23, 2024 alle 15:47
+-- Creato il: Gen 23, 2024 alle 16:15
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -43,9 +43,9 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`id`, `titolo`, `riassunto`, `foto`, `creazione`, `numero_foto`, `tipo`, `colori`) VALUES
-(1, 'LA NASCITA E L’ASCESA DELLA NBA', 'La National Basketball Association (NBA), una delle leghe sportive più prestigiose al mondo, ha una storia ricca e affascinante che ha avuto inizio il 6 giugno 1946 a New York City sotto il nome di Basketball Association of America (BAA)...', NULL, '2024-01-23 14:37:12', 0, 'aneddoti', '#800080'),
+(1, 'LA NASCITA E L’ASCESA DELLA NBA', 'La National Basketball Association (NBA), una delle leghe sportive più prestigiose al mondo, ha una storia ricca e affascinante che ha avuto inizio il 6 giugno 1946 a New York City sotto il nome di Basketball Association of America (BAA)...', 'https://www.gazzetta.it/methode_image/2021/11/01/Varie/Foto_Varie_-_Trattate/395429adbcd4b844d10c69c4c7cdeeac_1200x675.JPG', '2024-01-23 15:15:07', 0, 'aneddoti', '#800080'),
 (2, 'LAKERS AFFRONTANO E VINCONO CONTRO DALLAS', 'Anthony Davis ha brillato nella vittoria dei Lakers contro i Mavs la sera del 18/01, confermando di essere in ottima forma. Per la squadra gialloviola, attualmente in una posizione delicata nella zona Play-In, ogni vittoria è cruciale e quella di questa s', 'https://cdn.vox-cdn.com/thumbor/slsAA3Wz8YKApi0vMnO_2zVQC3M=/0x0:3000x2000/920x613/filters:focal(955x491:1435x971):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/72184204/1470529948.0.jpg', '2024-01-23 14:38:25', 2, 'match', '#880000'),
-(4, 'LA NASCITA DEL TIRO DA 3 PUNTI', 'Non tutti sanno che il famoso “tiro da 3” non è nato con l’inizio dell’NBA.\r\nLa NBA ha subito una trasformazione epocale con l\'introduzione del tiro da tre punti nella stagione 1979-1980. Questo elemento tattico ha cambiato radicalmente il modo in cui le ', NULL, '2024-01-23 14:37:25', 0, 'aneddoti', '#800080'),
+(4, 'LA NASCITA DEL TIRO DA 3 PUNTI', 'Non tutti sanno che il famoso “tiro da 3” non è nato con l’inizio dell’NBA.\r\nLa NBA ha subito una trasformazione epocale con l\'introduzione del tiro da tre punti nella stagione 1979-1980. Questo elemento tattico ha cambiato radicalmente il modo in cui le ', 'https://www.nbapassion.com/wp-content/uploads/2015/11/stephen-curry-021415-ftr-gettyjpg_zk4nwx55fa8i1mj6kihzjw880.jpg', '2024-01-23 15:14:15', 0, 'aneddoti', '#800080'),
 (6, 'Suga dei BTS collabora con l\'NBA, nominato nuovo ambasciatore', 'La nuova collezione ispirata al campionato di basket statunitense è stata curata dalla star del K-pop, Suga. Questa emozionante collaborazione è stata resa nota attraverso il sito ufficiale della Lega, che ha comunicato che il rinomato rapper e produttore', 'https://www.malemodelscene.net/wp-content/uploads/2023/08/SUGA-NBA-01.jpg', '2024-01-23 14:38:47', 2, 'aneddoti', '#800080');
 
 -- --------------------------------------------------------

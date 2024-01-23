@@ -34,28 +34,16 @@ public class PlayerService {
 
 	public List<Player> selezionaTuttiGiocatori(){return playerRepository.findAll();}
 
-	public PlayerResponse selezionaGiocatore(int playerId){
-		return toPlayerResponse(playerRepository.findById(playerId));
-	}
-
-	public Integer somma(List<Integer> input) {
-		List<Integer> x = new ArrayList<>(input);
-		int somma = 0;
-		for (Integer integer : x) {
-			somma += integer;
-		}
-		return somma;
-	}
-
-	public Integer media(List<Integer> input) {
-		int x = somma(input);
-		if (x == 0) {
-			return 0;
-		}
-		else {
-			return x / input.size();
-		}
-	}
+/**
+ * This method retrieves a specific player's details.
+ *
+ * @param playerId The ID of the player whose details are to be retrieved.
+ * @return A PlayerResponse object representing the player's details.
+ * If no player is found with the specified ID, the method returns null.
+ */
+public PlayerResponse selezionaGiocatore(int playerId){
+ return toPlayerResponse(playerRepository.findById(playerId));
+}
 
 	public List<PlayerResponse> selezionaGiocatoriPerSquadra(int teamId) {
 

@@ -91,3 +91,7 @@ jAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Payloa
 gAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Controller/BlogController.java,8\1\81e8454386298a11d14a51c1533d5290840a0a1f
 Š
 ZAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Entity/Games.java,a\e\ae455f51229a11af9e1b932f04ae0fd120698ff2
+‰
+YAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Entity/Blog.java,e\7\e78dc306e9071923d9404f2ebe62c4e9845caeb4
+‘
+aAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Service/BlogService.java,2\6\26e4e857752bfffe32c31a29be63ab4d0e788f22

@@ -48,6 +48,7 @@ public BlogCompleto getBlogCompleto(Integer id) {
     blogCompleto.setBlog(blogRepository.findById(id).orElse(null));
     blogCompleto.setParagrafi(toParagrafoRespone( paragrafoRepository.findByIdBlog(blog)) );
     List<Tag> allByBlog = tagRepository.findAllByBlog(id);
+
     blogCompleto.setTags(toListString (allByBlog));
     return blogCompleto;
 }

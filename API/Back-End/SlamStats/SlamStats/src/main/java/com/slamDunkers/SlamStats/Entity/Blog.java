@@ -34,5 +34,10 @@ public class Blog {
     @Column(name ="numero_foto")
     private Integer numeroFoto;
 
+    @Column(name ="tipo")
+    private String tipo;
+    @Column(name ="colori")
+    private String colori;
+
 
 }

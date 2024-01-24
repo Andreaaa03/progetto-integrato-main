@@ -328,7 +328,7 @@ public class ToResponse {
         playerResponse.setFotoAvif(player.getFoto2());
         playerResponse.setFotoWebp(player.getFoto3());
 
-        List<PlayerStatistics> playerStatisticsList = playerStatRepository.findByPlayerId(player.getId());
+        List<PlayerStatistics> playerStatisticsList = playerStatRepository.findLast5Games(player.getId());
 
         System.out.println(playerStatisticsList.get(0).getPos());
 

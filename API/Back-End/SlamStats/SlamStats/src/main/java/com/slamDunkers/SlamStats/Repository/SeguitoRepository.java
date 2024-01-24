@@ -21,8 +21,15 @@ public interface SeguitoRepository extends JpaRepository<Seguiti, Integer> {
     @Query(value = "SELECT COUNT(*) FROM `seguiti` WHERE `seguito` = :mioId", nativeQuery = true)
     int numeroSeguaci(int mioId);
 
-    @Query(value = "SELECT * FROM `seguiti` WHERE `seguito` = :mioId", nativeQuery = true)
-    Optional<UtenteResponse> daChivengoSeguito(int mioId);
+    @Query(value = "SELECT s.seguito, u.username, s.amico, r.role, " +
+            "(SELECT COUNT(s1.id) FROM seguiti s1 WHERE s1.seguito = u.id ) as follower, " +
+            "(SELECT COUNT(s1.id) FROM seguiti s1 WHERE s1.seguace = u.id ) as following " +
+            "FROM seguiti s " +
+            "JOIN utente u ON s.seguito = u.id " +
+            "JOIN roles r ON r.id = u.role_id " +
+            "WHERE s.seguito = :mioId ", nativeQuery = true)
+    List<Object[]> daChiVengoSeguito(@Param("mioId") Integer mioId);
+
 
     @Query(value = "SELECT s.seguito, u.username, s.amico, r.role, " +
             "(SELECT COUNT(s1.id) FROM seguiti s1 WHERE s1.seguito = u.id ) as follower, " +

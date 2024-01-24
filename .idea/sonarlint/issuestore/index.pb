@@ -109,3 +109,5 @@ hAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Reposi
 hAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Repository/TeamsRepository.java,9\f\9f21439d7cefde013655a65d31aa8ee69187ee87
 Š
 ZAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Entity/Teams.java,6\0\606cf531b9492f05aa870b1300ee83eba06e95bd
+š
+jAPI/Back-End/SlamStats/SlamStats/src/main/java/com/slamDunkers/SlamStats/Repository/SeguitoRepository.java,1\3\13e424688167adbcc08caad559f6798499ac4343

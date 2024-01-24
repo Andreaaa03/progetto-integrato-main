@@ -50,10 +50,15 @@ public class PlayerService {
      */
     public List<PlayerResponse> selezionaGiocatoriPerSquadra(int teamId) {
         Optional<Teams> teamFound = teamsRepository.findById(teamId);
+        System.out.println(teamFound.isPresent());
         if (teamFound.isPresent()) {
             List<PlayerResponse> playerResponseList = new ArrayList<>();
             for (Player player : playerRepository.findByTeam(teamFound)) {
-                playerResponseList.add(toResponse.toPlayerResponse(player));
+                PlayerResponse playe = toResponse.toPlayerResponse(player);
+                playerResponseList.add(playe);
+
+                System.out.println(playe.statistics);
+
             }
             return playerResponseList;
         } else {

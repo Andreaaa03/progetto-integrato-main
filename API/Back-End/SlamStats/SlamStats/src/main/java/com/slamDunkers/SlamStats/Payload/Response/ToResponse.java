@@ -326,8 +326,13 @@ public class ToResponse {
         playerResponse.numeroMaglia = player.getNumeroMaglia();
 
         List<PlayerStatistics> playerStatisticsList = playerStatRepository.findByPlayerId(player.getId());
+
+        System.out.println(playerStatisticsList.get(0).getPos());
+
+
         playerResponse.setPoints(sommaInt(playerStatisticsList.stream().map(PlayerStatistics::getPoints).toList()));
         playerResponse.setAssists(sommaInt(playerStatisticsList.stream().map(PlayerStatistics::getAssists).toList()));
+        playerResponse.setStatistics(playerStatisticsList.stream().map(PlayerStatistics::toPlayerStatisticsResponse).toList() );
         if (playerStatisticsList.isEmpty()) {
             playerResponse.setPosizione("N/A");
         } else {

@@ -62,4 +62,11 @@ public class Player {
 	private String lastAffiliation;
 	@Column(name = "numero_maglia", columnDefinition = "int")
 	private Integer numeroMaglia;
+	
+	@Column(name = "foto1", columnDefinition = "varchar(255)")
+	private String foto1;
+	@Column(name = "foto2", columnDefinition = "varchar(255)")
+	private String foto2;
+	@Column(name = "foto3", columnDefinition = "varchar(255)")
+	private String foto3;
 }

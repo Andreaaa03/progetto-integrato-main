@@ -34,6 +34,9 @@ public class PlayerResponse {
 	public String posizione;
 	public int assists;
 	public int numeroMaglia;
+	public String fotoPng;
+	public String fotoAvif;
+	public String fotoWebp;
 	public List<PlayerStatisticsResponse> statistics;
 
 

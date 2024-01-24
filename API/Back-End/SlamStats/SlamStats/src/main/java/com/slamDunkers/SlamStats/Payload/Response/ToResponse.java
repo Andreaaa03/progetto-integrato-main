@@ -324,6 +324,9 @@ public class ToResponse {
         playerResponse.college = player.getCollege();
         playerResponse.affiliation = player.getLastAffiliation();
         playerResponse.numeroMaglia = player.getNumeroMaglia();
+        playerResponse.setFotoPng(player.getFoto1());
+        playerResponse.setFotoAvif(player.getFoto2());
+        playerResponse.setFotoWebp(player.getFoto3());
 
         List<PlayerStatistics> playerStatisticsList = playerStatRepository.findByPlayerId(player.getId());
 

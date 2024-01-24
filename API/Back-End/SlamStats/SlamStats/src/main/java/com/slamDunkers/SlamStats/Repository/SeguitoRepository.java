@@ -1,8 +1,6 @@
 package com.slamDunkers.SlamStats.Repository;
 
 import com.slamDunkers.SlamStats.Entity.Seguiti;
-import com.slamDunkers.SlamStats.Payload.Response.AmicoResponse;
-import com.slamDunkers.SlamStats.Payload.Response.UtenteResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

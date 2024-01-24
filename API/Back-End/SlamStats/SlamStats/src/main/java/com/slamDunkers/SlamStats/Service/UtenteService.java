@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -361,6 +362,21 @@ public class UtenteService {
         ur.setNumeroTelefono(u.get().getNumeroTelefono());
         ur.setUsername(u.get().getUsername());
         ur.setSesso(u.get().getSesso());
+        ur.setFollower(u.get().getFollower());
+        ur.setDataIscrizione(u.get().getDataIscrizione());
+        LocalDate dataNascita = u.get().getBirthDate();
+
+        int annoNascita = dataNascita.getYear();
+        int meseNascita = dataNascita.getMonthValue();
+        int giornoNascita = dataNascita.getDayOfMonth();
+
+        LocalDate oggi = LocalDate.now();
+        int eta = oggi.getYear() - annoNascita;
+        if (oggi.getMonthValue() < meseNascita || (oggi.getMonthValue() == meseNascita && oggi.getDayOfMonth() < giornoNascita)) {
+            eta--; 
+        }
+        ur.setEta(eta);
+        ur.setRuolo(u.get().getRoleId().getRole());
         List<UtentePreferiti> lut = utenteTeamRepository.findTeamPreferiti(u.get().getId());
         List<TeamsResponse> teams = new ArrayList<>();
         for (UtentePreferiti utentePreferiti : lut) {

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -19,4 +20,8 @@ public class UtenteResponse {
 	private String username;
 	private String sesso;
 	private int follower;
+	private int eta;
+	private LocalDate dataIscrizione;
+	private String ruolo;
+
 }

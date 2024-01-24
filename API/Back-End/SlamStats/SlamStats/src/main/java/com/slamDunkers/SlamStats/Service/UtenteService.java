@@ -430,6 +430,20 @@ public class UtenteService {
         }
     }
 
+    public List<AmicoResponse> seguiti(TokenRequest request) {
+        Utente u = getUtente(request.getToken());
+        List<Object[]> seguiti = seguitoRepository.chiSeguo(u.getId());
+        if (seguiti == null) return null;
+
+        List<AmicoResponse> utenti = new ArrayList<>();
+        for (Object[] seguito : seguiti) {
+
+            utenti.add(toResponse.toAmicoresponse(seguito));
+        }
+
+
+    }
+
     public List<AmicoResponse> getAmici(TokenRequest request) {
         Utente u = getUtente(request.getToken());
 
@@ -450,4 +464,7 @@ public class UtenteService {
     }
 
 
+    public List<AmicoResponse> followers(TokenRequest request) {
+        return null;
+    }
 }

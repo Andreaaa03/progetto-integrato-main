@@ -63,14 +63,24 @@ public class UtenteController {
 		return userService.teamArticoliPreferiti(request);
 	}
 
-	@PostMapping("/addAmico")
+	@PostMapping("/seguiAmico")
 	public ResponseEntity<String> addAmico(@RequestBody @Valid SeguiRequest request){
 		return userService.addAmico(request);
 	}
 
-	@PostMapping("/getAmici")
+	@PostMapping("/amiciSeguiti")
 	public List<AmicoResponse> getAmici(@RequestBody @Valid TokenRequest request){
 		return userService.getAmici(request);
+	}
+
+	@PostMapping("/seguiti")
+	public List<AmicoResponse> getSeguiti (@RequestBody @Valid TokenRequest request){
+		return userService.seguiti(request);
+	}
+
+	@PostMapping("/followers")
+	public List<AmicoResponse> getFollowers (@RequestBody @Valid TokenRequest request){
+		return userService.followers(request);
 	}
 
 }

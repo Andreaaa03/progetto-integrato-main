@@ -65,9 +65,6 @@ public class TeamStatGameResponse {
 	public QaurtiScoreResponse qaurtiScoreResponse;
 	public List<PlayerStatisticsResponse> playersStatistics;
 
-
-
-	// Metodo di conversione da TeamStatGameResponse a Map
 	public void toMap( ) {
 		this.dati.put("fgm", this.fgm);
 		this.dati.put("fga", this.fga);

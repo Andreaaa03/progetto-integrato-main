@@ -2,7 +2,6 @@ package com.slamDunkers.SlamStats.Controller;
 
 import com.slamDunkers.SlamStats.Entity.Player;
 import com.slamDunkers.SlamStats.Payload.Response.PlayerResponse;
-import com.slamDunkers.SlamStats.Payload.Response.PlayerStatisticsResponse;
 import com.slamDunkers.SlamStats.Service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

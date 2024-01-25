@@ -1,0 +1,7 @@
+com.slamDunkers.SlamStats
+com.slamDunkers.SlamStats.Controller
+com.slamDunkers.SlamStats.Entity
+com.slamDunkers.SlamStats.Payload.Request
+com.slamDunkers.SlamStats.Payload.Response
+com.slamDunkers.SlamStats.Repository
+com.slamDunkers.SlamStats.Service

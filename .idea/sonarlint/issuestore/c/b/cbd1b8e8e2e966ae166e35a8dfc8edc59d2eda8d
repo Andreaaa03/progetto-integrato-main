@@ -1,3 +1,4 @@
 
 
-java:S1488¿"^Immediately return this expression instead of assigning it to the temporary variable "numero".(É¤¥ƒùÿÿÿÿ8Ê¨ÅÓ1
+java:S1488Ç"^Immediately return this expression instead of assigning it to the temporary variable "numero".(É¤¥ƒùÿÿÿÿ8Ê¨ÅÓ1
+H	java:S106Í"+Replace this use of System.out by a logger.(ÑÂÏõ8ç‹Ü€Ô1

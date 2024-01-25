@@ -1,114 +1,131 @@
-<div *ngIf="token==null && modal===true" class="fixed lg:top-1/2 top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center bg-[#acdeff81]">
-    <div class="w-[80%] lg:h-[80%] h-[85%] bg-gray-100 border-4 border-primary z-40">
-        <div class="flex flex-wrap items-center justify-center h-full z-40 mb-4">
+<div *ngIf="token==null && modal===true" class="fixed z-40 lg:top-1/2 top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center bg-[#acdeff81]">
+    <div class="w-[90%] lg:h-[80%] h-[85%] bg-gray-100 border-4 border-primary z-40">
+        <div class="flex flex-wrap items-center justify-center h-full z-40">
             <div class="w-full flex flex-wrap justify-center" *ngIf="registrati === false">
-                <form class="lg:w-[80%] w-[90%] flex flex-wrap" (submit)="login()">
+                <div class="lg:w-[80%] w-[90%] flex flex-wrap">
                     <div class="w-full flex justify-center">
-                        <div class="w-[80%] flex justify-center">
+                        <div class="lg:w-[80%] w-[90%] flex justify-center">
                             <div class="w-full flex justify-between items-center">
                                 <div class="w-[15%] flex justify-center"></div>
                                 <p class="w-[70%] flex justify-center text-2xl font-bold">ACCEDI AL TUO ACCOUNT</p>
-                                <div class="w-[15%] flex justify-center " (click)="modal=!modal">
+                                <div class="w-[15%] flex justify-center " (click)="modal=!modal; errorMessage=''; succesfulMessage=''">
                                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAsUlEQVR4nO2VQQrCMBBFH2Q8nne0FLNpDlYV3HcVEaYg0pqPraFCP8wqf/I6zSQDu/5VR+AONIAJfgNa4OK5MmQAskdXgJl7Rv+gwm4vSSWYvUHGuCqgZiJxCmYzkGecFFAAzjMbJODgnljwSPr0tV1hTWkeubK8tJJvYWkJRIWlNSAUDj6vWU2scT7x181gNdo7CJcxCJe6yhPU1npU+02NCdzY+y9QB1/j40GG7NqWHrZCsVI4Fm8DAAAAAElFTkSuQmCC">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="w-full flex justify-center flex-wrap mt-4">
-                        <div class="w-[70%] mb-4">
-                            <input type="text" id="username" name="username" maxlength="40" [(ngModel)]="email" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="USERNAME: ">
+                    <form class="w-full flex flex-wrap" (submit)="login()">
+                        <div class="w-full flex justify-center flex-wrap mt-4">
+                            <div class="lg:w-[70%] w-[90%] mb-4">
+                                <input type="text" id="mail" name="mail" maxlength="40" [(ngModel)]="signinForm.mail" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="USERNAME: ">
+                            </div>
+                            <div class="lg:w-[70%] w-[90%] mb-4">
+                                <input type="password" id="password" name="password" [(ngModel)]="signinForm.password" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="PASSWORD: ">
+                            </div>
                         </div>
-                        <div class="w-[70%] mb-4">
-                            <input type="password" id="password" name="password" [(ngModel)]="password" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="PASSWORD: ">
+                        <div class="w-full flex justify-center">
+                            <button type="submit" (submit)="login()" class="w-auto py-2 px-4 bg-secondary text-white rounded-2xl">ACCEDI</button>
                         </div>
-                    </div>
-                    <div class="w-full flex justify-center">
-                        <button type="submit" (submit)="login()" class="w-auto py-2 px-4 bg-primary text-white rounded-2xl hover:bg-blue-600">ACCEDI</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
                 <div class="w-full flex justify-center my-1">
                     <button class="lg:w-[30%] w-auto p-2 bg-white my-4 text-secondary font-bold rounded-2xl border-secondary border-4 hover:bg-tertiary">PASSWORD
                         DIMENTICATA?</button>
                 </div>
                 <div class="w-[60%] flex justify-evenly items-center mt-10">
                     <p class="w-auto lg:text-base text-xs lg:text-center font-bold mr-2">Non sei ancora registrato?</p>
-                    <button (click)="registratiView()" class="lg:w-[30%] w-auto p-2 bg-primary text-white rounded-2xl hover:bg-blue-600">REGISTRATI</button>
+                    <button (click)="registratiView()" class="lg:w-[30%] w-auto p-2 bg-secondary text-white rounded-2xl">REGISTRATI</button>
+                </div>
+                <div class="text-center w-full h-10 mt-4">
+                    <p *ngIf="errorMessage!=''" class="text-xl text-red-500">{{ errorMessage }}</p>
+                    <p *ngIf="succesfulMessage!=''" class="text-xl text-green-500">{{ succesfulMessage }}</p>
                 </div>
             </div>
             <div class="w-full flex flex-wrap justify-center" *ngIf="registrati === true">
-                <form class="lg:w-[80%] w-[90%] flex flex-wrap">
+                <div class="lg:w-[80%] w-[90%] flex flex-wrap justify-center">
                     <div class="w-full flex justify-center">
-                        <div class="lg:w-[70%] w-[80%] flex justify-between items-center">
+                        <div class="lg:w-[70%] w-[90%] flex justify-between items-center">
                             <div class="w-[15%] flex" (click)="registratiView()">
                                 <div class="w-auto lg:flex hidden justify-center items-center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAs0lEQVR4nNXWPQoCMRCG4fcEWsgq+AOKlXowj6mlhZ2uhWujNuolVhYiLJIUwpcPHJj6IZNkZuBPYgKcgC3QzYlcgDrkDuiokTFQtZBPrpXIKIGUQE+FDMKd1F95BoZKpIwgVThlVuQKTFVIP4HcgJkSOUaQOzBXIocI8gAWKqRIIE9gqUKa2EeQF7BSIlaocJXO9hisz9v6Ya0tyNpUrWPCOviso9y6nNDCmpJtcq5bP8UbhdWADWvaLVIAAAAASUVORK5CYII="> indietro </div>
                                 <div class="w-auto lg:hidden flex justify-center items-center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAs0lEQVR4nNXWPQoCMRCG4fcEWsgq+AOKlXowj6mlhZ2uhWujNuolVhYiLJIUwpcPHJj6IZNkZuBPYgKcgC3QzYlcgDrkDuiokTFQtZBPrpXIKIGUQE+FDMKd1F95BoZKpIwgVThlVuQKTFVIP4HcgJkSOUaQOzBXIocI8gAWKqRIIE9gqUKa2EeQF7BSIlaocJXO9hisz9v6Ya0tyNpUrWPCOviso9y6nNDCmpJtcq5bP8UbhdWADWvaLVIAAAAASUVORK5CYII="> </div>
                             </div>
-                            <p class="w-[70%] flex justify-center text-2xl font-bold">REGISTRATI</p>
+                            <p class="lg:w-[70%] w-[90%] flex justify-center text-2xl font-bold">REGISTRATI</p>
                             <div class="w-[15%] flex justify-end" (click)="modal=!modal">
                                 <img class="w-auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAsUlEQVR4nO2VQQrCMBBFH2Q8nne0FLNpDlYV3HcVEaYg0pqPraFCP8wqf/I6zSQDu/5VR+AONIAJfgNa4OK5MmQAskdXgJl7Rv+gwm4vSSWYvUHGuCqgZiJxCmYzkGecFFAAzjMbJODgnljwSPr0tV1hTWkeubK8tJJvYWkJRIWlNSAUDj6vWU2scT7x181gNdo7CJcxCJe6yhPU1npU+02NCdzY+y9QB1/j40GG7NqWHrZCsVI4Fm8DAAAAAElFTkSuQmCC">
                             </div>
                         </div>
                     </div>
-                    <div class="w-full flex justify-center flex-wrap mt-4">
-                        <div class="lg:w-[70%] w-[80%] mb-4">
-                            <input type="text" id="username" name="username" maxlength="40" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Username* ">
+                    <form class="lg:w-[70%] w-[90%] flex justify-center flex-wrap mt-4" (submit)="signup()">
+                        <div class="flex justify-between w-full">
+                            <div class="lg:w-[48%] w-full mb-4">
+                                <input required type="text" [(ngModel)]="signupForm.first_name" id="nome" name="first_name" minlength="1" maxlength="255" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Nome* ">
+                            </div>
+                            <div class="lg:w-[48%] w-full mb-4">
+                                <input required type="text" [(ngModel)]="signupForm.last_name" id="cognome" name="last_name" minlength="1" maxlength="255" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Cognome* ">
+                            </div>
                         </div>
-                        <div class="lg:w-[70%] w-[80%] mb-4">
-                            <input type="text" id="eta" name="eta" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Età ">
+                        <div class="flex justify-between w-full">
+                            <div class="lg:w-[48%] w-full mb-4">
+                                <input required type="text" [(ngModel)]="signupForm.username" id="username" name="username" minlength="1" maxlength="50" maxlength="40" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Username* ">
+                            </div>
+                            <div class="lg:w-[48%] w-full mb-4">
+                                <input required type="tel" [(ngModel)]="signupForm.numeroTelefono" id="tel" name="numeroTelefono" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Cellulare* ">
+                            </div>
                         </div>
-                        <div class="lg:w-[70%] w-[80%] flex flex-nowrap mb-4 lg:justify-between justify-center">
+                        <div class="w-full flex flex-nowrap mb-4 lg:justify-between justify-center">
                             <div class="w-full lg:flex hidden items-center">
                                 <div class="w-1/4 flex items-center ">
                                     <p class="px-4 w-full text-base">Sesso:</p>
                                 </div>
                                 <div class="w-1/4 flex items-center flex-nowrap">
-                                    <input type="radio" name="sesso" class="rounded-full w-5 h-5 bg-gray-400">
+                                    <input required type="radio" name="sesso" [ngModelOptions]="{standalone: true}" [(ngModel)]="signupForm.sesso" value="m" class="rounded-full w-5 h-5 bg-gray-400">
                                     <div class="px-4 flex justify-center border-primary border-4 ml-2">M</div>
                                 </div>
                                 <div class="w-1/4 flex items-center flex-nowrap">
-                                    <input type="radio" name="sesso" class="rounded-full w-5 h-5 bg-gray-400">
+                                    <input required type="radio" name="sesso" [ngModelOptions]="{standalone: true}" [(ngModel)]="signupForm.sesso" value="f" class="rounded-full w-5 h-5 bg-gray-400">
                                     <div class="px-4 flex justify-center border-primary border-4 ml-2">F</div>
                                 </div>
                                 <div class="w-1/4 flex items-center flex-nowrap">
-                                    <input type="radio" name="sesso" class="rounded-full w-5 h-5 bg-gray-400">
+                                    <input required type="radio" name="sesso" [ngModelOptions]="{standalone: true}" [(ngModel)]="signupForm.sesso" value="a" class="rounded-full w-5 h-5 bg-gray-400">
                                     <div class="px-4 flex justify-center border-primary border-4 ml-2">Altro</div>
                                 </div>
                             </div>
                             <div class="w-auto lg:hidden flex items-center ml-4">
-                                <div class="flex items-center w-full border-primary border-4">
-                                    <select id="select" class="border p-2" [(ngModel)]="selectedOption">
-                                        <option value="maschio">M</option>
-                                        <option value="femmina">F</option>
-                                        <option value="altro">Altro</option>
+                                <div class="flex items-center w-full border-primary border-4 rounded-full px-4">
+                                    <p class="w-auto">Sesso: </p>
+                                    <select required="" name="sesso" [(ngModel)]="signupForm.sesso" id="select" class="p-2">
+                                        <option value="m">M</option>
+                                        <option value="f">F</option>
+                                        <option value="a">Altro</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="lg:w-[70%] w-[80%] mb-4">
-                            <input type="email" id="email" name="email" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Eamil* ">
+                        <div class="w-full mb-4">
+                            <input required type="email" [(ngModel)]="signupForm.mail" id="email" name="mail" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Eamil* ">
                         </div>
-                        <div class="lg:w-[70%] w-[80%] mb-4">
-                            <input type="password" id="password" name="password" class="mt-1 px-4 py-1 w-full border-primary border-4 rounded-full" placeholder="Cellulare* ">
+                        <div class="w-full mb-4 border-primary border-4 rounded-full px-4 flex flex-wrap items-center">
+                            <p class="w-1/3">Data di nascita:</p> <input type="date" [(ngModel)]="signupForm.birthDate" id="dataDiNascita" name="dataDiNascita" class="m-0 px-4 py-1 w-2/3 bg-transparent" placeholder="Data di nascita ">
                         </div>
-                        <div class="lg:w-[70%] w-[80%] mb-4">
+                        <div class="w-full mb-4">
                             <div class="w-full flex lg:flex-nowrap flex-wrap">
-                                <input type="password" id="password" name="password" class="mt-1 px-4 py-1 lg:w-1/2 w-full lg:mr-2 border-primary border-4 rounded-full" placeholder="Password* ">
-                                <input type="password" id="password" name="password" class="mt-1 px-4 py-1 lg:w-1/2 w-full border-primary border-4 rounded-full" placeholder="Ripeti Password* ">
+                                <input required type="password" [(ngModel)]="signupForm.passwd" id="password1" name="passwd" class="mt-1 px-4 py-1 lg:w-1/2 w-full lg:mr-2 border-primary border-4 rounded-full" placeholder="Password* ">
+                                <input required type="password" [(ngModel)]="signupForm.ripetiPassword" id="password2" name="ripetiPassword" class="mt-1 px-4 py-1 lg:w-1/2 w-full border-primary border-4 rounded-full" placeholder="Ripeti Password* ">
                             </div>
                         </div>
                         <div class="w-full flex justify-center">
-                            <button type="submit" class="w-auto py-2 px-4 bg-primary text-white rounded-2xl hover:bg-blue-600">REGISTRATI</button>
+                            <input type="submit" class="w-auto py-2 px-4 bg-secondary text-white rounded-2xl" value="REGISTRATI" />
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
                 <!-- <div class="w-[60%] flex justify-evenly items-center mt-4">
                     <p class="text-base text-center font-bold mr-2">Hai già un account?</p>
-                    <button (click)="registratiView()" class="lg:w-[30%] w-auto p-2 bg-primary text-white rounded-2xl hover:bg-blue-600">ACCEDI</button>
+                    <button (click)="registratiView()" class="lg:w-[30%] w-auto p-2 bg-secondary text-white rounded-2xl">ACCEDI</button>
                 </div> -->
-            </div>
-
-            <div class="text-center mt-4">
-                <p class="text-sm text-gray-600">{{ errorMessage }}</p>
+                <div class="text-center w-full h-10 mt-4">
+                    <p *ngIf="errorMessage!=''" class="text-xl text-red-500">{{ errorMessage }}</p>
+                    <p *ngIf="succesfulMessage!=''" class="text-xl text-green-500">{{ succesfulMessage }}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -116,8 +133,6 @@
 <nav class="h-16 z-50">
     <div class="bg-secondary w-full flex flex-nowrap fixed top-0 h-16 z-50">
         <div class="md:flex-row flex flex-row-reverse w-full md:justify-normal justify-end">
-
-
             <div class="md:w-[10%] w-1/2 flex md:justify-center justify-start h-full items-center md:mr-20 pl-6 ">
                 <img routerLink="/home" class="object-contain h-[80%]" src="assets/logo-slam-stats.png" alt="">
             </div>
@@ -155,7 +170,7 @@
                 <form action="" class="flex items-center justify-end ">
                     <input type="text" placeholder="cerca" class="rounded-full text-center lg:flex items-center mr-2 hidden">
                     <button class="h-16 lg:w-[10%] w-[50%]">
-                        <img src="./assets/icon/lente-arancione-1.png" alt="" class="object-contain w-auto">
+                        <!-- <img src="./assets/icon/lente-arancione-1.png" alt="" class="object-contain w-auto"> -->
                     </button>
                 </form>
             </div>
@@ -163,7 +178,7 @@
                 <button *ngIf="token==null" (click)="modal=!modal" class="h-16 lg:w-2/4 w-[50%]">
                     <img src="./assets/icon/profilo-arancione-3.png" alt="" class="object-contain w-auto">
                 </button>
-                <button *ngIf="token!=null" [routerLink]="['/profilo']" routerLinkActive="router-link-active"  class="h-16 lg:w-2/4 w-[50%]">
+                <button *ngIf="token!=null" [routerLink]="['/profilo']" routerLinkActive="router-link-active" class="h-16 lg:w-2/4 w-[50%]">
                     <img src="./assets/icon/profilo-arancione-3.png" alt="" class="object-contain w-auto">
                 </button>
             </div>

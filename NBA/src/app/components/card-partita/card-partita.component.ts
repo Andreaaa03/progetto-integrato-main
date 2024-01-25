@@ -16,6 +16,10 @@ export class CardPartitaComponent implements OnInit {
   }
 
   match!: match;
+  /**
+   * ottengo la preview di una partita
+   * @param id : string
+   */
   functionGetMatch(id: string) {
     if (this.gameId != undefined) {
       this.getApiService.getSearchMatch(id).subscribe(

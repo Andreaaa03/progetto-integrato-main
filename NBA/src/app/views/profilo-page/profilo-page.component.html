@@ -4,7 +4,7 @@
         <div class="w-full flex justify-center h-full">
             <div class="w-full">
                 <div class="w-full h-20 bg-primary flex justify-center items-center">
-                    <h2 class=" text-white text-4xl font-bold">
+                    <h2 class=" text-white lg:text-4xl text-2xl font-bold tex-center">
                         PROFILO PERSONALE
                     </h2>
                 </div>
@@ -14,11 +14,11 @@
     </div>
     <div class="flex justify-center h-full">
         <div class="container flex flex-wrap justify-center h-full">
-            <div class="w-[70%] flex flex-nowrap mt-20">
-                <div class="w-[25%] h-full ">
+            <div class="lg:w-[70%] w-full flex lg:justify-normal justify-center flex-wrap lg:flex-nowrap mt-5 lg:mt-20">
+                <div class="lg:w-[25%] w-[80%] h-auto order-2 lg:order-1">
                     <div class="w-full bg-primary box-shadow-for-menu">
                         <ul>
-                            <li class="p-5 text-2xl text-white font-bold hover:underline focus:underline" (click)="functionChangeManu('profilo')">Profilo</li>
+                            <li class="p-5 text-2xl text-white font-bold hover:underline focus:underline" (click)="functionChangeManu('interazioni')">Interazioni</li>
                             <li class="p-5 text-2xl text-white font-bold hover:underline focus:underline" (click)="functionChangeManu('risultato')">Risultato Sondaggi</li>
                             <li class="p-5 text-2xl text-white font-bold hover:underline focus:underline" (click)="functionChangeManu('amici')">Amici</li>
                             <li class="p-5 text-2xl text-white font-bold hover:underline focus:underline" (click)="functionChangeManu('preferiti')">Preferiti</li>
@@ -26,21 +26,24 @@
                         </ul>
                     </div>
                 </div>
-                <div class="w-[75%] h-full  flex flex-wrap justify-center items-center py-10">
-                    <div class="h-[20vmin] w-[20vmin]">
-                        <div class="h-[20vmin] w-[20vmin] rounded-full bg-gray-500">
-
+                <div class="lg:w-[75%] w-full h-auto flex flex-wrap lg:justify-evenly justify-center items-center mt-5 mb-10 lg:mb-0  order-1 lg:order-2">
+                    <div class="h-[20vmin]">
+                        <div class="h-[20vmin] w-[20vmin] ">
+                            <div class="h-[20vmin] w-[20vmin] rounded-full bg-gray-500">
+                            </div>
                         </div>
                     </div>
-                    <div class="w-[10px] h-full bg-black ml-20 mr-20"></div>
-                    <div class="mx-10 flex items-center">
+                    <div class="lg:block hidden w-2 h-full bg-black "></div>
+                    <div class="lg:w-auto w-[90%] lg:mx-10 flex lg:items-center">
                         <ul>
-                            <li class="p-2 text-xl font-bold">Nome</li>
-                            <li class="p-2 text-xl font-bold">Età</li>
-                            <li class="p-2 text-xl font-bold">Sesso</li>
-                            <li class="p-2 text-xl font-bold">1k followers</li>
-                            <li class="p-2 text-xl font-bold">Data di iscrizione</li>
-                            <li class="p-2 text-xl font-bold">Badge</li>
+                            <li class="p-2 text-xl"><span class="font-bold">Username: </span> {{infoUser.username}}</li>
+                            <li class="p-2 text-xl"><span class="font-bold">Età: </span> {{infoUser.eta}}</li>
+                            <li class="p-2 text-xl"><span class="font-bold">Sesso: </span> {{infoUser.sesso}}</li>
+                            <li class="p-2 text-xl"><span class="font-bold">Follower: </span> {{infoUser.follower}}</li>
+                            <li class="p-2 text-xl"><span class="font-bold">E-mail: </span>{{infoUser.email}}</li>
+                            <li class="p-2 text-xl"><span class="font-bold">Tel: </span> {{infoUser.numeroTelefono}}</li>
+                            <li class="p-2 text-xl"><span class="font-bold">Iscritto il </span>{{infoUser.dataIscrizione}}</li>
+                            <li class="p-2 text-xl"><span class="font-bold">Ruolo: </span> {{infoUser.ruolo}}</li>
                         </ul>
                     </div>
                 </div>
@@ -52,61 +55,109 @@
     <div class="flex justify-center h-full">
         <div class="container flex flex-wrap justify-center h-full">
             <div class="lg:w-[70%] w-full my-10">
-                <div class="" *ngIf="menuSelected==='profilo'">
+                <div class="scroll-m-20" *ngIf="menuSelected==='interazioni'" id="Interazioni">
                     <div class="w-full h-20 bg-primary flex justify-center items-center">
-                        <h2 class=" text-white text-4xl font-bold">
+                        <h2 class=" text-white lg:text-4xl text-2xl font-bold text-center">
                             ULTIME INTERAZIONI FATTE
                         </h2>
                     </div>
                     <div class="w-full h-6 bg-secondary"></div>
-                    <div class="w-full h-full flex lg:justify-between mt-10">
-                        <div class="lg:w-[45%] w-[90%] ">
-                            <div class="bg-secondary rounded-xl flex justify-center">
-                                <div class="w-[90%] h-[90%]">
-                                    <div class="w-full h-20 flex flex-nowrap">
-                                        <div class="w-1/5 flex items-center">
-                                            <div class="w-14 h-14 rounded-full bg-white"></div>
+                    <div class="w-full h-auto flex flex-wrap lg:justify-between justify-center mt-10">
+                        <div class="lg:w-1/3 w-[90%] mb-4" *ngFor="let commento of commenti, let i=index">
+                            <div class="w-full lg:flex lg:flex-wrap" [ngClass]="{'lg:justify-start': i % 3 === 0, 'lg:justify-end': i % 3 === 2, 'lg:justify-center': i % 3 === 1}">
+                                <div class="bg-secondary rounded-xl flex justify-center">
+                                    <div class="w-[90%] h-[90%]">
+                                        <div class="w-full h-20 flex flex-nowrap">
+                                            <div class="w-1/5 flex items-center">
+                                                <div class="w-14 h-14 rounded-full bg-white"></div>
+                                            </div>
+                                            <div class="w-4/5 flex items-center">
+                                                <p class="text-white text-xl px-4">{{commento?.username}}</p>
+                                            </div>
                                         </div>
-                                        <div class="w-4/5 flex items-center">
-                                            <p class="text-white text-xl">Nome</p>
-                                        </div>
-                                    </div>
-                                    <div class="w-full ">
-                                        <div class="bg-[#ACDEFF] rounded-xl mb-6">
-                                            <p class="p-2">
-                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt dicta tempore vel! Minima dolore qui quasi facere consectetur quas nisi?
-                                            </p>
+                                        <div class="w-full ">
+                                            <div class="bg-[#ACDEFF] rounded-xl mb-6">
+                                                <p class="p-2">
+                                                    {{commento?.commento}}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex justify-end w-full mt-2">
-                                <button class="font-bold hover:underline text-xl">Vai all'articolo</button>
+                                <!-- <div class="flex justify-end w-full mt-2">
+                                    <button class="font-bold hover:underline text-xl">Vai all'articolo</button>
+                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="" *ngIf="menuSelected==='risultato'">
+                <div class="scroll-m-20" *ngIf="menuSelected==='risultato'" id="Sondaggi">
                     <div class="w-full h-20 bg-primary flex justify-center items-center">
-                        <h2 class=" text-white text-4xl font-bold">
+                        <h2 class=" text-white lg:text-4xl text-2xl font-bold">
                             SONDAGGI
                         </h2>
                     </div>
                     <div class="w-full h-6 bg-secondary"></div>
-                    <div class="w-full">
-                        <!-- <app-piechart></app-piechart> -->
-                        <!-- diagramma a torta -->
+                    <div class="w-full mt-10">
+                        <div class="w-full flex justify-evenly lg:justify-between">
+                            <div class="w-[30%] rounded-xl border-primary border-4 ">
+                                <p class="text-base font-bold text-center bg-blue-400">Sondaggi vinti: 3</p>
+                            </div>
+                            <div class="w-[30%] rounded-xl border-primary border-4 ">
+                                <p class="text-base font-bold text-center bg-red-300">Sondaggi persi: 2</p>    
+                            </div>
+                        </div>
+                        <div class="w-full flex justify-center mt-5">
+                                <img class="object-contain" src="../../../assets/Grafico risposte.png" alt="">
+                        </div>
+                        
+                    </div>
+                    <div class="w-full mt-10">
+                        <table class="w-full">
+                            <thead class="w-full bg-primary text-white">
+                                <tr class="w-full border-primary lg:border-4 border-b-4 h-12">
+                                    <th class="w-1/6"></th>
+                                    <th class="w-1/4">Nome</th>
+                                    <th class="w-1/4">Numero Sondaggi</th>
+                                    <th class="w-1/4">percentuale Sondaggi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="w-full border-primary lg:border-4 border-b-4 h-12" *ngFor="let _ of ripetiArray, let i = index">
+                                    <td class="w-1/6 h-full bg-tertiary">
+                                        <div class="w-full h-full flex justify-center items-center">
+                                            <p class="w-full h-full text-center">{{i+1}}°</p>
+                                        </div>
+                                    </td>
+                                    <td class="w-1/4">
+                                        <p class="text-base flex justify-center items-center"> Nome Utente </p>
+                                    </td>
+                                    <td class="w-1/4">
+                                        <p class="text-base flex justify-center items-center">{{i + 4}}</p>
+                                    </td>
+                                    <td class="w-1/4">
+                                        <p class="text-base flex justify-center items-center"> {{100-(i*10)}}% </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="" *ngIf="menuSelected==='amici'">
+                <div class="scroll-m-20" *ngIf="menuSelected==='amici'" id="Amici">
                     <div class="w-full h-20 bg-primary flex justify-center items-center">
-                        <h2 class=" text-white text-4xl font-bold">
+                        <h2 class=" text-white lg:text-4xl text-2xl font-bold">
                             AMICI
                         </h2>
                     </div>
                     <div class="w-full h-6 bg-secondary"></div>
-                    <div class="w-full flex flex-wrap justify-between my-10">
-                        <div class="lg:w-[30%] w-full mx-2 my-4 rounded-xl border-2 border-[#1671AA]" *ngFor="let _ of ripetiArray, let i = index">
+                    <div class="w-full flex flex-wrap justify-between my-5">
+                        <div *ngIf="!showCard" (click)="showCard=!showCard" class="flex w-full lg:h-8 h-8 lg:mt-10 mt-5 lg:mb-5 mb-4 lg:justify-normal justify-evenly">
+                            <button class="rounded-full lg:mx-2 lg:px-6 px-3 lg:py-1 text-sm bg-secondary text-white">Mostra Dettagli</button>
+                        </div>
+                        <div *ngIf="showCard" (click)="showCard=!showCard" class="flex w-full lg:h-8 h-8 lg:mt-10 mt-5 lg:mb-5 mb-4 lg:justify-normal justify-evenly">
+                            <button class="rounded-full lg:mx-2 lg:px-6 px-3 lg:py-1 text-sm bg-secondary text-white">Nascondi Dettagli</button>
+                        </div>
+                        <div class="lg:w-[30%] w-full mx-2 my-4 rounded-xl border-2 border-[#1671AA]" *ngFor="let user of seguiti, let i = index">
                             <div class="w-full h-[3/4]  bg-secondary rounded-t-lg flex flex-wrap p-4">
                                 <div class="w-full flex flex-nowrap">
                                     <div class="w-20 h-20 rounded-full bg-slate-500">
@@ -114,14 +165,16 @@
                                     </div>
                                     <div class="flex flex-wrap ml-4">
                                         <div class="w-full text-lg text-white ">
-                                            <p>Luca</p>
+                                            <p>{{user.username}}</p>
                                         </div>
                                         <div class="w-full text-lg text-white ">
-                                            <p>Badge</p>
+                                            <p>{{user.role}}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="w-full flex flex-wrap my-4">
+                                <div *ngIf="showCard===true" class="w-full flex flex-wrap my-4 ">
+                                    <p class="w-1/2 text-center lg:text-sm text-white py-1">SEGUITI: {{user.following}}</p>
+                                    <p class="w-1/2 text-center lg:text-sm text-white py-1 pb-3">FOLLOWER: {{user.follower}}</p>
                                     <p class="w-full lg:text-sm text-white py-1">SONDAGGI INDOVINATI: 5</p>
                                     <p class="w-full lg:text-sm text-white py-1">SONDAGGI SBAGLIATI: 12</p>
                                     <p class="w-full lg:text-sm text-white py-1">PERCENTUALE DI RISPOSTE CORRETTE: 2,4%</p>
@@ -129,36 +182,38 @@
                                 </div>
                             </div>
                             <div class="w-full h-[1/4] my-2 bg-white border-solid border-[#1671AA] flex justify-center items-center">
-                                <button class="rounded-full border-2 my-1 px-6 border-blue-900">SEGUI</button>
+                                <button *ngIf="stringFollowForCard===true" class="rounded-full border-2 my-1 px-6 border-blue-900" (click)="aggiungiRimuoviUtenti(user.seguito.toString()); stringFollowForCard=!stringFollowForCard">NON SEGUIRE</button>
+                                <button *ngIf="stringFollowForCard===false" class="rounded-full border-2 my-1 px-6 border-blue-900" (click)="aggiungiRimuoviUtenti(user.seguito.toString()); stringFollowForCard=!stringFollowForCard">SEGUI</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="" *ngIf="menuSelected==='preferiti'">
+                <div class="scroll-m-20" *ngIf="menuSelected==='preferiti'" id="Preferiti">
                     <div class="w-full h-20 bg-primary flex justify-center items-center">
-                        <h2 class=" text-white text-4xl font-bold">
+                        <h2 class=" text-white lg:text-4xl text-2xl font-bold">
                             I TUOI PREFERITI
                         </h2>
                     </div>
                     <div class="w-full h-6 bg-secondary"></div>
                     <div class="w-full">
-                        <div class="hidden lg:flex w-full lg:h-8 h-5 lg:mt-10 mt-5 lg:mb-5 mb-4">
-                            <button (click)="functionChangeManuPreferiti('tutti')" class="rounded-full text-white lg:mr-2 lg:px-6 px-3 lg:py-1 text-sm" [ngClass]="{'bg-secondary': menuPreferitiSelected === 'tutti', 'bg-[#ACDEFF]': menuPreferitiSelected !== 'tutti'}">
+                        <div class="flex lg:w-full w-80% lg:h-8 h-8 lg:mt-10 mt-5 lg:mb-5 mb-4 lg:justify-normal justify-evenly">
+                            <!-- <button (click)="functionChangeManuPreferiti('tutti')" class="rounded-full lg:mr-2 lg:px-6 px-3 lg:py-1 text-sm" [ngClass]="{'bg-secondary': menuPreferitiSelected === 'tutti', 'bg-[#ACDEFF]': menuPreferitiSelected !== 'tutti', 'text-white': menuPreferitiSelected === 'tutti'}">
                                 TUTTI
-                            </button>
+                            </button> -->
 
-                            <button (click)="functionChangeManuPreferiti('squadre')" class="rounded-full lg:mx-2 lg:px-6 px-3 lg:py-1 text-sm" [ngClass]="{'bg-secondary': menuPreferitiSelected === 'squadre', 'bg-[#ACDEFF]': menuPreferitiSelected !== 'squadre'}">
+                            <button (click)="functionChangeManuPreferiti('squadre')" class="rounded-full lg:mx-2 lg:px-6 px-3 lg:py-1 text-sm" [ngClass]="{'bg-secondary': menuPreferitiSelected === 'squadre', 'bg-[#ACDEFF]': menuPreferitiSelected !== 'squadre' , 'text-white': menuPreferitiSelected === 'squadre'}">
                                 SQUADRE
                             </button>
 
-                            <button (click)="functionChangeManuPreferiti('articoli')" class="rounded-full lg:ml-2 lg:px-6 px-3 lg:py-1 text-sm" [ngClass]="{'bg-secondary': menuPreferitiSelected === 'articoli', 'bg-[#ACDEFF]': menuPreferitiSelected !== 'articoli'}">
+                            <button (click)="functionChangeManuPreferiti('articoli')" class="rounded-full lg:ml-2 lg:px-6 px-3 lg:py-1 text-sm" [ngClass]="{'bg-secondary': menuPreferitiSelected === 'articoli', 'bg-[#ACDEFF]': menuPreferitiSelected !== 'articoli' , 'text-white': menuPreferitiSelected === 'articoli'}">
                                 ARTICOLI
                             </button>
 
                         </div>
                     </div>
-                    <div *ngIf="menuPreferitiSelected==='tutti'" class="w-full flex flex-wrap mt-5">
-                        <div class="w-1/3 flex flex-wrap my-8">
+                    <!-- <div *ngIf="menuPreferitiSelected==='tutti'" class="w-full flex flex-wrap mt-5">
+                        <div class="lg:w-1/3 w-full flex justify-center flex-wrap my-8">
+                            <p class="text-center text-base w-full justify-center flex mb-2">SQUADRE: </p>
                             <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
                                 <div class="w-2/5 flex justify-center">
                                     <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
@@ -171,7 +226,8 @@
                                 <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
                             </div>
                         </div>
-                        <div class="w-1/3 flex flex-wrap justify-center my-8">
+                        <p class="text-center text-base w-full justify-center flex mb-2">PREFERITI: </p>
+                        <div class="lg:w-1/3 w-full flex flex-wrap justify-center">
                             <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
                                 <p class="text-white">Titolo articolo</p>
                             </div>
@@ -179,193 +235,58 @@
                                 <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
                             </div>
                         </div>
-                        <!-- aggiungo solo per la visualizzazione -->
-                        <div class="w-1/3 flex flex-wrap justify-end my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
-                                <div class="w-2/5 flex justify-center">
-                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
-                                </div>
-                                <div class="w-3/5 flex items-center">
-                                    <p class="text-white text-xl">Nome squadra</p>
-                                </div>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap  my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
-                                <div class="w-2/5 flex justify-center">
-                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
-                                </div>
-                                <div class="w-3/5 flex items-center">
-                                    <p class="text-white text-xl">Nome squadra</p>
-                                </div>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap justify-center my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
-                                <p class="text-white">Titolo articolo</p>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap justify-end my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
-                                <p class="text-white">Titolo articolo</p>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
-                                <p class="text-white">Titolo articolo</p>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap justify-center my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
-                                <div class="w-2/5 flex justify-center">
-                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
-                                </div>
-                                <div class="w-3/5 flex items-center">
-                                    <p class="text-white text-xl">Nome squadra</p>
-                                </div>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap justify-end my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
-                                <div class="w-2/5 flex justify-center">
-                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
-                                </div>
-                                <div class="w-3/5 flex items-center">
-                                    <p class="text-white text-xl">Nome squadra</p>
-                                </div>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
-                                <p class="text-white">Titolo articolo</p>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <!-- fino a qui -->
-                    </div>
+                    </div> -->
+
                     <div *ngIf="menuPreferitiSelected==='articoli'" class="w-full flex flex-wrap mt-5">
-                        <div class="w-1/3 flex flex-wrap my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
-                                <p class="text-white">Titolo articolo</p>
+                        <ng-container *ngFor="let article of favouriteArticles, let i=index">
+                            <div class="lg:w-1/3 w-full flex flex-wrap my-8 justify-center" [ngClass]="{'lg:justify-start': i % 3 === 0, 'lg:justify-end': i % 3 === 2, 'lg:justify-center': i % 3 === 1}">
+                                <div class="w-[80%] bg-primary h-auto rounded-3xl flex flex-nowrap items-center">
+                                    <div class="w-[50%] h-full">
+                                        <img class="object-cover w-full h-full rounded-xl" src="{{article.blog.foto}}" alt="immagine articolo">
+                                    </div>
+                                    <div class="w-[50%] h-full">
+                                        <p class="text-white lg:text-lg text-sm py-2 px-4">{{article.blog.titolo | uppercase}}</p>
+                                    </div>
+                                </div>
+                                <div class="w-[80%] h-10 flex justify-end">
+                                    <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full" (click)="aggiungiRimuoviPreferitiArticles(article.blog.id)">Rimuovi</button>
+                                </div>
                             </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap justify-center my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex items-center justify-center text-xl">
-                                <p class="text-white">Titolo articolo</p>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
+                        </ng-container>
                     </div>
                     <div *ngIf="menuPreferitiSelected==='squadre'" class="w-full flex flex-wrap mt-5">
-                        <div class="w-1/3 flex flex-wrap my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
-                                <div class="w-2/5 flex justify-center">
-                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
+                        <ng-container *ngFor="let team of favouriteTeams, let i=index">
+                            <div class="lg:w-1/3 w-full flex flex-wrap my-8 justify-center" [ngClass]="{'lg:justify-start': i % 3 === 0, 'lg:justify-end': i % 3 === 2, 'lg:justify-center': i % 3 === 1}">
+                                <div class="w-[80%] bg-primary h-auto rounded-3xl flex flex-wrap">
+                                    <div class="w-2/5 h-24 flex justify-center">
+                                        <div class="w-20 h-20 m-2 bg-white rounded-full flex justify-center items-center">
+                                            <img class="w-16 h-auto" src={{team.logo}} alt="">
+                                        </div>
+                                    </div>
+                                    <div class="w-3/5 flex items-center">
+                                        <p class="text-white text-xl">{{team.teamName}}</p>
+                                    </div>
                                 </div>
-                                <div class="w-3/5 flex items-center">
-                                    <p class="text-white text-xl">Nome squadra</p>
-                                </div>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap justify-center my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
-                                <div class="w-2/5 flex justify-center">
-                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
-                                </div>
-                                <div class="w-3/5 flex items-center">
-                                    <p class="text-white text-xl">Nome squadra</p>
+                                <div class="w-[80%] h-10 flex justify-end">
+                                    <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full" (click)="aggiungiRimuoviPreferitiTeams(team.id)">Rimuovi</button>
                                 </div>
                             </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap justify-end my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
-                                <div class="w-2/5 flex justify-center">
-                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
-                                </div>
-                                <div class="w-3/5 flex items-center">
-                                    <p class="text-white text-xl">Nome squadra</p>
-                                </div>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
-                                <div class="w-2/5 flex justify-center">
-                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
-                                </div>
-                                <div class="w-3/5 flex items-center">
-                                    <p class="text-white text-xl">Nome squadra</p>
-                                </div>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="w-1/3 flex flex-wrap justify-center my-8">
-                            <div class="w-[80%] bg-primary h-24 rounded-3xl flex flex-wrap">
-                                <div class="w-2/5 flex justify-center">
-                                    <div class="w-20 h-20 m-2 bg-white rounded-full"></div>
-                                </div>
-                                <div class="w-3/5 flex items-center">
-                                    <p class="text-white text-xl">Nome squadra</p>
-                                </div>
-                            </div>
-                            <div class="w-[80%] flex justify-end">
-                                <button class="px-6 py-1 text-white mt-2 bg-secondary rounded-full">Rimuovi</button>
-                            </div>
-                        </div>
+                        </ng-container>
                     </div>
                 </div>
-                <div class="" *ngIf="menuSelected==='impostazioni'">
+                <div class="scroll-m-20" *ngIf="menuSelected==='impostazioni'" id="Impostazioni">
                     <div class="w-full h-20 bg-primary flex justify-center items-center">
-                        <h2 class=" text-white text-4xl font-bold">
+                        <h2 class=" text-white lg:text-4xl text-2xl font-bold">
                             IMPOSTAZIONI
                         </h2>
                     </div>
                     <div class="w-full h-6 bg-secondary"></div>
                     <div class="w-full mt-10">
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
                                 <p class="font-bold">Nome Utente</p>
                             </div>
                             <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
-
                                 <div class="w-1/2 flex justify-center">
                                     <input class="bg-gray-200 rounded-full text-center min-w-[50%]" type="text" max="50" placeholder="Nome nuovo">
                                 </div>
@@ -374,12 +295,11 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
                                 <p class="font-bold">Età</p>
                             </div>
                             <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
-
                                 <div class="w-1/2 flex justify-center">
                                     <input class="bg-gray-200 rounded-full text-center min-w-[50%]" type="number" min="16" max="99" inputmode="numeric">
                                 </div>
@@ -388,7 +308,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
                                 <p class="font-bold">Numero di Telefono</p>
                             </div>
@@ -401,46 +321,46 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
                                 <p class="font-bold">Sesso</p>
                             </div>
                             <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
                                 <div class="w-1/2 flex justify-center flex-wrap items-center">
-                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="maschio" value="maschio" name="sesso" type="radio"> maschio</div>
-                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="femmina" value="femmina" name="sesso" type="radio"> femmina</div>
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="maschio" value="m" name="sesso" type="radio"> Maschio</div>
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="femmina" value="a" name="sesso" type="radio"> Femmina</div>
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="altro" value="a" name="sesso" type="radio"> Altro</div>
                                 </div>
                                 <div class="w-1/2 flex justify-end items-center">
                                     <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
                                 </div>
                             </form>
                         </div>
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
                                 <p class="font-bold">Password</p>
                             </div>
-                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
-
-                                <div class="w-3/4 flex justify-around">
-                                    <input class="bg-gray-200 rounded-full text-center min-w-[40%]" type="text" placeholder="Nuovo password">
-                                    <input class="bg-gray-200 rounded-full text-center min-w-[40%]" type="text" placeholder="Ripeti nuova password">
+                            <form action="" class="w-3/4 flex flex-nowrap lg:justify-around justify-between lg:pl-4">
+                                <div class="lg:selection:w-3/4 w-[60%] flex lg:justify-around justify-between flex-wrap">
+                                    <input class="bg-gray-200 rounded-full text-center lg:min-w-[40%] mb-2 w-full" type="text" placeholder="Nuovo password">
+                                    <input class="bg-gray-200 rounded-full text-center lg:min-w-[40%] w-full" type="text" placeholder="Ripeti nuova password">
                                 </div>
-                                <div class="w-1/4 flex justify-end items-center">
+                                <div class="lg:w-1/4 flex justify-end items-center">
                                     <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
                                 </div>
                             </form>
                         </div>
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
                                 <p class="font-bold">Squadre preferite</p>
                             </div>
-                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4 ">
                                 <!-- si deve aprire un riquadro con tutto l'elenco delle squadre e l'utente sceglie le 5 squadre per conference, se gia scelte deve mostrare ovviamente le 5 scelte e deseleziona cosi ha uno slot libero per selezionare una nuova. puo avere piu slot liberi -->
-                                <div *ngIf="showTeams===true" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] border-primary bg-[#ACDEFF] flex justify-center flex-wrap items-center">
-                                    <div class="w-full h-full flex flex-wrap justify-center ">
+                                <div *ngIf="showTeams===true" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] lg:h-auto border-primary bg-[#ACDEFF] flex justify-center flex-wrap items-center">
+                                    <div class="w-full h-full flex flex-wrap justify-center overflow-y-scroll ">
                                         <div class="w-full flex flex-wrap lg:flex-nowrap lg:justify-between my-8 h-full">
-                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
-                                                <div class="lg:w-[80%] w-full">
+                                            <div class="lg:w-1/6 w-1/2 flex flex-wrap justify-center order-0">
+                                                <div class="w-[80%]">
                                                     <div class="flex justify-center">
                                                         <ul class="w-[90%] flex-col">
                                                             <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.SoutHeast">
@@ -449,15 +369,16 @@
                                                                 </div>
                                                                 <div class="w-2/3 pl-4">
                                                                     <p class="w-auto hover:cursor-pointer" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                                                    <p class="w-[10%] hover:cursor-pointer">🖤</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                                                 </div>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
-                                                <div class="lg:w-[80%] w-full">
+                                            <div class="lg:w-1/6 w-1/2 flex flex-wrap justify-center order-2 lg:order-1">
+                                                <div class="w-[80%]">
                                                     <div class="flex justify-center">
                                                         <ul class="w-[90%] flex-col">
                                                             <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.Atlantic">
@@ -466,15 +387,16 @@
                                                                 </div>
                                                                 <div class="w-2/3 pl-4">
                                                                     <p class="w-auto hover:cursor-pointer" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                                                    <p class="w-[10%] hover:cursor-pointer">🖤</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                                                 </div>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
-                                                <div class="lg:w-[80%] w-full">
+                                            <div class="lg:w-1/6 w-1/2 flex flex-wrap justify-center order-4 lg:order-2">
+                                                <div class="w-[80%]">
                                                     <div class="flex justify-center">
                                                         <ul class="w-[90%] flex-col">
                                                             <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.Central">
@@ -483,15 +405,16 @@
                                                                 </div>
                                                                 <div class="w-2/3 pl-4">
                                                                     <p class="w-full" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                                                    <p class="w-full">🖤</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                                                 </div>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
-                                                <div class="lg:w-[80%] w-full">
+                                            <div class="lg:w-1/6 w-1/2 flex flex-wrap justify-center border-l-2 border-dotted border-black order-1 lg:order-3">
+                                                <div class="w-[80%]">
                                                     <div class="flex justify-center">
                                                         <ul class="w-[90%] flex-col">
                                                             <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.SouthWest">
@@ -500,15 +423,16 @@
                                                                 </div>
                                                                 <div class="w-2/3 pl-4">
                                                                     <p class="w-full" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                                                    <p class="w-full">🖤</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                                                 </div>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
-                                                <div class="lg:w-[80%] w-full">
+                                            <div class="lg:w-1/6 w-1/2 flex flex-wrap justify-center border-l-2 border-dotted border-black lg:border-0 order-3 lg:order-4">
+                                                <div class="w-[80%]">
                                                     <div class="flex justify-center">
                                                         <ul class="w-[90%] flex-col">
                                                             <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.NorthWest">
@@ -517,15 +441,16 @@
                                                                 </div>
                                                                 <div class="w-2/3 pl-4">
                                                                     <p class="w-full" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                                                    <p class="w-full">🖤</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                                                 </div>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="lg:w-1/6 w-full flex flex-wrap justify-center">
-                                                <div class="lg:w-[80%] w-full">
+                                            <div class="lg:w-1/6 w-1/2 flex flex-wrap justify-center border-l-2 border-dotted border-black lg:border-0 order-5">
+                                                <div class="w-[80%]">
                                                     <div class="flex justify-center">
                                                         <ul class="w-[90%] flex-col">
                                                             <li class="h-20 flex justify-center my-4" *ngFor="let team of teams.Pacific">
@@ -534,19 +459,33 @@
                                                                 </div>
                                                                 <div class="w-2/3 pl-4">
                                                                     <p class="w-full" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                                                    <p class="w-full">🖤</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                                                    <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                                                 </div>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="w-full flex flex-wrap justify-center items-center mb-8 order-6 lg:hidden">
+                                                <div class="w-1/2">
+                                                    <p class="text-xl font-bold text-center">slot liberi: {{5-totalTeamEast}}</p>
+                                                    <p class="text-xl font-bold text-center">team scelti: {{totalTeamEast}}</p>
+                                                </div>
+                                                <div class="w-1/2 border-l-2 border-dotted border-black lg:border-0">
+                                                    <p class="text-xl font-bold text-center">slot liberi: {{5-totalTeamWest}}</p>
+                                                    <p class="text-xl font-bold text-center">team scelti: {{totalTeamWest}}</p>
+                                                </div>
+                                                <div class="w-full flex justify-center my-5"><button class="bg-secondary rounded-full px-4 py-2 text-white" (click)="showTeams=false">CHIUDI E CONFERMA</button></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="w-full flex justify-around items-center mb-8">
-                                        <p class="text-xl font-bold">slot liberi: 2</p>
-                                        <p class="text-xl font-bold">squadre scelte: 8</p>
-                                        <button class="bg-secondary rounded-full px-4 py-2 text-white" (click)="showTeams=false">CHIUDI E CONFERMA</button>
+                                        <div class="w-full justify-around items-center mb-8 hidden lg:flex">
+                                            <p class="text-xl font-bold">slot liberi: {{5-totalTeamEast}}</p>
+                                            <p class="text-xl font-bold">squadre scelte: {{totalTeamEast}}</p>
+                                            <button class="bg-secondary rounded-full px-4 py-2 text-white" (click)="showTeams=false">CHIUDI E CONFERMA</button>
+                                            <p class="text-xl font-bold">slot liberi: {{5-totalTeamWest}}</p>
+                                            <p class="text-xl font-bold">squadre scelte: {{totalTeamWest}}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="w-full flex justify-end items-center">
@@ -554,9 +493,25 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
-                                <p class="font-bold">Attiva/Disattiva notifiche follower (attivata)</p>
+                                <p class="font-bold hidden lg:block">Attiva/Disattiva notifiche follower (attivata)</p>
+                                <p class="font-bold lg:hidden">notifiche follower (attivata)</p>
+                            </div>
+                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
+                                <div class="w-1/2 flex justify-center flex-wrap items-center">
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="attiva" value="attiva" name="notifica" type="radio">Attiva</div>
+                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="disattiva" value="disattiva" name="notifica" type="radio">Disattiva</div>
+                                </div>
+                                <div class="w-1/2 flex justify-end items-center">
+                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
+                            <div class="w-1/4">
+                                <p class="font-bold hidden lg:block">Attiva/Disattiva notifiche follower (disattivata)</p>
+                                <p class="font-bold lg:hidden flex">notifiche follower (disattivata)</p>
                             </div>
                             <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
 
@@ -569,9 +524,10 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
-                                <p class="font-bold">Attiva/Disattiva notifiche follower (disattivata)</p>
+                                <p class="font-bold hidden lg:block">Attiva/Disattiva notifiche match (diattivata)</p>
+                                <p class="font-bold lg:hidden flex">notifiche match (diattivata)</p>
                             </div>
                             <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
 
@@ -584,9 +540,10 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
-                                <p class="font-bold">Attiva/Disattiva notifiche match (diattivata)</p>
+                                <p class="font-bold lg:flex hidden">Attiva/Disattiva notifiche nuovo articolo blog (attivata)</p>
+                                <p class="font-bold lg:hidden flex">notifiche blog (attivata)</p>
                             </div>
                             <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
 
@@ -599,24 +556,10 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 border-b-0 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
-                                <p class="font-bold">Attiva/Disattiva notifiche nuovo articolo blog (attivata)</p>
-                            </div>
-                            <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
-
-                                <div class="w-1/2 flex justify-center flex-wrap items-center">
-                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="attiva" value="attiva" name="notifica" type="radio">Attiva</div>
-                                    <div class="w-full flex justify-center"><input class="bg-gray-200 rounded-full text-center mx-2" id="disattiva" value="disattiva" name="notifica" type="radio">Disattiva</div>
-                                </div>
-                                <div class="w-1/2 flex justify-end items-center">
-                                    <input type="submit" class="bg-secondary text-white px-4 py-2 h-10 rounded-full" value="Cambia">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="h-20 border-black border-2 border-b-0 w-full p-4 flex justify-between items-center">
-                            <div class="w-1/4">
-                                <p class="font-bold">Attiva/Disattiva notifiche nuova puntata podcast (attivata)</p>
+                                <p class="font-bold lg:flex hidden">Attiva/Disattiva notifiche nuova puntata podcast (attivata)</p>
+                                <p class="font-bold lg:hidden flex">notifiche podcast (attivata)</p>
                             </div>
                             <form action="" class="w-3/4 flex flex-nowrap justify-around pl-4">
                                 <div class="w-1/2 flex justify-center flex-wrap items-center">
@@ -628,7 +571,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="h-20 border-black border-2 w-full p-4 flex justify-between items-center">
+                        <div class="h-20 border-black lg:border-2 border-y-2 w-full p-4 flex justify-between items-center">
                             <div class="w-1/4">
                                 <p class="font-bold">LOG OUT</p>
                             </div>

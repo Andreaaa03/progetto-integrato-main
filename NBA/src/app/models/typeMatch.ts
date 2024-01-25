@@ -1,5 +1,5 @@
 export type match = {
-    gameid: number | null;
+    gameid: string | null;
     gameStartDate: string | null;
     teamHomeName: string | null;
     teamAwayName: string | null;
@@ -24,7 +24,7 @@ export type match = {
 };
 
 type playerStats = {
-    id: number;
+    id: string;
     nome: string;
     points: number;
     pos: string;
@@ -93,7 +93,7 @@ export type matchStats = {
 
 //valutare di lasciare solo l'id dentro l'oggetto
 export type matchDate = {
-    gameid: number;
+    gameid: string;
     gameStartDate: string;
     teamHomeName: string;
     teamAwayName: string;

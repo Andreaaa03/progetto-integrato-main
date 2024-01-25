@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-
-interface glossaryItem{
+interface glossaryItem {
   titolo: string;
   sottotitolo: string;
   descrizione: string;
   id: number;
 }
-
 
 @Component({
   selector: 'app-storia-e-regole-page',
@@ -16,33 +14,37 @@ interface glossaryItem{
   styleUrls: ['./storia-e-regole-page.component.css']
 })
 export class StoriaERegolePageComponent implements OnInit {
-  constructor(private route: ActivatedRoute){}
-  selectedRegole : boolean = true
-  isShorter: boolean = true
-  selectedSection : number | null = null;
+  constructor(private route: ActivatedRoute) { }
   ngOnInit(): void {
     const url = this.route.snapshot.url.join('/');
     // Dividere l'URL in segmenti
     const segments = url.split('/');
-
     // Ottenere l'ultimo segmento dell'URL
     const ultimaParteUrl = segments[segments.length - 1];
-
     // Confrontare l'ultimo segmento con la stringa desiderata
-    ultimaParteUrl==="regole" ? this.functionSelectionRegole(true) : this.functionSelectionRegole(false);
-      
+    ultimaParteUrl === "regole" ? this.functionSelectionRegole(true) : this.functionSelectionRegole(false);
   }
+  selectedRegole: boolean = true
+  isShorter: boolean = true
+  selectedSection: number | null = null;
 
+  /**
+   * Funzione che cambia il valore della variabile booleana per cambiare vista della pagina
+   * @param selectedRegole : boolean
+   */
   functionSelectionRegole(selectedRegole: boolean) {
     this.selectedRegole = selectedRegole;
   }
 
-  functionIsShorter(isShorter: boolean){
+  /**
+   * Funzione che doveva ridurre un articolo in mobile che abbiamo deciso di non implementare
+   * @param isShorter : boolean
+   */
+  functionIsShorter(isShorter: boolean) {
     this.isShorter = !isShorter;
   }
 
- 
-  
+  //json contenente le informazione della view glossario
   jsonInfo: glossaryItem[] = [
     {
       "titolo": "GP",
@@ -232,18 +234,21 @@ export class StoriaERegolePageComponent implements OnInit {
     }
   ]
 
-
-
+  /**
+   * funzione che permette lo scroll della vista al punto desiderato
+   * @param i : number
+   */
   scrollToSection(i: number): void {
     this.selectedSection = i;
     const section = document.getElementById('' + this.jsonInfo[i].id);
 
+    //confronta il valore selezionato corrisponda a uno di quelli presenti ed esegue lo scoll
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block : 'center' });
+      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     setTimeout(() => {
-      this.selectedSection=null;
+      this.selectedSection = null;
     }, 1000);
   }
 

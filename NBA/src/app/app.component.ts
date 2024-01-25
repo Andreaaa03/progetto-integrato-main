@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    // Aggiungi un listener per il cambio di pagina
+    // Ogni volta che mi sposto in una pagina diversa mi porta su e non rimanne nel punto della pagina predente
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         window.scrollTo({ top: 0, behavior: 'smooth' });

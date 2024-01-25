@@ -22,13 +22,15 @@
 <section>
     <div class="flex justify-center">
         <div class="container flex justify-center">
-            <div class="lg:w-[90%] w-full  flex flex-wrap justify-center">
-                <div class="w-full h-20 bg-primary flex justify-center items-center">
-                    <h2 class=" text-white text-4xl font-bold">
-                        CLASSIFICA
-                    </h2>
+            <div class="lg:w-[90%] min-h-screen w-full  flex flex-wrap justify-center">
+                <div class="h-auto w-full">
+                    <div class="w-full h-20 bg-primary flex justify-center items-center">
+                        <h2 class=" text-white text-4xl font-bold">
+                            CLASSIFICA
+                        </h2>
+                    </div>
+                    <div class="w-full h-6 bg-secondary"></div>
                 </div>
-                <div class="w-full h-6 bg-secondary"></div>
                 <app-classifica [isParziale]="true" class="lg:w-[85%] w-full mt-10">
 
                 </app-classifica>
@@ -43,14 +45,17 @@
 </section>
 <section>
     <div class="w-full pt-12">
+        <a class="w-full h-auto" href="https://podcasters.spotify.com/pod/show/riccardo083" target="_blank">
         <div class="flex justify-center lg:h-[150px] h-[75px] -z-10">
-            <img class="object-cover lg:w-[50%] w-[90%] rounded-full -z-10" src="../../../assets/foto-spotify.png" alt="">
+            <img class="object-cover lg:w-[50%] w-[90%] rounded-full -z-10" src="../../../assets/foto-spotify.png" alt="immagine podcast">
         </div>
-        <div class="flex justify-center items-end -z-40">
-            <button class="lg:w-[40%] w-[80%] rounded-full lg:h-[70px] h-[50px] relative -z-30 bottom-6 bg-secondary lg:px-8 px-5 pt-6 text-white font-bold text-sm lg:text-xl hover:underline" [routerLink]="['/']">
+
+        <button class="flex w-full justify-center items-end -z-20">
+            <p class="lg:w-[40%] w-[80%] rounded-full lg:h-[70px] h-[50px] relative -z-30 bottom-6 bg-secondary lg:px-8 px-5 pt-6 text-white font-bold text-sm lg:text-xl hover:underline flex justify-center">
                 SCOPRI IL NOSTRO PODCACAST
-            </button>
-        </div>
+            </p>
+        </button>
+    </a>
     </div>
 </section>
 
@@ -65,9 +70,9 @@
                 </div>
                 <div class="w-full h-6 bg-secondary"></div>
                 <div class="mt-10 flex flex-wrap justify-center lg:justify-between">
-                    <app-post-articolo [extended]="true"></app-post-articolo>
-                    <app-post-articolo [extended]="false"></app-post-articolo>
-                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [artId]="article[2].id" [extended]="true"></app-post-articolo>
+                    <app-post-articolo [artId]="article[3].id" [extended]="false"></app-post-articolo>
+                    <app-post-articolo [artId]="article[0].id" [extended]="false"></app-post-articolo>
                 </div>
             </div>
         </div>

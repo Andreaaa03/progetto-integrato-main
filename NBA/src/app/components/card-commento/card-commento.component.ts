@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { commento } from 'src/app/models/typeComment';
+import { ApiService } from 'src/app/services/api.service';
+
+
 
 @Component({
   selector: 'app-card-commento',
@@ -6,17 +10,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./card-commento.component.css']
 })
 export class CardCommentoComponent implements OnInit {
-  countCommenti: number[] = [1,2,3,4,5];
-  showResponseComment: boolean = false;
-  testoCommenti:string="Mostra Commenti";
+  constructor(private apiService: ApiService){}
+  @Input() commento!: commento;
   ngOnInit(): void {
+    // console.log(this.commento);
     this.functionChangeTestoCommenti();
   }
-    functionChangeTestoCommenti() {
-      if(this.showResponseComment){
-        this.testoCommenti="Nascondi Commenti"
-      }else{
-        this.testoCommenti="Mostra Commenti";
-      }
+  
+  showResponseComment: boolean = false;
+  testoCommenti: string = "Mostra Commenti";
+  /**
+   * cambio testo
+   */
+  functionChangeTestoCommenti() {
+    if (this.showResponseComment) {
+      this.testoCommenti = "Nascondi Commenti"
+    } else {
+      this.testoCommenti = "Mostra Commenti";
     }
+  }
+
 }

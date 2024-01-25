@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
-<section class="">
+<section>
     <div class="w-full h-20 bg-primary flex justify-center items-center">
-        <h2 class=" text-white text-4xl font-bold">
+        <h2 class=" text-white lg:text-4xl text-2xl font-bold text-center">
             BLOG
         </h2>
     </div>
@@ -10,15 +10,15 @@
         <div class="container flex justify-center">
             <div class="lg:w-[90%] w-full  flex flex-wrap justify-center">
                 <div class="w-full h-20 bg-primary flex justify-center items-center">
-                    <h2 class=" text-white text-4xl font-bold">
+                    <h2 class=" text-white lg:text-4xl text-2xl font-bold">
                         ULTIME NOTIZIE
                     </h2>
                 </div>
                 <div class="w-full h-6 bg-secondary"></div>
                 <div class="mt-10 flex flex-wrap justify-center lg:justify-between">
-                    <app-post-articolo [extended]="true"></app-post-articolo>
-                    <app-post-articolo [extended]="false"></app-post-articolo>
-                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [artId]="article[3].id" [extended]="true"></app-post-articolo>
+                    <app-post-articolo [artId]="article[0].id" [extended]="false"></app-post-articolo>
+                    <app-post-articolo [artId]="article[2].id" [extended]="false"></app-post-articolo>
                 </div>
             </div>
         </div>
@@ -29,15 +29,15 @@
         <div class="container flex justify-center">
             <div class="lg:w-[90%] w-full  flex flex-wrap justify-center">
                 <div class="w-full h-20 bg-primary flex justify-center items-center">
-                    <h2 class=" text-white text-4xl font-bold">
-                        ULTIME NOTIZIE
+                    <h2 class=" text-white lg:text-4xl text-2xl font-bold">
+                        POST SUGGERITI
                     </h2>
                 </div>
                 <div class="w-full h-6 bg-secondary"></div>
                 <div class="mt-10 flex flex-wrap justify-center lg:justify-between">
-                    <app-post-articolo [extended]="false"></app-post-articolo>
-                    <app-post-articolo [extended]="false"></app-post-articolo>
-                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [artId]="article[3].id" [extended]="true"></app-post-articolo>
+                    <app-post-articolo [artId]="article[0].id" [extended]="false"></app-post-articolo>
+                    <app-post-articolo [artId]="article[2].id" [extended]="false"></app-post-articolo>
                 </div>
             </div>
         </div>
@@ -48,16 +48,16 @@
         <div class="container flex justify-center">
             <div class="lg:w-[90%] w-full  flex flex-wrap justify-center">
                 <div class="w-full h-20 bg-primary flex justify-center items-center">
-                    <h2 class=" text-white text-4xl font-bold">
-                        ULTIME NOTIZIE
+                    <h2 class=" text-white lg:text-4xl text-2xl font-bold">
+                        CHE POTREBBERO PIACERTI
                     </h2>
                 </div>
                 <div class="w-full h-6 bg-secondary"></div>
                 <div class="mt-10 flex flex-wrap justify-center lg:justify-between">
-                    <app-post-articolo [extended]="false"></app-post-articolo>
-                    <app-post-articolo [extended]="false"></app-post-articolo>
-                    <app-post-articolo [extended]="false"></app-post-articolo>
-                    <app-post-articolo [extended]="false"></app-post-articolo>
+                    <app-post-articolo [artId]="article[3].id" [extended]="false"></app-post-articolo>
+                    <app-post-articolo [artId]="article[0].id" [extended]="false"></app-post-articolo>
+                    <app-post-articolo [artId]="article[2].id" [extended]="false"></app-post-articolo>
+                    <app-post-articolo [artId]="article[4].id" [extended]="false"></app-post-articolo>
                 </div>
             </div>
         </div>

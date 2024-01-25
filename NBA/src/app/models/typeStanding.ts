@@ -1,16 +1,18 @@
+export type team = {
+    id: string;
+    nbaFranchise: boolean;
+    teamName: string;
+    city: string;
+    allStar: boolean;
+    code: string;
+    nickname: string;
+    logo: string;
+    conferenceName: string;
+    divisionName: string;
+}
+
 export type SingleTeamStanding = {
-    team: {
-        id: number;
-        nbaFranchise: boolean;
-        teamName: string;
-        city: string;
-        allStar: boolean;
-        code: string;
-        nickname: string;
-        logo: string;
-        conferenceName: string;
-        divisionName: string;
-    };
+    team: team;
     season: number;
     conferenceRank: number;
     conferenceWin: number;
@@ -26,6 +28,7 @@ export type SingleTeamStanding = {
     totalLoss: number;
     lastTenLoss: number;
     gamesBehind: number;
+    favourite: boolean;
 };
 
 export type Classifica = {

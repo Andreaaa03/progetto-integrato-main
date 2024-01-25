@@ -1,6 +1,9 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Classifica, StandingShow } from 'src/app/models/typeStanding';
+import { Classifica, SingleTeamStanding, StandingShow } from 'src/app/models/typeStanding';
+import { ApiService } from 'src/app/services/api.service';
+import { GetApiServiceProfilo } from 'src/app/services/getApiProfile.service';
+import { GetApiServiceStanding } from 'src/app/services/getApiStending.service';
 
 @Component({
   selector: 'app-classifica',
@@ -10,10 +13,23 @@ import { Classifica, StandingShow } from 'src/app/models/typeStanding';
 export class ClassificaComponent implements OnInit {
   @Input() isParziale!: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute, private apiService: ApiService, private getApiStanding: GetApiServiceStanding) {}
 
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe(
+      ({ ResolveStanding }) => {
+        //aggiorno la classifica
+        this.updateStanding(ResolveStanding);
+      })
+    this.cambiaTesto();
+    // nella home mostro 5 righe, in classifica 15(tutte)
+    if (this.isParziale === true)
+      this.countForStanding = 5;
+    else
+      this.countForStanding = 15;
   }
 
+  // mi salvo le 2 classifiche
   standings: Classifica = {
     allStanding: {
       eastConference: [],
@@ -24,10 +40,12 @@ export class ClassificaComponent implements OnInit {
       westConference: [],
     }
   }
+  // gli assegno la classifica che voglio mostrare
   standingToShow: StandingShow = {
     eastConference: [],
     westConference: [],
   }
+  //righe da mostrare della classifica
   countForStanding: number = 5;
 
   @HostListener('window:resize', ['$event'])
@@ -35,23 +53,53 @@ export class ClassificaComponent implements OnInit {
     this.cambiaTesto();
   }
 
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(
-      ({ ResolveStanding }) => {
-        this.standings.allStanding.eastConference = this.bubbleSort(ResolveStanding.allStanding.eastConference, 'winPercentage', false);
-        this.standings.allStanding.westConference = this.bubbleSort(ResolveStanding.allStanding.westConference, 'winPercentage', false);
-        this.standings.favouriteStandings.eastConference = this.bubbleSort(ResolveStanding.favouriteStandings.eastConference, 'winPercentage', false);
-        this.standings.favouriteStandings.westConference = this.bubbleSort(ResolveStanding.favouriteStandings.westConference, 'winPercentage', false);
-        this.standingToShow.eastConference = this.standings.allStanding.eastConference;
-        this.standingToShow.westConference = this.standings.allStanding.westConference;
-      })
-    this.cambiaTesto();
-    if (this.isParziale === true)
-      this.countForStanding = 5;
-    else
-      this.countForStanding = 15;
+  // assegno ai vari array di oggetti le squadre aggiornate, principalmente per i preferiti
+  /**
+   * 
+   * @param ResolveStanding : Classifica -->
+   */
+  updateStanding(ResolveStanding:Classifica){
+    this.standings.allStanding.eastConference = this.bubbleSort(ResolveStanding.allStanding.eastConference, 'winPercentage', false);
+    this.standings.allStanding.westConference = this.bubbleSort(ResolveStanding.allStanding.westConference, 'winPercentage', false);
+    this.standings.favouriteStandings.eastConference = this.bubbleSort(ResolveStanding.favouriteStandings.eastConference, 'winPercentage', false);
+    this.standings.favouriteStandings.westConference = this.bubbleSort(ResolveStanding.favouriteStandings.westConference, 'winPercentage', false);
+    this.standingToShow.eastConference = this.standings.allStanding.eastConference;
+    this.standingToShow.westConference = this.standings.allStanding.westConference;
   }
 
+  /**
+   * Aggiungo e rimuovo le squadre preferite, se il token non è valido svuoto la sessione
+   * @param id : string
+   */
+  aggiungiRimuoviPreferitiTeams(id: string) {
+    if(localStorage.getItem('authToken')){
+    this.apiService.AddRemoveFavouriteTeams(localStorage.getItem('authToken') as string, id + "").subscribe(
+      () => { },
+      (err) => {
+        if (err.status >= 200 && err.status <= 299) {
+          this.getApiStanding.getSearchStanding().subscribe(
+            (team) => {
+              this.ToggleCheckedForReset();
+              this.percentageStanding = true;
+              this.nameStanding = false;
+              this.crescente = false;
+              this.winStanding = false;
+              this.lossStanding = false;
+              this.favouriteStanding = false;
+              this.functionChangeFilterStanding(this.percentageStanding, this.nameStanding, this.winStanding, this.lossStanding, this.crescente);
+              this.updateStanding(team);
+            }
+          )
+        }
+        console.log(err);
+      }
+    );
+    }else{
+      console.log("token non valido");
+    }
+  }
+
+  // variabili per filtri
   percentageStanding: boolean = true;
   favouriteStanding: boolean = false;
   nameStanding: boolean = false;
@@ -59,9 +107,15 @@ export class ClassificaComponent implements OnInit {
   lossStanding: boolean = false;
   crescente: boolean = false;
 
-  functionChangeFilterStanding(percentageStanding: boolean, nameStanding: boolean, winStanding: boolean, lossStanding: boolean, crescente: boolean, event: Event) {
-    event.preventDefault();
-
+  /**
+   * Funzione per creare filtri nella classifica, ogni variabile attiva disabilità le altre e mostro una classifica specificata ordinata in ordine crescente o decrescente
+   * @param percentageStanding : boolean
+   * @param nameStanding : boolean
+   * @param winStanding : boolean
+   * @param lossStanding : boolean
+   * @param crescente : boolean
+   */
+  functionChangeFilterStanding(percentageStanding: boolean, nameStanding: boolean, winStanding: boolean, lossStanding: boolean, crescente: boolean) {
     if (this.favouriteStanding === false) {
       if (percentageStanding === true) {
         if (crescente === true) {
@@ -153,8 +207,11 @@ export class ClassificaComponent implements OnInit {
     }
   }
 
-  functionChangeStandingWithFavourite(favouriteStanding: boolean, event: Event) {
-    event.preventDefault();
+  /**
+   * Cambia i dati da mostrare, in questa caso mostro i preferiti
+   * @param favouriteStanding 
+   */
+  functionChangeStandingWithFavourite(favouriteStanding: boolean) {
     if (favouriteStanding === true) {
       this.standingToShow.eastConference = this.bubbleSort(this.standings.favouriteStandings.eastConference, 'winPercentage', false);
       this.standingToShow.westConference = this.bubbleSort(this.standings.favouriteStandings.westConference, 'winPercentage', false);
@@ -164,14 +221,20 @@ export class ClassificaComponent implements OnInit {
     }
   }
 
+  // per cambiare tra una conference e un altra
   selectedConference: boolean = true;
-
   functionSelectionConference(selectedConference: boolean) {
     this.selectedConference = selectedConference;
   }
 
-  //ordina in base ai parametri che riceve
-  bubbleSort(array: any[], key: string, isString: boolean): any[] {
+  /**
+   * ordina in base ai parametri che riceve in maniere crescente
+   * @param array : SingleTeamStanding[] --> può accettare solo array di oggetti  di tipo SingleTeamStanding
+   * @param key : string --> corrisponde alla chiave dell'oggetto 
+   * @param isString : boolean --> per sapere se il contenuto della chiave(il valore) è una stringa o numero
+   * @returns 
+   */
+  bubbleSort(array: SingleTeamStanding[], key: string, isString: boolean): SingleTeamStanding[] {
     for (let i = 0; i < array.length - 1; i++) {
       for (let j = 0; j < array.length - i - 1; j++) {
         //converto l'oggetto che arriva da "getNestedValue" in float
@@ -197,7 +260,14 @@ export class ClassificaComponent implements OnInit {
     return array;
   }
 
-  bubbleSortReverse(array: any[], key: string, isString: boolean): any[] {
+  /**
+   * ordina in base ai parametri che riceve in maniere decrescente
+   * @param array : SingleTeamStanding[] --> può accettare solo array di oggetti  di tipo SingleTeamStanding
+   * @param key : string --> corrisponde alla chiave dell'oggetto 
+   * @param isString : boolean --> per sapere se il contenuto della chiave(il valore) è una stringa o numero
+   * @returns 
+   */
+  bubbleSortReverse(array: SingleTeamStanding[], key: string, isString: boolean): SingleTeamStanding[] {
     for (let i = 0; i < array.length - 1; i++) {
       for (let j = 0; j < array.length - i - 1; j++) {
         //converto l'oggetto che arriva da "getNestedValue" in float
@@ -223,7 +293,12 @@ export class ClassificaComponent implements OnInit {
     return array;
   }
 
-  //prende il valore all'interno di un oggetto
+  /**
+   * prende il valore all'interno di un oggetto
+   * @param obj 
+   * @param key 
+   * @returns 
+   */
   getNestedValue(obj: any, key: string): any {
     const keys = key.split('.');
     let res = obj;
@@ -239,7 +314,10 @@ export class ClassificaComponent implements OnInit {
   vinte: string = "Vinte";
   sconfitte: string = "Sconfitte";
 
-  private cambiaTesto() {
+  /**
+   * Cambio testo a delle varibili per ottimizzare la visibilità da mobile
+   */
+  cambiaTesto() {
     const isMobile = window.innerWidth < 1024;
 
     this.vittore = isMobile ? "% V." : "% Vittore";
@@ -247,10 +325,12 @@ export class ClassificaComponent implements OnInit {
     this.sconfitte = isMobile ? "S." : "Sconfitte";
   }
 
+  /**
+   * Disattivo o attivo il cuore dei preferiti
+   */
   toggleChecked() {
     let checkbox = document.getElementById('cuore') as HTMLInputElement;
     checkbox.checked = !checkbox.checked;
-    console.log(checkbox.checked);
   }
   ToggleCheckedForReset() {
     let checkbox = document.getElementById('cuore') as HTMLInputElement;
@@ -258,6 +338,10 @@ export class ClassificaComponent implements OnInit {
       checkbox.checked = !checkbox.checked;
   }
 
+  /**
+   * Controllo se il cuore è attivo o no
+   * @returns 
+   */
   ControlChecked():boolean {
     let checkbox = document.getElementById('cuore') as HTMLInputElement;
     if (checkbox.checked == true)

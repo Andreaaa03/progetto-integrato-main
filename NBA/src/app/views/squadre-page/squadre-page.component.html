@@ -2,7 +2,7 @@
 <section>
     <div class="mb-10">
         <div class="w-full h-20 bg-primary flex justify-center items-center">
-            <h2 class=" text-white text-4xl font-bold">
+            <h2 class=" text-white text-4xl font-bold text-center">
                 SQUADRE
             </h2>
         </div>
@@ -24,9 +24,6 @@
     <div class="flex h-full justify-center">
         <div class="container h-full flex flex-wrap justify-center">
             <div class="lg:w-[75%] w-full h-full flex flex-wrap justify-center lg:my-12 " *ngIf="isConferenceSelected===true && isMobile===true || isMobile===false">
-                <div class="w-full flex justify-end pb-2">
-                    <button></button>
-                </div>
                 <div class="hidden w-full lg:flex justify-center items-center bg-primary h-12">
                     <h2 class="font-bold text-2xl text-white pl-4">EASTERN CONFERENCE</h2>
                 </div>
@@ -40,11 +37,12 @@
                                 <ul class="w-[90%] flex-col">
                                     <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.SoutHeast">
                                         <div class="w-1/3 flex justify-center">
-                                            <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]"/>
+                                            <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
                                         </div>
                                         <div class="w-2/3 pl-4">
                                             <p class="w-auto hover:cursor-pointer" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                            <p class="w-[10%] hover:cursor-pointer">🖤</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -60,11 +58,12 @@
                                 <ul class="w-[90%] flex-col">
                                     <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.Atlantic">
                                         <div class="w-1/3 flex justify-center">
-                                            <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]"/>
+                                            <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
                                         </div>
                                         <div class="w-2/3 pl-4">
                                             <p class="w-auto hover:cursor-pointer" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                            <p class="w-[10%] hover:cursor-pointer">🖤</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -84,7 +83,8 @@
                                         </div>
                                         <div class="w-2/3 pl-4">
                                             <p class="w-auto hover:cursor-pointer" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                            <p class="w-[10%] hover:cursor-pointer">🖤</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -94,9 +94,6 @@
                 </div>
             </div>
             <div class="lg:w-[75%] w-full h-full flex flex-wrap justify-center lg:my-12" *ngIf="isConferenceSelected===false && isMobile===true || isMobile===false">
-                <div class="w-full flex justify-end pb-2">
-                    <button></button>
-                </div>
                 <div class="hidden lg:flex w-full justify-center items-center bg-primary h-12">
                     <h2 class="font-bold text-2xl text-white pl-4">WESTERN CONFERENCE</h2>
                 </div>
@@ -110,11 +107,12 @@
                                 <ul class="w-[90%] flex-col">
                                     <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.SouthWest">
                                         <div class="w-1/3 flex justify-center">
-                                            <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]"/>
+                                            <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
                                         </div>
                                         <div class="w-2/3 pl-4">
                                             <p class="w-auto hover:cursor-pointer" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                            <p class="w-[10%] hover:cursor-pointer">🖤</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -130,11 +128,12 @@
                                 <ul class="w-[90%] flex-col">
                                     <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.NorthWest">
                                         <div class="w-1/3 flex justify-center">
-                                            <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]"/>
+                                            <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
                                         </div>
                                         <div class="w-2/3 pl-4">
                                             <p class="w-auto hover:cursor-pointer" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                            <p class="w-[10%] hover:cursor-pointer">🖤</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -150,11 +149,12 @@
                                 <ul class="w-[90%] flex-col">
                                     <li class="h-16 flex justify-center my-4" *ngFor="let team of teams.Pacific">
                                         <div class="w-1/3 flex justify-center">
-                                            <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]"/>
+                                            <img class="object-contain h-full hover:cursor-pointer" src={{team.logo}} alt="" [routerLink]="['/squadraDetail', team.id]" />
                                         </div>
                                         <div class="w-2/3 pl-4">
                                             <p class="w-auto hover:cursor-pointer" [routerLink]="['/squadraDetail', team.id]">{{team.teamName}}</p>
-                                            <p class="w-[10%] hover:cursor-pointer">🖤</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">❤️</p>
+                                            <p class="w-[10%] hover:cursor-pointer" *ngIf="team.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(team.id); team.favourite=!team.favourite">🖤</p>
                                         </div>
                                     </li>
                                 </ul>

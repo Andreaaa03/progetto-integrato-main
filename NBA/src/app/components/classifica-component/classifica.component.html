@@ -1,4 +1,4 @@
-<div class="mt-10">
+<div class="">
     <div class="lg:h-16 h-10">
         <ul class="w-full lg:h-16 h-10 flex flex-nowrap justify-around items-center">
             <!-- Primo elemento della lista -->
@@ -12,7 +12,7 @@
             </li>
         </ul>
     </div>
-    <div class="w-full h-auto lg:mt-10 mt-10 lg:mb-5 mb-4 flex flex-wrap justify-center bottoni-classifica">
+    <div class="w-full h-auto lg:mt-10 mt-5 lg:mb-5 mb-4 flex flex-wrap justify-center bottoni-classifica">
         <div class="w-full mb-4 flex flex-nowrap lg:hidden">
             <div class="w-1/2 flex justify-center">
                 <button *ngIf="isParziale===false" class="rounded-full bg-secondary text-white lg:mr-2 lg:px-6 px-3 lg:py-1 text-sm hover:underline" [routerLink]="['/storia&regole', 'regole']">
@@ -39,13 +39,13 @@
                     lossStanding=false;
                     favouriteStanding=false;
                     ToggleCheckedForReset();
-                    functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)">
+                    functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente)">
                     RESET FILTRI
                 </button>
             </div>
             <div class="w-1/2 lg:w-auto flex justify-center lg:justify-end">
                 <div class="rounded-full lg:px-6 px-3 lg:py-1 text-sm hover:underline">
-                    <div class="heart-rollover" (click)="favouriteStanding=!favouriteStanding; toggleChecked(); functionChangeStandingWithFavourite(favouriteStanding, $event);">
+                    <div class="heart-rollover" (click)="favouriteStanding=!favouriteStanding; toggleChecked(); functionChangeStandingWithFavourite(favouriteStanding);">
                         <input id="cuore" type="checkbox" />
                         <label class="toggle-item" for="cuore">
                             <div class="block-heart">
@@ -87,7 +87,7 @@
                             crescente=!crescente;
                             winStanding=false;
                             lossStanding=false;
-                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente)
                         ">Nome </p>
                     </td>
                     <td class="w-[10%]">
@@ -97,7 +97,7 @@
                             nameStanding=false;
                             winStanding=false;
                             lossStanding=false;
-                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente)
                         ">{{vittore}}</p>
                     </td>
                     <td class="w-[10%]">
@@ -107,7 +107,7 @@
                             winStanding=true;
                             crescente=!crescente;
                             lossStanding=false;
-                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente)
                         ">{{vinte}}</p>
                     </td>
                     <td class="w-[10%]">
@@ -117,7 +117,7 @@
                             winStanding=false;
                             lossStanding=true;
                             crescente=!crescente;
-                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente)
                         ">{{sconfitte}}</p>
                     </td>
                     <td class="lg:w-[10%] lg:table-cell w-0 hidden">
@@ -172,9 +172,8 @@
                                 <p>{{squadra.lastTenWin}} <span>-</span> {{squadra.lastTenLoss}}</p>
                             </td>
                             <td class="lg:w-[8%] w-[6%]">
-                                <!-- <p class="" *ngIf="squadra.preferiti===true">❤️</p>
-                                <p class="" *ngIf="squadra.preferiti===false">🖤</p> -->
-                                <p class="">🖤</p>
+                                <p class="w-full hover:cursor-pointer text-center" *ngIf="squadra.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(squadra.team.id); squadra.favourite=!squadra.favourite">❤️</p>
+                                <p class="w-full hover:cursor-pointer text-center" *ngIf="squadra.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(squadra.team.id); squadra.favourite=!squadra.favourite">🖤</p>
                             </td>
                         </tr>
                     </ng-container>
@@ -194,7 +193,7 @@
                             winStanding=false;
                             lossStanding=false;
 
-                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente)
                         ">Nome </p>
                     </td>
                     <td class="w-[10%]">
@@ -205,7 +204,7 @@
                             winStanding=false;
                             lossStanding=false;
 
-                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente)
                         ">{{vittore}}</p>
                     </td>
                     <td class="w-[10%]">
@@ -216,7 +215,7 @@
                             crescente=!crescente;
                             lossStanding=false;
 
-                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente)
                         ">{{vinte}}</p>
                     </td>
                     <td class="w-[10%]">
@@ -227,7 +226,7 @@
                             lossStanding=true;
                             crescente=!crescente;
 
-                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente, $event)
+                            functionChangeFilterStanding(percentageStanding,nameStanding,winStanding,lossStanding, crescente)
                         ">{{sconfitte}}</p>
                     </td>
                     <td class="lg:w-[10%] lg:table-cell w-0 hidden">
@@ -282,9 +281,8 @@
                                 <p>{{squadra.lastTenWin}} <span>-</span> {{squadra.lastTenLoss}}</p>
                             </td>
                             <td class="lg:w-[8%] w-[6%]">
-                                <!-- <p class="" *ngIf="squadra.preferiti===true">❤️</p>
-                                <p class="" *ngIf="squadra.preferiti===false">🖤</p> -->
-                                <p class="">🖤</p>
+                                <p class="w-full hover:cursor-pointer text-center" *ngIf="squadra.favourite===true" (click)="aggiungiRimuoviPreferitiTeams(squadra.team.id); squadra.favourite=!squadra.favourite">❤️</p>
+                                <p class="w-full hover:cursor-pointer text-center" *ngIf="squadra.favourite!=true" (click)="aggiungiRimuoviPreferitiTeams(squadra.team.id); squadra.favourite=!squadra.favourite">🖤</p>
                             </td>
                         </tr>
                     </ng-container>

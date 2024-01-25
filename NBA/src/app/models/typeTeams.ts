@@ -1,5 +1,5 @@
 export type SingleTeamTeams = {
-    id: number;
+    id: string;
     nbaFranchise: boolean;
     nickname: string;
     city: string;
@@ -8,6 +8,7 @@ export type SingleTeamTeams = {
     conferenceName: string;
     teamName: string;
     divisionName: string;
+    favourite: boolean;
 };
 
 export type division = {

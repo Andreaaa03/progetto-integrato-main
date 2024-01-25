@@ -373,7 +373,7 @@ public class UtenteService {
         LocalDate oggi = LocalDate.now();
         int eta = oggi.getYear() - annoNascita;
         if (oggi.getMonthValue() < meseNascita || (oggi.getMonthValue() == meseNascita && oggi.getDayOfMonth() < giornoNascita)) {
-            eta--; 
+            eta--;
         }
         ur.setEta(eta);
         ur.setRuolo(u.get().getRoleId().getRole());

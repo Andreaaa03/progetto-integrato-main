@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 25, 2024 alle 03:08
+-- Creato il: Gen 25, 2024 alle 01:11
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -71,71 +71,19 @@ CREATE TABLE `commenti` (
 --
 
 INSERT INTO `commenti` (`id`, `testo`, `id_commento_padre`, `id_utente`, `id_games`, `blog`, `creazione`) VALUES
-(3, 'Questo giocatore sta avendo una stagione straordinaria.', NULL, 5, NULL, 6, '2024-01-22 23:20:42'),
-(7, 'Un altra tripla doppia per questo giocatore fenomenale!', 3, 5, NULL, 6, '2024-01-22 23:20:42'),
-(8, 'Che ne pensate della trade di recente?', 7, 5, NULL, 6, '2024-01-22 23:20:42'),
-(9, 'Il coach sta prendendo decisioni discutibili ultimamente.', 7, 5, NULL, 6, '2024-01-22 23:24:19'),
-(10, 'Che partita incredibile quella di ieri sera!', 7, 5, NULL, 6, '2024-01-22 23:25:34'),
-(11, 'Sarà interessante vedere come questa squadra si comporterà nei playoff.', 10, 5, 13163, 6, '2024-01-25 02:03:58'),
-(12, 'Il coach sta prendendo decisioni discutibili ultimamente.', 10, 17, 13163, 7, '2024-01-25 02:03:58'),
-(13, 'Questo giocatore sta avendo una stagione straordinaria.', 7, 18, 13165, 8, '2024-01-25 02:03:58'),
-(14, 'Questo giocatore sta avendo una stagione straordinaria.', 3, 19, 13164, 1, '2024-01-25 02:03:58'),
-(15, 'Quando pensi che questa squadra possa vincere il campionato?', 10, 20, 13166, 4, '2024-01-25 02:03:58'),
-(16, 'Un altra tripla doppia per questo giocatore fenomenale!', 8, 21, 13166, 6, '2024-01-25 02:03:58'),
-(17, 'Sarà interessante vedere come questa squadra si comporterà nei playoff.', 3, 22, 13162, 2, '2024-01-25 02:03:58'),
-(18, 'Un altra tripla doppia per questo giocatore fenomenale!', 3, 23, 13163, 8, '2024-01-25 02:03:58'),
-(19, 'Che ne pensate della trade di recente?', 3, 24, 13164, 1, '2024-01-25 02:03:58'),
-(20, 'Quando pensi che questa squadra possa vincere il campionato?', 9, 25, 13166, 1, '2024-01-25 02:03:58'),
-(21, 'Questa partita è stata emozionante dall inizio alla fine.', 10, 9, 13166, 7, '2024-01-25 02:03:58'),
-(22, 'Il coach sta prendendo decisioni discutibili ultimamente.', 8, 16, 13164, 1, '2024-01-25 02:03:58'),
-(23, 'Che ne pensate della trade di recente?', 9, 5, 13164, 6, '2024-01-25 02:03:58'),
-(24, 'Sarà interessante vedere come questa squadra si comporterà nei playoff.', 7, 17, 13163, 7, '2024-01-25 02:03:58'),
-(25, 'Il coach sta prendendo decisioni discutibili ultimamente.', 8, 18, 13164, 7, '2024-01-25 02:03:58'),
-(26, 'Questa partita è stata emozionante dall inizio alla fine.', 7, 19, 13164, 7, '2024-01-25 02:03:58'),
-(27, 'Questa partita è stata emozionante dall inizio alla fine.', 3, 20, 13164, 7, '2024-01-25 02:03:58'),
-(28, 'Questa partita è stata emozionante dall inizio alla fine.', 10, 21, 13164, 1, '2024-01-25 02:03:58'),
-(29, 'Questo giocatore sta avendo una stagione straordinaria.', 3, 22, 13166, 4, '2024-01-25 02:03:58'),
-(30, 'Questo giocatore sta avendo una stagione straordinaria.', 7, 23, 13166, 8, '2024-01-25 02:03:58'),
-(31, 'Un altra tripla doppia per questo giocatore fenomenale!', 8, 24, 13166, 2, '2024-01-25 02:03:58'),
-(32, 'Questa partita è stata emozionante dall inizio alla fine.', 8, 25, 13166, 8, '2024-01-25 02:03:58'),
-(33, 'Il coach sta prendendo decisioni discutibili ultimamente.', 7, 9, 13164, 4, '2024-01-25 02:03:58'),
-(34, 'Quando pensi che questa squadra possa vincere il campionato?', 10, 16, 13162, 8, '2024-01-25 02:03:58'),
-(35, 'Quando pensi che questa squadra possa vincere il campionato?', 8, 5, 13164, 4, '2024-01-25 02:03:58'),
-(36, 'Che partita incredibile quella di ieri sera!', 9, 17, 13166, 2, '2024-01-25 02:03:58'),
-(37, 'Quando pensi che questa squadra possa vincere il campionato?', 7, 18, 13163, 7, '2024-01-25 02:03:58'),
-(38, 'Che partita incredibile quella di ieri sera!', 7, 19, 13163, 6, '2024-01-25 02:03:58'),
-(39, 'Il coach sta prendendo decisioni discutibili ultimamente.', 9, 20, 13165, 7, '2024-01-25 02:03:58'),
-(40, 'Questa partita è stata emozionante dall inizio alla fine.', 9, 21, 13163, 2, '2024-01-25 02:03:58'),
-(41, 'Il coach sta prendendo decisioni discutibili ultimamente.', 8, 22, 13165, 1, '2024-01-25 02:03:58'),
-(42, 'Che partita incredibile quella di ieri sera!', 8, 23, 13165, 2, '2024-01-25 02:03:58'),
-(43, 'Che partita incredibile quella di ieri sera!', 8, 24, 13164, 1, '2024-01-25 02:03:58'),
-(44, 'Che ne pensate della trade di recente?', 3, 25, 13164, 8, '2024-01-25 02:03:58'),
-(45, 'Questa partita è stata emozionante dall inizio alla fine.', 7, 9, 13163, 8, '2024-01-25 02:03:58'),
-(46, 'Il coach sta prendendo decisioni discutibili ultimamente.', 10, 16, 13165, 1, '2024-01-25 02:03:58'),
-(47, 'Il coach sta prendendo decisioni discutibili ultimamente.', 10, 5, 13164, 2, '2024-01-25 02:03:58'),
-(48, 'Questo giocatore sta avendo una stagione straordinaria.', 3, 17, 13164, 4, '2024-01-25 02:03:58'),
-(49, 'Che ne pensate della trade di recente?', 8, 18, 13165, 7, '2024-01-25 02:03:58'),
-(50, 'Che ne pensate della trade di recente?', 10, 19, 13166, 7, '2024-01-25 02:03:58'),
-(51, 'Questo giocatore sta avendo una stagione straordinaria.', 9, 20, 13163, 6, '2024-01-25 02:03:58'),
-(52, 'Un altra tripla doppia per questo giocatore fenomenale!', 8, 21, 13165, 6, '2024-01-25 02:03:58'),
-(53, 'Sarà interessante vedere come questa squadra si comporterà nei playoff.', 7, 22, 13162, 8, '2024-01-25 02:03:58'),
-(54, 'Questa partita è stata emozionante dall inizio alla fine.', 8, 23, 13164, 7, '2024-01-25 02:03:58'),
-(55, 'Quando pensi che questa squadra possa vincere il campionato?', 8, 24, 13162, 7, '2024-01-25 02:03:58'),
-(56, 'Il coach sta prendendo decisioni discutibili ultimamente.', 3, 25, 13163, 7, '2024-01-25 02:03:58'),
-(57, 'Questo giocatore sta avendo una stagione straordinaria.', 8, 9, 13165, 6, '2024-01-25 02:03:58'),
-(58, 'Sarà interessante vedere come questa squadra si comporterà nei playoff.', 9, 16, 13166, 6, '2024-01-25 02:03:58'),
-(59, 'Questa partita è stata emozionante dall inizio alla fine.', 3, 5, 13163, 8, '2024-01-25 02:03:58'),
-(60, 'Il coach sta prendendo decisioni discutibili ultimamente.', 10, 17, 13164, 1, '2024-01-25 02:03:58'),
-(61, 'Questa partita è stata emozionante dall inizio alla fine.', 7, 18, 13165, 4, '2024-01-25 02:03:58'),
-(62, 'Che partita incredibile quella di ieri sera!', 3, 19, 13165, 1, '2024-01-25 02:03:58'),
-(63, 'Che ne pensate della trade di recente?', 9, 20, 13163, 2, '2024-01-25 02:03:58'),
-(64, 'Che partita incredibile quella di ieri sera!', 7, 21, 13163, 8, '2024-01-25 02:03:58'),
-(65, 'Il coach sta prendendo decisioni discutibili ultimamente.', 8, 22, 13165, 2, '2024-01-25 02:03:58'),
-(66, 'Un altra tripla doppia per questo giocatore fenomenale!', 9, 23, 13164, 4, '2024-01-25 02:03:58'),
-(67, 'Quando pensi che questa squadra possa vincere il campionato?', 7, 24, 13162, 1, '2024-01-25 02:03:58'),
-(68, 'Questo giocatore sta avendo una stagione straordinaria.', 3, 25, 13164, 7, '2024-01-25 02:03:58'),
-(69, 'Quando pensi che questa squadra possa vincere il campionato?', 3, 9, 13162, 6, '2024-01-25 02:03:58'),
-(70, 'Che ne pensate della trade di recente?', 7, 16, 13164, 2, '2024-01-25 02:03:58');
+(3, 'prova di commommento da backend a database', NULL, 5, NULL, 6, '2024-01-23 00:20:42'),
+(7, 'risposta al commento', 3, 5, NULL, 6, '2024-01-23 00:20:42'),
+(8, 'risposta al commento', 7, 5, NULL, 6, '2024-01-23 00:20:42'),
+(9, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:24:19'),
+(10, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:25:34'),
+(11, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:33:21'),
+(12, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:35:13'),
+(13, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:35:16'),
+(14, 'risposta al commentoaaaaaaaaaa', NULL, 5, NULL, NULL, '2024-01-23 00:40:03'),
+(15, 'risposta al commentoaaaaaaaaaa', 7, 5, NULL, 6, '2024-01-23 00:40:21'),
+(16, 'risposta al commentoaaaaaaaaaa', NULL, 5, 13774, NULL, '2024-01-23 00:41:17'),
+(17, 'risposta al commentoaaaaaaaaaa', NULL, 5, 13773, NULL, '2024-01-23 00:41:26'),
+(18, 'risposta al commentoaaaaaaaaaa', NULL, 5, 13773, NULL, '2024-01-24 23:05:45');
 
 -- --------------------------------------------------------
 
@@ -38142,39 +38090,8 @@ CREATE TABLE `seguiti` (
 
 INSERT INTO `seguiti` (`id`, `seguito`, `seguace`, `amico`) VALUES
 (14, 16, 9, 0),
-(17, 5, 9, 0),
-(18, 17, 19, 0),
-(19, 18, 17, 0),
-(20, 19, 5, 0),
-(21, 20, 9, 0),
-(22, 21, 16, 1),
-(23, 22, 9, 1),
-(24, 23, 9, 1),
-(25, 24, 20, 1),
-(26, 25, 22, 1),
-(27, 9, 22, 1),
-(29, 5, 23, 0),
-(31, 18, 23, 0),
-(32, 19, 20, 1),
-(33, 20, 5, 1),
-(34, 21, 9, 1),
-(36, 23, 21, 1),
-(37, 24, 18, 1),
-(38, 25, 19, 1),
-(39, 9, 25, 1),
-(40, 16, 25, 1),
-(41, 5, 20, 1),
-(42, 17, 16, 1),
-(43, 18, 20, 1),
-(44, 19, 24, 1),
-(45, 20, 21, 1),
-(46, 21, 24, 1),
-(47, 22, 23, 1),
-(48, 23, 19, 1),
-(49, 24, 17, 1),
-(50, 25, 24, 1),
-(53, 16, 5, 0),
-(54, 9, 5, 1);
+(15, 16, 5, 0),
+(16, 9, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -38494,8 +38411,8 @@ INSERT INTO `utente_preferiti` (`id`, `utente`, `team`, `articolo`, `data`) VALU
 (38, 5, 2, NULL, '2024-01-23 20:53:41'),
 (39, 5, 4, NULL, '2024-01-23 20:53:45'),
 (40, 5, 24, NULL, '2024-01-23 20:53:51'),
-(47, 5, NULL, 6, '2024-01-25 01:29:33'),
-(48, 5, 27, NULL, '2024-01-25 02:04:37');
+(43, 5, 27, NULL, '2024-01-24 23:04:45'),
+(45, 5, NULL, 6, '2024-01-24 23:04:51');
 
 --
 -- Indici per le tabelle scaricate
@@ -38662,7 +38579,7 @@ ALTER TABLE `blog`
 -- AUTO_INCREMENT per la tabella `commenti`
 --
 ALTER TABLE `commenti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT per la tabella `conference`
@@ -38674,7 +38591,7 @@ ALTER TABLE `conference`
 -- AUTO_INCREMENT per la tabella `division`
 --
 ALTER TABLE `division`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT per la tabella `games`
@@ -38716,7 +38633,7 @@ ALTER TABLE `season`
 -- AUTO_INCREMENT per la tabella `seguiti`
 --
 ALTER TABLE `seguiti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT per la tabella `tag`
@@ -38740,7 +38657,7 @@ ALTER TABLE `utente`
 -- AUTO_INCREMENT per la tabella `utente_preferiti`
 --
 ALTER TABLE `utente_preferiti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Limiti per le tabelle scaricate
